@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ws3dx.core\ws3dx.core.csproj" />
+    <ProjectReference Include="..\data\ws3dx.dsreq.data.csproj" />
+  </ItemGroup>
+
+ 
+
+</Project>

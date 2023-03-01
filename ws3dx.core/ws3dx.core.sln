@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.core", "ws3dx.core.csproj", "{888CBCBF-DD7D-4F01-AEB2-4D5460546A4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.shared", "..\ws3dx.shared\ws3dx.shared.csproj", "{5C076918-A6F8-447D-9ED5-9FC4A4A13A14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{888CBCBF-DD7D-4F01-AEB2-4D5460546A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{888CBCBF-DD7D-4F01-AEB2-4D5460546A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{888CBCBF-DD7D-4F01-AEB2-4D5460546A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{888CBCBF-DD7D-4F01-AEB2-4D5460546A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C076918-A6F8-447D-9ED5-9FC4A4A13A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C076918-A6F8-447D-9ED5-9FC4A4A13A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C076918-A6F8-447D-9ED5-9FC4A4A13A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C076918-A6F8-447D-9ED5-9FC4A4A13A14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6986F0D-CA2C-4DE9-89AE-B13385EBD215}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>ws3dx.shared.snk</AssemblyOriginatorKeyFile>
+    <PackageLicenseFile>MITlicense.txt</PackageLicenseFile>
+    <PackageId>ws3dx.shared</PackageId>
+    <Authors>Dassault Systèmes - CPE EMED</Authors>
+    <Company>Dassault Systèmes SPA</Company>
+    <Description>Base logic and data module</Description>
+    <Copyright>Copyright ©  2023</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Product>3DEXPERIENCE Web Services Client SDK for Dotnet Core</Product>
+    <RepositoryUrl>https://github.com/3ds-cpe-emed/ds-cpemed-ws3dx-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>3DEXPERIENCE "web service" ".NET"</PackageTags>
+    <AssemblyName>ws3dx.shared</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MITlicense.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data.extension\" />
+  </ItemGroup>
+
+</Project>
