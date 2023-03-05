@@ -21,6 +21,6 @@ namespace ws3dx.data.collection.impl
    public interface IItemSet<T>
    {
       public long TotalItems { get; set; }
-      public List<T> Items { get; set; }
+      public IList<T> Items { get; set; }
    }
 }

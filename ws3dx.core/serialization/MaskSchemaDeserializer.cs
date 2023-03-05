@@ -22,12 +22,6 @@ namespace ws3dx.core.serialization
    //Implementation inspired from : https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-use-dom-utf8jsonreader-utf8jsonwriter?pivots=dotnet-core-3-1
    public class MaskSchemaDeserializer<T> : CoreSchemaDeserializer<T>
    {
-      static JsonReaderOptions m_options = new JsonReaderOptions
-      {
-         AllowTrailingCommas = true,
-         CommentHandling = JsonCommentHandling.Skip
-      };
-
       public override dynamic DeserializeElement(JsonElement _jsonElem, Type _deserializedElemType)
       {
          return DeserializeItem(_jsonElem, _deserializedElemType);

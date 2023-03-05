@@ -21,7 +21,6 @@ using ws3dx.shared.data;
 
 namespace ws3dx.data.impl
 {
-   [InterfaceDeserializer(typeof(IBusinessObjectIdentifier))]
    public class BusinessObjectIdentifier : IBusinessObjectIdentifier
    {
       [JsonPropertyName("identifier")]

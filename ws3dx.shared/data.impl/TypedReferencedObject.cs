@@ -20,7 +20,6 @@ using ws3dx.shared.data;
 
 namespace ws3dx.data.impl
 {
-   [InterfaceDeserializer(typeof(ITypedReferencedObject))]
    public class TypedReferencedObject : ITypedReferencedObject
    {
       private const string SOURCE = "source";

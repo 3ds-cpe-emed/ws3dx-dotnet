@@ -20,15 +20,16 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.data.collection.impl
 {
-   [InterfaceDeserializer(typeof(IItemSet<>))]
+   // [InterfaceDeserializer(typeof(IItemSet<>))]
    public class ItemSet<T> : IItemSet<T>
    {
       [JsonPropertyName("totalItems")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public long TotalItems { get; set; }
 
+      [ResponseCollectionItems("member")]
       [JsonPropertyName("member")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public List<T> Items { get; set; }
+      public IList<T> Items { get; set; }
    }
 }

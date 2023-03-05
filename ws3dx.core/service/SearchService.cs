@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.exception;
 using ws3dx.core.serialization;
+using ws3dx.data.collection.impl;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
@@ -49,8 +50,16 @@ namespace ws3dx.core.service
 
       #region Search
 
+      protected bool IsSearchSkipParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchSkipParamName()); } }
+      protected bool IsSearchTopParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchTopParamName()); } }
+
       // Full search
-      public async Task<IList<T>> Search<T>(SearchQuery _searchString) //where T : IItemMask
+      public async Task<IList<T>> Search<T>(SearchQuery _searchString)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(_searchString);
+      }
+
+      protected async Task<IList<T>> Search<T, S>(SearchQuery _searchString)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
@@ -72,7 +81,7 @@ namespace ws3dx.core.service
             // }
             // firstTime = false;
 
-            page = await Search<T>(_searchString, skip, TOP);
+            page = await Search<T, S>(_searchString, skip, TOP);
 
             skip += TOP;
 
@@ -86,22 +95,29 @@ namespace ws3dx.core.service
          return __output;
       }
 
-      protected bool IsMaskParamNameEmpty { get { return ((GetMaskParamName() == null) || (GetMaskParamName() == string.Empty)); } }
-      protected bool IsSearchSkipParamNameEmpty { get { return ((GetSearchSkipParamName() == null) || (GetSearchSkipParamName() == string.Empty)); } }
-      protected bool IsSearchTopParamNameEmpty { get { return ((GetSearchTopParamName() == null) || (GetSearchTopParamName() == string.Empty)); } }
+
 
       //Paged Search
-      public async Task<IList<T>> Search<T>(SearchQuery _searchQuery, long _skip = 0, long _top = 100)
+      public async Task<IList<T>> Search<T>(SearchQuery _searchString, long _skip = 0, long _top = 100)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(_searchString, _skip, _top);
+      }
+
+      protected async Task<IList<T>> Search<T, S>(SearchQuery _searchQuery, long _skip = 0, long _top = 100)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
          Dictionary<string, string> queryParams = new Dictionary<string, string>();
 
-         string maskName = MaskNameUtils.GetMaskNameFromType(typeof(T));
+         if (HasMask)
+         {
+            queryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
 
-         if (!IsMaskParamNameEmpty) queryParams.Add(GetMaskParamName(), maskName);
          if (!IsSearchSkipParamNameEmpty) queryParams.Add(GetSearchSkipParamName(), _skip.ToString());
          if (!IsSearchTopParamNameEmpty) queryParams.Add(GetSearchTopParamName(), _top.ToString());
+
+         queryParams.Add(GetSearchCriteriaParamName(), _searchQuery.GetSearchString());
 
          HttpResponseMessage response = await GetAsync(GetSearchResource(), queryParams);
 
@@ -111,17 +127,11 @@ namespace ws3dx.core.service
             throw (new SearchResponseException(response));
          }
 
-         //TODO: Review this to use ManufacturingItemRead
-         // Deserialize response
-         IList<T> returnSet = await DeserializeAsList<T>(response);
+         string responseContent = await response.Content.ReadAsStringAsync();
 
-         if ((null == returnSet) || (returnSet.Count != 1))
-         {
-            throw (new SearchResponseException(response));
-         }
-
-         return returnSet;
+         return Deserialize<T, S>(responseContent);
       }
+
       #endregion
 
    }

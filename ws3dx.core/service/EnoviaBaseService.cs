@@ -25,6 +25,7 @@ using ws3dx.authentication.data;
 using ws3dx.core.data.impl;
 using ws3dx.core.exception;
 using ws3dx.core.serialization;
+using ws3dx.core.serialization.registry;
 using ws3dx.data.collection.impl;
 using ws3dx.serialization.attribute;
 
@@ -48,6 +49,8 @@ namespace ws3dx.core.service
       protected virtual string GetMaskParamName() { return MASK_PARAM_NAME; }
       protected virtual string GetFieldsParamName() { return FIELDS_PARAM_NAME; }
       protected virtual string GetIncludeParamName() { return INCLUDE_PARAM_NAME; }
+
+      protected bool HasMask { get { return !string.IsNullOrEmpty(GetMaskParamName()); } }
 
       //ENO_CSRF_TOKEN
       private CsrfTokenCache m_tokenCache = null;
@@ -237,30 +240,33 @@ namespace ws3dx.core.service
          return request;
       }
 
+      #region Deserialization 
+
       protected async Task<IList<T>> DeserializeAsList<T>(HttpResponseMessage _response)
       {
          dynamic __output;
+
+         System.Diagnostics.Debug.WriteLine("DeserializeAsList");
 
          try
          {
             string responseContent = await _response.Content.ReadAsStringAsync();
 
-            System.Diagnostics.Debug.WriteLine("DeserializeAsList");
             System.Diagnostics.Debug.WriteLine(responseContent);
 
-            __output = MaskDeserializationHandler.Deserialize<NlsLabeledItemSet<T>>(responseContent);
+            __output = MaskDeserializationHandler.Deserialize<T, NlsLabeledItemSet<T>>(responseContent);
          }
-         catch
+         catch (Exception _ex)
          {
-            //TODO - handle ex
+            System.Diagnostics.Debug.WriteLine(_ex.Message);
+
             throw;
-         }
-         finally
-         {
          }
 
          return __output;
       }
+
+
 
       protected async Task<T> Deserialize<T>(HttpResponseMessage _response)
       {
@@ -273,23 +279,51 @@ namespace ws3dx.core.service
             System.Diagnostics.Debug.WriteLine("Deserialize");
             System.Diagnostics.Debug.WriteLine(responseContent);
 
-            __output = MaskDeserializationHandler.Deserialize<T>(responseContent);
+            __output = MaskDeserializationHandler.Deserialize<T, NlsLabeledItemSet<T>>(responseContent);
          }
          catch
          {
             //TODO - handle ex
             throw;
          }
-         finally
+
+         return __output;
+      }
+
+      protected IList<T> Deserialize<T, S>(string _json)
+      {
+         IList<T> __output = null;
+
+         System.Diagnostics.Debug.WriteLine("Deserialize");
+         System.Diagnostics.Debug.WriteLine(_json);
+
+         try
          {
+            var methodInfo = typeof(MaskDeserializationHandler).GetMethod("Deserialize");
+
+            var genericMethodInfo = methodInfo.MakeGenericMethod(new Type[] { typeof(T), typeof(S) });
+
+            __output = (IList<T>)genericMethodInfo.Invoke(null, new object[] { _json });
+         }
+         catch (Exception _ex)
+         {
+            System.Diagnostics.Debug.WriteLine(_ex.Message);
+            throw;
          }
 
          return __output;
       }
 
+      #endregion
+
       protected async Task<T> GetUnique<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         IList<T> returnSet = await GetMultiple<T>(_requestUri, queryParams, headerParams);
+         return await GetUnique<T, NlsLabeledItemSet<T>>(_requestUri, queryParams, headerParams);
+      }
+
+      protected async Task<T> GetUnique<T, S>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
+      {
+         IList<T> returnSet = await GetMultiple<T, S>(_requestUri, queryParams, headerParams);
 
          if ((returnSet == null) || (returnSet.Count == 0)) return default;
 
@@ -298,13 +332,20 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> GetMultiple<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
+         return await GetMultiple<T, NlsLabeledItemSet<T>>(_requestUri, queryParams, headerParams);
+      }
+
+      protected async Task<IList<T>> GetMultiple<T, S>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
+      {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
          //mask
          Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
 
-         string maskName = MaskNameUtils.GetMaskNameFromType(typeof(T));
-         requestQueryParams.Add(GetMaskParamName(), maskName);
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
 
          if (queryParams != null)
          {
@@ -324,7 +365,9 @@ namespace ws3dx.core.service
             throw (new HttpResponseException(response));
          }
 
-         return await DeserializeAsList<T>(response);
+         string responseContent = await response.Content.ReadAsStringAsync();
+
+         return Deserialize<T, S>(responseContent);
       }
 
       protected async Task<T> PostRequest<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)

@@ -20,7 +20,6 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.data.impl
 {
-   [InterfaceDeserializer(typeof(IExtendedAttributes))]
    public class ExtendedAttributes : Dictionary<string, object>, IExtendedAttributes
    {
    }

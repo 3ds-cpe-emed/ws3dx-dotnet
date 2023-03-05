@@ -21,12 +21,15 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ws3dx.core.serialization.registry;
-using ws3dx.data.collection.impl;
 
 using ws3dx.serialization.attribute;
 
 namespace ws3dx.core.serialization
 {
+   /// <summary>
+   /// Main Deserializer class
+   /// </summary>
+   /// <typeparam name="T">Represents the inner type</typeparam>
    public abstract class CoreSchemaDeserializer<T>
    {
       const string TYPE_PROPERTY_NAME = "type";
@@ -40,28 +43,13 @@ namespace ws3dx.core.serialization
 
       public abstract dynamic DeserializeElement(JsonElement _jsonElem, Type _deserialElemType);
 
-      private static dynamic CreateListInstance(Type argType, bool _useCache = true)
-      {
-         Type listConcreteType;
-
-         if ((_useCache) && (m_listWrappedTypes.ContainsKey(argType)))
-         {
-            listConcreteType = m_listWrappedTypes[argType];
-         }
-         else
-         {
-            listConcreteType = typeof(List<>).MakeGenericType(argType);
-         }
-
-         if ((_useCache) && (listConcreteType != null))
-         {
-            m_listWrappedTypes[argType] = listConcreteType;
-         }
-
-         return Activator.CreateInstance(listConcreteType);
-      }
-
-      public object Deserialize(string jsonContent)
+      /// <summary>
+      /// Deserialization main entry point
+      /// </summary>
+      /// <typeparam name="S">Type of the wrapping collection (e.g. NlsLabeledItemSet) that is discarded in favour of an IEnumerator</typeparam>
+      /// <param name="jsonContent"></param>
+      /// <returns></returns>
+      public object Deserialize<S>(string jsonContent)
       {
          dynamic __deserializedOutput = null;
 
@@ -69,33 +57,58 @@ namespace ws3dx.core.serialization
          {
             JsonElement root = jsonDocument.RootElement;
 
-            if (IsWrapperType(typeof(T)))
-            {
-               Type wrappedType;
+            Type wrappingType = typeof(S);
 
-               if (!TryGetGenericArgType0(typeof(T), out wrappedType))
+            if (wrappingType.IsInterface)
+            {
+               wrappingType = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(typeof(S));
+            }
+
+            if (wrappingType.IsGenericType)
+            {
+               wrappingType = wrappingType.GetGenericTypeDefinition();
+            }
+
+            if (GlobalSchemaAttributeRegistry.IsResponseCollectionSchema(wrappingType))
+            {
+               ResponseCollectionSchemaHelper wrappingSchemaHelper = GlobalSchemaAttributeRegistry.GetResponseCollectionSchema(wrappingType);
+
+               Type wrappingItemsType = wrappingSchemaHelper.CollectionItemsType;
+
+               if (!TryGetTypeOfGenericFirstArg(wrappingItemsType, out Type wrappedType))
                {
-                  throw new ArgumentException("Cannot find wrapped type.");
+                  throw new ArgumentException($"Cannot find the wrapped type from the schema collection. Is type '{wrappingItemsType.Name}' generic?");
                }
+
+               if (wrappedType.IsGenericTypeParameter)
+               {
+                  wrappedType = typeof(T);
+               }
+
+               __deserializedOutput = CreateCollectionInstance(wrappingItemsType, wrappedType);
 
                JsonElement _memberRoot;
 
-               if (!root.TryGetProperty("member", out _memberRoot))
+               string wrappingItemsJsonProperty = wrappingSchemaHelper.CollectionItemsJsonPropertyName;
+
+               // Fast forward to the items json property of the wrapping collection
+
+               if (!root.TryGetProperty(wrappingItemsJsonProperty, out _memberRoot))
                {
-                  throw new ArgumentException("Cannot find member property.");
+                  throw new ArgumentException($"Cannot find '{wrappingItemsJsonProperty}' property.");
                }
 
-               __deserializedOutput = CreateListInstance(wrappedType);
+               if (_memberRoot.ValueKind != JsonValueKind.Array)
+               {
+                  throw new ArgumentException($"Expecting '{wrappingItemsJsonProperty}' property to be of array schema type.");
+               }
 
                if (_memberRoot.ValueKind == JsonValueKind.Null)
                {
                   return __deserializedOutput;
                }
 
-               if (_memberRoot.ValueKind != JsonValueKind.Array)
-               {
-                  throw new ArgumentException("Expecting member property to be an array.");
-               }
+               //// ...........................................................................
 
                JsonElement.ArrayEnumerator jsonArrayEnumerator = _memberRoot.EnumerateArray();
 
@@ -107,6 +120,8 @@ namespace ws3dx.core.serialization
 
                   __deserializedOutput.Add(deserializedElement);
                }
+
+               ////...........................
             }
             else
             {
@@ -123,7 +138,7 @@ namespace ws3dx.core.serialization
 
          if (itemType.IsInterface)
          {
-            itemType = GetObjectDeserializationItemType(itemType, _jsonElem);
+            itemType = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(itemType);
          }
 
          //If it is primitive value and the primite values match ok - otherwise convert (or delegate conversion)
@@ -145,39 +160,74 @@ namespace ws3dx.core.serialization
          return null;
       }
 
-      private static bool IsWrapperType(Type _wrapperType)
-      {
-         if (_wrapperType == null) return false;
 
-         //TODO: Currently these types are hardcoded because they are the most common ones.
-         //it is wise to change this in order to make it more flexible
-         if (_wrapperType.IsGenericType &&
-           ((_wrapperType.GetGenericTypeDefinition() == typeof(NlsLabeledItemSet<>)) ||
-            (_wrapperType.GetGenericTypeDefinition() == typeof(ItemSet<>))))
+      public static Type GetTypeDefinitionIfGeneric(Type _type)
+      {
+         Type __outType = _type;
+
+         if (_type.IsGenericType)
          {
-            return true;
+            __outType = _type.GetGenericTypeDefinition();
          }
 
-         return false;
+         return __outType;
       }
 
-      private static bool TryGetGenericArgType0(Type _genericType, out Type _genericTypeArg0)
+      private static dynamic CreateCollectionInstance(Type _collectionType, Type _collectionArgType, bool _useCache = true)
+      {
+         Type collectionConstructedType = null;
+
+         // if ((_useCache) && (m_listWrappedTypes.ContainsKey(_collectionArgType)))
+         // {
+         //    collectionConcreteType = m_listWrappedTypes[_collectionArgType];
+         // }
+         // else
+         // {
+         try
+         {
+            Type collectionTypeDefinition = _collectionType;
+
+            if ((_collectionType.IsGenericType) && (!_collectionType.IsGenericTypeDefinition))
+            {
+               collectionTypeDefinition = _collectionType.GetGenericTypeDefinition();
+            }
+
+            if (collectionTypeDefinition.IsInterface)
+            {
+               collectionTypeDefinition = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(collectionTypeDefinition);
+            }
+
+            collectionConstructedType = collectionTypeDefinition.MakeGenericType(new Type[] { _collectionArgType });
+         }
+         catch (Exception _ex)
+         {
+            System.Diagnostics.Debug.WriteLine(_ex.Message);
+         }
+
+
+         //}
+
+         //if ((_useCache) && (collectionConcreteType != null))
+         //{
+         //   m_listWrappedTypes[_collectionArgType] = collectionConcreteType;
+         //}
+
+         return Activator.CreateInstance(collectionConstructedType);
+      }
+
+      private static bool TryGetTypeOfGenericFirstArg(Type _genericType, out Type _genericTypeArg0)
       {
          _genericTypeArg0 = null;
 
-         //TODO: Currently these types are hardcoded because they are the most common ones.
-         //it is wise to change this in order to make it more flexible
-         if (_genericType.IsGenericType)
-         {
-            Type[] genericTypeArgs = _genericType.GetGenericArguments();
+         if (!_genericType.IsGenericType) return false;
 
-            if ((genericTypeArgs != null) && (genericTypeArgs.Length > 0))
-            {
-               _genericTypeArg0 = genericTypeArgs[0];
-               return true;
-            }
-         }
-         return false;
+         Type[] genericTypeArgs = _genericType.GetGenericArguments();
+
+         if ((genericTypeArgs == null) || (genericTypeArgs.Length == 0)) return false;
+
+         _genericTypeArg0 = genericTypeArgs[0];
+
+         return true;
       }
 
       protected static bool TypeIsSupportedGenericDictionaryClass(Type _type, bool _useCache = true)
@@ -429,7 +479,7 @@ namespace ws3dx.core.serialization
          object deserializerInst = MaskDeserializationHandler.GetCachedInstanceForType(_itemType);
 
          MethodInfo method = (deserializerInst.GetType()).GetMethod(nameof(DeserializeItem), BindingFlags.NonPublic | BindingFlags.Instance);
-
+         
          return method.Invoke(deserializerInst, new object[] { _jsonElement, _itemType });
       }
 
@@ -464,39 +514,6 @@ namespace ws3dx.core.serialization
          }
 
          return true;
-      }
-
-      //TODO: Review this implementation
-      protected static Type GetObjectDeserializationItemType(Type _interfaceType, JsonElement _root)
-      {
-         //string maskName = null;
-
-         Type t = null;
-
-         //string typePropertyValue;
-
-         //if (MaskNameUtils.TryGetMaskNameFromType(_interfaceType, out maskName))
-         //{
-         //if (TryGetTypePropertyValue(_root, out typePropertyValue))
-         //{
-         //    t = GlobalSchemaAttributeRegistry.GetTypeFromPropertyNameAndMaskAttributes(maskName, TYPE_PROPERTY_NAME, typePropertyValue);
-         //}
-         //else
-         //{
-         //Get Default Implementation Class
-         t = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(_interfaceType);
-         //}
-         //};
-
-         if (null == t)
-         {
-            t = GlobalSchemaAttributeRegistry.GetDefaultClassDeserializerImpForInterface(_interfaceType);
-         }
-
-         //Check if our json object has a type property
-         if (null == t) throw new TypeLoadException($"Cannot find implementation class for interface {_interfaceType.Name}");
-
-         return t;
       }
 
       // Study an alternative to attributes for this purpose? e.g. events or an interface method?
@@ -561,7 +578,7 @@ namespace ws3dx.core.serialization
       }
 
       /// <summary>
-      /// Checks if the json object has a type property. 
+      /// Checks if the json object has a type property.
       /// Items are by definition json objects that have a specific type.
       /// </summary>
       /// <param name="jsonElement"></param>
