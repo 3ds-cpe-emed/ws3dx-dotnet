@@ -27,6 +27,7 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |[Advanced-Filter Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAAdvancedFilteringWS/dsadvfilter_v1.htm)|[ws3dx.dsadvfilter](./ws3dx.dsadvfilter)|
 |[Bookmark REST Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAABookmarkWS/BookmarkAPI1_v1.htm)|[ws3dx.dsbks](./ws3dx.dsbks)|
 |[CAD Collaboration Web Services 1.5.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAXCADWS/dsxcad_v1.htm)|[ws3dx.dsxcad](./ws3dx.dsxcad)|
+|[Issue Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAChangeWS/dslc_change_issue_v1.htm)|[ws3dx.dsiss](./ws3dx.dsiss)|
 |[Derived Outputs Web Services 1.2.1](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADerivedOutputsWS/dsdo_v1.htm)|[ws3dx.dsdo](./ws3dx.dsdo)|
 |[Document REST Services 1.1.5](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADocumentWS/dsdoc_v1.htm)|[ws3dx.document](./ws3dx.document)|
 |[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)|
@@ -146,7 +147,7 @@ In order to be able to keep up with new updates every new 3DEXPERIENCE release, 
 
 This process relies on two main transformation steps.
 
-- Step 1: **Transformation of the 3DEXPERIENCE Web Services OpenAPI documentation to a neutral UML model** in CAMEO Enterprise Architect. The OpenAPI json file of each individual 3DEXPERIENCE web services family is downloaded from the public documentation site and an SDK UML based model is created. This is done using a custom CAMEO plugin built on purpose.
+- Step 1: **Transformation of the 3DEXPERIENCE Web Services OpenAPI documentation to a neutral UML model** in CAMEO Enterprise Architect. The OpenAPI json file of each individual 3DEXPERIENCE web services family is downloaded from the public  site and a corresponding SDK UML-based model is created. This is done using a custom CAMEO plugin built on purpose.
 
 - Step 2: **Transformation of the SDK Model into source code**. With the help of the same custom CAMEO plugin and some Mustache files the C# sharp code for the data, the services and the tests is generated. As explained before currently C# code is created but other languages (e.g. Java) are being investigated.
 
