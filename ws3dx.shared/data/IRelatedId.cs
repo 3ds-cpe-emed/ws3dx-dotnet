@@ -14,10 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------------------------------------------------------------
 
-namespace ws3dx.data
+using System.Collections.Generic;
+
+namespace ws3dx.shared.data
 {
-   public interface IReference
+   public interface IRelatedId : ITypedUriId
    {
-      string Reference { get; }
+      IList<ITypedUriId> ReferencedObject { get; set; }
    }
 }

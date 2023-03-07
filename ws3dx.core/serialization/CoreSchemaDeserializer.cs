@@ -46,6 +46,25 @@ namespace ws3dx.core.serialization
       /// <summary>
       /// Deserialization main entry point
       /// </summary>
+      /// <param name="jsonContent"></param>
+      /// <returns></returns>
+      public object Deserialize(string jsonContent)
+      {
+         dynamic __deserializedOutput = null;
+
+         using (JsonDocument jsonDocument = JsonDocument.Parse(jsonContent))
+         {
+            JsonElement root = jsonDocument.RootElement;
+
+            __deserializedOutput = DeserializeElement(root, typeof(T));
+         }
+
+         return __deserializedOutput;
+      }
+
+      /// <summary>
+      /// Deserialization main entry point
+      /// </summary>
       /// <typeparam name="S">Type of the wrapping collection (e.g. NlsLabeledItemSet) that is discarded in favour of an IEnumerator</typeparam>
       /// <param name="jsonContent"></param>
       /// <returns></returns>
@@ -433,10 +452,15 @@ namespace ws3dx.core.serialization
                      {
                         if (propType.IsInterface)
                         {
-                           //Type propClassImpType = GlobalSchemaAttributeRegistry.GetDefaultClassDeserializerImpForInterface(propType);
                            Type propClassImpType = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(propType);
-
-                           propInfo.SetValue(__item, DeserializeAsObjectDictionary(propClassImpType, jProp.Value));
+                           if (propClassImpType != null)
+                           {
+                              propInfo.SetValue(__item, DeserializeAsObjectDictionary(propClassImpType, jProp.Value));
+                           }
+                           else
+                           {
+                              throw new Exception($"No deserialization implementation class was found for the {propType.Name} interface.");
+                           }
                         }
                         else
                         {
@@ -449,11 +473,13 @@ namespace ws3dx.core.serialization
                         {
                            //Get the default implementor class
                            Type classDeserializerImp = GlobalSchemaAttributeRegistry.GetDefaultImplementationClass(propType);
-                           //GetDefaultClassDeserializerImpForInterface(propType);
-
                            if (classDeserializerImp != null)
                            {
                               propInfo.SetValue(__item, InvokeDeserializeItemForType(classDeserializerImp, jProp.Value));
+                           }
+                           else
+                           {
+                              throw new Exception($"No deserialization implementation class was found for the {propType.Name} interface.");
                            }
                         }
                         else
@@ -479,7 +505,7 @@ namespace ws3dx.core.serialization
          object deserializerInst = MaskDeserializationHandler.GetCachedInstanceForType(_itemType);
 
          MethodInfo method = (deserializerInst.GetType()).GetMethod(nameof(DeserializeItem), BindingFlags.NonPublic | BindingFlags.Instance);
-         
+
          return method.Invoke(deserializerInst, new object[] { _jsonElement, _itemType });
       }
 
@@ -659,7 +685,17 @@ namespace ws3dx.core.serialization
             if (jsonPropertyNameAttribute != null)
                jPropNameParsed = jsonPropertyNameAttribute.Name;
 
-            __jsonMappableProperties.Add(jPropNameParsed, property);
+            if (!__jsonMappableProperties.ContainsKey(jPropNameParsed))
+            {
+               __jsonMappableProperties.Add(jPropNameParsed, property);
+            }
+            else
+            {
+               if (property.DeclaringType == _type)
+               {
+                  __jsonMappableProperties[jPropNameParsed] = property;
+               }
+            }
          }
 
          if (_useCache)

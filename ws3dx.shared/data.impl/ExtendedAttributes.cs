@@ -16,8 +16,6 @@
 
 using System.Collections.Generic;
 
-using ws3dx.serialization.attribute;
-
 namespace ws3dx.data.impl
 {
    public class ExtendedAttributes : Dictionary<string, object>, IExtendedAttributes

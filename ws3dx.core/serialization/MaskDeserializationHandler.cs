@@ -52,5 +52,12 @@ namespace ws3dx.core.serialization
 
          return schemaDeserializer.Deserialize<S>(_json);
       }
+
+      public static dynamic Deserialize<T>(string _json)
+      {
+         MaskSchemaDeserializer<T> schemaDeserializer = (MaskSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
+
+         return schemaDeserializer.Deserialize(_json);
+      }
    }
 }

@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.exception;
 using ws3dx.core.serialization;
-using ws3dx.data.collection.impl;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
@@ -52,12 +51,6 @@ namespace ws3dx.core.service
 
       protected bool IsSearchSkipParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchSkipParamName()); } }
       protected bool IsSearchTopParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchTopParamName()); } }
-
-      // Full search
-      public async Task<IList<T>> Search<T>(SearchQuery _searchString)
-      {
-         return await Search<T, NlsLabeledItemSet<T>>(_searchString);
-      }
 
       protected async Task<IList<T>> Search<T, S>(SearchQuery _searchString)
       {
@@ -95,16 +88,10 @@ namespace ws3dx.core.service
          return __output;
       }
 
-
-
-      //Paged Search
-      public async Task<IList<T>> Search<T>(SearchQuery _searchString, long _skip = 0, long _top = 100)
-      {
-         return await Search<T, NlsLabeledItemSet<T>>(_searchString, _skip, _top);
-      }
-
       protected async Task<IList<T>> Search<T, S>(SearchQuery _searchQuery, long _skip = 0, long _top = 100)
       {
+         System.Diagnostics.Debug.WriteLine($"Search<{typeof(T).Name}, {typeof(S).Name}>");
+
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
          Dictionary<string, string> queryParams = new Dictionary<string, string>();

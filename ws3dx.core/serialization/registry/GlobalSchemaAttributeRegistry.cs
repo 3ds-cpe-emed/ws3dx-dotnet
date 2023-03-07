@@ -22,9 +22,9 @@ namespace ws3dx.core.serialization.registry
 {
    static class GlobalSchemaAttributeRegistry
    {
-      private static MaskSchemaRegistry               m_glbSchemaMaskRegistry       = null;
+      private static MaskSchemaRegistry m_glbSchemaMaskRegistry = null;
       private static ResponseCollectionSchemaRegistry m_glbCollectionSchemaRegistry = null;
-      private static IDictionary<Type, IList<Type>>   m_glbInterfaceImplClasses     = null;
+      private static IDictionary<Type, IList<Type>> m_glbInterfaceImplClasses = null;
 
       private static bool IsInitialized { get; set; } = false;
 
@@ -51,7 +51,7 @@ namespace ws3dx.core.serialization.registry
 
          #region adding well known collection generic type definitions
          // IList -> List
-         __contextClassImpTypeListByInterfaceType.Add(typeof(IList<>),       new List<Type>() { typeof(List<>) });
+         __contextClassImpTypeListByInterfaceType.Add(typeof(IList<>), new List<Type>() { typeof(List<>) });
          // IDictionary -> Dictionary
          __contextClassImpTypeListByInterfaceType.Add(typeof(IDictionary<,>), new List<Type>() { typeof(Dictionary<,>) });
          #endregion
@@ -129,7 +129,8 @@ namespace ws3dx.core.serialization.registry
 
          Type interfaceDef = _interfaceMaskDef;
 
-         if ((_interfaceMaskDef.IsGenericType) && (!_interfaceMaskDef.IsGenericTypeDefinition)) {
+         if ((_interfaceMaskDef.IsGenericType) && (!_interfaceMaskDef.IsGenericTypeDefinition))
+         {
             interfaceDef = _interfaceMaskDef.GetGenericTypeDefinition();
          }
 
@@ -143,13 +144,13 @@ namespace ws3dx.core.serialization.registry
 
       public static bool IsResponseCollectionSchema(Type _testType)
       {
-         if (!IsInitialized) { Initialize();}
+         if (!IsInitialized) { Initialize(); }
          return m_glbCollectionSchemaRegistry.IsResponseCollectionSchema(_testType);
       }
 
       public static ResponseCollectionSchemaHelper GetResponseCollectionSchema(Type _type)
       {
-         if (!IsInitialized) { Initialize();}
+         if (!IsInitialized) { Initialize(); }
          return m_glbCollectionSchemaRegistry.GetResponseCollection(_type);
       }
    }

@@ -15,8 +15,6 @@
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Text.Json.Serialization;
-
-using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
 
 namespace ws3dx.data.impl
