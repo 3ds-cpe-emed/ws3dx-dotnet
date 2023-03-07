@@ -23,6 +23,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("sequenceOrder")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string SequenceOrder { get; set; }
-
    }
 }

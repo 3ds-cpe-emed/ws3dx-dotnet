@@ -18,10 +18,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
 using ws3dx.shared.data.dscfg;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dseng.core.service
 {
@@ -64,6 +66,16 @@ namespace ws3dx.dseng.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -78,11 +90,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> GetEnterpriseItemNumber(string engItemId)
+      public async Task<IEnterpriseItemNumberMask> GetEnterpriseItemNumber(string engItemId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
 
-         return await GetMultiple<IEnterpriseItemNumberMask>(resourceURI);
+         return await GetIndividual<IEnterpriseItemNumberMask, NlsLabeledItemSet<IEnterpriseItemNumberMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -100,13 +112,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetInstance<T>(string engItemId, string instanceId)
+      public async Task<T> GetInstance<T>(string engItemId, string instanceId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceMaskFilterable), typeof(IEngInstanceMaskPosition), typeof(IEngInstanceDefaultMask), typeof(IEngInstanceDetailsMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -121,13 +133,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string engItemId)
+      public async Task<T> Get<T>(string engItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -149,7 +161,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -165,11 +177,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IChangeControlMaskStatus>> GetChangeControl(string engItemId)
+      public async Task<IChangeControlMaskStatus> GetChangeControl(string engItemId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
 
-         return await GetMultiple<IChangeControlMaskStatus>(resourceURI);
+         return await GetIndividual<IChangeControlMaskStatus>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -187,13 +199,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetAlternate<T>(string engItemId, string alternateId)
+      public async Task<T> GetAlternate<T>(string engItemId, string alternateId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMaskDefault), typeof(IAlternateMaskDetail) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -216,7 +228,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable";
 
-         return await GetMultiple<IFilterableDetail>(resourceURI);
+         return await GetGroup<IFilterableDetail, ItemSet<IFilterableDetail>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -238,7 +250,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -259,7 +271,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -275,11 +287,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<ITypedUriIdentifierResources> AttachConfiguration(string engItemId, ITypedUriIdentifier[] request)
+      public async Task<IEnumerable<ITypedUriIdentifier>> AttachConfiguration(string engItemId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/attach";
 
-         return await PostRequest<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostGroup<ITypedUriIdentifier, ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -298,7 +310,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
 
-         return await PostRequest<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -336,7 +348,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/set/evolution";
 
-         return await PostRequest<ISetEvolutionResponse, ISetEvolutionEffectivities>(resourceURI, request);
+         return await PostIndividual<ISetEvolutionResponse, ISetEvolutionEffectivities>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -360,7 +372,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/replace";
 
-         return await PostRequestMultiple<T, IEngInstanceReplace>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, IEngInstanceReplace>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -378,7 +390,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem";
 
-         return await PostRequestMultiple<T, ICreateEngItem>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateEngItem>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -394,11 +406,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<ITypedUriIdentifierResources> DetachConfiguration(string engItemId, ITypedUriIdentifier[] request)
+      public async Task<IEnumerable<ITypedUriIdentifier>> DetachConfiguration(string engItemId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/detach";
 
-         return await PostRequest<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostGroup<ITypedUriIdentifier, ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -422,7 +434,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/variant";
 
-         return await PostRequest<IResponseUnsetVariantEffectivity>(resourceURI);
+         return await PostIndividual<IResponseUnsetVariantEffectivity>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -438,11 +450,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> AttachEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> AttachEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
 
-         return await PostRequestMultiple<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PostIndividual<IEnterpriseItemNumberMask, ItemSet<IEnterpriseItemNumberMask>, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -481,7 +493,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/set/variant";
 
-         return await PostRequest<ISetVariantResponse, ISetVariantEffectivities>(resourceURI, request);
+         return await PostIndividual<ISetVariantResponse, ISetVariantEffectivities>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -503,7 +515,7 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
-         return await PostRequestMultiple<T, ICreateEngInstances>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateEngInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -526,7 +538,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/evolution";
 
-         return await PostRequest<IResponseUnsetEvolutionEffectivity>(resourceURI);
+         return await PostIndividual<IResponseUnsetEvolutionEffectivity>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -542,11 +554,11 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> UpdateEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> UpdateEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
 
-         return await PatchGroup<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PatchIndividual<IEnterpriseItemNumberMask, ItemSet<IEnterpriseItemNumberMask>, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -565,13 +577,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> UpdateInstance<T>(string engItemId, string instanceId, IEngInstancePatch request)
+      public async Task<T> UpdateInstance<T>(string engItemId, string instanceId, IEngInstancePatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceMaskFilterable), typeof(IEngInstanceMaskPosition), typeof(IEngInstanceDefaultMask), typeof(IEngInstanceDetailsMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
-         return await PatchGroup<T, IEngInstancePatch>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IEngInstancePatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -587,13 +599,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> UpdateConfiguration<T>(string engItemId, IConfiguredPatch request)
+      public async Task<T> UpdateConfiguration<T>(string engItemId, IConfiguredPatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
 
-         return await PatchGroup<T, IConfiguredPatch>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IConfiguredPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -609,13 +621,13 @@ namespace ws3dx.dseng.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string engItemId, IEngItemPatch request)
+      public async Task<T> Update<T>(string engItemId, IEngItemPatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-         return await PatchGroup<T, IEngItemPatch>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IEngItemPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -693,9 +705,11 @@ namespace ws3dx.dseng.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternates request)
       {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMaskDefault), typeof(IAlternateMaskDetail) });
+
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
-         return await PostRequestMultiple<T, IAddAlternates>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, IAddAlternates>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -713,9 +727,11 @@ namespace ws3dx.dseng.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesParent request)
       {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMaskDefault), typeof(IAlternateMaskDetail) });
+
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
-         return await PostRequestMultiple<T, IAddAlternatesParent>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, IAddAlternatesParent>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -733,9 +749,11 @@ namespace ws3dx.dseng.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesInstance request)
       {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMaskDefault), typeof(IAlternateMaskDetail) });
+
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
-         return await PostRequestMultiple<T, IAddAlternatesInstance>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, IAddAlternatesInstance>(resourceURI, request);
       }
    }
 }

@@ -92,6 +92,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("fileExtension")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<string> FileExtension { get; set; }
-
    }
 }

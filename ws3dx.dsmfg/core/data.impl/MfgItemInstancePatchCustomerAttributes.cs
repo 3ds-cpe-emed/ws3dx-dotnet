@@ -13,19 +13,12 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using ws3dx.dsmfg.data;
 
 namespace ws3dx.dsmfg.core.data.impl
 {
-   public class MfgItemInstancePatchCustomerAttributes : IMfgItemInstancePatchCustomerAttributes
+   public class MfgItemInstancePatchCustomerAttributes : Dictionary<string, object>, IMfgItemInstancePatchCustomerAttributes
    {
-      [JsonPropertyName("DBcustomExtension")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMfgItemInstancePatchCustomerAttributesDBcustomExtension DBcustomExtension { get; set; }
-
-      [JsonPropertyName("DBcustomAttributesGroup")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMfgItemInstancePatchCustomerAttributesDBcustomAttributesGroup DBcustomAttributesGroup { get; set; }
    }
 }

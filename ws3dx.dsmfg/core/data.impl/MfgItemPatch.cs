@@ -259,6 +259,6 @@ namespace ws3dx.dsmfg.core.data.impl
 
       [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICustomerAttributes CustomerAttributes { get; set; }
+      public IMfgItemCustomerAttributes CustomerAttributes { get; set; }
    }
 }

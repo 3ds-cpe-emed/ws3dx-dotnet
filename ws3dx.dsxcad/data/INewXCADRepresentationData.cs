@@ -39,6 +39,5 @@ namespace ws3dx.dsxcad.data
       public IXCADAttribute XCADAttributes { get; set; }
 
       public IFileData AuthoringFile { get; set; }
-
    }
 }

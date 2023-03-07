@@ -95,7 +95,7 @@ namespace NUnitTestProject
          return __bookmarkService;
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("bookmark", 0, 50)]
       public async Task Search_Paged_IBookmarkMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -105,8 +105,22 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IBookmarkMask> ret = await bookmarkService.Search<IBookmarkMask>(searchByFreeText, skip, top);
-
          Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IBookmarkMask bksMask in ret)
+         {
+            IEnumerable<IBookmarkDetailMask> bksEnum = await bookmarkService.Get<IBookmarkDetailMask>(bksMask.Id);
+
+            foreach (IBookmarkDetailMask bksMaskDetail in bksEnum)
+            {
+               Assert.AreEqual(bksMaskDetail.Id, bksMask.Id);
+            }
+
+            i++;
+
+            if (i > 20) return;
+         }
       }
 
       [TestCase("search")]

@@ -71,6 +71,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("organization")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Organization { get; set; }
-
    }
 }

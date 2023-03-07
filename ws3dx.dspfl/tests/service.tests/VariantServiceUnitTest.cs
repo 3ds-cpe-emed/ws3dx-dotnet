@@ -95,7 +95,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          VariantService variantService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IVariantMask> ret = await variantService.GetVariant(variantId);
+         IVariantMask ret = await variantService.GetVariant(variantId);
 
          Assert.IsNotNull(ret);
       }

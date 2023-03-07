@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -100,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            IReservationOutput ret = await reservationService.Reserve(request);
+            IEnumerable<IReservation> ret = await reservationService.Reserve(request);
 
             Assert.IsNotNull(ret);
          }
@@ -122,7 +123,7 @@ namespace NUnitTestProject
 
          try
          {
-            IReservationOutput ret = await reservationService.Unreserve(request);
+            IEnumerable<IReservation> ret = await reservationService.Unreserve(request);
 
             Assert.IsNotNull(ret);
          }

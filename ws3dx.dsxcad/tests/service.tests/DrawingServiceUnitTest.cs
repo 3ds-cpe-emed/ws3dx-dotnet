@@ -107,7 +107,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("AAA27", 0, 50)]
       public async Task Search_Paged_IXCADDrawingMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -121,7 +121,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("AAA27")]
       public async Task Search_Full_IXCADDrawingMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -188,7 +188,7 @@ namespace NUnitTestProject
 
          Assert.IsNotNull(ret);
       }
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADDrawingBasicMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -198,6 +198,18 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IXCADDrawingBasicMask> ret = await drawingService.Search<IXCADDrawingBasicMask>(searchByFreeText, skip, top);
+
+         int i = 0;
+         foreach (IXCADDrawingBasicMask drawingFound in ret)
+         {
+            IXCADDrawingDetailMask drawing = await drawingService.Get<IXCADDrawingDetailMask>(drawingFound.Id);
+
+            Assert.AreEqual(drawingFound.Id, drawing.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
 
          Assert.IsNotNull(ret);
       }
@@ -222,7 +234,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DrawingService drawingService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADDrawingMask> ret = await drawingService.Get<IXCADDrawingMask>(drawingId);
+         IXCADDrawingMask ret = await drawingService.Get<IXCADDrawingMask>(drawingId);
 
          Assert.IsNotNull(ret);
       }
@@ -233,7 +245,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DrawingService drawingService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADDrawingDetailMask> ret = await drawingService.Get<IXCADDrawingDetailMask>(drawingId);
+         IXCADDrawingDetailMask ret = await drawingService.Get<IXCADDrawingDetailMask>(drawingId);
 
          Assert.IsNotNull(ret);
       }
@@ -244,7 +256,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DrawingService drawingService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADDrawingEnterpriseDetailMask> ret = await drawingService.Get<IXCADDrawingEnterpriseDetailMask>(drawingId);
+         IXCADDrawingEnterpriseDetailMask ret = await drawingService.Get<IXCADDrawingEnterpriseDetailMask>(drawingId);
 
          Assert.IsNotNull(ret);
       }
@@ -255,7 +267,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DrawingService drawingService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADDrawingBasicMask> ret = await drawingService.Get<IXCADDrawingBasicMask>(drawingId);
+         IXCADDrawingBasicMask ret = await drawingService.Get<IXCADDrawingBasicMask>(drawingId);
 
          Assert.IsNotNull(ret);
       }
@@ -348,7 +360,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingMask> ret = await drawingService.Attach<IXCADDrawingMask>(drawingId, request);
+            IXCADDrawingMask ret = await drawingService.Attach<IXCADDrawingMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -369,7 +381,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingDetailMask> ret = await drawingService.Attach<IXCADDrawingDetailMask>(drawingId, request);
+            IXCADDrawingDetailMask ret = await drawingService.Attach<IXCADDrawingDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -390,7 +402,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingEnterpriseDetailMask> ret = await drawingService.Attach<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
+            IXCADDrawingEnterpriseDetailMask ret = await drawingService.Attach<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -411,7 +423,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingBasicMask> ret = await drawingService.Attach<IXCADDrawingBasicMask>(drawingId, request);
+            IXCADDrawingBasicMask ret = await drawingService.Attach<IXCADDrawingBasicMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -455,7 +467,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IEnterpriseItemNumberMask> ret = await drawingService.Locate(request);
+            IEnumerable<IRelatedId> ret = await drawingService.Locate(request);
 
             Assert.IsNotNull(ret);
          }
@@ -477,7 +489,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingMask> ret = await drawingService.Modify<IXCADDrawingMask>(drawingId, request);
+            IXCADDrawingMask ret = await drawingService.Modify<IXCADDrawingMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -498,7 +510,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingDetailMask> ret = await drawingService.Modify<IXCADDrawingDetailMask>(drawingId, request);
+            IXCADDrawingDetailMask ret = await drawingService.Modify<IXCADDrawingDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -519,7 +531,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingEnterpriseDetailMask> ret = await drawingService.Modify<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
+            IXCADDrawingEnterpriseDetailMask ret = await drawingService.Modify<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -540,7 +552,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingBasicMask> ret = await drawingService.Modify<IXCADDrawingBasicMask>(drawingId, request);
+            IXCADDrawingBasicMask ret = await drawingService.Modify<IXCADDrawingBasicMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -584,7 +596,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingMask> ret = await drawingService.Detach<IXCADDrawingMask>(drawingId, request);
+            IXCADDrawingMask ret = await drawingService.Detach<IXCADDrawingMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -605,7 +617,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingDetailMask> ret = await drawingService.Detach<IXCADDrawingDetailMask>(drawingId, request);
+            IXCADDrawingDetailMask ret = await drawingService.Detach<IXCADDrawingDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -626,7 +638,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingEnterpriseDetailMask> ret = await drawingService.Detach<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
+            IXCADDrawingEnterpriseDetailMask ret = await drawingService.Detach<IXCADDrawingEnterpriseDetailMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -647,7 +659,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADDrawingBasicMask> ret = await drawingService.Detach<IXCADDrawingBasicMask>(drawingId, request);
+            IXCADDrawingBasicMask ret = await drawingService.Detach<IXCADDrawingBasicMask>(drawingId, request);
 
             Assert.IsNotNull(ret);
          }

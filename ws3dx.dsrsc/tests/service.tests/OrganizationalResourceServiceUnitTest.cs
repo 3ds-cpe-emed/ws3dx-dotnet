@@ -129,7 +129,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOrganizationalResourceInstanceMask> ret = await organizationalResourceService.GetInstance(organizationalResourceId, instanceId);
+         IOrganizationalResourceInstanceMask ret = await organizationalResourceService.GetInstance(organizationalResourceId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -140,7 +140,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IWorkerInstanceMask> ret = await organizationalResourceService.GetWorkerInstance<IWorkerInstanceMask>(organizationalResourceId, instanceId);
+         IWorkerInstanceMask ret = await organizationalResourceService.GetWorkerInstance<IWorkerInstanceMask>(organizationalResourceId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -151,7 +151,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IWorkerInstanceDetailMask> ret = await organizationalResourceService.GetWorkerInstance<IWorkerInstanceDetailMask>(organizationalResourceId, instanceId);
+         IWorkerInstanceDetailMask ret = await organizationalResourceService.GetWorkerInstance<IWorkerInstanceDetailMask>(organizationalResourceId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -162,7 +162,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemInstanceMask> ret = await organizationalResourceService.GetResourceItemInstance<IResourceItemInstanceMask>(organizationalResourceId, instanceId);
+         IResourceItemInstanceMask ret = await organizationalResourceService.GetResourceItemInstance<IResourceItemInstanceMask>(organizationalResourceId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -173,7 +173,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemInstanceDetailMask> ret = await organizationalResourceService.GetResourceItemInstance<IResourceItemInstanceDetailMask>(organizationalResourceId, instanceId);
+         IResourceItemInstanceDetailMask ret = await organizationalResourceService.GetResourceItemInstance<IResourceItemInstanceDetailMask>(organizationalResourceId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -184,7 +184,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOrganizationalResourceMask> ret = await organizationalResourceService.Get<IOrganizationalResourceMask>(orgResourceId);
+         IOrganizationalResourceMask ret = await organizationalResourceService.Get<IOrganizationalResourceMask>(orgResourceId);
 
          Assert.IsNotNull(ret);
       }
@@ -195,7 +195,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOrganizationalResourceDetailMask> ret = await organizationalResourceService.Get<IOrganizationalResourceDetailMask>(orgResourceId);
+         IOrganizationalResourceDetailMask ret = await organizationalResourceService.Get<IOrganizationalResourceDetailMask>(orgResourceId);
 
          Assert.IsNotNull(ret);
       }
@@ -206,7 +206,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          OrganizationalResourceService organizationalResourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IImplementLinkMask> ret = await organizationalResourceService.GetImplementLink(orgResourceId, implementLinkId);
+         IImplementLinkMask ret = await organizationalResourceService.GetImplementLink(orgResourceId, implementLinkId);
 
          Assert.IsNotNull(ret);
       }

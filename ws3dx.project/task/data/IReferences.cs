@@ -20,6 +20,5 @@ namespace ws3dx.project.task.data
    public interface IReferences
    {
       public IList<IReference> Data { get; set; }
-
    }
 }

@@ -41,6 +41,5 @@ namespace ws3dx.dsadvfilter.core.data.impl
       [JsonPropertyName("filterSpecifications")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string FilterSpecifications { get; set; }
-
    }
 }

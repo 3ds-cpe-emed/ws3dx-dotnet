@@ -29,6 +29,5 @@ namespace ws3dx.dsxcad.data
       public string Status { get; set; }
 
       public IList<IChangeControlControllingChanges> ControllingChanges { get; set; }
-
    }
 }

@@ -21,6 +21,5 @@ namespace ws3dx.project.project.data
       public string Title { get; set; }
 
       public string Default { get; set; }
-
    }
 }

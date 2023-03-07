@@ -21,6 +21,5 @@ namespace ws3dx.dsxcad.data
    public interface IXCADAttributesMask
    {
       public IXCADAttribute XCADAttributes { get; set; }
-
    }
 }

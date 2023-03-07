@@ -13,18 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
+using ws3dx.dsmfg.data.extension;
 
-namespace ws3dx.dsmfg.data
+namespace ws3dx.dsmfg.data.impl.extension
 {
-   public interface IMfgItemInstancePatchCustomerAttributesDBcustomExtension
+   public class ProcessContinuousProvideEnterpriseAttributes : Dictionary<string, object>, IProcessContinuousProvideEnterpriseAttributes
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Attribute DB Value Example: Attribute DB Value
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string MyDBAttr2 { get; set; }
+      //Specific Enterprise Attributes
    }
 }

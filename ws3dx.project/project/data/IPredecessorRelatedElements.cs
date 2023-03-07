@@ -35,6 +35,5 @@ namespace ws3dx.project.project.data
       public string PredProjectName { get; set; }
 
       public string PredProjectId { get; set; }
-
    }
 }

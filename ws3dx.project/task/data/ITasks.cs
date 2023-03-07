@@ -20,6 +20,5 @@ namespace ws3dx.project.task.data
    public interface ITasks
    {
       public IList<ITask> Data { get; set; }
-
    }
 }

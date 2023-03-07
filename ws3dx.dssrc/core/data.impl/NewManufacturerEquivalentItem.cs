@@ -72,6 +72,5 @@ namespace ws3dx.dssrc.core.data.impl
       [JsonPropertyName("partSource")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string PartSource { get; set; }
-
    }
 }

@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -100,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITransferOutput ret = await ownershipService.Transfer(request);
+            IEnumerable<ITransfer> ret = await ownershipService.Transfer(request);
 
             Assert.IsNotNull(ret);
          }

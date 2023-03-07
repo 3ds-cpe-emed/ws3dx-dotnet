@@ -51,6 +51,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("relelements")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IPredecessorRelatedElements RelatedElements { get; set; }
-
    }
 }

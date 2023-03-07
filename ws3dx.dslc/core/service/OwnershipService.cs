@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -44,11 +45,11 @@ namespace ws3dx.dslc.core.service
       // at a time. Summary: Transfer ownership
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<ITransferOutput> Transfer(ITransferListInput request)
+      public async Task<IEnumerable<ITransfer>> Transfer(ITransferListInput request)
       {
          string resourceURI = $"{GetBaseResource()}ownership/transfer";
 
-         return await PostRequest<ITransferOutput, ITransferListInput>(resourceURI, request);
+         return await PostGroup<ITransfer, ITransferOutput, ITransferListInput>(resourceURI, request);
       }
    }
 }

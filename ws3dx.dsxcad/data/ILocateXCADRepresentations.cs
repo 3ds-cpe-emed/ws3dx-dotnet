@@ -21,6 +21,5 @@ namespace ws3dx.dsxcad.data
    public interface ILocateXCADRepresentations
    {
       public IList<ITypedUriId> ReferencedObject { get; set; }
-
    }
 }

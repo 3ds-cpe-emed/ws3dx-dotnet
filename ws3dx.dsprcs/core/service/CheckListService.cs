@@ -18,8 +18,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsprcs.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsprcs.core.service
 {
@@ -62,6 +64,16 @@ namespace ws3dx.dsprcs.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -80,7 +92,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}/dsprcs:DataCollectRow";
 
-         return await GetMultiple<ICheckListRowMask>(resourceURI);
+         return await GetGroup<ICheckListRowMask, NlsLabeledItemSet<ICheckListRowMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -99,11 +111,11 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<ICheckListRowMask>> GetDataCollectRow(string checkListId, string dataCollectRowId)
+      public async Task<ICheckListRowMask> GetDataCollectRow(string checkListId, string dataCollectRowId)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{checkListId}/dsprcs:DataCollectRow/{dataCollectRowId}";
 
-         return await GetMultiple<ICheckListRowMask>(resourceURI);
+         return await GetIndividual<ICheckListRowMask, NlsLabeledItemSet<ICheckListRowMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -119,20 +131,13 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string ID)
+      public async Task<T> Get<T>(string ID)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(ICheckListMask), typeof(ICheckListDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
-
-
-
-
-
-
-
    }
 }

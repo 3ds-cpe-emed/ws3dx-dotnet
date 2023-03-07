@@ -55,6 +55,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("predProjectId")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string PredProjectId { get; set; }
-
    }
 }

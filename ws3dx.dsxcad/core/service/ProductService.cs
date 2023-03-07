@@ -18,8 +18,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsxcad.core.service
 {
@@ -62,6 +64,16 @@ namespace ws3dx.dsxcad.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
 
       //---------------------------------------------------------------------------------------------
@@ -76,13 +88,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string productId)
+      public async Task<T> Get<T>(string productId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -102,7 +114,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -120,7 +132,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Product";
 
-         return await PostRequestMultiple<T, ICreateXCADProductsFromTemplate>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADProductsFromTemplate>(resourceURI, request);
       }
    }
 }

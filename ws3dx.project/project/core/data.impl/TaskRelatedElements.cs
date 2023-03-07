@@ -27,6 +27,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("taskWBS")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string TaskWBS { get; set; }
-
    }
 }

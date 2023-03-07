@@ -16,7 +16,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
-using ws3dx.dsprcs.data;
 using ws3dx.shared.data;
 using IRealizedChangeDetailMask = ws3dx.dsprcs.data.IRealizedChangeDetailMask;
 

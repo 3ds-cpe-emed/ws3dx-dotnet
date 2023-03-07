@@ -53,6 +53,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Jobticket { get; set; }
-
    }
 }

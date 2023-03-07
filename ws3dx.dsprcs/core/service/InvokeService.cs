@@ -50,7 +50,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsprcs:getRealizedChanges";
 
-         return await PostRequest<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
+         return await PostIndividual<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
       }
    }
 }

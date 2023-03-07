@@ -120,7 +120,7 @@ namespace NUnitTestProject
 
          Assert.IsNotNull(ret);
       }
-      [TestCase("search", 0, 50)]
+      [TestCase("library", 0, 50)]
       public async Task Search_Paged_ILibraryDetailMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -129,12 +129,30 @@ namespace NUnitTestProject
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<ILibraryDetailMask> ret = await libraryService.Search<ILibraryDetailMask>(searchByFreeText, skip, top);
+         IEnumerable<ISimpleMask> ret = await libraryService.Search<ISimpleMask>(searchByFreeText, skip, top);
 
          Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (ISimpleMask libFound in ret)
+         {
+            IEnumerable<ILibraryDetailMask> libFamily = await libraryService.Get<ILibraryDetailMask>(libFound.Id, "1");
+
+            if (libFamily != null)
+            {
+               foreach (ILibraryDetailMask libFamilyDetailMask in libFamily)
+               {
+                  Assert.AreEqual(libFound.Id, libFamilyDetailMask.Id);
+               }
+            }
+
+            i++;
+
+            if (i > 20) return;
+         }
       }
 
-      [TestCase("search")]
+      [TestCase("library")]
       public async Task Search_Full_ILibraryDetailMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();

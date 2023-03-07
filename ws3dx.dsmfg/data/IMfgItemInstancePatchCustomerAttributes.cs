@@ -14,12 +14,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace ws3dx.dsmfg.data
 {
-   public interface IMfgItemInstancePatchCustomerAttributes
+   public interface IMfgItemInstancePatchCustomerAttributes : IDictionary<string, object>
    {
-      public IMfgItemInstancePatchCustomerAttributesDBcustomExtension DBcustomExtension { get; set; }
-
-      public IMfgItemInstancePatchCustomerAttributesDBcustomAttributesGroup DBcustomAttributesGroup { get; set; }
    }
 }

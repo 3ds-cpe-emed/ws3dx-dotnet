@@ -25,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.dsrsc.core.data.impl;
 using ws3dx.dsrsc.core.service;
 using ws3dx.dsrsc.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -96,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceService resourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceMask> ret = await resourceService.Get<IResourceMask>(resId);
+         IResourceMask ret = await resourceService.Get<IResourceMask>(resId);
 
          Assert.IsNotNull(ret);
       }
@@ -107,7 +108,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceService resourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceDetailMask> ret = await resourceService.Get<IResourceDetailMask>(resId);
+         IResourceDetailMask ret = await resourceService.Get<IResourceDetailMask>(resId);
 
          Assert.IsNotNull(ret);
       }
@@ -132,6 +133,46 @@ namespace NUnitTestProject
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
+      }
+
+      [TestCase("resource")]
+      public async Task Search_Full_IResourceMask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ResourceService resourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IResourceMask> ret = await resourceService.Search<IResourceMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("resource", 0, 50)]
+      public async Task Search_Paged_IResourceMask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ResourceService resourceService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IResourceMask> ret = await resourceService.Search<IResourceMask>(searchByFreeText, skip, top);
+
+         int i = 0;
+         foreach (IResourceMask resourceFound in ret)
+         {
+            IResourceDetailMask resource = await resourceService.Get<IResourceDetailMask>(resourceFound.Id);
+
+            Assert.AreEqual(resourceFound.Id, resource.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
+
+         Assert.IsNotNull(ret);
       }
    }
 }

@@ -87,6 +87,5 @@ namespace ws3dx.dssrc.data
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
-
    }
 }

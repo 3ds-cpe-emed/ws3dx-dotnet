@@ -114,7 +114,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEnterpriseItemNumberMask> ret = await partService.GetEnterpriseItemNumber(partId);
+         IEnterpriseItemNumberMask ret = await partService.GetEnterpriseItemNumber(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -125,7 +125,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADPartMask> ret = await partService.Get<IXCADPartMask>(partId);
+         IXCADPartMask ret = await partService.Get<IXCADPartMask>(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -136,7 +136,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADPartBasicMask> ret = await partService.Get<IXCADPartBasicMask>(partId);
+         IXCADPartBasicMask ret = await partService.Get<IXCADPartBasicMask>(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -147,7 +147,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADPartEnterpriseDetailMask> ret = await partService.Get<IXCADPartEnterpriseDetailMask>(partId);
+         IXCADPartEnterpriseDetailMask ret = await partService.Get<IXCADPartEnterpriseDetailMask>(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -158,7 +158,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADPartDetailMask> ret = await partService.Get<IXCADPartDetailMask>(partId);
+         IXCADPartDetailMask ret = await partService.Get<IXCADPartDetailMask>(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -174,7 +174,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADPartMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -201,7 +201,7 @@ namespace NUnitTestProject
 
          Assert.IsNotNull(ret);
       }
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADPartBasicMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -211,6 +211,19 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IXCADPartBasicMask> ret = await partService.Search<IXCADPartBasicMask>(searchByFreeText, skip, top);
+
+         int i = 0;
+
+         foreach (IXCADPartBasicMask partFound in ret)
+         {
+            IXCADPartDetailMask part = await partService.Get<IXCADPartDetailMask>(partFound.Id);
+
+            Assert.AreEqual(partFound.Id, part.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
 
          Assert.IsNotNull(ret);
       }
@@ -289,7 +302,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          PartService partService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADAttributesMask> ret = await partService.GetXCADAttributes(partId);
+         IXCADAttributesMask ret = await partService.GetXCADAttributes(partId);
 
          Assert.IsNotNull(ret);
       }
@@ -360,7 +373,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartMask> ret = await partService.Attach<IXCADPartMask>(partId, request);
+            IXCADPartMask ret = await partService.Attach<IXCADPartMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -381,7 +394,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartBasicMask> ret = await partService.Attach<IXCADPartBasicMask>(partId, request);
+            IXCADPartBasicMask ret = await partService.Attach<IXCADPartBasicMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -402,7 +415,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartEnterpriseDetailMask> ret = await partService.Attach<IXCADPartEnterpriseDetailMask>(partId, request);
+            IXCADPartEnterpriseDetailMask ret = await partService.Attach<IXCADPartEnterpriseDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -423,7 +436,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartDetailMask> ret = await partService.Attach<IXCADPartDetailMask>(partId, request);
+            IXCADPartDetailMask ret = await partService.Attach<IXCADPartDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -467,7 +480,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartMask> ret = await partService.Modify<IXCADPartMask>(partId, request);
+            IXCADPartMask ret = await partService.Modify<IXCADPartMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -488,7 +501,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartBasicMask> ret = await partService.Modify<IXCADPartBasicMask>(partId, request);
+            IXCADPartBasicMask ret = await partService.Modify<IXCADPartBasicMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -509,7 +522,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartEnterpriseDetailMask> ret = await partService.Modify<IXCADPartEnterpriseDetailMask>(partId, request);
+            IXCADPartEnterpriseDetailMask ret = await partService.Modify<IXCADPartEnterpriseDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -530,7 +543,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartDetailMask> ret = await partService.Modify<IXCADPartDetailMask>(partId, request);
+            IXCADPartDetailMask ret = await partService.Modify<IXCADPartDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -574,7 +587,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IEnterpriseItemNumberMask> ret = await partService.AddEnterpriseItemNumber(partId, request);
+            IEnterpriseItemNumberMask ret = await partService.AddEnterpriseItemNumber(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -596,7 +609,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartMask> ret = await partService.Detach<IXCADPartMask>(partId, request);
+            IXCADPartMask ret = await partService.Detach<IXCADPartMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -617,7 +630,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartBasicMask> ret = await partService.Detach<IXCADPartBasicMask>(partId, request);
+            IXCADPartBasicMask ret = await partService.Detach<IXCADPartBasicMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -638,7 +651,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartEnterpriseDetailMask> ret = await partService.Detach<IXCADPartEnterpriseDetailMask>(partId, request);
+            IXCADPartEnterpriseDetailMask ret = await partService.Detach<IXCADPartEnterpriseDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -659,7 +672,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IXCADPartDetailMask> ret = await partService.Detach<IXCADPartDetailMask>(partId, request);
+            IXCADPartDetailMask ret = await partService.Detach<IXCADPartDetailMask>(partId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -669,9 +682,6 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-
-
-
 
 
 

@@ -19,13 +19,14 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.project.program.data;
+using ws3dx.utils.search;
 
 namespace ws3dx.project.program.core.service
 {
    // SDK Service
    public class ProgramService : SearchService
    {
-      private const string BASE_RESOURCE = "/resources/v1/modeler//";
+      private const string BASE_RESOURCE = "/resources/v1/modeler";
 
       public ProgramService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
@@ -44,23 +45,39 @@ namespace ws3dx.project.program.core.service
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { };
+         return new List<Type>() { typeof(IResponseProgramData) };
+      }
+
+      protected override string GetMaskParamName()
+      {
+         return null;
       }
 
       protected override string GetSearchSkipParamName()
       {
-         return "";
+         return null;
       }
 
       protected override string GetSearchTopParamName()
       {
-         return "";
+         return null;
       }
 
       protected override string GetSearchCriteriaParamName()
       {
          return "searchStr";
       }
+
+      public async Task<IList<IResponseProgramData>> Search(SearchQuery searchQuery)
+      {
+         return await Search<IResponseProgramData, IResponseProgram>(searchQuery);
+      }
+
+      public async Task<IList<IResponseProgramData>> Search(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<IResponseProgramData, IResponseProgram>(searchQuery, _skip, _top);
+      }
+
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -71,11 +88,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Get a specific Program detail and related data.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProgram> GetProgram(string programId)
+      public async Task<IResponseProgramData> GetProgram(string programId)
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}";
 
-         return await GetUnique<IResponseProgram>(resourceURI);
+         return await GetIndividual<IResponseProgramData, IResponseProgram>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -87,11 +104,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Get all users Programs.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProgram> GetAllPrograms()
+      public async Task<IList<IResponseProgramData>> GetAllPrograms()
       {
          string resourceURI = $"{GetBaseResource()}/programs";
 
-         return await GetUnique<IResponseProgram>(resourceURI);
+         return await GetGroup<IResponseProgramData, IResponseProgram>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -103,11 +120,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Get a list of Projects associated to specific Program.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProject> GetProgramProjects(string programId)
+      public async Task<IList<IResponseProgramData>> GetProgramProjects(string programId)
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}/projects";
 
-         return await GetUnique<IResponseProject>(resourceURI);
+         return await GetGroup<IResponseProgramData, IResponseProgram>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -119,11 +136,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Create Programs.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProgram> CreateProgram(IPrograms programs)
+      public async Task<IList<IResponseProgramData>> CreateProgram(IPrograms programs)
       {
          string resourceURI = $"{GetBaseResource()}/programs";
 
-         return await PostRequest<IResponseProgram, IPrograms>(resourceURI, programs);
+         return await PostGroup<IResponseProgramData, IResponseProgram, IPrograms>(resourceURI, programs);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -135,11 +152,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Add list of Projects associated to specific Program.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProject> UpdateProgramProjects(string programId, IProjects projects)
+      public async Task<IList<IResponseProjectData>> UpdateProgramProjects(string programId, IProjects projects)
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}/projects";
 
-         return await PutIndividual<IResponseProject, IProjects>(resourceURI, projects);
+         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -151,11 +168,11 @@ namespace ws3dx.project.program.core.service
       // Description: Summary: Update a Program and its related data.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProgram> UpdateProgram(string programId, IPrograms programs)
+      public async Task<IResponseProgramData> UpdateProgram(string programId, IPrograms programs)
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}";
 
-         return await PutIndividual<IResponseProgram, IPrograms>(resourceURI, programs);
+         return await PutIndividual<IResponseProgramData, IResponseProgram, IPrograms>(resourceURI, programs);
       }
 
       //---------------------------------------------------------------------------------------------

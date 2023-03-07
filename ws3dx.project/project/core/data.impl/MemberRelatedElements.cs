@@ -23,6 +23,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("projectAccess")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string ProjectAccess { get; set; }
-
    }
 }

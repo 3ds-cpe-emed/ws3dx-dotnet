@@ -97,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RequirementService requirementService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<INewRequirementMask> ret = await requirementService.Get(reqId);
+         INewRequirementMask ret = await requirementService.Get(reqId);
 
          Assert.IsNotNull(ret);
       }

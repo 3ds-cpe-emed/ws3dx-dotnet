@@ -44,6 +44,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Type { get; set; }
-
    }
 }

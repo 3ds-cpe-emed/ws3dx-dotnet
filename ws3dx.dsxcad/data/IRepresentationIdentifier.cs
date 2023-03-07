@@ -29,6 +29,5 @@ namespace ws3dx.dsxcad.data
       public string Identifier { get; set; }
 
       public ITypedUriIdentifier Representation { get; set; }
-
    }
 }

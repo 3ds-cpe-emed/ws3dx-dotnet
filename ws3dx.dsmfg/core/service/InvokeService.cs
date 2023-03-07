@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 
@@ -46,11 +47,11 @@ namespace service
       // Summary: Retrieve Manufacturing Item realized changes with its realized activity in the change.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IRealizedChangeDetailMask> GetRealizedChanges(IRealizedChangeRequest request)
+      public async Task<IEnumerable<IRealizedChangeDetailMask>> GetRealizedChanges(IRealizedChangeRequest request)
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getRealizedChanges";
 
-         return await PostRequest<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
+         return await PostGroup<IRealizedChangeDetailMask, NlsLabeledItemSet<IRealizedChangeDetailMask>, IRealizedChangeRequest>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:detachMfgItemInstances";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getMfgItemInstanceFromImplementedEngOccurrence";
 
-         return await PostRequestMultiple<IMfgItemInstanceNavigateUTCMask, IItemOccurrence[]>(resourceURI, request);
+         return await PostGroup<IMfgItemInstanceNavigateUTCMask, NlsLabeledItemSet<IMfgItemInstanceNavigateUTCMask>, IItemOccurrence[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -103,7 +104,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getMfgItemsFromEngItem";
 
-         return await PostRequestMultiple<IMfgItemNavigateUTCMask, string[]>(resourceURI, request);
+         return await PostGroup<IMfgItemNavigateUTCMask, NlsLabeledItemSet<IMfgItemNavigateUTCMask>, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -123,7 +124,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:reconnect";
 
-         return await PostRequest<IGenericResponse, IMfgItemReconnectRequestPayload>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IMfgItemReconnectRequestPayload>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -143,7 +144,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:reconnect";
 
-         return await PostRequest<IGenericResponse, IMfgItemReconnectRequestPayloadResultingEngItem>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IMfgItemReconnectRequestPayloadResultingEngItem>(resourceURI, request);
       }
    }
 }

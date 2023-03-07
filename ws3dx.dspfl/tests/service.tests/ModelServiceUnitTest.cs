@@ -16,7 +16,6 @@
 using NUnit.Framework;
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using ws3dx.authentication.data;
@@ -95,7 +94,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelService modelService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IModelMask> ret = await modelService.Get<IModelMask>(modelId);
+         IModelMask ret = await modelService.Get<IModelMask>(modelId);
 
          Assert.IsNotNull(ret);
       }
@@ -106,7 +105,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelService modelService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IModelRootVersionMask> ret = await modelService.Get<IModelRootVersionMask>(modelId);
+         IModelRootVersionMask ret = await modelService.Get<IModelRootVersionMask>(modelId);
 
          Assert.IsNotNull(ret);
       }

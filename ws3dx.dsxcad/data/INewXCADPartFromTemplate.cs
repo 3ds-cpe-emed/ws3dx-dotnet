@@ -19,6 +19,5 @@ namespace ws3dx.dsxcad.data
    public interface INewXCADPartFromTemplate
    {
       public ICreateXCADPartFromTemplateItemsAttributes Attributes { get; set; }
-
    }
 }

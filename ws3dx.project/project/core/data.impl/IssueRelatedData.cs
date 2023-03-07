@@ -32,6 +32,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("originatorInfo")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IIssueCreator> OriginatorInfo { get; set; }
-
    }
 }

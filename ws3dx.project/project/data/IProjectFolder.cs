@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public IFolderData Data { get; set; }
 
       public IFolderRelatedData RelatedData { get; set; }
-
    }
 }

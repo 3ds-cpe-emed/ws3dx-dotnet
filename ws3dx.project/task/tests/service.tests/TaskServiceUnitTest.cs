@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -25,6 +26,7 @@ using ws3dx.project.task.core.data.impl;
 using ws3dx.project.task.core.service;
 using ws3dx.project.task.data;
 using Task = System.Threading.Tasks.Task;
+using WS3DX = ws3dx.project.task.core.data.impl;
 
 namespace NUnitTestProject
 {
@@ -100,62 +102,62 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseReference ret = await taskService.GetTaskReferences(taskId);
+         IList<IResponseReferenceData> ret = await taskService.GetTaskReferences(taskId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("A0EA6A14EC2400006363763A0004E226")]
       public async Task GetTask(string taskId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseTask ret = await taskService.GetTask(taskId);
+         IResponseTaskData ret = await taskService.GetTask(taskId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("A0EA6A14EC2400006363763A0004E226")]
       public async Task GetTaskAssignees(string taskId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseAssignee ret = await taskService.GetTaskAssignees(taskId);
+         IList<IResponseAssigneeData> ret = await taskService.GetTaskAssignees(taskId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("795A0F6C3253000061FDA1A70013466B")]
       public async Task GetTaskScopes(string taskId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseScope ret = await taskService.GetTaskScopes(taskId);
+         IList<IResponseScopeData> ret = await taskService.GetTaskScopes(taskId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("FDBEB6D4D7020000639849FE0001DE07")]//Change Action
       public async Task GetTasksWithScope(string scopeId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseTask ret = await taskService.GetTasksWithScope(scopeId);
+         IList<IResponseTaskData> ret = await taskService.GetTasksWithScope(scopeId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("A0EA6A14EC2400006363763A0004E226")]
       public async Task GetTaskDeliverables(string taskId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseDeliverable ret = await taskService.GetTaskDeliverables(taskId);
+         IList<IResponseDeliverableData> ret = await taskService.GetTaskDeliverables(taskId);
 
          Assert.IsNotNull(ret);
       }
@@ -166,9 +168,16 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseTask ret = await taskService.GetUserTasks(showProjectTasks);
-
+         IList<IResponseTaskData> ret = await taskService.GetUserTasks(showProjectTasks);
          Assert.IsNotNull(ret);
+
+         foreach (IResponseTaskData taskData in ret)
+         {
+            IResponseTaskData taskDetail = await taskService.GetTask(taskData.Id);
+            Assert.IsNotNull(taskDetail);
+
+            Assert.AreEqual(taskDetail.Id, taskData.Id);
+         }
       }
 
       [TestCase()]
@@ -178,9 +187,12 @@ namespace NUnitTestProject
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         // Comma-separated list of IDs to retrieve.
+         string idPayload = "A0EA6A14EC2400006363763A0004E226";
+
          try
          {
-            IResponseTask ret = await taskService.GetTasks();
+            IList<IResponseTaskData> ret = await taskService.GetTasks(idPayload);
 
             Assert.IsNotNull(ret);
          }
@@ -202,7 +214,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseAssignee ret = await taskService.AddAssigneesToTask(taskId, assignees);
+            IList<IResponseAssigneeData> ret = await taskService.AddAssigneesToTask(taskId, assignees);
 
             Assert.IsNotNull(ret);
          }
@@ -224,7 +236,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseReference ret = await taskService.AddReferencesToTask(taskId, references);
+            IList<IResponseReferenceData> ret = await taskService.AddReferencesToTask(taskId, references);
 
             Assert.IsNotNull(ret);
          }
@@ -246,7 +258,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseDeliverable ret = await taskService.AddDeliverablesToTask(taskId, deliverables);
+            IList<IResponseDeliverableData> ret = await taskService.AddDeliverablesToTask(taskId, deliverables);
 
             Assert.IsNotNull(ret);
          }
@@ -268,7 +280,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseScope ret = await taskService.AddScopesToTask(taskId, scopes);
+            IList<IResponseScopeData> ret = await taskService.AddScopesToTask(taskId, scopes);
 
             Assert.IsNotNull(ret);
          }
@@ -286,12 +298,26 @@ namespace NUnitTestProject
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         ITaskData taskData1 = new WS3DX.TaskData();
+         taskData1.Title = "Task I - created from web services";
+
+         ITaskData taskData2 = new WS3DX.TaskData();
+         taskData2.Title = "Task II - created from web services";
+
+         ITask task1 = new WS3DX.Task();
+         task1.Data = taskData1;
+
+         ITask task2 = new WS3DX.Task();
+         task2.Data = taskData2;
+
          ITasks tasks = new Tasks();
+         tasks.Data = new List<ITask>();
+         tasks.Data.Add(task1);
+         tasks.Data.Add(task2);
 
          try
          {
-            IResponseTask ret = await taskService.CreateTask(tasks);
-
+            IList<IResponseTaskData> ret = await taskService.CreateTask(tasks);
             Assert.IsNotNull(ret);
          }
          catch (HttpResponseException _ex)

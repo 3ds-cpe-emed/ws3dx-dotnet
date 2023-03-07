@@ -16,11 +16,13 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dslc.data;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dslc.core.data.impl
 {
    public class GetNextStatesOutput : IGetNextStatesOutput
    {
+      [ResponseCollectionItems("results")]
       [JsonPropertyName("results")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IGetNextStates> Results { get; set; }

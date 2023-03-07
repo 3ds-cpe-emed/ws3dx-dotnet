@@ -19,6 +19,5 @@ namespace ws3dx.dsbks.data
    public interface INewBookmark
    {
       public INewBookmarkData Attributes { get; set; }
-
    }
 }

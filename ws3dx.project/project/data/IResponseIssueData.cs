@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public IIssueData Data { get; set; }
 
       public IIssueRelatedData RelatedData { get; set; }
-
    }
 }

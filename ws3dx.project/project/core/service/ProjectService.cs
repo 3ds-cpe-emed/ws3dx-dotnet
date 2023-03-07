@@ -19,13 +19,14 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.project.project.data;
+using ws3dx.utils.search;
 
 namespace ws3dx.project.project.core.service
 {
    // SDK Service
    public class ProjectService : SearchService
    {
-      private const string BASE_RESOURCE = "/resources/v1/modeler//";
+      private const string BASE_RESOURCE = "/resources/v1/modeler";
 
       public ProjectService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
@@ -44,7 +45,7 @@ namespace ws3dx.project.project.core.service
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { };
+         return new List<Type>() { typeof(IResponseProjectData) };
       }
 
       protected override string GetSearchSkipParamName()
@@ -61,7 +62,21 @@ namespace ws3dx.project.project.core.service
       {
          return "searchStr";
       }
+
+      public async Task<IList<IResponseProjectData>> Search(SearchQuery searchQuery)
+      {
+         return await Search<IResponseProjectData, IResponseProject>(searchQuery);
+      }
+
+      public async Task<IList<IResponseProjectData>> Search(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<IResponseProjectData, IResponseProject>(searchQuery, _skip, _top);
+      }
+
+      protected override string GetMaskParamName() { return null; }
+
       #endregion
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (GET) /projects/{projectId}/risks/{riskId}
@@ -71,16 +86,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the risk details for a given project & risk id.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseRisk> GetProjectRisk(string projectId, string riskId)
+      public async Task<IResponseRiskData> GetProjectRisk(string projectId, string riskId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/risks/{riskId}";
 
-
-         return await GetUnique<IResponseRisk>(resourceURI);
+         return await GetIndividual<IResponseRiskData, IResponseRisk>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -91,16 +102,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get Project Issues for a given project.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseIssue> GetProjectIssues(string projectId)
+      public async Task<IList<IResponseIssueData>> GetProjectIssues(string projectId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/issues";
 
-
-         return await GetUnique<IResponseIssue>(resourceURI);
+         return await GetGroup<IResponseIssueData, IResponseIssue>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -111,16 +118,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the information for a given Assessment.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseAssessment> GetProjectAssessment(string projectId, string assessmentId)
+      public async Task<IResponseAssessmentData> GetProjectAssessment(string projectId, string assessmentId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments/{assessmentId}";
 
-
-         return await GetUnique<IResponseAssessment>(resourceURI);
+         return await GetIndividual<IResponseAssessmentData, IResponseAssessment>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -131,16 +134,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get all users Projects.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProject> GetAllProjects()
+      public async Task<IList<IResponseProjectData>> GetAllProjects()
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-
-         return await GetUnique<IResponseProject>(resourceURI);
+         return await GetGroup<IResponseProjectData, IResponseProject>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -154,18 +153,15 @@ namespace ws3dx.project.project.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseAssessment> GetProjectAssessments(string projectId, string allAssessments)
+      public async Task<IList<IResponseAssessmentData>> GetProjectAssessments(string projectId, string allAssessments)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments";
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          queryParams.Add("allAssessments", allAssessments);
 
-         return await GetUnique<IResponseAssessment>(resourceURI, queryParams: queryParams);
+         return await GetGroup<IResponseAssessmentData, IResponseAssessment>(resourceURI, queryParams: queryParams);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -176,20 +172,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the issue details for a given project & issue id.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseIssue> GetProjectIssue(string projectId, string issueId)
+      public async Task<IResponseIssueData> GetProjectIssue(string projectId, string issueId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/issues/{issueId}";
 
-
-         return await GetUnique<IResponseIssue>(resourceURI);
+         return await GetIndividual<IResponseIssueData, IResponseIssue>(resourceURI);
       }
-
-
-
-
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -200,16 +188,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the projects for a given program id
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProject> GetProgramProjects(string programId)
+      public async Task<IList<IResponseProjectData>> GetProgramProjects(string programId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/programId/{programId}";
 
-
-         return await GetUnique<IResponseProject>(resourceURI);
+         return await GetGroup<IResponseProjectData, IResponseProject>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -220,16 +204,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the risks associated directly to a given project.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseRisk> GetProjectRisks(string projectId)
+      public async Task<IList<IResponseRiskData>> GetProjectRisks(string projectId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/risks";
 
-
-         return await GetUnique<IResponseRisk>(resourceURI);
+         return await GetGroup<IResponseRiskData, IResponseRisk>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -240,16 +220,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the information for a given folder object associated with any project.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseFolder> GetProjectFolder(string folderId)
+      public async Task<IResponseFolderData> GetProjectFolder(string folderId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/folderId/{folderId}";
 
-
-         return await GetUnique<IResponseFolder>(resourceURI);
+         return await GetIndividual<IResponseFolderData, IResponseFolder>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -260,16 +236,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get a specific Project detail and related data.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseProject> GetProject(string projectId)
+      public async Task<IResponseProjectData> GetProject(string projectId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}";
 
-
-         return await GetUnique<IResponseProject>(resourceURI);
+         return await GetIndividual<IResponseProjectData, IResponseProject>(resourceURI);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -280,17 +252,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Get the folders for a given project id.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseFolder> GetProjectFolders(string projectId)
+      public async Task<IList<IResponseFolderData>> GetProjectFolders(string projectId)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-
-         return await GetUnique<IResponseFolder>(resourceURI);
+         return await GetGroup<IResponseFolderData, IResponseFolder>(resourceURI);
       }
-
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -301,17 +268,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Create an Assessment for a given Project.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseAssessment> AddProjectAssessment(string projectId, IAssessments assessments)
+      public async Task<IResponseAssessmentData> AddProjectAssessment(string projectId, IAssessments assessments)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments";
 
-
-         return await PostRequest<IResponseAssessment, IAssessments>(resourceURI, assessments);
-
+         return await PostIndividual<IResponseAssessmentData, IAssessments>(resourceURI, assessments);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -322,17 +284,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Create projects and related data.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProject> CreateProject(IProjects projects)
+      public async Task<IResponseProjectData> CreateProject(IProjects projects)
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-
-         return await PostRequest<IResponseProject, IProjects>(resourceURI, projects);
-
+         return await PostIndividual<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -343,18 +300,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Create the folders for a given project id.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseFolder> AddProjectFolder(string projectId, IFolders folders)
+      public async Task<IResponseFolderData> AddProjectFolder(string projectId, IFolders folders)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-
-         return await PostRequest<IResponseFolder, IFolders>(resourceURI, folders);
-
+         return await PostIndividual<IResponseFolderData, IResponseFolder, IFolders>(resourceURI, folders);
       }
-
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -365,17 +316,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Update the Assessments for a given Project.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseAssessment> UpdateProjectAssessments(string projectId, IAssessments assessments)
+      public async Task<IList<IResponseAssessmentData>> UpdateProjectAssessments(string projectId, IAssessments assessments)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments";
 
-
-         return await PutIndividual<IResponseAssessment, IAssessments>(resourceURI, assessments);
-
+         return await PutGroup<IResponseAssessmentData, IResponseAssessment, IAssessments>(resourceURI, assessments);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -386,17 +332,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Update projects and related data.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProject> UpdateProject(string projectId, IProjects projects)
+      public async Task<IList<IResponseProjectData>> UpdateProject(string projectId, IProjects projects)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}";
 
-
-         return await PutIndividual<IResponseProject, IProjects>(resourceURI, projects);
-
+         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -407,17 +348,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Update the folders for a given project id.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseFolder> UpdateProjectFolders(string projectId, IFolders folders)
+      public async Task<IList<IResponseFolderData>> UpdateProjectFolders(string projectId, IFolders folders)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-
-         return await PutIndividual<IResponseFolder, IFolders>(resourceURI, folders);
-
+         return await PutGroup<IResponseFolderData, IResponseFolder, IFolders>(resourceURI, folders);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -428,17 +364,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Update an Assessment for a given Project.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseAssessment> UpdateProjectAssessment(string projectId, string assessmentId, IAssessments assessments)
+      public async Task<IList<IResponseAssessmentData>> UpdateProjectAssessment(string projectId, string assessmentId, IAssessments assessments)
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments/{assessmentId}";
 
-
-         return await PutIndividual<IResponseAssessment, IAssessments>(resourceURI, assessments);
-
+         return await PutGroup<IResponseAssessmentData, IResponseAssessment, IAssessments>(resourceURI, assessments);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -449,18 +380,12 @@ namespace ws3dx.project.project.core.service
       // Description: Summary: Update projects and related data.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseProject> UpdateProjects(IProjects projects)
+      public async Task<IList<IResponseProjectData>> UpdateProjects(IProjects projects)
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-
-         return await PutIndividual<IResponseProject, IProjects>(resourceURI, projects);
-
+         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
       }
-
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -475,13 +400,8 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments/{assessmentId}";
 
-
          return await DeleteIndividual<IResponseEmpty>(resourceURI);
-
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -496,13 +416,8 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders/{folderId}";
 
-
          return await DeleteIndividual<IResponseEmpty>(resourceURI);
-
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -517,10 +432,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}";
 
-
          return await DeleteIndividual<IResponseEmpty>(resourceURI);
-
       }
-
    }
 }

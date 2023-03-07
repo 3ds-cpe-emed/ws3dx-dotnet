@@ -113,7 +113,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RepresentationService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADRepresentationMask> ret = await representationService.Get<IXCADRepresentationMask>(representationId);
+         IXCADRepresentationMask ret = await representationService.Get<IXCADRepresentationMask>(representationId);
 
          Assert.IsNotNull(ret);
       }
@@ -124,7 +124,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RepresentationService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Get<IXCADRepresentationDetailMask>(representationId);
+         IXCADRepresentationDetailMask ret = await representationService.Get<IXCADRepresentationDetailMask>(representationId);
 
          Assert.IsNotNull(ret);
       }
@@ -135,12 +135,12 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RepresentationService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Get<IXCADRepresentationBasicMask>(representationId);
+         IXCADRepresentationBasicMask ret = await representationService.Get<IXCADRepresentationBasicMask>(representationId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADRepresentationMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -154,7 +154,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("solidworks")]
       public async Task Search_Full_IXCADRepresentationMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -228,7 +228,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RepresentationService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADAttributesMask> ret = await representationService.GetXCADAttributes(representationId);
+         IXCADAttributesMask ret = await representationService.GetXCADAttributes(representationId);
 
          Assert.IsNotNull(ret);
       }
@@ -587,9 +587,6 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-
-
-
 
 
 

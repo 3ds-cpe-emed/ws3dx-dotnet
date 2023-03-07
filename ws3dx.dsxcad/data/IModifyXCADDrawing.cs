@@ -47,6 +47,5 @@ namespace ws3dx.dsxcad.data
       public string Cestamp { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }
-
    }
 }

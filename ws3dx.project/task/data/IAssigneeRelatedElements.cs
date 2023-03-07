@@ -19,6 +19,5 @@ namespace ws3dx.project.task.data
    public interface IAssigneeRelatedElements
    {
       public string Allocation { get; set; }
-
    }
 }

@@ -21,6 +21,5 @@ namespace ws3dx.dsxcad.data
    public interface IAuthoringFileMask
    {
       public IAuthoringFile AuthoringFile { get; set; }
-
    }
 }

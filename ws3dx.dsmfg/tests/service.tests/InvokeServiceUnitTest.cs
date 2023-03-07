@@ -101,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            IRealizedChangeDetailMask ret = await invokeService.GetRealizedChanges(request);
+            IEnumerable<IRealizedChangeDetailMask> ret = await invokeService.GetRealizedChanges(request);
 
             Assert.IsNotNull(ret);
          }

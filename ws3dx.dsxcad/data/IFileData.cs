@@ -44,6 +44,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string MD5 { get; set; }
-
    }
 }

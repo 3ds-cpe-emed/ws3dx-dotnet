@@ -48,7 +48,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsrsc:getResourcesOccurrencesFromMfgOperationOccurrences";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsrsc:deleteWorkerInstances";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsrsc:deleteOrganizationalResourceInstances";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsrsc:deleteResourceItemInstances";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
    }
 }

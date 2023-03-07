@@ -106,7 +106,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          VariabilityGroupService variabilityGroupService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IVariabilityGroupMask> ret = await variabilityGroupService.GetVariabilityGroup(variabilityGroupId);
+         IVariabilityGroupMask ret = await variabilityGroupService.GetVariabilityGroup(variabilityGroupId);
 
          Assert.IsNotNull(ret);
       }
@@ -117,7 +117,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          VariabilityGroupService variabilityGroupService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOptionMask> ret = await variabilityGroupService.GetOption(variabilityGroupId, optionId);
+         IOptionMask ret = await variabilityGroupService.GetOption(variabilityGroupId, optionId);
 
          Assert.IsNotNull(ret);
       }

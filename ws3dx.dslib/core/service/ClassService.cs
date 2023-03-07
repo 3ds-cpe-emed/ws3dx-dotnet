@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dslib.data;
 using ws3dx.shared.utils;
 
@@ -73,7 +74,7 @@ namespace ws3dx.dslib.core.service
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          queryParams.Add("$depth", depth);
 
-         return await GetMultiple<T>(resourceURI, queryParams: queryParams);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -107,9 +108,7 @@ namespace ws3dx.dslib.core.service
          queryParams.Add("$top", top);
          queryParams.Add("$skip", skip);
 
-         return await PostRequestMultiple<IClassifiedItemsMask, IFilterAndFetchClassifiedItems>(resourceURI, request, queryParams: queryParams);
+         return await PostGroup<IClassifiedItemsMask, NlsLabeledItemSet<IClassifiedItemsMask>, IFilterAndFetchClassifiedItems>(resourceURI, request, queryParams: queryParams);
       }
-
-
    }
 }

@@ -62,6 +62,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Active { get; set; }
-
    }
 }

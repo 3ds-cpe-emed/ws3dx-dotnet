@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dspfl.data;
 
 namespace ws3dx.dspfl.core.service
@@ -48,7 +49,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup";
 
-         return await GetMultiple<IVariabilityGroupMask>(resourceURI);
+         return await GetGroup<IVariabilityGroupMask, NlsLabeledItemSet<IVariabilityGroupMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -63,11 +64,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IVariabilityGroupMask>> GetVariabilityGroup(string variabilityGroupId)
+      public async Task<IVariabilityGroupMask> GetVariabilityGroup(string variabilityGroupId)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}";
 
-         return await GetMultiple<IVariabilityGroupMask>(resourceURI);
+         return await GetIndividual<IVariabilityGroupMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -85,11 +86,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IOptionMask>> GetOption(string variabilityGroupId, string optionId)
+      public async Task<IOptionMask> GetOption(string variabilityGroupId, string optionId)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}/dspfl:Option/{optionId}";
 
-         return await GetMultiple<IOptionMask>(resourceURI);
+         return await GetIndividual<IOptionMask, NlsLabeledItemSet<IOptionMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -108,7 +109,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}/dspfl:Option";
 
-         return await GetMultiple<IOptionMask>(resourceURI);
+         return await GetGroup<IOptionMask, NlsLabeledItemSet<IOptionMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -130,7 +131,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}/dspfl:Option/{ID}/modify";
 
-         return await PostRequestMultiple<IOptionMask, IOrdered>(resourceURI, request);
+         return await PostGroup<IOptionMask, NlsLabeledItemSet<IOptionMask>, IOrdered>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -146,7 +147,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup";
 
-         return await PostRequestMultiple<IVariabilityGroupMask, ICreateVariabilityGroup>(resourceURI, request);
+         return await PostGroup<IVariabilityGroupMask, NlsLabeledItemSet<IVariabilityGroupMask>, ICreateVariabilityGroup>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -165,7 +166,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}/dspfl:Option";
 
-         return await PostRequestMultiple<IOptionMask, ICreateVariabilityOption>(resourceURI, request);
+         return await PostGroup<IOptionMask, NlsLabeledItemSet<IOptionMask>, ICreateVariabilityOption>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -183,11 +184,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IOptionMask>> UpdateOption(string variabilityGroupId, string optionId, IUpdateOption request)
+      public async Task<IOptionMask> UpdateOption(string variabilityGroupId, string optionId, IUpdateOption request)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}/dspfl:Option/{optionId}";
 
-         return await PatchGroup<IOptionMask, IUpdateOption>(resourceURI, request);
+         return await PatchIndividual<IOptionMask, NlsLabeledItemSet<IOptionMask>, IUpdateOption>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -206,7 +207,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:VariabilityGroup/{variabilityGroupId}";
 
-         return await PatchGroup<IVariabilityGroupMask, IUpdateVariabilityGroup>(resourceURI, request);
+         return await PatchGroup<IVariabilityGroupMask, NlsLabeledItemSet<IVariabilityGroupMask>, IUpdateVariabilityGroup>(resourceURI, request);
       }
    }
 }

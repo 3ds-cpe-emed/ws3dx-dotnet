@@ -251,6 +251,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("predictiveActualFinishDate")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string PredictiveActualFinishDate { get; set; }
-
    }
 }

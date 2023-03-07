@@ -46,6 +46,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public IList<string> Tickets { get; set; }
-
    }
 }

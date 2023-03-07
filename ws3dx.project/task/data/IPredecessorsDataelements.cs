@@ -21,6 +21,5 @@ namespace ws3dx.project.task.data
       public string Title { get; set; }
 
       public string PALId { get; set; }
-
    }
 }

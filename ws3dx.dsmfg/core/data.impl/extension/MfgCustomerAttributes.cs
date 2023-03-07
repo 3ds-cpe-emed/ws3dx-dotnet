@@ -14,9 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
-namespace ws3dx.dsmfg.data.extension
+using System.Collections.Generic;
+using ws3dx.dsmfg.data.extension;
+
+namespace ws3dx.dsmfg.data.impl.extension
 {
-   public interface ICustomerAttributesCustomerAttributes
+   public class MfgCustomerAttributes : Dictionary<string, object>, IMfgItemCustomerAttributes
    {
    }
 }

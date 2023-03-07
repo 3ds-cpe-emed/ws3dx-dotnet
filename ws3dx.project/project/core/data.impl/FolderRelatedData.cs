@@ -28,6 +28,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("sovaccess")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IFolderSovaccess> Sovaccess { get; set; }
-
    }
 }

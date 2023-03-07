@@ -28,6 +28,5 @@ namespace ws3dx.dsxcad.data
       public string Active { get; set; }
 
       public IXCADFamilyRepMaskDetailDerivedItemsRefObj ReferencedObject { get; set; }
-
    }
 }

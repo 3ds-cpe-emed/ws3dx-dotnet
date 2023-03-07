@@ -25,6 +25,7 @@ using ws3dx.core.data.impl;
 using ws3dx.core.redirection;
 using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -100,11 +101,37 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          TemplateService templateService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADTemplateMask> ret = await templateService.Get(templateId);
+         IXCADTemplateMask ret = await templateService.Get(templateId);
 
          Assert.IsNotNull(ret);
       }
 
+      [TestCase("solidworks")]
+      public async Task Search_Full_IXCADTemplateMask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
 
+         TemplateService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IXCADTemplateMask> ret = await representationService.Search<IXCADTemplateMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("search", 0, 50)]
+      public async Task Search_Paged_IXCADTemplateMask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         TemplateService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IXCADTemplateMask> ret = await representationService.Search<IXCADTemplateMask>(searchByFreeText, skip, top);
+
+         Assert.IsNotNull(ret);
+      }
    }
 }

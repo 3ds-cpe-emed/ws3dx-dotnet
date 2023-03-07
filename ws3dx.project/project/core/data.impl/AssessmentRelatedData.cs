@@ -32,6 +32,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("references")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IAssessmentReference> References { get; set; }
-
    }
 }

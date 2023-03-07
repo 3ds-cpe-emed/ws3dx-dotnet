@@ -24,6 +24,5 @@ namespace ws3dx.project.project.data
       public IList<IIssueOwner> OwnerInfo { get; set; }
 
       public IList<IIssueCreator> OriginatorInfo { get; set; }
-
    }
 }

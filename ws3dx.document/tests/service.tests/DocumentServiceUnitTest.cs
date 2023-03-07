@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -23,6 +24,7 @@ using ws3dx.core.redirection;
 using ws3dx.document.core.data.impl;
 using ws3dx.document.core.service;
 using ws3dx.document.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -95,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IDocumentsResponse ret = await documentService.GetItemDocuments(parentId, parentRelName, parentDirection);
+         IEnumerable<IDocumentDataResponse> ret = await documentService.GetItemDocuments(parentId, parentRelName, parentDirection);
 
          Assert.IsNotNull(ret);
       }
@@ -106,7 +108,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IVersionResponse ret = await documentService.GetFileVersions(docId, fileId);
+         IEnumerable<IDocumentFile> ret = await documentService.GetFileVersions(docId, fileId);
 
          Assert.IsNotNull(ret);
       }
@@ -117,7 +119,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IFileResponse ret = await documentService.GetFiles(docId);
+         IEnumerable<IDocumentFile> ret = await documentService.GetFiles(docId);
 
          Assert.IsNotNull(ret);
       }
@@ -128,7 +130,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IDocumentsResponse ret = await documentService.Get(docId);
+         IEnumerable<IDocumentDataResponse> ret = await documentService.Get(docId);
 
          Assert.IsNotNull(ret);
       }
@@ -144,7 +146,7 @@ namespace NUnitTestProject
 
          try
          {
-            IDocumentsResponse ret = await documentService.Create(documents);
+            IEnumerable<IDocumentDataResponse> ret = await documentService.Create(documents);
 
             Assert.IsNotNull(ret);
          }
@@ -166,7 +168,7 @@ namespace NUnitTestProject
 
          try
          {
-            IFileResponse ret = await documentService.AddFiles(docId, files);
+            IEnumerable<IDocumentFile> ret = await documentService.AddFiles(docId, files);
 
             Assert.IsNotNull(ret);
          }
@@ -177,16 +179,15 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task GetMany()
+      [TestCase("")]
+      public async Task GetMany(string ids)
       {
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
          try
          {
-            IDocumentsResponse ret = await documentService.GetMany();
+            IEnumerable<IDocumentDataResponse> ret = await documentService.GetMany(ids);
 
             Assert.IsNotNull(ret);
          }
@@ -194,6 +195,49 @@ namespace NUnitTestProject
          {
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("document", 0, 50)]
+      public async Task Search_Paged(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IDocumentDataResponse> ret = await documentService.Search(searchByFreeText, skip, top);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("document")]
+      public async Task Search_Full(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IDocumentDataResponse> ret = await documentService.Search(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IDocumentsResponse docFound in ret)
+         {
+            IEnumerable<IDocumentDataResponse> docs = await documentService.Get(docFound.Data[0].Id);
+
+            foreach (IDocumentDataResponse doc in docs)
+            {
+               Assert.AreEqual(docFound.Data[0].Id, doc.Id);
+            }
+
+            i++;
+
+            if (i > 20) return;
          }
       }
    }

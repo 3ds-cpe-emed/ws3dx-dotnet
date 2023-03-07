@@ -20,6 +20,5 @@ namespace ws3dx.dsxcad.data
    public interface ICreateXCADDrawings
    {
       public IList<INewXCADDrawing> Items { get; set; }
-
    }
 }

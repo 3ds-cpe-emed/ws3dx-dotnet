@@ -1,0 +1,60 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.project.task.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="TaskServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetTask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetTask(&quot;A0EA6A14EC2400006363763A0004E226&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetTaskAssignees" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetTaskAssignees(&quot;A0EA6A14EC2400006363763A0004E226&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetTasksWithScope" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetTasksWithScope(&quot;FDBEB6D4D7020000639849FE0001DE07&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetTaskDeliverables" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetTaskDeliverables(&quot;A0EA6A14EC2400006363763A0004E226&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetUserTasks" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetUserTasks(True)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.TaskServiceTests.GetTaskScopes" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetTaskScopes(&quot;795A0F6C3253000061FDA1A70013466B&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>

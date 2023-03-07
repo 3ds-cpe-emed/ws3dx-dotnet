@@ -14,7 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsmfg.data.extension;
-using ICustomerAttributes = ws3dx.dsmfg.data.extension.ICustomerAttributes;
+using IMfgItemCustomerAttributes = ws3dx.dsmfg.data.extension.IMfgItemCustomerAttributes;
 
 namespace ws3dx.dsmfg.data
 {
@@ -212,6 +212,6 @@ namespace ws3dx.dsmfg.data
 
       public IMfgItemEnterpriseAttributes MfgEnterpriseAttributes { get; set; }
 
-      public ICustomerAttributes CustomerAttributes { get; set; }
+      public IMfgItemCustomerAttributes CustomerAttributes { get; set; }
    }
 }

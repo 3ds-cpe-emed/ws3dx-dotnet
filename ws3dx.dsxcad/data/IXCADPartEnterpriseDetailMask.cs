@@ -150,6 +150,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
-
    }
 }

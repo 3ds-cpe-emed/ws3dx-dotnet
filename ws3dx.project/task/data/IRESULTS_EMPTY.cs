@@ -23,6 +23,5 @@ namespace ws3dx.project.task.data
       public int StatusCode { get; set; }
 
       public ICsrf Csrf { get; set; }
-
    }
 }

@@ -20,6 +20,5 @@ namespace ws3dx.project.project.data
    public interface IMemberRelatedData
    {
       public IList<IMemberCalendar> Calendar { get; set; }
-
    }
 }

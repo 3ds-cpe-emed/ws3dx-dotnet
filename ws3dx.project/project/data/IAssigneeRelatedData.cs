@@ -20,6 +20,5 @@ namespace ws3dx.project.project.data
    public interface IAssigneeRelatedData
    {
       public IList<IAssigneeCalendar> Calendar { get; set; }
-
    }
 }

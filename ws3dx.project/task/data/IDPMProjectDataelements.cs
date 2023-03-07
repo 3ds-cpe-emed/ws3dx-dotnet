@@ -48,6 +48,5 @@ namespace ws3dx.project.task.data
       public IList<string> Hasfiles { get; set; }
 
       public IList<string> FileExtension { get; set; }
-
    }
 }

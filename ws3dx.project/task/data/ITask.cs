@@ -33,6 +33,5 @@ namespace ws3dx.project.task.data
       public ITaskRelatedElements RelatedElements { get; set; }
 
       public ITaskRelatedData RelatedData { get; set; }
-
    }
 }

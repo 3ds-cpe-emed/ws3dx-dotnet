@@ -77,6 +77,5 @@ namespace ws3dx.project.project.data
       public string ProcurementCmnts { get; set; }
 
       public string StakeholdersCmnts { get; set; }
-
    }
 }

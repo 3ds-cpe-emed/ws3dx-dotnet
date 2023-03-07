@@ -58,6 +58,5 @@ namespace ws3dx.dssrc.data
       // </summary>
       //----------------------------------------------------------------
       public string PartSource { get; set; }
-
    }
 }

@@ -43,6 +43,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Cestamp { get; set; }
-
    }
 }

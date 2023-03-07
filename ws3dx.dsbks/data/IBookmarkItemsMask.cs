@@ -49,6 +49,5 @@ namespace ws3dx.dsbks.data
       // </summary>
       //----------------------------------------------------------------
       public IList<ITypedUriIdentifier> Items { get; set; }
-
    }
 }

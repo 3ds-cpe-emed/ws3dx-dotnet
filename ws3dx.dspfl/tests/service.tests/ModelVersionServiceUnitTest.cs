@@ -25,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.dspfl.core.data.impl;
 using ws3dx.dspfl.core.service;
 using ws3dx.dspfl.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -106,7 +107,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IVariantInstanceMask> ret = await modelVersionService.GetVariant<IVariantInstanceMask>(modelVersionId, variantInstanceId);
+         IVariantInstanceMask ret = await modelVersionService.GetVariant<IVariantInstanceMask>(modelVersionId, variantInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -117,7 +118,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IVariantInstanceCustomerAttributeMask> ret = await modelVersionService.GetVariant<IVariantInstanceCustomerAttributeMask>(modelVersionId, variantInstanceId);
+         IVariantInstanceCustomerAttributeMask ret = await modelVersionService.GetVariant<IVariantInstanceCustomerAttributeMask>(modelVersionId, variantInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -128,7 +129,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IProductConfigurationMask> ret = await modelVersionService.GetProductConfiguration<IProductConfigurationMask>(modelVersionId, productConfigurationId);
+         IProductConfigurationMask ret = await modelVersionService.GetProductConfiguration<IProductConfigurationMask>(modelVersionId, productConfigurationId);
 
          Assert.IsNotNull(ret);
       }
@@ -139,7 +140,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IProductConfigurationCriteriaMask> ret = await modelVersionService.GetProductConfiguration<IProductConfigurationCriteriaMask>(modelVersionId, productConfigurationId);
+         IProductConfigurationCriteriaMask ret = await modelVersionService.GetProductConfiguration<IProductConfigurationCriteriaMask>(modelVersionId, productConfigurationId);
 
          Assert.IsNotNull(ret);
       }
@@ -172,7 +173,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IModelVersionMask> ret = await modelVersionService.Get<IModelVersionMask>(modelVersionId);
+         IModelVersionMask ret = await modelVersionService.Get<IModelVersionMask>(modelVersionId);
 
          Assert.IsNotNull(ret);
       }
@@ -183,7 +184,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IModelVersionDetailMask> ret = await modelVersionService.Get<IModelVersionDetailMask>(modelVersionId);
+         IModelVersionDetailMask ret = await modelVersionService.Get<IModelVersionDetailMask>(modelVersionId);
 
          Assert.IsNotNull(ret);
       }
@@ -194,7 +195,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMatrixRuleResponse> ret = await modelVersionService.GetConfigurationRule(modelVersionId, configRuleId);
+         IMatrixRuleResponse ret = await modelVersionService.GetConfigurationRule(modelVersionId, configRuleId);
 
          Assert.IsNotNull(ret);
       }
@@ -205,7 +206,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOptionGroupInstanceMask> ret = await modelVersionService.GetOption<IOptionGroupInstanceMask>(modelVersionId, optionGroupInstanceId);
+         IOptionGroupInstanceMask ret = await modelVersionService.GetOption<IOptionGroupInstanceMask>(modelVersionId, optionGroupInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -216,7 +217,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IOptionGroupInstanceCustomerAttributeMask> ret = await modelVersionService.GetOption<IOptionGroupInstanceCustomerAttributeMask>(modelVersionId, optionGroupInstanceId);
+         IOptionGroupInstanceCustomerAttributeMask ret = await modelVersionService.GetOption<IOptionGroupInstanceCustomerAttributeMask>(modelVersionId, optionGroupInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -806,7 +807,43 @@ namespace NUnitTestProject
          }
       }
 
+      [TestCase("model")]
+      public async Task Search_Full(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
 
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IModelVersionMask> ret = await modelVersionService.Search<IModelVersionMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("model", 0, 50)]
+      public async Task Search_Paged(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IModelVersionMask> ret = await modelVersionService.Search<IModelVersionMask>(searchByFreeText, skip, top);
+         Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IModelVersionMask modelVersion in ret)
+         {
+            IModelVersionDetailMask modelVersionDetail = await modelVersionService.Get<IModelVersionDetailMask>(modelVersion.Id);
+
+            Assert.AreEqual(modelVersion.Id, modelVersionDetail.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
+      }
    }
 }

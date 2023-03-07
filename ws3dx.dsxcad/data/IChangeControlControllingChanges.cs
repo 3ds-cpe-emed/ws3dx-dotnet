@@ -20,6 +20,5 @@ namespace ws3dx.dsxcad.data
    public interface IChangeControlControllingChanges
    {
       public ITypedUriIdentifier ReferencedObject { get; set; }
-
    }
 }

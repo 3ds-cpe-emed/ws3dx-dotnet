@@ -61,6 +61,5 @@ namespace ws3dx.dsbks.data
       // </summary>
       //----------------------------------------------------------------
       public ICustomerAttributes CustomerAttributes { get; set; }
-
    }
 }

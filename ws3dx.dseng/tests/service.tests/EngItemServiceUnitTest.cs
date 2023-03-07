@@ -100,7 +100,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEnterpriseItemNumberMask> ret = await engItemService.GetEnterpriseItemNumber(engItemId);
+         IEnterpriseItemNumberMask ret = await engItemService.GetEnterpriseItemNumber(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -111,7 +111,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngInstanceMaskFilterable> ret = await engItemService.GetInstance<IEngInstanceMaskFilterable>(engItemId, instanceId);
+         IEngInstanceMaskFilterable ret = await engItemService.GetInstance<IEngInstanceMaskFilterable>(engItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -122,7 +122,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngInstanceMaskPosition> ret = await engItemService.GetInstance<IEngInstanceMaskPosition>(engItemId, instanceId);
+         IEngInstanceMaskPosition ret = await engItemService.GetInstance<IEngInstanceMaskPosition>(engItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -133,7 +133,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstance<IEngInstanceDefaultMask>(engItemId, instanceId);
+         IEngInstanceDefaultMask ret = await engItemService.GetInstance<IEngInstanceDefaultMask>(engItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -144,7 +144,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstance<IEngInstanceDetailsMask>(engItemId, instanceId);
+         IEngInstanceDetailsMask ret = await engItemService.GetInstance<IEngInstanceDetailsMask>(engItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -155,7 +155,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngItemDefaultMask> ret = await engItemService.Get<IEngItemDefaultMask>(engItemId);
+         IEngItemDefaultMask ret = await engItemService.Get<IEngItemDefaultMask>(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -166,7 +166,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngItemCommonMask> ret = await engItemService.Get<IEngItemCommonMask>(engItemId);
+         IEngItemCommonMask ret = await engItemService.Get<IEngItemCommonMask>(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -177,7 +177,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngItemDetailsMask> ret = await engItemService.Get<IEngItemDetailsMask>(engItemId);
+         IEngItemDetailsMask ret = await engItemService.Get<IEngItemDetailsMask>(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -188,7 +188,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEngItemConfigMask> ret = await engItemService.Get<IEngItemConfigMask>(engItemId);
+         IEngItemConfigMask ret = await engItemService.Get<IEngItemConfigMask>(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -207,7 +207,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("AAA27")]
       public async Task Search_Full_IEngItemDefaultMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -217,6 +217,18 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IEngItemDefaultMask> ret = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+
+         int i = 0;
+         foreach (IEngItemDefaultMask engItem in ret)
+         {
+            IEngItemDetailsMask engItemDetail = await engItemService.Get<IEngItemDetailsMask>(engItem.Id);
+
+            Assert.AreEqual(engItem.Id, engItemDetail.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
 
          Assert.IsNotNull(ret);
       }
@@ -303,7 +315,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IChangeControlMaskStatus> ret = await engItemService.GetChangeControl(engItemId);
+         IChangeControlMaskStatus ret = await engItemService.GetChangeControl(engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -314,7 +326,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlternateMaskDefault> ret = await engItemService.GetAlternate<IAlternateMaskDefault>(engItemId, alternateId);
+         IAlternateMaskDefault ret = await engItemService.GetAlternate<IAlternateMaskDefault>(engItemId, alternateId);
 
          Assert.IsNotNull(ret);
       }
@@ -325,7 +337,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlternateMaskDetail> ret = await engItemService.GetAlternate<IAlternateMaskDetail>(engItemId, alternateId);
+         IAlternateMaskDetail ret = await engItemService.GetAlternate<IAlternateMaskDetail>(engItemId, alternateId);
 
          Assert.IsNotNull(ret);
       }
@@ -418,7 +430,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await engItemService.AttachConfiguration(engItemId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await engItemService.AttachConfiguration(engItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -633,7 +645,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await engItemService.DetachConfiguration(engItemId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await engItemService.DetachConfiguration(engItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -675,7 +687,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IEnterpriseItemNumberMask> ret = await engItemService.AttachEnterpriseItemNumber(engItemId, request);
+            IEnterpriseItemNumberMask ret = await engItemService.AttachEnterpriseItemNumber(engItemId, request);
 
             Assert.IsNotNull(ret);
          }

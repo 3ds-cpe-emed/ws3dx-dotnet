@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsadvfilter.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsadvfilter.core.service
 {
@@ -63,10 +65,17 @@ namespace ws3dx.dsadvfilter.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -80,19 +89,14 @@ namespace ws3dx.dsadvfilter.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string ID)
+      public async Task<T> Get<T>(string ID)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAdvancedFilterMask), typeof(IAdvancedFilterSpecMask) });
 
          string resourceURI = $"{GetBaseResource()}/dsadvfilter:AdvFilter/{ID}";
 
-
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
-
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -109,13 +113,8 @@ namespace ws3dx.dsadvfilter.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsadvfilter:AdvFilter";
 
-
-         return await PostRequestMultiple<T, ICreateAdvancedFilters>(resourceURI, request);
-
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateAdvancedFilters>(resourceURI, request);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -131,13 +130,8 @@ namespace ws3dx.dsadvfilter.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dsadvfilter:AdvFilter/locate";
 
-
-         return await PostRequestMultiple<ILocateAdvancedFilterResponse, ITypedUriIdentifier[]>(resourceURI, request);
-
+         return await PostGroup<ILocateAdvancedFilterResponse, ItemSet<ILocateAdvancedFilterResponse>, ITypedUriIdentifier[]>(resourceURI, request);
       }
-
-
-
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -151,18 +145,13 @@ namespace ws3dx.dsadvfilter.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string ID, IUpdateAdvancedFilter request)
+      public async Task<T> Update<T>(string ID, IUpdateAdvancedFilter request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAdvancedFilterMask), typeof(IAdvancedFilterSpecMask) });
 
          string resourceURI = $"{GetBaseResource()}/dsadvfilter:AdvFilter/{ID}";
 
-
-         return await PatchGroup<T, IUpdateAdvancedFilter>(resourceURI, request);
-
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateAdvancedFilter>(resourceURI, request);
       }
-
-
-
    }
 }

@@ -35,6 +35,5 @@ namespace ws3dx.project.project.data
       public IMemberRelatedElements RelatedElements { get; set; }
 
       public IMemberRelatedData RelatedData { get; set; }
-
    }
 }

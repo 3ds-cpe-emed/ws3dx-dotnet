@@ -46,6 +46,5 @@ namespace ws3dx.dsxcad.data
       public string Cestamp { get; set; }
 
       public IFileData AuthoringFile { get; set; }
-
    }
 }

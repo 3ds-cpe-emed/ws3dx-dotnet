@@ -26,6 +26,5 @@ namespace ws3dx.project.task.data
       public ICsrf Csrf { get; set; }
 
       public IList<IResponseAssigneeData> Data { get; set; }
-
    }
 }

@@ -14,10 +14,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dspfl.data;
 using ws3dx.shared.utils;
 
@@ -50,13 +50,13 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string modelId)
+      public async Task<T> Get<T>(string modelId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IModelMask), typeof(IModelRootVersionMask) });
 
          string resourceURI = $"{GetBaseResource()}/dspfl:Model/{modelId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
    }
 }

@@ -50,6 +50,5 @@ namespace ws3dx.dsxcad.data
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }
-
    }
 }

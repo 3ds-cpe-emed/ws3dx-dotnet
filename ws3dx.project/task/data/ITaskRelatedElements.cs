@@ -21,6 +21,5 @@ namespace ws3dx.project.task.data
       public string SequenceOrder { get; set; }
 
       public string TaskWBS { get; set; }
-
    }
 }

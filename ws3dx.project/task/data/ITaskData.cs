@@ -129,6 +129,5 @@ namespace ws3dx.project.task.data
       public string Deviation { get; set; }
 
       public string PredictiveActualFinishDate { get; set; }
-
    }
 }

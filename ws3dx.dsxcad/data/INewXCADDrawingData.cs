@@ -44,6 +44,5 @@ namespace ws3dx.dsxcad.data
       public IFileData AuthoringFile { get; set; }
 
       public IFileData VisualizationFile { get; set; }
-
    }
 }

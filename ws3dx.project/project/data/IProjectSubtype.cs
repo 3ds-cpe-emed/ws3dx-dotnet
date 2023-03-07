@@ -29,6 +29,5 @@ namespace ws3dx.project.project.data
       public string RelativePath { get; set; }
 
       public string Cestamp { get; set; }
-
    }
 }

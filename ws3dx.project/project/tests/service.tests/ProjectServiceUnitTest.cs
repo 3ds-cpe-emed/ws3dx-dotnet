@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -24,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.project.project.core.data.impl;
 using ws3dx.project.project.core.service;
 using ws3dx.project.project.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -94,18 +96,18 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseRisk ret = await projectService.GetProjectRisk(projectId, riskId);
+         IResponseRiskData ret = await projectService.GetProjectRisk(projectId, riskId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C0B200000350")]
       public async Task GetProjectIssues(string projectId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseIssue ret = await projectService.GetProjectIssues(projectId);
+         IList<IResponseIssueData> ret = await projectService.GetProjectIssues(projectId);
 
          Assert.IsNotNull(ret);
       }
@@ -116,7 +118,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseAssessment ret = await projectService.GetProjectAssessment(projectId, assessmentId);
+         IResponseAssessmentData ret = await projectService.GetProjectAssessment(projectId, assessmentId);
 
          Assert.IsNotNull(ret);
       }
@@ -127,18 +129,18 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProject ret = await projectService.GetAllProjects();
+         IList<IResponseProjectData> ret = await projectService.GetAllProjects();
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "")]
+      [TestCase("41DF2E16046E00006278C0B200000350", "true")]
       public async Task GetProjectAssessments(string projectId, string allAssessments)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseAssessment ret = await projectService.GetProjectAssessments(projectId, allAssessments);
+         IList<IResponseAssessmentData> ret = await projectService.GetProjectAssessments(projectId, allAssessments);
 
          Assert.IsNotNull(ret);
       }
@@ -149,7 +151,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseIssue ret = await projectService.GetProjectIssue(projectId, issueId);
+         IResponseIssueData ret = await projectService.GetProjectIssue(projectId, issueId);
 
          Assert.IsNotNull(ret);
       }
@@ -160,51 +162,51 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProject ret = await projectService.GetProgramProjects(programId);
+         IList<IResponseProjectData> ret = await projectService.GetProgramProjects(programId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C0B200000350")]
       public async Task GetProjectRisks(string projectId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseRisk ret = await projectService.GetProjectRisks(projectId);
+         IList<IResponseRiskData> ret = await projectService.GetProjectRisks(projectId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("795A0F6C8258000061EE87240011621A")]
       public async Task GetProjectFolder(string folderId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseFolder ret = await projectService.GetProjectFolder(folderId);
+         IResponseFolderData ret = await projectService.GetProjectFolder(folderId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C0B200000350")]
       public async Task GetProject(string projectId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProject ret = await projectService.GetProject(projectId);
+         IResponseProjectData ret = await projectService.GetProject(projectId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C0B200000350")]
       public async Task GetProjectFolders(string projectId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseFolder ret = await projectService.GetProjectFolders(projectId);
+         IList<IResponseFolderData> ret = await projectService.GetProjectFolders(projectId);
 
          Assert.IsNotNull(ret);
       }
@@ -220,7 +222,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseAssessment ret = await projectService.AddProjectAssessment(projectId, assessments);
+            IResponseAssessmentData ret = await projectService.AddProjectAssessment(projectId, assessments);
 
             Assert.IsNotNull(ret);
          }
@@ -242,7 +244,7 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseProject ret = await projectService.CreateProject(projects);
+            IResponseProjectData ret = await projectService.CreateProject(projects);
 
             Assert.IsNotNull(ret);
          }
@@ -264,7 +266,27 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseFolder ret = await projectService.AddProjectFolder(projectId, folders);
+            IResponseFolderData ret = await projectService.AddProjectFolder(projectId, folders);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("AAA27")]
+      public async Task SearchProject(string _searchCriteria)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         try
+         {
+            IList<IResponseProjectData> ret = await projectService.Search(new SearchByFreeText(_searchCriteria));
 
             Assert.IsNotNull(ret);
          }

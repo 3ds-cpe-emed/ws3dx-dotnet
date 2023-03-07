@@ -21,6 +21,5 @@ namespace ws3dx.dsxcad.data
    public interface IChangeControlMask
    {
       public IChangeControlStatus ChangeControlStatus { get; set; }
-
    }
 }

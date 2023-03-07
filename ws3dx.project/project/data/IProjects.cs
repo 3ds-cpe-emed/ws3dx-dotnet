@@ -20,6 +20,5 @@ namespace ws3dx.project.project.data
    public interface IProjects
    {
       public IList<IProject> Data { get; set; }
-
    }
 }

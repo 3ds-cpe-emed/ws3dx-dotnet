@@ -55,6 +55,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("owner")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Owner { get; set; }
-
    }
 }

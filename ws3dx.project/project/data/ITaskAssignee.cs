@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public IAssigneeData Data { get; set; }
 
       public IAssigneeRelatedData RelatedData { get; set; }
-
    }
 }

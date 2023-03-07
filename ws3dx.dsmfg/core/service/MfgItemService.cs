@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace service
 {
@@ -63,6 +65,16 @@ namespace service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -83,7 +95,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeEngItem";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, ItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -104,7 +116,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec";
 
-         return await GetMultiple<IScopeRequirementSpecMask>(resourceURI);
+         return await GetGroup<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -126,7 +138,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -145,11 +157,11 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IAssignedRequirementMask>> GetAssignedRequirement(string mfgItemId, string requirementId)
+      public async Task<IAssignedRequirementMask> GetAssignedRequirement(string mfgItemId, string requirementId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement/{requirementId}";
 
-         return await GetMultiple<IAssignedRequirementMask>(resourceURI);
+         return await GetIndividual<IAssignedRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -172,7 +184,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:Dependency";
 
-         return await GetMultiple<IDependencyMask>(resourceURI);
+         return await GetGroup<IDependencyMask, NlsLabeledItemSet<IDependencyMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -190,13 +202,13 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetInstance<T>(string mfgItemId, string instanceId)
+      public async Task<T> GetInstance<T>(string mfgItemId, string instanceId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -216,11 +228,11 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IScopeRequirementSpecMask>> GetScopeRequirementSpec(string mfgItemId, string requirementId)
+      public async Task<IScopeRequirementSpecMask> GetScopeRequirementSpec(string mfgItemId, string requirementId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec/{requirementId}";
 
-         return await GetMultiple<IScopeRequirementSpecMask>(resourceURI);
+         return await GetIndividual<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -240,7 +252,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dslc:changeControl";
 
-         return await GetMultiple<IChangeControlStatusMask>(resourceURI);
+         return await GetGroup<IChangeControlStatusMask, NlsLabeledItemSet<IChangeControlStatusMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -255,13 +267,13 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string mfgItemId)
+      public async Task<T> Get<T>(string mfgItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMaskDetails), typeof(IMfgItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -283,7 +295,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -303,7 +315,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:PartialScopeEngItem";
 
-         return await GetMultiple<IPartialScopeEngItemMask>(resourceURI);
+         return await GetGroup<IPartialScopeEngItemMask, NlsLabeledItemSet<IPartialScopeEngItemMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -323,7 +335,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement";
 
-         return await GetMultiple<IAssignedRequirementMask>(resourceURI);
+         return await GetGroup<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -342,11 +354,11 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IImplementedEngOccurrenceMask>> GetInstanceImplementedEngOccurrence(string mfgItemId, string instanceId)
+      public async Task<IImplementedEngOccurrenceMask> GetInstanceImplementedEngOccurrence(string mfgItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:ImplementedEngOccurrence";
 
-         return await GetMultiple<IImplementedEngOccurrenceMask>(resourceURI);
+         return await GetIndividual<IImplementedEngOccurrenceMask, NlsLabeledItemSet<IImplementedEngOccurrenceMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -369,7 +381,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dscfg:Filterable";
 
-         return await GetMultiple<IFilterableDetail>(resourceURI);
+         return await GetGroup<IFilterableDetail, NlsLabeledItemSet<IFilterableDetail>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -394,7 +406,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -416,7 +428,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -436,7 +448,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter";
 
-         return await GetMultiple<IAssignmentFilterMask>(resourceURI);
+         return await GetGroup<IAssignmentFilterMask, NlsLabeledItemSet<IAssignmentFilterMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -455,7 +467,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dslc:changeControl";
 
-         return await PostRequest<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -476,7 +488,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeEngItem/set/reconnect";
 
-         return await PostRequest<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -496,7 +508,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement";
 
-         return await PostRequestMultiple<IAssignedRequirementMask, ICreateAssignedRequirements>(resourceURI, request);
+         return await PostGroup<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>, ICreateAssignedRequirements>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -516,7 +528,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:PartialScopeEngItem/detach";
 
-         return await PostRequest<IGenericResponse, IUriIdentifier>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -538,7 +550,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-         return await PostRequestMultiple<T, ICreateResultingEngItems>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateResultingEngItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -561,7 +573,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:Dependency/detach";
 
-         return await PostRequest<IGenericResponse, IDetachDependencyPayload>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IDetachDependencyPayload>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -584,7 +596,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/expand";
 
-         return await PostRequestMultiple<IMfgItemExpandV1, IMfgItemExpandRequestPayloadV1>(resourceURI, request);
+         return await PostGroup<IMfgItemExpandV1, NlsLabeledItemSet<IMfgItemExpandV1>, IMfgItemExpandRequestPayloadV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -604,7 +616,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeEngItem/detach";
 
-         return await PostRequest<IGenericResponse, IUriIdentifier>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -627,7 +639,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:Dependency/attach";
 
-         return await PostRequest<IGenericResponse, IAttachDependencyPayload>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAttachDependencyPayload>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -652,7 +664,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/replace";
 
-         return await PostRequestMultiple<T, IMfgItemInstanceReplace>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<IMfgItemInstanceReplace>, IMfgItemInstanceReplace>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -672,7 +684,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured/attach";
 
-         return await PostRequest<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -690,7 +702,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem";
 
-         return await PostRequestMultiple<T, ICreateMfgItems>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateMfgItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -710,7 +722,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:PartialScopeEngItem/attach";
 
-         return await PostRequest<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -730,7 +742,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured/detach";
 
-         return await PostRequest<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -750,7 +762,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeEngItem/attach";
 
-         return await PostRequest<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, ITypedUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -772,7 +784,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance";
 
-         return await PostRequestMultiple<T, ICreateMfgInstancesRef>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateMfgInstancesRef>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -793,7 +805,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec";
 
-         return await PostRequestMultiple<IScopeRequirementSpecMask, ICreateScopeRequirementSpecs>(resourceURI, request);
+         return await PostGroup<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>, ICreateScopeRequirementSpecs>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -812,13 +824,13 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> UpdateInstance<T>(string mfgItemId, string instanceId, IMfgItemInstancePatch request)
+      public async Task<T> UpdateInstance<T>(string mfgItemId, string instanceId, IMfgItemInstancePatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}";
 
-         return await PatchGroup<T, IMfgItemInstancePatch>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IMfgItemInstancePatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -840,7 +852,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured";
 
-         return await PatchGroup<T, IConfiguredPatch>(resourceURI, request);
+         return await PatchGroup<T, NlsLabeledItemSet<T>, IConfiguredPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -856,13 +868,13 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string mfgItemId, IMfgItemPatch request)
+      public async Task<T> Update<T>(string mfgItemId, IMfgItemPatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMaskDetails), typeof(IMfgItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
-         return await PatchGroup<T, IMfgItemPatch>(resourceURI, request);
+         return await PatchIndividual<T, IMfgItemPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -881,13 +893,13 @@ namespace service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> UpdateResultingEngItem<T>(string engItemId, string mfgItemId, IResultingEngItemPatch request)
+      public async Task<T> UpdateResultingEngItem<T>(string engItemId, string mfgItemId, IResultingEngItemPatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 
-         return await PatchGroup<T, IResultingEngItemPatch>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IResultingEngItemPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1033,7 +1045,7 @@ namespace service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await PostRequestMultiple<ILocateMfgItemsResponse, ILocateMfgItemsRequest>(resourceURI, request, queryParams: queryParams);
+         return await PostGroup<ILocateMfgItemsResponse, NlsLabeledItemSet<ILocateMfgItemsResponse>, ILocateMfgItemsRequest>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1072,7 +1084,7 @@ namespace service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await PostRequestMultiple<ILocateMfgItemsResponse, ILocateMfgItems>(resourceURI, request, queryParams: queryParams);
+         return await PostGroup<ILocateMfgItemsResponse, NlsLabeledItemSet<ILocateMfgItemsResponse>, ILocateMfgItems>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1093,7 +1105,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter/detach";
 
-         return await PostRequest<IGenericResponse, IDetachAssignmentFilterV1>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IDetachAssignmentFilterV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1114,7 +1126,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter/detach";
 
-         return await PostRequest<IGenericResponse, IDetachAssignmentFilter>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IDetachAssignmentFilter>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1138,7 +1150,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:ImplementedEngOccurrence/attach";
 
-         return await PostRequest<IGenericResponse, IItemOccurrence>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IItemOccurrence>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1162,7 +1174,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:ImplementedEngOccurrence/detach";
 
-         return await PostRequest<IGenericResponse, IItemOccurrence>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IItemOccurrence>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1183,7 +1195,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter/attach";
 
-         return await PostRequest<IGenericResponse, IAttachAssignmentFilterV1>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAttachAssignmentFilterV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1204,7 +1216,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter/attach";
 
-         return await PostRequest<IGenericResponse, IAttachAssignmentFilter>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAttachAssignmentFilter>(resourceURI, request);
       }
    }
 }

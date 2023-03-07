@@ -96,6 +96,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("linkURL")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string LinkURL { get; set; }
-
    }
 }

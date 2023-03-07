@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.project.program.data;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.project.program.core.data.impl
 {
@@ -33,6 +34,7 @@ namespace ws3dx.project.program.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ICsrf Csrf { get; set; }
 
+      [ResponseCollectionItems("data")]
       [JsonPropertyName("data")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IResponseProgramData> Data { get; set; }

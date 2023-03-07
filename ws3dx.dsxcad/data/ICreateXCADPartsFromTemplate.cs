@@ -23,6 +23,5 @@ namespace ws3dx.dsxcad.data
       public ITypedUriIdentifier CreateFrom { get; set; }
 
       public IList<INewXCADPartFromTemplate> Items { get; set; }
-
    }
 }

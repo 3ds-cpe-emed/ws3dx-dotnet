@@ -36,6 +36,5 @@ namespace ws3dx.project.project.data
       public IList<IProjectFolder> Folders { get; set; }
 
       public IList<IProjectCalendar> Calendar { get; set; }
-
    }
 }

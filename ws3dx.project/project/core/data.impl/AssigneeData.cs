@@ -35,6 +35,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("email")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Email { get; set; }
-
    }
 }

@@ -35,6 +35,5 @@ namespace ws3dx.project.project.data
       public string Originator { get; set; }
 
       public string Owner { get; set; }
-
    }
 }

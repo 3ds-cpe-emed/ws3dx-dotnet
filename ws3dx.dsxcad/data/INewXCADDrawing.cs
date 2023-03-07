@@ -19,6 +19,5 @@ namespace ws3dx.dsxcad.data
    public interface INewXCADDrawing
    {
       public INewXCADDrawingData Attributes { get; set; }
-
    }
 }

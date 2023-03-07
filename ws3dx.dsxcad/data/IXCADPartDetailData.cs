@@ -29,6 +29,5 @@ namespace ws3dx.dsxcad.data
       public string Cadlinktype { get; set; }
 
       public ITypedUriId ReferencedObject { get; set; }
-
    }
 }

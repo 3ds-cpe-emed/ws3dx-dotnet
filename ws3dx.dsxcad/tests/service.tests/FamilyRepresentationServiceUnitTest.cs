@@ -103,7 +103,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADFamilyRepMask> ret = await familyRepresentationService.Get<IXCADFamilyRepMask>(familyRepId);
+         IXCADFamilyRepMask ret = await familyRepresentationService.Get<IXCADFamilyRepMask>(familyRepId);
 
          Assert.IsNotNull(ret);
       }
@@ -114,7 +114,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADFamilyRepBasicMask> ret = await familyRepresentationService.Get<IXCADFamilyRepBasicMask>(familyRepId);
+         IXCADFamilyRepBasicMask ret = await familyRepresentationService.Get<IXCADFamilyRepBasicMask>(familyRepId);
 
          Assert.IsNotNull(ret);
       }
@@ -125,12 +125,12 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADFamilyRepDetailMask> ret = await familyRepresentationService.Get<IXCADFamilyRepDetailMask>(familyRepId);
+         IXCADFamilyRepDetailMask ret = await familyRepresentationService.Get<IXCADFamilyRepDetailMask>(familyRepId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADFamilyRepMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -144,7 +144,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("solidworks")]
       public async Task Search_Full_IXCADFamilyRepMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -157,7 +157,7 @@ namespace NUnitTestProject
 
          Assert.IsNotNull(ret);
       }
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADFamilyRepBasicMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -167,8 +167,19 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IXCADFamilyRepBasicMask> ret = await familyRepresentationService.Search<IXCADFamilyRepBasicMask>(searchByFreeText, skip, top);
-
          Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IXCADFamilyRepBasicMask cadFamilyFound in ret)
+         {
+            IXCADFamilyRepDetailMask cadFamily = await familyRepresentationService.Get<IXCADFamilyRepDetailMask>(cadFamilyFound.Id);
+
+            Assert.AreEqual(cadFamilyFound.Id, cadFamily.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
       }
 
       [TestCase("search")]

@@ -100,7 +100,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DerivedOutputService derivedOutputService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDerivedOutputDetailMask> ret = await derivedOutputService.Get<IDerivedOutputDetailMask>(doId);
+         IDerivedOutputDetailMask ret = await derivedOutputService.Get<IDerivedOutputDetailMask>(doId);
 
          Assert.IsNotNull(ret);
       }
@@ -111,7 +111,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DerivedOutputService derivedOutputService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDerivedOutputCompleteMask> ret = await derivedOutputService.Get<IDerivedOutputCompleteMask>(doId);
+         IDerivedOutputCompleteMask ret = await derivedOutputService.Get<IDerivedOutputCompleteMask>(doId);
 
          Assert.IsNotNull(ret);
       }
@@ -127,7 +127,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IDerivedOutputDetailMask> ret = await derivedOutputService.Create<IDerivedOutputDetailMask>(request);
+            IDerivedOutputDetailMask ret = await derivedOutputService.Create<IDerivedOutputDetailMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -148,7 +148,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IDerivedOutputCompleteMask> ret = await derivedOutputService.Create<IDerivedOutputCompleteMask>(request);
+            IDerivedOutputCompleteMask ret = await derivedOutputService.Create<IDerivedOutputCompleteMask>(request);
 
             Assert.IsNotNull(ret);
          }

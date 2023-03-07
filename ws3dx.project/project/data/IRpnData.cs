@@ -31,6 +31,5 @@ namespace ws3dx.project.project.data
       public string Originated { get; set; }
 
       public string Modified { get; set; }
-
    }
 }

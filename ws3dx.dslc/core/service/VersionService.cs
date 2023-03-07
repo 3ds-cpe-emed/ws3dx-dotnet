@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -44,11 +45,11 @@ namespace ws3dx.dslc.core.service
       // total number of objects exceeds 50. Summary: Get the version graphs of objects
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IVersionGraphOutput> GetGraph(IObjRefInput request)
+      public async Task<IEnumerable<IVersionGraph>> GetGraph(IObjRefInput request)
       {
          string resourceURI = $"{GetBaseResource()}version/getGraph";
 
-         return await PostRequest<IVersionGraphOutput, IObjRefInput>(resourceURI, request);
+         return await PostGroup<IVersionGraph, IVersionGraphOutput, IObjRefInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -66,11 +67,11 @@ namespace ws3dx.dslc.core.service
       // exceeds 100. Summary: Version objects
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDuplicateOutput> Create(IObjRefBranchInput request)
+      public async Task<IEnumerable<IDuplicate>> Create(IObjRefBranchInput request)
       {
          string resourceURI = $"{GetBaseResource()}version/create";
 
-         return await PostRequest<IDuplicateOutput, IObjRefBranchInput>(resourceURI, request);
+         return await PostGroup<IDuplicate, IDuplicateOutput, IObjRefBranchInput>(resourceURI, request);
       }
    }
 }

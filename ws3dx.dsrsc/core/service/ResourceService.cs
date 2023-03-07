@@ -18,9 +18,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsrsc.data;
-using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsrsc.core.service
 {
@@ -46,7 +47,7 @@ namespace ws3dx.dsrsc.core.service
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { typeof(IItem), typeof(IResourceDetail) };
+         return new List<Type>() { typeof(IResourceMask), typeof(IResourceDetail) };
       }
 
       protected override string GetSearchSkipParamName()
@@ -63,6 +64,16 @@ namespace ws3dx.dsrsc.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -76,13 +87,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string resId)
+      public async Task<T> Get<T>(string resId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceMask), typeof(IResourceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Resource/{resId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -99,7 +110,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:Resource/locate";
 
-         return await PostRequestMultiple<IResourceLocated, ILocateResource>(resourceURI, request);
+         return await PostGroup<IResourceLocated, ItemSet<IResourceLocated>, ILocateResource>(resourceURI, request);
       }
    }
 }

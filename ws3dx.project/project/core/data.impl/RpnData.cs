@@ -47,6 +47,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("modified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Modified { get; set; }
-
    }
 }

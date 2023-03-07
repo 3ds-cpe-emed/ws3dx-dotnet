@@ -20,6 +20,5 @@ namespace ws3dx.project.task.data
    public interface IAssignees
    {
       public IList<IAssignee> Data { get; set; }
-
    }
 }

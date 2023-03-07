@@ -21,6 +21,5 @@ namespace ws3dx.project.project.data
       public string Name { get; set; }
 
       public string Value { get; set; }
-
    }
 }

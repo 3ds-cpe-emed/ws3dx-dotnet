@@ -111,6 +111,5 @@ namespace ws3dx.project.project.data
       public string PALId { get; set; }
 
       public string ObjectId { get; set; }
-
    }
 }

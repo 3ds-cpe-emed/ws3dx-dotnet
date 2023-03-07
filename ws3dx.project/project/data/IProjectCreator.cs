@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public ICreatorData Data { get; set; }
 
       public ICreatorRelatedData RelatedData { get; set; }
-
    }
 }

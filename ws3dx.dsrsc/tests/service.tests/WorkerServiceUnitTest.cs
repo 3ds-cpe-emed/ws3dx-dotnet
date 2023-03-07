@@ -96,7 +96,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          WorkerService workerService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IWorkerResourceMask> ret = await workerService.Get<IWorkerResourceMask>(workerId);
+         IWorkerResourceMask ret = await workerService.Get<IWorkerResourceMask>(workerId);
 
          Assert.IsNotNull(ret);
       }
@@ -107,7 +107,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          WorkerService workerService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IWorkerResourceDetailMask> ret = await workerService.Get<IWorkerResourceDetailMask>(workerId);
+         IWorkerResourceDetailMask ret = await workerService.Get<IWorkerResourceDetailMask>(workerId);
 
          Assert.IsNotNull(ret);
       }
@@ -162,7 +162,7 @@ namespace NUnitTestProject
 
          WorkerService workerService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         IBulkUpdateWorkerResource[] request = new BulkUpdateWorkerResource[] { } ;
+         IBulkUpdateWorkerResource[] request = new BulkUpdateWorkerResource[] { };
 
          try
          {

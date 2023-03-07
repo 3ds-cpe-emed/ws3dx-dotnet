@@ -37,6 +37,5 @@ namespace ws3dx.dsbks.data
       // </summary>
       //----------------------------------------------------------------
       public string Name { get; set; }
-
    }
 }

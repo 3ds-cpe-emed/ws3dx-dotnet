@@ -29,6 +29,5 @@ namespace ws3dx.project.task.data
       public string RelativePath { get; set; }
 
       public IDPMProjectDataelements Data { get; set; }
-
    }
 }

@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.document.data;
+using ws3dx.utils.search;
 
 namespace ws3dx.document.core.service
 {
@@ -44,7 +45,7 @@ namespace ws3dx.document.core.service
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { typeof(IDocumentsResponse) };
+         return new List<Type>() { typeof(IDocumentDataResponse) };
       }
 
       protected override string GetSearchSkipParamName()
@@ -61,6 +62,22 @@ namespace ws3dx.document.core.service
       {
          return "searchStr";
       }
+
+      protected override string GetMaskParamName()
+      {
+         return null;
+      }
+
+      public async Task<IList<IDocumentDataResponse>> Search(SearchQuery _searchString)
+      {
+         return await Search<IDocumentDataResponse, IDocumentsResponse>(_searchString);
+      }
+
+      public async Task<IList<IDocumentDataResponse>> Search(SearchQuery _searchString, long _skip = 0, long _top = 100)
+      {
+         return await Search<IDocumentDataResponse, IDocumentsResponse>(_searchString, _skip, _top);
+      }
+
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -77,7 +94,7 @@ namespace ws3dx.document.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IDocumentsResponse> GetItemDocuments(string parentId, string parentRelName, string parentDirection)
+      public async Task<IEnumerable<IDocumentDataResponse>> GetItemDocuments(string parentId, string parentRelName, string parentDirection)
       {
          string resourceURI = $"{GetBaseResource()}/documents/parentId/{parentId}";
 
@@ -85,7 +102,7 @@ namespace ws3dx.document.core.service
          queryParams.Add("parentRelName", parentRelName);
          queryParams.Add("parentDirection", parentDirection);
 
-         return await GetUnique<IDocumentsResponse>(resourceURI, queryParams: queryParams);
+         return await GetGroup<IDocumentDataResponse, IDocumentsResponse>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -97,11 +114,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Get the file versions.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IVersionResponse> GetFileVersions(string docId, string fileId)
+      public async Task<IEnumerable<IDocumentFile>> GetFileVersions(string docId, string fileId)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files/{fileId}/versions";
 
-         return await GetUnique<IVersionResponse>(resourceURI);
+         return await GetGroup<IDocumentFile, IVersionResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -113,11 +130,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Retrieve the files meta-data for a given document.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IFileResponse> GetFiles(string docId)
+      public async Task<IEnumerable<IDocumentFile>> GetFiles(string docId)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files";
 
-         return await GetUnique<IFileResponse>(resourceURI);
+         return await GetGroup<IDocumentFile, IFileResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -129,11 +146,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Get the information for a given document object.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IDocumentsResponse> Get(string docId)
+      public async Task<IEnumerable<IDocumentDataResponse>> Get(string docId)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}";
 
-         return await GetUnique<IDocumentsResponse>(resourceURI);
+         return await GetGroup<IDocumentDataResponse, IDocumentsResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -145,11 +162,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Create new document and related file data.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDocumentsResponse> Create(IDocuments documents)
+      public async Task<IEnumerable<IDocumentDataResponse>> Create(IDocuments documents)
       {
          string resourceURI = $"{GetBaseResource()}/documents";
 
-         return await PostRequest<IDocumentsResponse, IDocuments>(resourceURI, documents);
+         return await PostGroup<IDocumentDataResponse, IDocumentsResponse, IDocuments>(resourceURI, documents);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -161,11 +178,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Create new document object files.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IFileResponse> AddFiles(string docId, IFiles files)
+      public async Task<IEnumerable<IDocumentFile>> AddFiles(string docId, IFiles files)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files";
 
-         return await PostRequest<IFileResponse, IFiles>(resourceURI, files);
+         return await PostGroup<IDocumentFile, IFileResponse, IFiles>(resourceURI, files);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -175,13 +192,16 @@ namespace ws3dx.document.core.service
       //---------------------------------------------------------------------------------------------
       // <summary>
       // Description: Summary: Get the documents for a given set of document IDs.
+      // <param name="ids">
+      // Comma-separated list of IDs to retrieve.
+      // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDocumentsResponse> GetMany()
+      public async Task<IEnumerable<IDocumentDataResponse>> GetMany(string ids)
       {
          string resourceURI = $"{GetBaseResource()}/documents/ids";
 
-         return await PostRequest<IDocumentsResponse>(resourceURI);
+         return await PostGroup<IDocumentDataResponse, IDocumentsResponse, string>(resourceURI, ids);
       }
 
       //---------------------------------------------------------------------------------------------

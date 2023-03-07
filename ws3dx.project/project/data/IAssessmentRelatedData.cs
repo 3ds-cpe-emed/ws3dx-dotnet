@@ -24,6 +24,5 @@ namespace ws3dx.project.project.data
       public IList<IAssessmentCreator> OriginatorInfo { get; set; }
 
       public IList<IAssessmentReference> References { get; set; }
-
    }
 }

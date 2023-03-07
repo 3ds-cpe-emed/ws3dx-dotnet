@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<Folder Include="extension\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="6.0.7" />
   </ItemGroup>
 

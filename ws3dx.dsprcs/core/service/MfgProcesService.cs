@@ -55,7 +55,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgProcessInstance/{instanceId}/dscfg:Filterable/unset/variant";
 
-         return await PostRequest<IUnitaryVariantEffectivity>(resourceURI);
+         return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -79,9 +79,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}/dscfg:Filterable/unset/variant";
 
-         return await PostRequest<IUnitaryVariantEffectivity>(resourceURI);
+         return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI);
       }
-
-
    }
 }

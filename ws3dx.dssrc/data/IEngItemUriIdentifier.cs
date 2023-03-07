@@ -20,6 +20,5 @@ namespace ws3dx.dssrc.data
    public interface IEngItemUriIdentifier
    {
       public ITypedUriIdentifier EngItem { get; set; }
-
    }
 }

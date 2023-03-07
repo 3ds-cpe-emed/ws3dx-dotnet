@@ -36,6 +36,5 @@ namespace ws3dx.dsbks.data
       public string ParentId { get; set; }
 
       public IList<INewBookmark> Items { get; set; }
-
    }
 }

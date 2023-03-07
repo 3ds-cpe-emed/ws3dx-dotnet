@@ -27,6 +27,7 @@ using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -157,7 +158,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAssignedRequirementMask> ret = await mfgItemService.GetAssignedRequirement(mfgItemId, requirementId);
+         IAssignedRequirementMask ret = await mfgItemService.GetAssignedRequirement(mfgItemId, requirementId);
 
          Assert.IsNotNull(ret);
       }
@@ -179,7 +180,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgItemInstanceMask> ret = await mfgItemService.GetInstance<IMfgItemInstanceMask>(mfgItemId, instanceId);
+         IMfgItemInstanceMask ret = await mfgItemService.GetInstance<IMfgItemInstanceMask>(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -190,7 +191,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgItemInstanceDetailMask> ret = await mfgItemService.GetInstance<IMfgItemInstanceDetailMask>(mfgItemId, instanceId);
+         IMfgItemInstanceDetailMask ret = await mfgItemService.GetInstance<IMfgItemInstanceDetailMask>(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -201,7 +202,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IScopeRequirementSpecMask> ret = await mfgItemService.GetScopeRequirementSpec(mfgItemId, requirementId);
+         IScopeRequirementSpecMask ret = await mfgItemService.GetScopeRequirementSpec(mfgItemId, requirementId);
 
          Assert.IsNotNull(ret);
       }
@@ -223,7 +224,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgItemMaskDetails> ret = await mfgItemService.Get<IMfgItemMaskDetails>(mfgItemId);
+         IMfgItemMaskDetails ret = await mfgItemService.Get<IMfgItemMaskDetails>(mfgItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -234,7 +235,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgItemMask> ret = await mfgItemService.Get<IMfgItemMask>(mfgItemId);
+         IMfgItemMask ret = await mfgItemService.Get<IMfgItemMask>(mfgItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -289,7 +290,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IImplementedEngOccurrenceMask> ret = await mfgItemService.GetInstanceImplementedEngOccurrence(mfgItemId, instanceId);
+         IImplementedEngOccurrenceMask ret = await mfgItemService.GetInstanceImplementedEngOccurrence(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -829,7 +830,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<ILocateMfgItemsResponse> ret = await mfgItemService.Locate( top, skip, request);
+            IEnumerable<ILocateMfgItemsResponse> ret = await mfgItemService.Locate(top, skip, request);
 
             Assert.IsNotNull(ret);
          }
@@ -1038,5 +1039,42 @@ namespace NUnitTestProject
       //   }
       //}
 
+      [TestCase("item")]
+      public async Task Search_Full_IXCADFamilyRepMask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IMfgItemMask> ret = await mfgItemService.Search<IMfgItemMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+      [TestCase("item", 0, 50)]
+      public async Task Search_Paged_IXCADFamilyRepBasicMask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IMfgItemMask> ret = await mfgItemService.Search<IMfgItemMask>(searchByFreeText, skip, top);
+         Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IMfgItemMask mfgItem in ret)
+         {
+            IMfgItemMaskDetails mfgItemDetails = await mfgItemService.Get<IMfgItemMaskDetails>(mfgItem.Id);
+
+            Assert.AreEqual(mfgItem.Id, mfgItemDetails.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
+      }
    }
 }

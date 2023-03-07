@@ -32,6 +32,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("rpn")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IRiskRpn> Rpn { get; set; }
-
    }
 }

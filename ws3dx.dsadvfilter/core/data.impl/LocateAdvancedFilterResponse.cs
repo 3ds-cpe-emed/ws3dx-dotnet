@@ -36,6 +36,5 @@ namespace ws3dx.dsadvfilter.core.data.impl
       [JsonPropertyName("filters")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<ITypedUriIdentifier> Filters { get; set; }
-
    }
 }

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsrsc.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -50,13 +51,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string workerId)
+      public async Task<T> Get<T>(string workerId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IWorkerResourceMask), typeof(IWorkerResourceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker/{workerId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -74,7 +75,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker";
 
-         return await PostRequestMultiple<T, ICreateWorkerResources>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateWorkerResources>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -91,7 +92,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker/bulkUpdate";
 
-         return await PostRequest<IGenericResponse, IBulkUpdateWorkerResource[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IBulkUpdateWorkerResource[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -106,13 +107,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string workerId, IUpdateOrganizationalResource request)
+      public async Task<T> Update<T>(string workerId, IUpdateOrganizationalResource request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IWorkerResourceMask), typeof(IWorkerResourceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker/{workerId}";
 
-         return await PatchGroup<T, IUpdateOrganizationalResource>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateOrganizationalResource>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

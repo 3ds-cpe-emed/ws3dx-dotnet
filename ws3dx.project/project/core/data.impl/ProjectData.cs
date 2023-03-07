@@ -207,6 +207,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("objectId")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string ObjectId { get; set; }
-
    }
 }

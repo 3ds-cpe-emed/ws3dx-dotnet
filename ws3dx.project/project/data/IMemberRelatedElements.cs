@@ -19,6 +19,5 @@ namespace ws3dx.project.project.data
    public interface IMemberRelatedElements
    {
       public string ProjectAccess { get; set; }
-
    }
 }

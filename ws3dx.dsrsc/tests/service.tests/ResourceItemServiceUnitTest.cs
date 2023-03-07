@@ -96,7 +96,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceItemService resourceItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemInstanceMask> ret = await resourceItemService.GetInstance<IResourceItemInstanceMask>(resourceItemId, instanceId);
+         IResourceItemInstanceMask ret = await resourceItemService.GetInstance<IResourceItemInstanceMask>(resourceItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -107,7 +107,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceItemService resourceItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemInstanceDetailMask> ret = await resourceItemService.GetInstance<IResourceItemInstanceDetailMask>(resourceItemId, instanceId);
+         IResourceItemInstanceDetailMask ret = await resourceItemService.GetInstance<IResourceItemInstanceDetailMask>(resourceItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -118,7 +118,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceItemService resourceItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemMask> ret = await resourceItemService.Get<IResourceItemMask>(resItemId);
+         IResourceItemMask ret = await resourceItemService.Get<IResourceItemMask>(resItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -129,7 +129,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ResourceItemService resourceItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResourceItemDetailMask> ret = await resourceItemService.Get<IResourceItemDetailMask>(resItemId);
+         IResourceItemDetailMask ret = await resourceItemService.Get<IResourceItemDetailMask>(resItemId);
 
          Assert.IsNotNull(ret);
       }

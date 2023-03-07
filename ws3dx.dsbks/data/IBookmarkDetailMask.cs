@@ -127,6 +127,5 @@ namespace ws3dx.dsbks.data
       // </summary>
       //----------------------------------------------------------------
       public string Collabspace { get; set; }
-
    }
 }

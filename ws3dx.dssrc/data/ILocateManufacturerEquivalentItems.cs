@@ -21,6 +21,5 @@ namespace ws3dx.dssrc.data
    public interface ILocateManufacturerEquivalentItems
    {
       public IList<ITypedUriIdentifier> EngItem { get; set; }
-
    }
 }

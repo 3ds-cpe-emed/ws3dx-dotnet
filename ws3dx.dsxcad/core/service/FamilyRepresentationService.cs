@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsxcad.core.service
 {
@@ -63,6 +65,16 @@ namespace ws3dx.dsxcad.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -76,13 +88,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string familyRepId)
+      public async Task<T> Get<T>(string familyRepId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADFamilyRepMask), typeof(IXCADFamilyRepBasicMask), typeof(IXCADFamilyRepDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -102,7 +114,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:xCADAttributes";
 
-         return await GetMultiple<IXCADAttributesMask>(resourceURI);
+         return await GetGroup<IXCADAttributesMask, NlsLabeledItemSet<IAuthoringFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -122,7 +134,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile";
 
-         return await GetMultiple<IAuthoringFileMask>(resourceURI);
+         return await GetGroup<IAuthoringFileMask, NlsLabeledItemSet<IAuthoringFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -142,7 +154,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -159,7 +171,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/locate";
 
-         return await PostRequest<IRepresentationIdentifiers, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostIndividual<IRepresentationIdentifiers, ITypedUriIdentifier[]>(resourceURI, request);
       }
    }
 }

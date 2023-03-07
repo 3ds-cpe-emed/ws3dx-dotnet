@@ -24,6 +24,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("data")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IProject> Data { get; set; }
-
    }
 }

@@ -27,6 +27,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("default")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Default { get; set; }
-
    }
 }

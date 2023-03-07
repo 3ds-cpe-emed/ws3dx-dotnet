@@ -24,6 +24,5 @@ namespace ws3dx.dsadvfilter.core.data.impl
       [JsonPropertyName("items")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<INewAdvancedFilter> Items { get; set; }
-
    }
 }

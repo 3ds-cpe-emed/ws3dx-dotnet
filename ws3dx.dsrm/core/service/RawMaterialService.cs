@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsrm.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsrm.core.service
 {
@@ -63,6 +65,16 @@ namespace ws3dx.dsrm.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -77,11 +89,11 @@ namespace ws3dx.dsrm.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> GetEnterpriseItemNumber(string rawMatId)
+      public async Task<IEnterpriseItemNumberMask> GetEnterpriseItemNumber(string rawMatId)
       {
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}/dseng:EnterpriseReference";
 
-         return await GetMultiple<IEnterpriseItemNumberMask>(resourceURI);
+         return await GetIndividual<IEnterpriseItemNumberMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -101,7 +113,7 @@ namespace ws3dx.dsrm.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}/dslc:changeControl";
 
-         return await GetMultiple<IChangeControlStatusMask>(resourceURI);
+         return await GetGroup<IChangeControlStatusMask, NlsLabeledItemSet<IChangeControlStatusMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -116,13 +128,13 @@ namespace ws3dx.dsrm.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string rawMatId)
+      public async Task<T> Get<T>(string rawMatId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IRawMaterialMask), typeof(IRawMaterialDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -141,7 +153,7 @@ namespace ws3dx.dsrm.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}/dslc:changeControl";
 
-         return await PostRequest<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -154,13 +166,13 @@ namespace ws3dx.dsrm.core.service
       // Summary: Creates Raw Material item.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Create<T>(ICreateRawMaterial request)
+      public async Task<T> Create<T>(ICreateRawMaterial request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IRawMaterialMask), typeof(IRawMaterialDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial";
 
-         return await PostRequestMultiple<T, ICreateRawMaterial>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, ICreateRawMaterial>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -176,11 +188,11 @@ namespace ws3dx.dsrm.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> AddEnterpriseItemNumber(string rawMatId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> AddEnterpriseItemNumber(string rawMatId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}/dseng:EnterpriseReference";
 
-         return await PostRequestMultiple<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PostIndividual<IEnterpriseItemNumberMask, NlsLabeledItemSet<IEnterpriseItemNumberMask>, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -196,11 +208,11 @@ namespace ws3dx.dsrm.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> UpdateEnterpriseItemNumber(string rawMatId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> UpdateEnterpriseItemNumber(string rawMatId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}/dseng:EnterpriseReference";
 
-         return await PatchGroup<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PatchIndividual<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -215,13 +227,13 @@ namespace ws3dx.dsrm.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string rawMatId, IUpdateRawMaterial request)
+      public async Task<T> Update<T>(string rawMatId, IUpdateRawMaterial request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IRawMaterialMask), typeof(IRawMaterialDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}/dsrm:RawMaterial/{rawMatId}";
 
-         return await PatchGroup<T, IUpdateRawMaterial>(resourceURI, request);
+         return await PatchIndividual<T, IUpdateRawMaterial>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

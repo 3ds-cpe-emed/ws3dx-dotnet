@@ -131,6 +131,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("toConnectAccess")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string ToConnectAccess { get; set; }
-
    }
 }

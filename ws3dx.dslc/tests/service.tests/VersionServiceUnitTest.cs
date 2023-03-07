@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -100,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            IVersionGraphOutput ret = await versionService.GetGraph(request);
+            IEnumerable<IVersionGraph> ret = await versionService.GetGraph(request);
 
             Assert.IsNotNull(ret);
          }
@@ -122,7 +123,7 @@ namespace NUnitTestProject
 
          try
          {
-            IDuplicateOutput ret = await versionService.Create(request);
+            IEnumerable<IDuplicate> ret = await versionService.Create(request);
 
             Assert.IsNotNull(ret);
          }

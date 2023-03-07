@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -43,11 +44,11 @@ namespace ws3dx.dslc.core.service
       // Description: Get sharing profiles of a list of objects Summary: Get sharing profiles
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IGetSharingOutput> GetSharing(IGetSharingInput request)
+      public async Task<IEnumerable<ISharing>> GetSharing(IGetSharingInput request)
       {
          string resourceURI = $"{GetBaseResource()}sharing/getSharing";
 
-         return await PostRequest<IGetSharingOutput, IGetSharingInput>(resourceURI, request);
+         return await PostGroup<ISharing, IGetSharingOutput, IGetSharingInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}sharing/setSharing";
 
-         return await PostRequest<ISetSharingOutput, ISetSharingInput>(resourceURI, request);
+         return await PostIndividual<ISetSharingOutput, ISetSharingInput>(resourceURI, request);
       }
    }
 }

@@ -20,6 +20,5 @@ namespace ws3dx.project.project.data
    public interface IFolders
    {
       public IList<IFolder> Data { get; set; }
-
    }
 }

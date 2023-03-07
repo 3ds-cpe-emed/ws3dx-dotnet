@@ -22,9 +22,11 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -106,7 +108,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          CheckListService checkListService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ICheckListRowMask> ret = await checkListService.GetDataCollectRow(checkListId, dataCollectRowId);
+         ICheckListRowMask ret = await checkListService.GetDataCollectRow(checkListId, dataCollectRowId);
 
          Assert.IsNotNull(ret);
       }
@@ -117,7 +119,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          CheckListService checkListService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ICheckListMask> ret = await checkListService.Get<ICheckListMask>(iD);
+         ICheckListMask ret = await checkListService.Get<ICheckListMask>(iD);
 
          Assert.IsNotNull(ret);
       }
@@ -128,9 +130,63 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          CheckListService checkListService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ICheckListDetailMask> ret = await checkListService.Get<ICheckListDetailMask>(iD);
+         ICheckListDetailMask ret = await checkListService.Get<ICheckListDetailMask>(iD);
 
          Assert.IsNotNull(ret);
+      }
+
+      [TestCase("check")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         CheckListService checkListService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<ICheckListMask> ret = await checkListService.Search<ICheckListMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("check", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         CheckListService checkListService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<ICheckListMask> ret = await checkListService.Search<ICheckListMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (ICheckListMask checkList in ret)
+            {
+               ICheckListDetailMask checkListDetail = await checkListService.Get<ICheckListDetailMask>(checkList.Id);
+
+               Assert.AreEqual(checkList.Id, checkListDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
    }
 }

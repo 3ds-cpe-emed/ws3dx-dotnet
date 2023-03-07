@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -50,13 +51,13 @@ namespace ws3dx.dsdo.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string doId)
+      public async Task<T> Get<T>(string doId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -68,13 +69,13 @@ namespace ws3dx.dsdo.core.service
       // Description: Add new derived output. Summary: Add new derived output.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Create<T>(ICreateDerivedOutput request)
+      public async Task<T> Create<T>(ICreateDerivedOutput request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs";
 
-         return await PostRequestMultiple<T, ICreateDerivedOutput>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, ICreateDerivedOutput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -96,7 +97,7 @@ namespace ws3dx.dsdo.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/DownloadTicket";
 
-         return await PostRequest<IDownloadFileTicketResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IDownloadFileTicketResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -115,7 +116,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/Locate";
 
-         return await PostRequestMultiple<T, ILocateDerivedOutputs>(resourceURI, request);
+         return await PostGroup<T, ItemSet<T>, ILocateDerivedOutputs>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -140,7 +141,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/Sync";
 
-         return await PostRequestMultiple<T, IUpdateDerivedOutput>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, IUpdateDerivedOutput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

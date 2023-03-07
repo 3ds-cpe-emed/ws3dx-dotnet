@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -100,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            IChangeStateOutput ret = await maturityService.ChangeState(request);
+            IEnumerable<IChangeState> ret = await maturityService.ChangeState(request);
 
             Assert.IsNotNull(ret);
          }

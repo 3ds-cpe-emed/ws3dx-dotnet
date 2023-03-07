@@ -20,6 +20,5 @@ namespace ws3dx.project.task.data
    public interface IScopes
    {
       public IList<IScope> Data { get; set; }
-
    }
 }

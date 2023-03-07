@@ -38,6 +38,5 @@ namespace ws3dx.dsxcad.data
       public string Description { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }
-
    }
 }

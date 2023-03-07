@@ -23,6 +23,5 @@ namespace ws3dx.project.task.data
       public string Firstname { get; set; }
 
       public string Lastname { get; set; }
-
    }
 }

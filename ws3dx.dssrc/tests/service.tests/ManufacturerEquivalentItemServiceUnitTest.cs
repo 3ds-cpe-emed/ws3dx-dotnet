@@ -97,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IManufacturerEquivalentItemMask> ret = await manufacturerEquivalentItemService.Get(meiId);
+         IManufacturerEquivalentItemMask ret = await manufacturerEquivalentItemService.Get(meiId);
 
          Assert.IsNotNull(ret);
       }

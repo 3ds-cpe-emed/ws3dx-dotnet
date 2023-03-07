@@ -97,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IInstructionInstanceMask> ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceMask>(mfgOperationId, instanceId);
+         IInstructionInstanceMask ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -108,7 +108,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IInstructionInstanceDetailMask> ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceDetailMask>(mfgOperationId, instanceId);
+         IInstructionInstanceDetailMask ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceDetailMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -130,7 +130,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ISecondaryCapableResourceMask> ret = await mfgOperationService.GetSecondaryCapableResource(mfgOperationId, secondaryResourceId);
+         ISecondaryCapableResourceMask ret = await mfgOperationService.GetSecondaryCapableResource(mfgOperationId, secondaryResourceId);
 
          Assert.IsNotNull(ret);
       }
@@ -141,7 +141,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ITimeConstraintMask> ret = await mfgOperationService.GetTimeConstraint(mfgOperationId, timeConstraintId);
+         ITimeConstraintMask ret = await mfgOperationService.GetTimeConstraint(mfgOperationId, timeConstraintId);
 
          Assert.IsNotNull(ret);
       }
@@ -152,7 +152,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAssignedRequirementMask> ret = await mfgOperationService.GetAssignedRequirement(mfgOperationId, pID);
+         IAssignedRequirementMask ret = await mfgOperationService.GetAssignedRequirement(mfgOperationId, pID);
 
          Assert.IsNotNull(ret);
       }
@@ -163,7 +163,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectInstanceMask> ret = await mfgOperationService.GetDataCollectInstance<IDataCollectInstanceMask>(mfgOperationId, instanceId);
+         IDataCollectInstanceMask ret = await mfgOperationService.GetDataCollectInstance<IDataCollectInstanceMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -174,7 +174,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectInstanceDetailMask> ret = await mfgOperationService.GetDataCollectInstance<IDataCollectInstanceDetailMask>(mfgOperationId, instanceId);
+         IDataCollectInstanceDetailMask ret = await mfgOperationService.GetDataCollectInstance<IDataCollectInstanceDetailMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -185,7 +185,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IScopeRequirementSpecMask> ret = await mfgOperationService.GetScopeRequirementSpec(mfgOperationId, pID);
+         IScopeRequirementSpecMask ret = await mfgOperationService.GetScopeRequirementSpec(mfgOperationId, pID);
 
          Assert.IsNotNull(ret);
       }
@@ -218,7 +218,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ISignOffInstanceMask> ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceMask>(mfgOperationId, instanceId);
+         ISignOffInstanceMask ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -229,7 +229,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ISignOffInstanceDetailMask> ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceDetailMask>(mfgOperationId, instanceId);
+         ISignOffInstanceDetailMask ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceDetailMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -262,7 +262,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IPrimaryCapableResourceMask> ret = await mfgOperationService.GetPrimaryCapableResource(mfgOperationId, primaryResourceId);
+         IPrimaryCapableResourceMask ret = await mfgOperationService.GetPrimaryCapableResource(mfgOperationId, primaryResourceId);
 
          Assert.IsNotNull(ret);
       }
@@ -317,7 +317,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlertInstanceMask> ret = await mfgOperationService.GetAlertInstance<IAlertInstanceMask>(mfgOperationId, instanceId);
+         IAlertInstanceMask ret = await mfgOperationService.GetAlertInstance<IAlertInstanceMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -328,7 +328,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlertInstanceDetailMask> ret = await mfgOperationService.GetAlertInstance<IAlertInstanceDetailMask>(mfgOperationId, instanceId);
+         IAlertInstanceDetailMask ret = await mfgOperationService.GetAlertInstance<IAlertInstanceDetailMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -339,7 +339,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectPlanInstanceMask> ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, instanceId);
+         IDataCollectPlanInstanceMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -350,7 +350,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectPlanInstanceDetailMask> ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, instanceId);
+         IDataCollectPlanInstanceDetailMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -394,7 +394,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgOperationInstanceMask> ret = await mfgOperationService.GetInstance(mfgOperationId, mfgOperationInstanceId);
+         IMfgOperationInstanceMask ret = await mfgOperationService.GetInstance(mfgOperationId, mfgOperationInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -460,7 +460,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgOperationMask> ret = await mfgOperationService.Get<IMfgOperationMask>(mfgOperationId);
+         IMfgOperationMask ret = await mfgOperationService.Get<IMfgOperationMask>(mfgOperationId);
 
          Assert.IsNotNull(ret);
       }
@@ -471,7 +471,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgOperationDetailMask> ret = await mfgOperationService.Get<IMfgOperationDetailMask>(mfgOperationId);
+         IMfgOperationDetailMask ret = await mfgOperationService.Get<IMfgOperationDetailMask>(mfgOperationId);
 
          Assert.IsNotNull(ret);
       }
@@ -509,7 +509,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -575,7 +575,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IMfgOperationMask> ret = await mfgOperationService.Create<IMfgOperationMask>(request);
+            IMfgOperationMask ret = await mfgOperationService.Create<IMfgOperationMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -596,7 +596,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IMfgOperationDetailMask> ret = await mfgOperationService.Create<IMfgOperationDetailMask>(request);
+            IMfgOperationDetailMask ret = await mfgOperationService.Create<IMfgOperationDetailMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -618,7 +618,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
 
             Assert.IsNotNull(ret);
          }

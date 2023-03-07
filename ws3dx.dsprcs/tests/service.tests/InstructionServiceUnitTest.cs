@@ -22,9 +22,11 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -95,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          InstructionService instructionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IInstructionMask> ret = await instructionService.Get<IInstructionMask>(instructionId);
+         IInstructionMask ret = await instructionService.Get<IInstructionMask>(instructionId);
 
          Assert.IsNotNull(ret);
       }
@@ -106,9 +108,63 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          InstructionService instructionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IInstructionDetailMask> ret = await instructionService.Get<IInstructionDetailMask>(instructionId);
+         IInstructionDetailMask ret = await instructionService.Get<IInstructionDetailMask>(instructionId);
 
          Assert.IsNotNull(ret);
+      }
+
+      [TestCase("instruction")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         InstructionService instructionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IInstructionMask> ret = await instructionService.Search<IInstructionMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("instruction", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         InstructionService instructionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IInstructionMask> ret = await instructionService.Search<IInstructionMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (IInstructionMask instruction in ret)
+            {
+               IInstructionDetailMask instructionDetail = await instructionService.Get<IInstructionDetailMask>(instruction.Id);
+
+               Assert.AreEqual(instruction.Id, instructionDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
    }
 }

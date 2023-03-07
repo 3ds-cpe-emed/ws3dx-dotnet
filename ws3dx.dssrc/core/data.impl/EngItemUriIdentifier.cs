@@ -24,6 +24,5 @@ namespace ws3dx.dssrc.core.data.impl
       [JsonPropertyName("engItem")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier EngItem { get; set; }
-
    }
 }

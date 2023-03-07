@@ -40,6 +40,5 @@ namespace ws3dx.project.task.data
       public IList<ITaskAssignee> Assignees { get; set; }
 
       public IList<ITaskCalendar> Calendar { get; set; }
-
    }
 }

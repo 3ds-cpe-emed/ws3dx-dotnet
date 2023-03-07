@@ -43,6 +43,5 @@ namespace ws3dx.project.project.data
       public string Project { get; set; }
 
       public string Organization { get; set; }
-
    }
 }

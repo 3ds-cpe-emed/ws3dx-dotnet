@@ -21,6 +21,5 @@ namespace ws3dx.dsxcad.data
    public interface IVisualizationFileMask
    {
       public IAuthoringFile VisualizationFile { get; set; }
-
    }
 }

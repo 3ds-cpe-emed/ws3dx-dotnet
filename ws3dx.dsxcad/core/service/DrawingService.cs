@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsxcad.core.service
 {
@@ -63,6 +65,17 @@ namespace ws3dx.dsxcad.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
+
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -81,7 +94,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:VisualizationFile";
 
-         return await GetMultiple<IVisualizationFileMask>(resourceURI);
+         return await GetGroup<IVisualizationFileMask, NlsLabeledItemSet<IVisualizationFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -96,13 +109,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string drawingId)
+      public async Task<T> Get<T>(string drawingId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADDrawingMask), typeof(IXCADDrawingDetailMask), typeof(IXCADDrawingEnterpriseDetailMask), typeof(IXCADDrawingBasicMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -121,7 +134,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dslc:changeControl";
 
-         return await GetMultiple<IChangeControlMask>(resourceURI);
+         return await GetGroup<IChangeControlMask, NlsLabeledItemSet<IChangeControlMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -141,7 +154,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:xCADAttributes";
 
-         return await GetMultiple<IXCADAttributesMask>(resourceURI);
+         return await GetGroup<IXCADAttributesMask, NlsLabeledItemSet<IXCADAttributesMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -161,7 +174,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:AuthoringFile";
 
-         return await GetMultiple<IAuthoringFileMask>(resourceURI);
+         return await GetGroup<IAuthoringFileMask, NlsLabeledItemSet<IAuthoringFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -181,7 +194,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -202,7 +215,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:AuthoringFile/CheckinTicket";
 
-         return await PostRequest<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -217,13 +230,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Attach<T>(string drawingId, IAttachXCADDrawing request)
+      public async Task<T> Attach<T>(string drawingId, IAttachXCADDrawing request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADDrawingMask), typeof(IXCADDrawingDetailMask), typeof(IXCADDrawingEnterpriseDetailMask), typeof(IXCADDrawingBasicMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Attach";
 
-         return await PostRequestMultiple<T, IAttachXCADDrawing>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IAttachXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -242,7 +255,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dslc:changeControl";
 
-         return await PostRequest<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -255,11 +268,11 @@ namespace ws3dx.dsxcad.core.service
       // Locate the drawing from an Engineering Item
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> Locate(ILocateXCADDrawing request)
+      public async Task<IEnumerable<IRelatedId>> Locate(ILocateXCADDrawing request)
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/Locate";
 
-         return await PostRequestMultiple<IEnterpriseItemNumberMask, ILocateXCADDrawing>(resourceURI, request);
+         return await PostGroup<IRelatedId, NlsLabeledItemSet<IRelatedId>, ILocateXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -274,13 +287,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string drawingId, IModifyXCADDrawingWithFiles request)
+      public async Task<T> Modify<T>(string drawingId, IModifyXCADDrawingWithFiles request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADDrawingMask), typeof(IXCADDrawingDetailMask), typeof(IXCADDrawingEnterpriseDetailMask), typeof(IXCADDrawingBasicMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Modify";
 
-         return await PostRequestMultiple<T, IModifyXCADDrawingWithFiles>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IModifyXCADDrawingWithFiles>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -300,7 +313,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:VisualizationFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -316,13 +329,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Detach<T>(string drawingId, IDetachXCADDrawing request)
+      public async Task<T> Detach<T>(string drawingId, IDetachXCADDrawing request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADDrawingMask), typeof(IXCADDrawingDetailMask), typeof(IXCADDrawingEnterpriseDetailMask), typeof(IXCADDrawingBasicMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Detach";
 
-         return await PostRequestMultiple<T, IDetachXCADDrawing>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IDetachXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -337,13 +350,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string drawingId, IModifyXCADDrawing request)
+      public async Task<T> Modify<T>(string drawingId, IModifyXCADDrawing request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADDrawingMask), typeof(IXCADDrawingDetailMask), typeof(IXCADDrawingEnterpriseDetailMask), typeof(IXCADDrawingBasicMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}";
 
-         return await PatchGroup<T, IModifyXCADDrawing>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IModifyXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -397,7 +410,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing";
 
-         return await PostRequestMultiple<T, ICreateXCADDrawings>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADDrawings>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -413,7 +426,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing";
 
-         return await PostRequestMultiple<T, ICreateXCADDrawingsFromTemplate>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADDrawingsFromTemplate>(resourceURI, request);
       }
    }
 }

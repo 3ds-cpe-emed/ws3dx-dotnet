@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -100,7 +101,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGetSharingOutput ret = await sharingService.GetSharing(request);
+            IEnumerable<ISharing> ret = await sharingService.GetSharing(request);
 
             Assert.IsNotNull(ret);
          }

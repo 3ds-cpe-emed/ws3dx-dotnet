@@ -50,6 +50,5 @@ namespace ws3dx.dsadvfilter.core.data.impl
       [JsonPropertyName("filter")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IAdvancedFilter Filter { get; set; }
-
    }
 }

@@ -48,7 +48,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}CheckinTicket";
 
-         return await PostRequest<ICheckinTicket, IPreCheckin>(resourceURI, request);
+         return await PostIndividual<ICheckinTicket, IPreCheckin>(resourceURI, request);
       }
    }
 }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dspfl.data;
 
 namespace ws3dx.dspfl.core.service
@@ -47,11 +48,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IVariantMask>> GetVariant(string variantId)
+      public async Task<IVariantMask> GetVariant(string variantId)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}";
 
-         return await GetMultiple<IVariantMask>(resourceURI);
+         return await GetIndividual<IVariantMask, NlsLabeledItemSet<IVariantMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}/dspfl:VariantValue";
 
-         return await GetMultiple<IValueMask>(resourceURI);
+         return await GetGroup<IValueMask, NlsLabeledItemSet<IValueMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant";
 
-         return await GetMultiple<IVariantMask>(resourceURI);
+         return await GetGroup<IVariantMask, NlsLabeledItemSet<IVariantMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -108,7 +109,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}/dspfl:VariantValue/{ID}";
 
-         return await GetMultiple<IValueMask>(resourceURI);
+         return await GetGroup<IValueMask, NlsLabeledItemSet<IValueMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -127,7 +128,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}/dspfl:VariantValue";
 
-         return await PostRequestMultiple<IValueMask, ICreateVariantValue>(resourceURI, request);
+         return await PostGroup<IValueMask, NlsLabeledItemSet<IValueMask>, ICreateVariantValue>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -143,7 +144,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant";
 
-         return await PostRequestMultiple<IVariantMask, ICreateVariant>(resourceURI, request);
+         return await PostGroup<IVariantMask, IEnumerable<IVariantMask>, ICreateVariant>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -165,7 +166,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}/dspfl:VariantValue/{ID}/modify";
 
-         return await PostRequestMultiple<IValueMask, IOrdered>(resourceURI, request);
+         return await PostGroup<IValueMask, NlsLabeledItemSet<IValueMask>, IOrdered>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -183,11 +184,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IValueMask>> UpdateValue(string variantId, string ID, IUpdateVariantValue request)
+      public async Task<IValueMask> UpdateValue(string variantId, string ID, IUpdateVariantValue request)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}/dspfl:VariantValue/{ID}";
 
-         return await PatchGroup<IValueMask, IUpdateVariantValue>(resourceURI, request);
+         return await PatchIndividual<IValueMask, NlsLabeledItemSet<IValueMask>, IUpdateVariantValue>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -202,11 +203,11 @@ namespace ws3dx.dspfl.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IVariantMask>> UpdateVariant(string variantId, IUpdateVariant request)
+      public async Task<IVariantMask> UpdateVariant(string variantId, IUpdateVariant request)
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:Variant/{variantId}";
 
-         return await PatchGroup<IVariantMask, IUpdateVariant>(resourceURI, request);
+         return await PatchIndividual<IVariantMask, NlsLabeledItemSet<IVariantMask>, IUpdateVariant>(resourceURI, request);
       }
    }
 }

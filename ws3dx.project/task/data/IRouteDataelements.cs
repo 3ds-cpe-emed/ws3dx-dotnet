@@ -19,6 +19,5 @@ namespace ws3dx.project.task.data
    public interface IRouteDataelements
    {
       public string Name { get; set; }
-
    }
 }

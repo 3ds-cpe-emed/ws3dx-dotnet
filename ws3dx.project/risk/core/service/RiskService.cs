@@ -19,13 +19,14 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.project.risk.data;
+using ws3dx.utils.search;
 
 namespace ws3dx.project.risk.core.service
 {
    // SDK Service
    public class RiskService : SearchService
    {
-      private const string BASE_RESOURCE = "/resources/v1/modeler//";
+      private const string BASE_RESOURCE = "/resources/v1/modeler";
 
       public RiskService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
@@ -44,7 +45,7 @@ namespace ws3dx.project.risk.core.service
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { };
+         return new List<Type>() { typeof(IResponseRiskData) };
       }
 
       protected override string GetSearchSkipParamName()
@@ -61,7 +62,21 @@ namespace ws3dx.project.risk.core.service
       {
          return "searchStr";
       }
+
+      public async Task<IList<IResponseRiskData>> Search(SearchQuery searchQuery)
+      {
+         return await Search<IResponseRiskData, IResponseRisk>(searchQuery);
+      }
+
+      public async Task<IList<IResponseRiskData>> Search(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<IResponseRiskData, IResponseRisk>(searchQuery, _skip, _top);
+      }
+
+      protected override string GetMaskParamName() { return null; }
+
       #endregion
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (GET) /risks
@@ -85,7 +100,7 @@ namespace ws3dx.project.risk.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseRisk> GetRisks(string owned, string assigned, int completed, string state)
+      public async Task<IList<IResponseRiskData>> GetRisks(string owned, string assigned, int completed, string state)
       {
          string resourceURI = $"{GetBaseResource()}/risks";
 
@@ -95,7 +110,7 @@ namespace ws3dx.project.risk.core.service
          queryParams.Add("completed", completed.ToString());
          queryParams.Add("state", state);
 
-         return await GetUnique<IResponseRisk>(resourceURI, queryParams: queryParams);
+         return await GetGroup<IResponseRiskData, IResponseRisk>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -107,11 +122,11 @@ namespace ws3dx.project.risk.core.service
       // Description: Summary: Get Risk item details.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseRisk> GetRisk(string riskId)
+      public async Task<IResponseRiskData> GetRisk(string riskId)
       {
          string resourceURI = $"{GetBaseResource()}/risks/{riskId}";
 
-         return await GetUnique<IResponseRisk>(resourceURI);
+         return await GetIndividual<IResponseRiskData, IResponseRisk>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -123,11 +138,11 @@ namespace ws3dx.project.risk.core.service
       // Description: Summary: Create Risks.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseRisk> CreateRisk(IRisk risks)
+      public async Task<IList<IResponseRiskData>> CreateRisk(IRisk risks)
       {
          string resourceURI = $"{GetBaseResource()}/risks";
 
-         return await PostRequest<IResponseRisk, IRisk>(resourceURI, risks);
+         return await PostGroup<IResponseRiskData, IResponseRisk, IRisk>(resourceURI, risks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -139,11 +154,11 @@ namespace ws3dx.project.risk.core.service
       // Description: Summary: Modify a Risk item.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseRisk> UpdateRisk(string riskId, IRisk risks)
+      public async Task<IResponseRiskData> UpdateRisk(string riskId, IRisk risks)
       {
          string resourceURI = $"{GetBaseResource()}/risks/{riskId}";
 
-         return await PutIndividual<IResponseRisk, IRisk>(resourceURI, risks);
+         return await PutIndividual<IResponseRiskData, IResponseRisk, IRisk>(resourceURI, risks);
       }
 
       //---------------------------------------------------------------------------------------------

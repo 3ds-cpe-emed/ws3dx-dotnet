@@ -18,9 +18,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
+using ws3dx.utils.search;
 
 namespace ws3dx.dsxcad.core.service
 {
@@ -63,6 +65,16 @@ namespace ws3dx.dsxcad.core.service
       {
          return "$searchStr";
       }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+      }
+
+      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+      }
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
@@ -80,7 +92,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:VisualizationFile";
 
-         return await GetMultiple<IVisualizationFileMask>(resourceURI);
+         return await GetGroup<IVisualizationFileMask, NlsLabeledItemSet<IVisualizationFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -95,11 +107,11 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> GetEnterpriseItemNumber(string partId)
+      public async Task<IEnterpriseItemNumberMask> GetEnterpriseItemNumber(string partId)
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dseng:EnterpriseReference";
 
-         return await GetMultiple<IEnterpriseItemNumberMask>(resourceURI);
+         return await GetIndividual<IEnterpriseItemNumberMask, NlsLabeledItemSet<IEnterpriseItemNumberMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -114,13 +126,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string partId)
+      public async Task<T> Get<T>(string partId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADPartMask), typeof(IXCADPartBasicMask), typeof(IXCADPartEnterpriseDetailMask), typeof(IXCADPartDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -139,7 +151,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dslc:changeControl";
 
-         return await GetMultiple<IChangeControlMask>(resourceURI);
+         return await GetGroup<IChangeControlMask, ItemSet<IChangeControlMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -155,11 +167,11 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IXCADAttributesMask>> GetXCADAttributes(string partId)
+      public async Task<IXCADAttributesMask> GetXCADAttributes(string partId)
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:xCADAttributes";
 
-         return await GetMultiple<IXCADAttributesMask>(resourceURI);
+         return await GetIndividual<IXCADAttributesMask, NlsLabeledItemSet<IXCADAttributesMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -179,7 +191,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:AuthoringFile";
 
-         return await GetMultiple<IAuthoringFileMask>(resourceURI);
+         return await GetGroup<IAuthoringFileMask, NlsLabeledItemSet<IAuthoringFileMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -199,7 +211,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -218,7 +230,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dslc:changeControl";
 
-         return await PostRequest<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -233,13 +245,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Attach<T>(string partId, IAttachXCADPart request)
+      public async Task<T> Attach<T>(string partId, IAttachXCADPart request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADPartMask), typeof(IXCADPartBasicMask), typeof(IXCADPartEnterpriseDetailMask), typeof(IXCADPartDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/Attach";
 
-         return await PostRequestMultiple<T, IAttachXCADPart>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IAttachXCADPart>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -260,7 +272,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:AuthoringFile/CheckinTicket";
 
-         return await PostRequest<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -275,13 +287,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string partId, IModifyXCADPartWithFiles request)
+      public async Task<T> Modify<T>(string partId, IModifyXCADPartWithFiles request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADPartMask), typeof(IXCADPartBasicMask), typeof(IXCADPartEnterpriseDetailMask), typeof(IXCADPartDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/Modify";
 
-         return await PostRequestMultiple<T, IModifyXCADPartWithFiles>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IModifyXCADPartWithFiles>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -301,7 +313,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dsxcad:VisualizationFile/DownloadTicket";
 
-         return await PostRequest<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -316,11 +328,11 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> AddEnterpriseItemNumber(string partId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> AddEnterpriseItemNumber(string partId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dseng:EnterpriseReference";
 
-         return await PostRequestMultiple<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PostIndividual<IEnterpriseItemNumberMask, NlsLabeledItemSet<IEnterpriseItemNumberMask>, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -336,13 +348,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Detach<T>(string partId, IDetachXCADPart request)
+      public async Task<T> Detach<T>(string partId, IDetachXCADPart request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADPartMask), typeof(IXCADPartBasicMask), typeof(IXCADPartEnterpriseDetailMask), typeof(IXCADPartDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/Detach";
 
-         return await PostRequestMultiple<T, IDetachXCADPart>(resourceURI, request);
+         return await PostIndividual<T, NlsLabeledItemSet<T>, IDetachXCADPart>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -358,11 +370,11 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IEnterpriseItemNumberMask>> ModifyEnterpriseItemNumber(string partId, IEnterpriseItemNumber request)
+      public async Task<IEnterpriseItemNumberMask> ModifyEnterpriseItemNumber(string partId, IEnterpriseItemNumber request)
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}/dseng:EnterpriseReference";
 
-         return await PatchGroup<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         return await PatchIndividual<IEnterpriseItemNumberMask, NlsLabeledItemSet<IEnterpriseItemNumberMask>, IEnterpriseItemNumber>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -377,13 +389,13 @@ namespace ws3dx.dsxcad.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string partId, IModifyXCADPart request)
+      public async Task<T> Modify<T>(string partId, IModifyXCADPart request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADPartMask), typeof(IXCADPartBasicMask), typeof(IXCADPartEnterpriseDetailMask), typeof(IXCADPartDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Part/{partId}";
 
-         return await PatchGroup<T, IModifyXCADPart>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IModifyXCADPart>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -437,7 +449,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part";
 
-         return await PostRequestMultiple<T, ICreateXCADParts>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADParts>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -453,7 +465,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Part";
 
-         return await PostRequestMultiple<T, ICreateXCADPartsFromTemplate>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADPartsFromTemplate>(resourceURI, request);
       }
    }
 }

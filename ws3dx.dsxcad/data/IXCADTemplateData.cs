@@ -35,6 +35,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Persistencytype { get; set; }
-
    }
 }

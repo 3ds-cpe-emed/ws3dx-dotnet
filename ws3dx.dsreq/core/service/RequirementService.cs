@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsreq.data;
 
 namespace ws3dx.dsreq.core.service
@@ -47,11 +48,11 @@ namespace ws3dx.dsreq.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<INewRequirementMask>> Get(string reqId)
+      public async Task<INewRequirementMask> Get(string reqId)
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:Requirement/{reqId}";
 
-         return await GetMultiple<INewRequirementMask>(resourceURI);
+         return await GetIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -67,7 +68,7 @@ namespace ws3dx.dsreq.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:Requirement";
 
-         return await PostRequestMultiple<INewRequirementMask, ICreateRequirement>(resourceURI, request);
+         return await PostGroup<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, ICreateRequirement>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -83,11 +84,11 @@ namespace ws3dx.dsreq.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<INewRequirementMask>> Update(string reqId, IModifyRequirement request)
+      public async Task<INewRequirementMask> Update(string reqId, IModifyRequirement request)
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:Requirement/{reqId}";
 
-         return await PatchGroup<INewRequirementMask, IModifyRequirement>(resourceURI, request);
+         return await PatchIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, IModifyRequirement>(resourceURI, request);
       }
    }
 }

@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -43,11 +44,11 @@ namespace ws3dx.dslc.core.service
       // Description: Reserve a list of objects by the current user. Summary: Reserve objects
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IReservationOutput> Reserve(IIdInput request)
+      public async Task<IEnumerable<IReservation>> Reserve(IIdInput request)
       {
          string resourceURI = $"{GetBaseResource()}reservation/reserve";
 
-         return await PostRequest<IReservationOutput, IIdInput>(resourceURI, request);
+         return await PostGroup<IReservation, IReservationOutput, IIdInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -59,11 +60,11 @@ namespace ws3dx.dslc.core.service
       // Description: Uneserve a list of objects by the current user. Summary: Uneserve objects
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IReservationOutput> Unreserve(IIdInput request)
+      public async Task<IEnumerable<IReservation>> Unreserve(IIdInput request)
       {
          string resourceURI = $"{GetBaseResource()}reservation/unreserve";
 
-         return await PostRequest<IReservationOutput, IIdInput>(resourceURI, request);
+         return await PostGroup<IReservation, IReservationOutput, IIdInput>(resourceURI, request);
       }
    }
 }

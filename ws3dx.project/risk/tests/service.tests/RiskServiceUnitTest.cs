@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -24,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.project.risk.core.data.impl;
 using ws3dx.project.risk.core.service;
 using ws3dx.project.risk.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -93,24 +95,38 @@ namespace NUnitTestProject
          return __riskService;
       }
 
-      [TestCase("", "", 0, "")]
+      // <param name="owned">
+      // Description: Retrieve Risks owned by me (Default: true)
+      // </param>
+      // <param name="assigned">
+      // Description: Retrieve Risks assigned to me (Default: true)
+      // </param>
+      // <param name="completed">
+      // Description: Retrieve Risks that have been Completed within this range (none, all, number of days; 
+      // Default: none)
+      // </param>
+      // <param name="state">
+      // Description: Filter Risks by one or more comma separated states: Create, Assign, Active, Review, 
+      // Complete (Default: all but Complete)
+      // </param>
+      [TestCase("false", "false", 0, "Create,Assign,Active,Review,Complete")]
       public async Task GetRisks(string owned, string assigned, int completed, string state)
       {
          IPassportAuthentication passport = await Authenticate();
 
          RiskService riskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseRisk ret = await riskService.GetRisks(owned, assigned, completed, state);
+         IList<IResponseRiskData> ret = await riskService.GetRisks(owned, assigned, completed, state);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("DFD6F085F3530000630E19F8000A7EE0")]
       public async Task GetRisk(string riskId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          RiskService riskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseRisk ret = await riskService.GetRisk(riskId);
+         IResponseRiskData ret = await riskService.GetRisk(riskId);
 
          Assert.IsNotNull(ret);
       }
@@ -122,11 +138,41 @@ namespace NUnitTestProject
 
          RiskService riskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         //MANDATORY for Create: { probability, impact, effectiveDate, }
+         IRiskData riskData = new RiskData();
+         riskData.Title = "New Risk Created from Web Services";
+         riskData.Probability = "1"; //1-Rare, 2-Unlikely, 3-Possible, 4-Likely, and 5-Almost Certain
+         riskData.Impact = "2";
+         riskData.EffectiveDate = "2023-03-18"; //?
+         riskData.ContextId = "41DF2E16046E00006278C0B200000350";
+
          IRisk risks = new Risk();
+         risks.Data = new List<IRiskData>();
+         risks.Data.Add(riskData);
 
          try
          {
-            IResponseRisk ret = await riskService.CreateRisk(risks);
+            IList<IResponseRiskData> ret = await riskService.CreateRisk(risks);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("risk")]
+      public async Task SearchRisks(string _searchCriteria)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         RiskService riskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         try
+         {
+            IList<IResponseRiskData> ret = await riskService.Search(new SearchByFreeText(_searchCriteria));
 
             Assert.IsNotNull(ret);
          }

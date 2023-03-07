@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -24,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.project.program.core.data.impl;
 using ws3dx.project.program.core.service;
 using ws3dx.project.program.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -88,35 +90,35 @@ namespace NUnitTestProject
          return __programService;
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C04E0018B05A")]
       public async Task GetProgram(string programId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProgramService programService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProgram ret = await programService.GetProgram(programId);
+         IResponseProgramData ret = await programService.GetProgram(programId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
+      [TestCase]
       public async Task GetAllPrograms()
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProgramService programService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProgram ret = await programService.GetAllPrograms();
+         IList<IResponseProgramData> ret = await programService.GetAllPrograms();
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("41DF2E16046E00006278C04E0018B05A")]
       public async Task GetProgramProjects(string programId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProgramService programService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IResponseProject ret = await programService.GetProgramProjects(programId);
+         IList<IResponseProgramData> ret = await programService.GetProgramProjects(programId);
 
          Assert.IsNotNull(ret);
       }
@@ -132,7 +134,27 @@ namespace NUnitTestProject
 
          try
          {
-            IResponseProgram ret = await programService.CreateProgram(programs);
+            IList<IResponseProgramData> ret = await programService.CreateProgram(programs);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("AAA27")]
+      public async Task SearchProgram(string _searchCriteria)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ProgramService programService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         try
+         {
+            IList<IResponseProgramData> ret = await programService.Search(new SearchByFreeText(_searchCriteria));
 
             Assert.IsNotNull(ret);
          }

@@ -95,7 +95,7 @@ namespace NUnitTestProject
          return __productService;
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("solidworks", 0, 50)]
       public async Task Search_Paged_IXCADProductMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -106,10 +106,23 @@ namespace NUnitTestProject
 
          IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText, skip, top);
 
+         int i = 0;
+
+         foreach (IXCADProductMask productFound in ret)
+         {
+            IXCADProductDetailMask product = await productService.Get<IXCADProductDetailMask>(productFound.Id);
+
+            Assert.AreEqual(productFound.Id, product.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
+
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("solidworks")]
       public async Task Search_Full_IXCADProductMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -183,7 +196,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADProductMask> ret = await productService.Get<IXCADProductMask>(productId);
+         IXCADProductMask ret = await productService.Get<IXCADProductMask>(productId);
 
          Assert.IsNotNull(ret);
       }
@@ -194,7 +207,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADProductDetailMask> ret = await productService.Get<IXCADProductDetailMask>(productId);
+         IXCADProductDetailMask ret = await productService.Get<IXCADProductDetailMask>(productId);
 
          Assert.IsNotNull(ret);
       }
@@ -205,7 +218,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Get<IXCADProductEnterpriseDetailMask>(productId);
+         IXCADProductEnterpriseDetailMask ret = await productService.Get<IXCADProductEnterpriseDetailMask>(productId);
 
          Assert.IsNotNull(ret);
       }

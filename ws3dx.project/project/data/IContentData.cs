@@ -54,6 +54,5 @@ namespace ws3dx.project.project.data
       public IList<string> Hasfiles { get; set; }
 
       public IList<string> FileExtension { get; set; }
-
    }
 }

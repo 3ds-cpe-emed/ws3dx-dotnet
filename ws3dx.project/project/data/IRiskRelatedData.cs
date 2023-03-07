@@ -24,6 +24,5 @@ namespace ws3dx.project.project.data
       public IList<IRiskOwner> OwnerInfo { get; set; }
 
       public IList<IRiskRpn> Rpn { get; set; }
-
    }
 }

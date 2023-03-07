@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public IPredecessorData Data { get; set; }
 
       public IPredecessorRelatedElements RelatedElements { get; set; }
-
    }
 }

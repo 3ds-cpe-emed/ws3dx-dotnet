@@ -22,9 +22,11 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -95,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          SignOffService signOffService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ISignOffMask> ret = await signOffService.Get<ISignOffMask>(signOffId);
+         ISignOffMask ret = await signOffService.Get<ISignOffMask>(signOffId);
 
          Assert.IsNotNull(ret);
       }
@@ -106,9 +108,64 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          SignOffService signOffService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ISignOffDetailMask> ret = await signOffService.Get<ISignOffDetailMask>(signOffId);
+         ISignOffDetailMask ret = await signOffService.Get<ISignOffDetailMask>(signOffId);
 
          Assert.IsNotNull(ret);
+      }
+
+
+      [TestCase("sign")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         SignOffService signOffService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<ISignOffMask> ret = await signOffService.Search<ISignOffMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("sign", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         SignOffService signOffService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<ISignOffMask> ret = await signOffService.Search<ISignOffMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (ISignOffMask signOff in ret)
+            {
+               ISignOffDetailMask signOffDetail = await signOffService.Get<ISignOffDetailMask>(signOff.Id);
+
+               Assert.AreEqual(signOff.Id, signOffDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
    }
 }

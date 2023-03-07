@@ -22,9 +22,11 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -106,7 +108,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectRowMask> ret = await dataCollectPlanService.GetDataCollectRow(dataCollectPlanId, dataCollectRowId);
+         IDataCollectRowMask ret = await dataCollectPlanService.GetDataCollectRow(dataCollectPlanId, dataCollectRowId);
 
          Assert.IsNotNull(ret);
       }
@@ -117,7 +119,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Get<IDataCollectPlanMask>(dataCollectPlanId);
+         IDataCollectPlanMask ret = await dataCollectPlanService.Get<IDataCollectPlanMask>(dataCollectPlanId);
 
          Assert.IsNotNull(ret);
       }
@@ -128,9 +130,63 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectPlanDetailMask> ret = await dataCollectPlanService.Get<IDataCollectPlanDetailMask>(dataCollectPlanId);
+         IDataCollectPlanDetailMask ret = await dataCollectPlanService.Get<IDataCollectPlanDetailMask>(dataCollectPlanId);
 
          Assert.IsNotNull(ret);
+      }
+
+      [TestCase("plan")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("plan", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (IDataCollectPlanMask dataCollectPlan in ret)
+            {
+               IDataCollectPlanDetailMask dataCollectPlanDetail = await dataCollectPlanService.Get<IDataCollectPlanDetailMask>(dataCollectPlan.Id);
+
+               Assert.AreEqual(dataCollectPlan.Id, dataCollectPlanDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
    }
 }

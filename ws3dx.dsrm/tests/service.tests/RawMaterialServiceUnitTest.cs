@@ -98,7 +98,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RawMaterialService rawMaterialService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IEnterpriseItemNumberMask> ret = await rawMaterialService.GetEnterpriseItemNumber(rawMatId);
+         IEnterpriseItemNumberMask ret = await rawMaterialService.GetEnterpriseItemNumber(rawMatId);
 
          Assert.IsNotNull(ret);
       }
@@ -120,7 +120,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RawMaterialService rawMaterialService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IRawMaterialMask> ret = await rawMaterialService.Get<IRawMaterialMask>(rawMatId);
+         IRawMaterialMask ret = await rawMaterialService.Get<IRawMaterialMask>(rawMatId);
 
          Assert.IsNotNull(ret);
       }
@@ -131,12 +131,12 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          RawMaterialService rawMaterialService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IRawMaterialDetailMask> ret = await rawMaterialService.Get<IRawMaterialDetailMask>(rawMatId);
+         IRawMaterialDetailMask ret = await rawMaterialService.Get<IRawMaterialDetailMask>(rawMatId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("raw", 0, 50)]
       public async Task Search_Paged_IRawMaterialMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -146,8 +146,19 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IRawMaterialMask> ret = await rawMaterialService.Search<IRawMaterialMask>(searchByFreeText, skip, top);
-
          Assert.IsNotNull(ret);
+
+         int i = 0;
+         foreach (IRawMaterialMask rawMaterialMask in ret)
+         {
+            IRawMaterialDetailMask rawMaterialDetailMask = await rawMaterialService.Get<IRawMaterialDetailMask>(rawMaterialMask.Id);
+
+            Assert.AreEqual(rawMaterialMask.Id, rawMaterialDetailMask.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
       }
 
       [TestCase("search")]
@@ -177,7 +188,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("raw")]
       public async Task Search_Full_IRawMaterialDetailMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -224,7 +235,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IRawMaterialMask> ret = await rawMaterialService.Create<IRawMaterialMask>(request);
+            IRawMaterialMask ret = await rawMaterialService.Create<IRawMaterialMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -245,7 +256,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IRawMaterialDetailMask> ret = await rawMaterialService.Create<IRawMaterialDetailMask>(request);
+            IRawMaterialDetailMask ret = await rawMaterialService.Create<IRawMaterialDetailMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -267,7 +278,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IEnterpriseItemNumberMask> ret = await rawMaterialService.AddEnterpriseItemNumber(rawMatId, request);
+            IEnterpriseItemNumberMask ret = await rawMaterialService.AddEnterpriseItemNumber(rawMatId, request);
 
             Assert.IsNotNull(ret);
          }

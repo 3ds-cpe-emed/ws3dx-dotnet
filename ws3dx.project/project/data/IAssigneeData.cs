@@ -25,6 +25,5 @@ namespace ws3dx.project.project.data
       public string Lastname { get; set; }
 
       public string Email { get; set; }
-
    }
 }

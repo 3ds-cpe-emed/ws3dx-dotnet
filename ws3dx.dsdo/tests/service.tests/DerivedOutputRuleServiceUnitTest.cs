@@ -111,7 +111,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DerivedOutputRuleService derivedOutputRuleService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDerivedOutputRuleDetailMask> ret = await derivedOutputRuleService.Get(iD);
+         IDerivedOutputRuleDetailMask ret = await derivedOutputRuleService.Get(iD);
 
          Assert.IsNotNull(ret);
       }

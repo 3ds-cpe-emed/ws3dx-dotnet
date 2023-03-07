@@ -51,6 +51,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("relateddata")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IOwnerRelatedData RelatedData { get; set; }
-
    }
 }

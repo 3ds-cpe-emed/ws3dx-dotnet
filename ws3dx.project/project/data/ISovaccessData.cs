@@ -27,6 +27,5 @@ namespace ws3dx.project.project.data
       public string Access { get; set; }
 
       public string Comment { get; set; }
-
    }
 }

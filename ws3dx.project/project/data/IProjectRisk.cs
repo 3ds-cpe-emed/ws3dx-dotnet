@@ -33,6 +33,5 @@ namespace ws3dx.project.project.data
       public IRiskData Data { get; set; }
 
       public IRiskRelatedData RelatedData { get; set; }
-
    }
 }

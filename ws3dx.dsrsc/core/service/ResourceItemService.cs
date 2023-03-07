@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsrsc.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -53,13 +54,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetInstance<T>(string resourceItemId, string instanceId)
+      public async Task<T> GetInstance<T>(string resourceItemId, string instanceId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceItemInstanceMask), typeof(IResourceItemInstanceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/{resourceItemId}/dsrsc:ResourceItemInstance/{instanceId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -74,13 +75,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> Get<T>(string resItemId)
+      public async Task<T> Get<T>(string resItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceItemMask), typeof(IResourceItemDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/{resItemId}";
 
-         return await GetMultiple<T>(resourceURI);
+         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -112,7 +113,7 @@ namespace ws3dx.dsrsc.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetMultiple<T>(resourceURI, queryParams: queryParams);
+         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -134,7 +135,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/{resItemId}/dsrsc:ResourceItemInstance";
 
-         return await PostRequestMultiple<T, ICreateResourceItemInstances>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateResourceItemInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -152,7 +153,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem";
 
-         return await PostRequestMultiple<T, ICreateResourceItems>(resourceURI, request);
+         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateResourceItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -169,7 +170,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/bulkUpdate";
 
-         return await PostRequest<IGenericResponse, IBulkUpdateResourceItem[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IBulkUpdateResourceItem[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -188,13 +189,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> UpdateInstance<T>(string resourceItemId, string instanceId, IUpdateResourceItemInstance request)
+      public async Task<T> UpdateInstance<T>(string resourceItemId, string instanceId, IUpdateResourceItemInstance request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceItemInstanceMask), typeof(IResourceItemInstanceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/{resourceItemId}/dsrsc:ResourceItemInstance/{instanceId}";
 
-         return await PatchGroup<T, IUpdateResourceItemInstance>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateResourceItemInstance>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -210,13 +211,13 @@ namespace ws3dx.dsrsc.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string resItemId, IUpdateResourceItem request)
+      public async Task<T> Update<T>(string resItemId, IUpdateResourceItem request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceItemMask), typeof(IResourceItemDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsrsc:ResourceItem/{resItemId}";
 
-         return await PatchGroup<T, IUpdateResourceItem>(resourceURI, request);
+         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateResourceItem>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

@@ -27,6 +27,7 @@ using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -97,7 +98,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgOperationInstanceMask> ret = await mfgProcessService.GetMfgOperationInstance(mfgProcessId, mfgOperationInstanceId);
+         IMfgOperationInstanceMask ret = await mfgProcessService.GetMfgOperationInstance(mfgProcessId, mfgOperationInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -108,7 +109,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<ITimeConstraintMask> ret = await mfgProcessService.GetTimeConstraint(mfgProcessId, timeConstraintId);
+         ITimeConstraintMask ret = await mfgProcessService.GetTimeConstraint(mfgProcessId, timeConstraintId);
 
          Assert.IsNotNull(ret);
       }
@@ -141,7 +142,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgProcessInstanceMask> ret = await mfgProcessService.GetInstance<IMfgProcessInstanceMask>(mfgProcessId, mfgProcessInstanceId);
+         IMfgProcessInstanceMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceMask>(mfgProcessId, mfgProcessInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -152,7 +153,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgProcessInstanceDetailMask> ret = await mfgProcessService.GetInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId);
+         IMfgProcessInstanceDetailMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -185,7 +186,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Get<IMfgProcessMask>(mfgProcessId);
+         IMfgProcessMask ret = await mfgProcessService.Get<IMfgProcessMask>(mfgProcessId);
 
          Assert.IsNotNull(ret);
       }
@@ -196,7 +197,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgProcessDetailMask> ret = await mfgProcessService.Get<IMfgProcessDetailMask>(mfgProcessId);
+         IMfgProcessDetailMask ret = await mfgProcessService.Get<IMfgProcessDetailMask>(mfgProcessId);
 
          Assert.IsNotNull(ret);
       }
@@ -207,7 +208,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IMfgProcessStructureModelViewIndexMask> ret = await mfgProcessService.Get<IMfgProcessStructureModelViewIndexMask>(mfgProcessId);
+         IMfgProcessStructureModelViewIndexMask ret = await mfgProcessService.Get<IMfgProcessStructureModelViewIndexMask>(mfgProcessId);
 
          Assert.IsNotNull(ret);
       }
@@ -251,7 +252,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IPrimaryCapableResourceMask> ret = await mfgProcessService.GetPrimaryCapableResource(mfgProcessId, primaryResourceId);
+         IPrimaryCapableResourceMask ret = await mfgProcessService.GetPrimaryCapableResource(mfgProcessId, primaryResourceId);
 
          Assert.IsNotNull(ret);
       }
@@ -284,7 +285,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IPreAssignedWorkCenterMask> ret = await mfgProcessService.GetPreAssignedWorkCenter(mfgProcessId, workCenterId);
+         IPreAssignedWorkCenterMask ret = await mfgProcessService.GetPreAssignedWorkCenter(mfgProcessId, workCenterId);
 
          Assert.IsNotNull(ret);
       }
@@ -306,7 +307,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IItemSpecificationMask> ret = await mfgProcessService.GetItemSpecification(mfgProcessId, itemSpecificationId);
+         IItemSpecificationMask ret = await mfgProcessService.GetItemSpecification(mfgProcessId, itemSpecificationId);
 
          Assert.IsNotNull(ret);
       }
@@ -452,7 +453,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await mfgProcessService.AttachConfiguration(mfgProcessId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await mfgProcessService.AttachConfiguration(mfgProcessId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -539,7 +540,7 @@ namespace NUnitTestProject
 
          try
          {
-            ITypedUriIdentifierResources ret = await mfgProcessService.DetachConfiguration(mfgProcessId, request);
+            IEnumerable<ITypedUriIdentifier> ret = await mfgProcessService.DetachConfiguration(mfgProcessId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -649,6 +650,60 @@ namespace NUnitTestProject
             IUnitaryEvolutionEffectivity ret = await mfgProcessService.UnsetInstanceEvolutionEffectivity(mfgProcessId, mfgProcessInstanceId);
 
             Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("process")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Search<IMfgProcessMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("process", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Search<IMfgProcessMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (IMfgProcessMask process in ret)
+            {
+               IMfgProcessDetailMask processDetail = await mfgProcessService.Get<IMfgProcessDetailMask>(process.Id);
+
+               Assert.AreEqual(process.Id, processDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
          }
          catch (HttpResponseException _ex)
          {

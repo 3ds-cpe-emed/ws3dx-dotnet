@@ -50,6 +50,5 @@ namespace ws3dx.project.task.data
       public IList<string> FileExtension { get; set; }
 
       public string LinkURL { get; set; }
-
    }
 }

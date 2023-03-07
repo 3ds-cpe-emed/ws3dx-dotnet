@@ -24,6 +24,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("calendar")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IOwnerCalendar> Calendar { get; set; }
-
    }
 }

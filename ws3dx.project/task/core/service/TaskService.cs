@@ -24,7 +24,7 @@ namespace ws3dx.project.task.core.service
    // SDK Service
    public class TaskService : EnoviaBaseService
    {
-      private const string BASE_RESOURCE = "/resources/v1/modeler//";
+      private const string BASE_RESOURCE = "/resources/v1/modeler";
 
       public TaskService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
@@ -35,6 +35,8 @@ namespace ws3dx.project.task.core.service
          return BASE_RESOURCE;
       }
 
+      protected override string GetMaskParamName() { return null; }
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (GET) /tasks/{taskId}/references
@@ -44,11 +46,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Get the task references.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseReference> GetTaskReferences(string taskId)
+      public async Task<IList<IResponseReferenceData>> GetTaskReferences(string taskId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await GetUnique<IResponseReference>(resourceURI);
+         return await GetGroup<IResponseReferenceData, IResponseReference>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -60,11 +62,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Retrive an existing task information.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseTask> GetTask(string taskId)
+      public async Task<IResponseTaskData> GetTask(string taskId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
 
-         return await GetUnique<IResponseTask>(resourceURI);
+         return await GetIndividual<IResponseTaskData, IResponseTask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -76,11 +78,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Retrieve assignees for an existing task.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseAssignee> GetTaskAssignees(string taskId)
+      public async Task<IList<IResponseAssigneeData>> GetTaskAssignees(string taskId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await GetUnique<IResponseAssignee>(resourceURI);
+         return await GetGroup<IResponseAssigneeData, IResponseAssignee>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -92,11 +94,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Retrieve tha tasks context/scope object(s).
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseScope> GetTaskScopes(string taskId)
+      public async Task<IList<IResponseScopeData>> GetTaskScopes(string taskId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
 
-         return await GetUnique<IResponseScope>(resourceURI);
+         return await GetGroup<IResponseScopeData, IResponseScope>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -108,11 +110,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Retrieve tha tasks for a given context/scope object.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseTask> GetTasksWithScope(string scopeId)
+      public async Task<IList<IResponseTaskData>> GetTasksWithScope(string scopeId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/scopeId/{scopeId}";
 
-         return await GetUnique<IResponseTask>(resourceURI);
+         return await GetGroup<IResponseTaskData, IResponseTask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -124,11 +126,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Get the task deliverables.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseDeliverable> GetTaskDeliverables(string taskId)
+      public async Task<IList<IResponseDeliverableData>> GetTaskDeliverables(string taskId)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await GetUnique<IResponseDeliverable>(resourceURI);
+         return await GetGroup<IResponseDeliverableData, IResponseDeliverable>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -143,14 +145,16 @@ namespace ws3dx.project.task.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseTask> GetUserTasks(bool showProjectTasks)
+      public async Task<IList<IResponseTaskData>> GetUserTasks(bool showProjectTasks)
       {
          string resourceURI = $"{GetBaseResource()}/tasks";
 
-         IDictionary<string, string> queryParams = new Dictionary<string, string>();
-         queryParams.Add("showProjectTasks", showProjectTasks.ToString());
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "showProjectTasks", showProjectTasks.ToString() }
+         };
 
-         return await GetUnique<IResponseTask>(resourceURI, queryParams: queryParams);
+         return await GetGroup<IResponseTaskData, IResponseTask>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -162,11 +166,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Get the user assigned tasks for the specified task objects.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseTask> GetTasks()
+      public async Task<IList<IResponseTaskData>> GetTasks(string _idPayload)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/ids";
 
-         return await PostRequest<IResponseTask>(resourceURI);
+         return await PostGroup<IResponseTaskData, IResponseTask, string>(resourceURI, _idPayload);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -178,11 +182,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Add new assignees for an existing task.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseAssignee> AddAssigneesToTask(string taskId, IAssignees assignees)
+      public async Task<IList<IResponseAssigneeData>> AddAssigneesToTask(string taskId, IAssignees assignees)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await PostRequest<IResponseAssignee, IAssignees>(resourceURI, assignees);
+         return await PostGroup<IResponseAssigneeData, IResponseAssignee, IAssignees>(resourceURI, assignees);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -194,11 +198,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Add new task references.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseReference> AddReferencesToTask(string taskId, IReferences references)
+      public async Task<IList<IResponseReferenceData>> AddReferencesToTask(string taskId, IReferences references)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await PostRequest<IResponseReference, IReferences>(resourceURI, references);
+         return await PostGroup<IResponseReferenceData, IResponseReference, IReferences>(resourceURI, references);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -210,11 +214,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Add new task deliverables.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseDeliverable> AddDeliverablesToTask(string taskId, IDeliverables deliverables)
+      public async Task<IList<IResponseDeliverableData>> AddDeliverablesToTask(string taskId, IDeliverables deliverables)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await PostRequest<IResponseDeliverable, IDeliverables>(resourceURI, deliverables);
+         return await PostGroup<IResponseDeliverableData, IResponseDeliverable, IDeliverables>(resourceURI, deliverables);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -226,11 +230,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Add specified Scope object(s) to the specific Task object.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseScope> AddScopesToTask(string taskId, IScopes scopes)
+      public async Task<IList<IResponseScopeData>> AddScopesToTask(string taskId, IScopes scopes)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
 
-         return await PostRequest<IResponseScope, IScopes>(resourceURI, scopes);
+         return await PostGroup<IResponseScopeData, IResponseScope, IScopes>(resourceURI, scopes);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -242,11 +246,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Create new task(s).
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseTask> CreateTask(ITasks tasks)
+      public async Task<IList<IResponseTaskData>> CreateTask(ITasks tasks)
       {
          string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PostRequest<IResponseTask, ITasks>(resourceURI, tasks);
+         return await PostGroup<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -258,11 +262,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Update an existing task information.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseTask> UpdateTask(string taskId, ITasks tasks)
+      public async Task<IResponseTaskData> UpdateTask(string taskId, ITasks tasks)
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
 
-         return await PutIndividual<IResponseTask, ITasks>(resourceURI, tasks);
+         return await PutIndividual<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -274,11 +278,11 @@ namespace ws3dx.project.task.core.service
       // Description: Summary: Modify existing task(s).
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IResponseTask> UpdateTasks(ITasks tasks)
+      public async Task<IList<IResponseTaskData>> UpdateTasks(ITasks tasks)
       {
          string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PutIndividual<IResponseTask, ITasks>(resourceURI, tasks);
+         return await PutGroup<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------

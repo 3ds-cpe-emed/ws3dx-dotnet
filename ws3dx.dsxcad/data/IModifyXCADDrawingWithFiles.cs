@@ -51,6 +51,5 @@ namespace ws3dx.dsxcad.data
       public IFileData VisualizationFile { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }
-
    }
 }

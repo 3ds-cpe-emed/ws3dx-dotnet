@@ -22,9 +22,11 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -95,7 +97,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DataCollectService dataCollectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectMask> ret = await dataCollectService.Get<IDataCollectMask>(dataCollectId);
+         IDataCollectMask ret = await dataCollectService.Get<IDataCollectMask>(dataCollectId);
 
          Assert.IsNotNull(ret);
       }
@@ -106,9 +108,63 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          DataCollectService dataCollectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IDataCollectDetailMask> ret = await dataCollectService.Get<IDataCollectDetailMask>(dataCollectId);
+         IDataCollectDetailMask ret = await dataCollectService.Get<IDataCollectDetailMask>(dataCollectId);
 
          Assert.IsNotNull(ret);
+      }
+
+      [TestCase("data")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DataCollectService dataCollectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IDataCollectMask> ret = await dataCollectService.Search<IDataCollectMask>(searchByFreeText);
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("data", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         DataCollectService dataCollectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         try
+         {
+            IEnumerable<IDataCollectMask> ret = await dataCollectService.Search<IDataCollectMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+
+            int i = 0;
+            foreach (IDataCollectMask dataCollect in ret)
+            {
+               IDataCollectDetailMask dataCollectDetail = await dataCollectService.Get<IDataCollectDetailMask>(dataCollect.Id);
+
+               Assert.AreEqual(dataCollect.Id, dataCollectDetail.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
    }
 }

@@ -27,6 +27,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("PALId")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string PALId { get; set; }
-
    }
 }

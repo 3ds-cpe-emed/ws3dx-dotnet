@@ -26,6 +26,5 @@ namespace ws3dx.dsxcad.data
       // </summary>
       //----------------------------------------------------------------
       public string Filename { get; set; }
-
    }
 }

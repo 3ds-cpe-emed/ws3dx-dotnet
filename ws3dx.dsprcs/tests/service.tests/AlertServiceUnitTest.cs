@@ -25,6 +25,7 @@ using ws3dx.core.data.impl;
 using ws3dx.core.redirection;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
@@ -95,7 +96,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          AlertService alertService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlertMask> ret = await alertService.Get<IAlertMask>(alertId);
+         IAlertMask ret = await alertService.Get<IAlertMask>(alertId);
 
          Assert.IsNotNull(ret);
       }
@@ -106,7 +107,47 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          AlertService alertService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAlertDetailMask> ret = await alertService.Get<IAlertDetailMask>(alertId);
+         IAlertDetailMask ret = await alertService.Get<IAlertDetailMask>(alertId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("alert")]
+      public async Task Search_Full_Mask(string search)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         AlertService alertService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("alert", 0, 50)]
+      public async Task Search_Paged_Mask(string search, int skip, int top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         AlertService alertService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText, skip, top);
+
+         int i = 0;
+         foreach (IAlertMask alert in ret)
+         {
+            IAlertDetailMask alertDetail = await alertService.Get<IAlertDetailMask>(alert.Id);
+
+            Assert.AreEqual(alert.Id, alertDetail.Id);
+
+            i++;
+
+            if (i > 20) return;
+         }
 
          Assert.IsNotNull(ret);
       }

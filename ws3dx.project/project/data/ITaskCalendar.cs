@@ -31,6 +31,5 @@ namespace ws3dx.project.project.data
       public string Cestamp { get; set; }
 
       public ICalendarData Data { get; set; }
-
    }
 }

@@ -19,6 +19,5 @@ namespace ws3dx.project.project.data
    public interface IProjectRelatedElements
    {
       public string SequenceOrder { get; set; }
-
    }
 }

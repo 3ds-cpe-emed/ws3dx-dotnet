@@ -55,6 +55,5 @@ namespace ws3dx.project.project.data
       public string DeleteAccess { get; set; }
 
       public string Project { get; set; }
-
    }
 }

@@ -95,6 +95,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("project")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Project { get; set; }
-
    }
 }

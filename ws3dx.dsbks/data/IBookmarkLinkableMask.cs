@@ -22,6 +22,5 @@ namespace ws3dx.dsbks.data
    public interface IBookmarkLinkableMask
    {
       public ITypedUriIdentifier Bookmark { get; set; }
-
    }
 }

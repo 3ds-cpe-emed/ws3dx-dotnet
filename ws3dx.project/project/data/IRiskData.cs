@@ -73,6 +73,5 @@ namespace ws3dx.project.project.data
       public string FromConnectAccess { get; set; }
 
       public string ToConnectAccess { get; set; }
-
    }
 }

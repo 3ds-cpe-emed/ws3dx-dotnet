@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
+using ws3dx.data.collection.impl;
 using ws3dx.dsreq.data;
 
 namespace ws3dx.dsreq.core.service
@@ -48,11 +49,11 @@ namespace ws3dx.dsreq.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<INewRequirementSpecificationMask>> Get(string reqSpecId)
+      public async Task<INewRequirementSpecificationMask> Get(string reqSpecId)
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:RequirementSpecification/{reqSpecId}";
 
-         return await GetMultiple<INewRequirementSpecificationMask>(resourceURI);
+         return await GetIndividual<INewRequirementSpecificationMask, NlsLabeledItemSet<INewRequirementSpecificationMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ namespace ws3dx.dsreq.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:RequirementSpecification";
 
-         return await PostRequestMultiple<INewRequirementSpecificationMask, ICreateRequirementSpecification>(resourceURI, request);
+         return await PostGroup<INewRequirementSpecificationMask, NlsLabeledItemSet<INewRequirementSpecificationMask>, ICreateRequirementSpecification>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -85,11 +86,11 @@ namespace ws3dx.dsreq.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<INewRequirementSpecificationMask>> Update(string reqSpecId, IModifyRequirementSpecification request)
+      public async Task<INewRequirementSpecificationMask> Update(string reqSpecId, IModifyRequirementSpecification request)
       {
          string resourceURI = $"{GetBaseResource()}/dsreq:RequirementSpecification/{reqSpecId}";
 
-         return await PatchGroup<INewRequirementSpecificationMask, IModifyRequirementSpecification>(resourceURI, request);
+         return await PatchIndividual<INewRequirementSpecificationMask, NlsLabeledItemSet<INewRequirementSpecificationMask>, IModifyRequirementSpecification>(resourceURI, request);
       }
    }
 }

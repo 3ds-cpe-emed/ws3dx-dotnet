@@ -27,6 +27,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("value")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Value { get; set; }
-
    }
 }

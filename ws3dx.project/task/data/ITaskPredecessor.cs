@@ -31,6 +31,5 @@ namespace ws3dx.project.task.data
       public IPredecessorsDataelements Data { get; set; }
 
       public IPredecessorsRelelements RelatedElements { get; set; }
-
    }
 }

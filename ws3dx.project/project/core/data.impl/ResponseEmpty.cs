@@ -31,6 +31,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("csrf")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ICsrf Csrf { get; set; }
-
    }
 }

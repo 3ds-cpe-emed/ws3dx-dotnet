@@ -48,7 +48,7 @@ namespace ws3dx.dseng.core.service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dseng:detachEngInstances";
 
-         return await PostRequest<IGenericResponse, string[]>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
       }
    }
 }

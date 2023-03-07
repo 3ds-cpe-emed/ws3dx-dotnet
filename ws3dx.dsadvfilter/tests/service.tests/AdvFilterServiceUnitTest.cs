@@ -94,7 +94,7 @@ namespace NUnitTestProject
          };
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("filter", 0, 50)]
       public async Task Search_Paged_IAdvancedFilterMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -103,9 +103,31 @@ namespace NUnitTestProject
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IAdvancedFilterMask> ret = await advFilterService.Search<IAdvancedFilterMask>(searchByFreeText, skip, top);
+         try
+         {
+            IEnumerable<IAdvancedFilterMask> ret = await advFilterService.Search<IAdvancedFilterMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
 
-         Assert.IsNotNull(ret);
+            int i = 0;
+
+            foreach (IAdvancedFilterMask filterFound in ret)
+            {
+               IAdvancedFilterMask filter0 = await advFilterService.Get<IAdvancedFilterMask>(filterFound.Id);
+
+               //IAdvancedFilterSpecMask filter1 = await advFilterService.Get<IAdvancedFilterSpecMask>(filterFound.Id);
+
+               Assert.AreEqual(filter0.Id, filterFound.Id);
+
+               i++;
+
+               if (i > 20) return;
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
 
       [TestCase("search")]
@@ -155,7 +177,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          AdvFilterService advFilterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAdvancedFilterMask> ret = await advFilterService.Get<IAdvancedFilterMask>(iD);
+         IAdvancedFilterMask ret = await advFilterService.Get<IAdvancedFilterMask>(iD);
 
          Assert.IsNotNull(ret);
       }
@@ -166,7 +188,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          AdvFilterService advFilterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IAdvancedFilterSpecMask> ret = await advFilterService.Get<IAdvancedFilterSpecMask>(iD);
+         IAdvancedFilterSpecMask ret = await advFilterService.Get<IAdvancedFilterSpecMask>(iD);
 
          Assert.IsNotNull(ret);
       }

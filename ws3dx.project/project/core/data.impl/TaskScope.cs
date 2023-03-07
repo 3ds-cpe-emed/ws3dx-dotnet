@@ -47,6 +47,5 @@ namespace ws3dx.project.project.core.data.impl
       [JsonPropertyName("dataelements")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IScopeData Data { get; set; }
-
    }
 }
