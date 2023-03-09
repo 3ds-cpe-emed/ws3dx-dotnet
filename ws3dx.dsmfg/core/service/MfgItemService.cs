@@ -161,7 +161,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement/{requirementId}";
 
-         return await GetIndividual<IAssignedRequirementMask>(resourceURI);
+         return await GetIndividual<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
