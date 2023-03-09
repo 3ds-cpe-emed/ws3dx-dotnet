@@ -371,8 +371,24 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
          //Send the Request
-         HttpResponseMessage response = await PostAsync(_requestUri, _queryParameters: queryParams, _headers: headerParams);
+         HttpResponseMessage response = await PostAsync(_requestUri, _queryParameters: requestQueryParams, _headers: headerParams);
 
          //Handle the Response
          if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -390,10 +406,26 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
          string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.CREATE);
 
          //Send the Request
-         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: queryParams, _headers: headerParams);
+         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: requestQueryParams, _headers: headerParams);
 
          //Handle the Response
          if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -411,10 +443,26 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
          string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.CREATE);
 
          //Send the Request
-         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: queryParams, _headers: headerParams);
+         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: requestQueryParams, _headers: headerParams);
 
          //Handle the Response
          if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -436,10 +484,26 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
          string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.CREATE);
 
          //Send the Request
-         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: queryParams, _headers: headerParams);
+         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: requestQueryParams, _headers: headerParams);
 
          //Handle the Response
          if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -457,10 +521,26 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (HasMask)
+         {
+            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+         }
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
          string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.CREATE);
 
          //Send the Request
-         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: queryParams, _headers: headerParams);
+         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: requestQueryParams, _headers: headerParams);
 
          //Handle the Response
          if (response.StatusCode != System.Net.HttpStatusCode.OK)
