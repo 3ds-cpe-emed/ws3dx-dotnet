@@ -177,3 +177,6 @@ The [MIT license](https://opensource.org/license/mit/) applies to all of the art
 
 ## Credits
 Dassault Systèmes Euromed CPE
+
+## Disclaimer
+As described by the associated open source MIT license, <ins>this is not an official dassault systèmes product</ins>, so, it's not subject, under any circumstance, to official Dassault Systèmes warranty or support.
