@@ -91,7 +91,7 @@ namespace NUnitTestProject
          return __requirementSpecificationService;
       }
 
-      [TestCase("")]
+      [TestCase("44C2728F273000006414E802000DBEFC")]
       public async Task Get(string reqSpecId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -110,6 +110,17 @@ namespace NUnitTestProject
          RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ICreateRequirementSpecification request = new CreateRequirementSpecification();
+
+         request.Items = new List<INewRequirementSpecification>();
+
+         INewRequirementSpecification newRequirementSpec = new NewRequirementSpecification();
+         newRequirementSpec.Type = "Requirement Specification";
+         newRequirementSpec.VersionName = "1.1";
+         newRequirementSpec.Attributes = new NewRequirementSpecificationData();
+         newRequirementSpec.Attributes.Title = "New Requirement Specification from Web Services";
+         newRequirementSpec.Attributes.Description = "New Requirement Specification  Description from Web Services";
+
+         request.Items.Add(newRequirementSpec);
 
          try
          {

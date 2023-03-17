@@ -91,15 +91,24 @@ namespace NUnitTestProject
          return __requirementService;
       }
 
-      [TestCase("")]
+      [TestCase("C39D5789C074000061F02D540012B654")]
       public async Task Get(string reqId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          RequirementService requirementService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         INewRequirementMask ret = await requirementService.Get(reqId);
 
-         Assert.IsNotNull(ret);
+         try
+         {
+            INewRequirementMask ret = await requirementService.Get(reqId);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
 
       [TestCase()]
@@ -110,6 +119,17 @@ namespace NUnitTestProject
          RequirementService requirementService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ICreateRequirement request = new CreateRequirement();
+
+         request.Items = new List<INewRequirement>();
+
+         INewRequirement newRequirement = new NewRequirement();
+         newRequirement.Type = "Requirement";
+         newRequirement.VersionName = "1.1";
+         newRequirement.Attributes = new NewRequirementData();
+         newRequirement.Attributes.Title = "New Requirement from Web Services";
+         newRequirement.Attributes.Description = "New Requirement Description from Web Services";
+
+         request.Items.Add(newRequirement);
 
          try
          {

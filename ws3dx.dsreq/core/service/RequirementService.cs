@@ -36,6 +36,9 @@ namespace ws3dx.dsreq.core.service
          return BASE_RESOURCE;
       }
 
+      // SR-00971020
+      //	IR-1028857
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (GET) /dsreq:Requirement/{ID}
@@ -50,7 +53,7 @@ namespace ws3dx.dsreq.core.service
       //---------------------------------------------------------------------------------------------		
       public async Task<INewRequirementMask> Get(string reqId)
       {
-         string resourceURI = $"{GetBaseResource()}/dsreq:Requirement/{reqId}";
+         string resourceURI = $"{GetBaseResource()}dsreq:Requirement/{reqId}";
 
          return await GetIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>>(resourceURI);
       }
@@ -66,7 +69,7 @@ namespace ws3dx.dsreq.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<INewRequirementMask>> Create(ICreateRequirement request)
       {
-         string resourceURI = $"{GetBaseResource()}/dsreq:Requirement";
+         string resourceURI = $"{GetBaseResource()}dsreq:Requirement";
 
          return await PostGroup<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, ICreateRequirement>(resourceURI, request);
       }
@@ -86,7 +89,7 @@ namespace ws3dx.dsreq.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<INewRequirementMask> Update(string reqId, IModifyRequirement request)
       {
-         string resourceURI = $"{GetBaseResource()}/dsreq:Requirement/{reqId}";
+         string resourceURI = $"{GetBaseResource()}dsreq:Requirement/{reqId}";
 
          return await PatchIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, IModifyRequirement>(resourceURI, request);
       }
