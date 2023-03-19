@@ -207,7 +207,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("AAA27")]
+      [TestCase("New Engineering item created from Web Service")]
       public async Task Search_Full_IEngItemDefaultMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -556,7 +556,13 @@ namespace NUnitTestProject
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewEngItem newEngItem = new NewEngItem();
+         newEngItem.Attributes = new NewEngItemAttributes();
+         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+
          ICreateEngItem request = new CreateEngItem();
+         request.Items = new List<INewEngItem>();
+         request.Items.Add(newEngItem);
 
          try
          {
@@ -577,13 +583,24 @@ namespace NUnitTestProject
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewEngItem newEngItem = new NewEngItem();
+         newEngItem.Attributes = new NewEngItemAttributes();
+         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+
          ICreateEngItem request = new CreateEngItem();
+         request.Items = new List<INewEngItem>();
+         request.Items.Add(newEngItem);
 
          try
          {
             IEnumerable<IEngItemCommonMask> ret = await engItemService.Create<IEngItemCommonMask>(request);
 
             Assert.IsNotNull(ret);
+
+            foreach (IEngItemCommonMask engItem in ret)
+            {
+               Assert.IsNotNull(engItem.Usage);
+            }
          }
          catch (HttpResponseException _ex)
          {
@@ -598,13 +615,24 @@ namespace NUnitTestProject
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewEngItem newEngItem = new NewEngItem();
+         newEngItem.Attributes = new NewEngItemAttributes();
+         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+
          ICreateEngItem request = new CreateEngItem();
+         request.Items = new List<INewEngItem>();
+         request.Items.Add(newEngItem);
 
          try
          {
             IEnumerable<IEngItemDetailsMask> ret = await engItemService.Create<IEngItemDetailsMask>(request);
 
             Assert.IsNotNull(ret);
+            foreach (IEngItemDetailsMask engItem in ret)
+            {
+               Assert.IsNotNull(engItem.EnterpriseAttributes);
+               Assert.IsNotNull(engItem.EnterpriseReference);
+            }
          }
          catch (HttpResponseException _ex)
          {
@@ -619,13 +647,24 @@ namespace NUnitTestProject
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewEngItem newEngItem = new NewEngItem();
+         newEngItem.Attributes = new NewEngItemAttributes();
+         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+
          ICreateEngItem request = new CreateEngItem();
+         request.Items = new List<INewEngItem>();
+         request.Items.Add(newEngItem);
 
          try
          {
             IEnumerable<IEngItemConfigMask> ret = await engItemService.Create<IEngItemConfigMask>(request);
 
             Assert.IsNotNull(ret);
+
+            foreach (IEngItemConfigMask engItem in ret)
+            {
+               Assert.IsNotNull(engItem.ConfigurationContext);
+            }
          }
          catch (HttpResponseException _ex)
          {
@@ -676,20 +715,22 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task AttachEnterpriseItemNumber(string engItemId)
+      [TestCase("3784C760967A00006409AA5B000160E9", "AAA27:0000002")]
+      public async Task AttachEnterpriseItemNumber(string engItemId, string enterpriseItemNumber)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          IEnterpriseItemNumber request = new EnterpriseItemNumber();
+         request.PartNumber = enterpriseItemNumber;
 
          try
          {
             IEnterpriseItemNumberMask ret = await engItemService.AttachEnterpriseItemNumber(engItemId, request);
 
             Assert.IsNotNull(ret);
+            Assert.AreEqual(enterpriseItemNumber, ret.PartNumber);
          }
          catch (HttpResponseException _ex)
          {
@@ -817,6 +858,41 @@ namespace NUnitTestProject
             IResponseUnsetEvolutionEffectivity ret = await engItemService.UnsetInstanceEvolutionEffectivity(engItemId, instanceId);
 
             Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+      [TestCase()]
+      public async Task Create_IEngItemDetailsMask_WithEnterpriseReference()
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         INewEngItem newEngItem = new NewEngItem();
+         newEngItem.Attributes = new NewEngItemAttributes();
+         newEngItem.Attributes.EnterpriseReference = new EnterpriseItemNumber();
+
+         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+         newEngItem.Attributes.EnterpriseReference.PartNumber = "AAA27:000001";
+
+         ICreateEngItem request = new CreateEngItem();
+         request.Items = new List<INewEngItem>();
+         request.Items.Add(newEngItem);
+
+         try
+         {
+            IEnumerable<IEngItemDetailsMask> ret = await engItemService.Create<IEngItemDetailsMask>(request);
+
+            Assert.IsNotNull(ret);
+            foreach (IEngItemDetailsMask engItem in ret)
+            {
+               Assert.IsNotNull(engItem.EnterpriseAttributes);
+               Assert.IsNotNull(engItem.EnterpriseReference);
+            }
          }
          catch (HttpResponseException _ex)
          {
