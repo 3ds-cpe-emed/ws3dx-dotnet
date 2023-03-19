@@ -124,14 +124,16 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create()
+      [TestCase("New Issue AAA27", "Issue created from Web Services")]
+      public async Task Create(string issueTitle, string issueDescription)
       {
          IPassportAuthentication passport = await Authenticate();
 
          IssueService issueService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ICreateIssue request = new CreateIssue();
+         request.Title = issueTitle;
+         request.Description = issueDescription;
 
          try
          {
