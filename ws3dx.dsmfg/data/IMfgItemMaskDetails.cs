@@ -46,7 +46,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsLotNumberRequired { get; set; }
+      public bool? IsLotNumberRequired { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -55,7 +55,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsSerialNumberRequired { get; set; }
+      public bool? IsSerialNumberRequired { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -64,7 +64,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedCost { get; set; }
+      public double? EstimatedCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -91,7 +91,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedWeight { get; set; }
+      public double? EstimatedWeight { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -118,7 +118,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool SpareManufacturedItem { get; set; }
+      public bool? SpareManufacturedItem { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -136,7 +136,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double DepthOfFeature { get; set; }
+      public double? DepthOfFeature { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -145,7 +145,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double DiameterOfFeature { get; set; }
+      public double? DiameterOfFeature { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

@@ -100,7 +100,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsIgnored { get; set; }
+      public bool? IsIgnored { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

@@ -104,7 +104,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isLotNumberRequired")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsLotNumberRequired { get; set; }
+      public bool? IsLotNumberRequired { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -115,7 +115,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isSerialNumberRequired")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsSerialNumberRequired { get; set; }
+      public bool? IsSerialNumberRequired { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -126,7 +126,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedCost { get; set; }
+      public double? EstimatedCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -159,7 +159,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedWeight")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedWeight { get; set; }
+      public double? EstimatedWeight { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -192,7 +192,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("spareManufacturedItem")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool SpareManufacturedItem { get; set; }
+      public bool? SpareManufacturedItem { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -214,7 +214,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("depthOfFeature")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double DepthOfFeature { get; set; }
+      public double? DepthOfFeature { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -225,7 +225,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("depthOfFeature")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double DiameterOfFeature { get; set; }
+      public double? DiameterOfFeature { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

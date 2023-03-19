@@ -47,7 +47,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      public bool Computed { get; set; }
+      public bool? Computed { get; set; }
 
       public ITypedUriIdentifier ResultingEngItem { get; set; }
 

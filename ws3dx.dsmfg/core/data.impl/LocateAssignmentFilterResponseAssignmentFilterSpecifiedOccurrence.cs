@@ -22,7 +22,7 @@ namespace ws3dx.dsmfg.core.data.impl
    {
       [JsonPropertyName("instancePosition")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int InstancePosition { get; set; }
+      public int? InstancePosition { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

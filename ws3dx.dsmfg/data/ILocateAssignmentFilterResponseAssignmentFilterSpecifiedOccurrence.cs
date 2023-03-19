@@ -18,7 +18,7 @@ namespace ws3dx.dsmfg.data
 {
    public interface ILocateAssignmentFilterResponseAssignmentFilterSpecifiedOccurrence
    {
-      public int InstancePosition { get; set; }
+      public int? InstancePosition { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

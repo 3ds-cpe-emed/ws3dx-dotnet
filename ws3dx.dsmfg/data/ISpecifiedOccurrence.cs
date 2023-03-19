@@ -19,7 +19,7 @@ namespace ws3dx.dsmfg.data
 {
    public interface ISpecifiedOccurrence
    {
-      public int InstancePosition { get; set; }
+      public int? InstancePosition { get; set; }
 
       public ITypedUriIdentifier InstanceObject { get; set; }
    }

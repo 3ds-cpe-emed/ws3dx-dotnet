@@ -40,7 +40,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("inputValue")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double InputValue { get; set; }
+      public double? InputValue { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

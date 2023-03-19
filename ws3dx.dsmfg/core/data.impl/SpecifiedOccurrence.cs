@@ -20,7 +20,7 @@ namespace ws3dx.dsmfg.core.data.impl
 {
    public class SpecifiedOccurrence : ISpecifiedOccurrence
    {
-      public int InstancePosition { get; set; }
+      public int? InstancePosition { get; set; }
 
       public ITypedUriIdentifier InstanceObject { get; set; }
    }

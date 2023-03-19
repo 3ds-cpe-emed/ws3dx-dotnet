@@ -34,7 +34,7 @@ namespace ws3dx.dsmfg.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double InputValue { get; set; }
+      public double? InputValue { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
