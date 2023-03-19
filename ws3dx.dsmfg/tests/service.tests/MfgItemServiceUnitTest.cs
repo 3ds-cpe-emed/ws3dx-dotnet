@@ -23,6 +23,7 @@ using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.exception;
 using ws3dx.core.redirection;
+using ws3dx.dsmfg;
 using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
@@ -38,10 +39,6 @@ namespace NUnitTestProject
       const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
       const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
       const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
-
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
 
       string m_username = string.Empty;
       string m_password = string.Empty;
@@ -152,15 +149,24 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "")]
-      public async Task GetAssignedRequirement(string mfgItemId, string requirementId)
+      [TestCase("44C2728FE131000064099D210015C8CD", "A437358E00006B0C6409BC5800010224")]
+      public async Task GetAssignedRequirement(string mfgItemId, string assignedRequirementId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IAssignedRequirementMask ret = await mfgItemService.GetAssignedRequirement(mfgItemId, requirementId);
 
-         Assert.IsNotNull(ret);
+         try
+         {
+            IAssignedRequirementMask ret = await mfgItemService.GetAssignedRequirement(mfgItemId, assignedRequirementId);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
       }
 
       [TestCase("", "")]
@@ -273,7 +279,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("44C2728FE131000064099D210015C8CD")]
       public async Task GetAssignedRequirements(string mfgItemId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -673,7 +679,15 @@ namespace NUnitTestProject
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewMfgItem newMfgItem = new NewMfgItem();
+         newMfgItem.Attributes = new MfgItem();
+         newMfgItem.Attributes.Type = MFGResourceNames.MANUFACTURING_ASSEMBLY_TYPE;
+         newMfgItem.Attributes.Title = "AAA27 Mfg Assembly";
+         newMfgItem.Attributes.Description = "New Mfg Assembly from Web Services";
+
          ICreateMfgItems request = new CreateMfgItems();
+         request.Items = new List<INewMfgItem>();
+         request.Items.Add(newMfgItem);
 
          try
          {
@@ -1040,7 +1054,7 @@ namespace NUnitTestProject
       //}
 
       [TestCase("item")]
-      public async Task Search_Full_IXCADFamilyRepMask(string search)
+      public async Task Search_Full_MfgItemMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -1052,8 +1066,8 @@ namespace NUnitTestProject
 
          Assert.IsNotNull(ret);
       }
-      [TestCase("item", 0, 50)]
-      public async Task Search_Paged_IXCADFamilyRepBasicMask(string search, int skip, int top)
+      [TestCase("mass-R1132100982379-00007497", 0, 50)]
+      public async Task Search_Paged_MfgItemMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
 
