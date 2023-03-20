@@ -219,14 +219,21 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task Create_IBookmarkMask()
+      // Create ROOT BOOKMARK
+      [TestCase("AAA27WSBOOKMARK", "Description of bookmark")]
+      public async Task Create_IBookmarkMask(string bookMarkTitle, string bookMarkDescription)
       {
          IPassportAuthentication passport = await Authenticate();
 
          BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewBookmark newBookmark = new NewBookmark();
+         newBookmark.Attributes = new NewBookmarkData();
+         newBookmark.Attributes.Title = bookMarkTitle;
+         newBookmark.Attributes.Description = bookMarkDescription;
+
          ICreateBookmarks request = new CreateBookmarks();
+         request.Items = new List<INewBookmark>() { newBookmark };
 
          try
          {
@@ -240,14 +247,23 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-      [TestCase()]
-      public async Task Create_IBookmarkDetailMask()
+
+      // Create SUB-BOOKMARK
+      [TestCase("44C2728FF159000064183E6E001CC996", "AAA27WS-SUB-BOOKMARK", "Description of sub bookmark")]
+      public async Task Create_IBookmarkDetailMask(string parentId, string bookMarkTitle, string bookMarkDescription)
       {
          IPassportAuthentication passport = await Authenticate();
 
          BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewBookmark newBookmark = new NewBookmark();
+         newBookmark.Attributes = new NewBookmarkData();
+         newBookmark.Attributes.Title = bookMarkTitle;
+         newBookmark.Attributes.Description = bookMarkDescription;
+
          ICreateBookmarks request = new CreateBookmarks();
+         request.Items = new List<INewBookmark>() { newBookmark };
+         request.ParentId = parentId;
 
          try
          {
