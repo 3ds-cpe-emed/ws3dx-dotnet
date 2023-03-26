@@ -28,12 +28,12 @@ namespace ws3dx.core.service
 {
    public abstract class SearchService : EnoviaBaseService
    {
-      const long MAX_VALS_PER_QUERY = 1000;
-      const long TOP = MAX_VALS_PER_QUERY;
+      private const long MAX_VALS_PER_QUERY = 1000;
+      private const long TOP = MAX_VALS_PER_QUERY;
 
-      const string SKIP_PARAM_NAME = "$skip";
-      const string TOP_PARAM_NAME = "$top";
-      const string SEARCH_CRITERIA_PARAM_NAME = "$searchStr";
+      private const string SKIP_PARAM_NAME = "$skip";
+      private const string TOP_PARAM_NAME = "$top";
+      private const string SEARCH_CRITERIA_PARAM_NAME = "$searchStr";
 
       protected virtual string GetSearchSkipParamName() { return SKIP_PARAM_NAME; }
       protected virtual string GetSearchTopParamName() { return TOP_PARAM_NAME; }
@@ -43,7 +43,7 @@ namespace ws3dx.core.service
 
       protected abstract IEnumerable<Type> SearchConstraintTypes();
 
-      public SearchService(string _enoviaService, IPassportAuthentication passport) : base(_enoviaService, passport)
+      protected SearchService(string _enoviaService, IPassportAuthentication passport) : base(_enoviaService, passport)
       {
       }
 
@@ -52,7 +52,7 @@ namespace ws3dx.core.service
       protected bool IsSearchSkipParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchSkipParamName()); } }
       protected bool IsSearchTopParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchTopParamName()); } }
 
-      protected async Task<IList<T>> Search<T, S>(SearchQuery _searchString)
+      protected async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchString)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
@@ -74,23 +74,23 @@ namespace ws3dx.core.service
             // }
             // firstTime = false;
 
-            page = await Search<T, S>(_searchString, skip, TOP);
+            page = await SearchCollection<T>(_wrappingCollectionJsonPropertyName, _searchString, skip, TOP);
 
             skip += TOP;
 
-            if ((page != null) && (page.Count > 0))
+            if (page?.Count > 0)
             {
                __output.AddRange(page);
             }
          }
-         while ((page != null) && (page.Count == TOP));
+         while (page?.Count == TOP);
 
          return __output;
       }
 
-      protected async Task<IList<T>> Search<T, S>(SearchQuery _searchQuery, long _skip = 0, long _top = 100)
+      protected async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchQuery, long _skip = 0, long _top = 100)
       {
-         System.Diagnostics.Debug.WriteLine($"Search<{typeof(T).Name}, {typeof(S).Name}>");
+         System.Diagnostics.Debug.WriteLine($"SearchCollection<{typeof(T).Name}>");
 
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
@@ -116,10 +116,9 @@ namespace ws3dx.core.service
 
          string responseContent = await response.Content.ReadAsStringAsync();
 
-         return Deserialize<T, S>(responseContent);
+         return DeserializeCollection<T>(responseContent, _wrappingCollectionJsonPropertyName);
       }
 
       #endregion
-
    }
 }

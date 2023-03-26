@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 
@@ -51,7 +50,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getRealizedChanges";
 
-         return await PostGroup<IRealizedChangeDetailMask, NlsLabeledItemSet<IRealizedChangeDetailMask>, IRealizedChangeRequest>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -87,7 +86,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getMfgItemInstanceFromImplementedEngOccurrence";
 
-         return await PostGroup<IMfgItemInstanceNavigateUTCMask, NlsLabeledItemSet<IMfgItemInstanceNavigateUTCMask>, IItemOccurrence[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IMfgItemInstanceNavigateUTCMask, IItemOccurrence[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -104,7 +103,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}invoke/dsmfg:getMfgItemsFromEngItem";
 
-         return await PostGroup<IMfgItemNavigateUTCMask, NlsLabeledItemSet<IMfgItemNavigateUTCMask>, string[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IMfgItemNavigateUTCMask, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

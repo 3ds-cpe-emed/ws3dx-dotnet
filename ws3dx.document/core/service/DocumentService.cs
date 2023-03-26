@@ -70,12 +70,12 @@ namespace ws3dx.document.core.service
 
       public async Task<IList<IDocumentDataResponse>> Search(SearchQuery _searchString)
       {
-         return await Search<IDocumentDataResponse, IDocumentsResponse>(_searchString);
+         return await SearchCollection<IDocumentDataResponse>("data", _searchString);
       }
 
       public async Task<IList<IDocumentDataResponse>> Search(SearchQuery _searchString, long _skip = 0, long _top = 100)
       {
-         return await Search<IDocumentDataResponse, IDocumentsResponse>(_searchString, _skip, _top);
+         return await SearchCollection<IDocumentDataResponse>("data", _searchString, _skip, _top);
       }
 
       #endregion
@@ -102,7 +102,7 @@ namespace ws3dx.document.core.service
          queryParams.Add("parentRelName", parentRelName);
          queryParams.Add("parentDirection", parentDirection);
 
-         return await GetGroup<IDocumentDataResponse, IDocumentsResponse>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseDataProperty<IDocumentDataResponse>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files/{fileId}/versions";
 
-         return await GetGroup<IDocumentFile, IVersionResponse>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IDocumentFile>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files";
 
-         return await GetGroup<IDocumentFile, IFileResponse>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IDocumentFile>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}";
 
-         return await GetGroup<IDocumentDataResponse, IDocumentsResponse>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IDocumentDataResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents";
 
-         return await PostGroup<IDocumentDataResponse, IDocumentsResponse, IDocuments>(resourceURI, documents);
+         return await PostCollectionFromResponseDataProperty<IDocumentDataResponse, IDocuments>(resourceURI, documents);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files";
 
-         return await PostGroup<IDocumentFile, IFileResponse, IFiles>(resourceURI, files);
+         return await PostCollectionFromResponseDataProperty<IDocumentFile, IFiles>(resourceURI, files);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ namespace ws3dx.document.core.service
       {
          string resourceURI = $"{GetBaseResource()}/documents/ids";
 
-         return await PostGroup<IDocumentDataResponse, IDocumentsResponse, string>(resourceURI, ids);
+         return await PostCollectionFromResponseDataProperty<IDocumentDataResponse, string>(resourceURI, ids);
       }
 
       //---------------------------------------------------------------------------------------------

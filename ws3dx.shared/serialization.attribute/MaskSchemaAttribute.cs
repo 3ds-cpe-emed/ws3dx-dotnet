@@ -24,7 +24,7 @@ namespace ws3dx.serialization.attribute
    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
    public class MaskSchemaAttribute : Attribute
    {
-      public string MaskName { get; private set; }
+      public string MaskName { get; }
 
       public MaskSchemaAttribute(string maskName)
       {

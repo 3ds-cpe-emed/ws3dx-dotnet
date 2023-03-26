@@ -16,7 +16,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dslc.data;
-using ws3dx.serialization.attribute;
 
 namespace ws3dx.dslc.core.data.impl
 {
@@ -30,7 +29,6 @@ namespace ws3dx.dslc.core.data.impl
    //------------------------------------------------------------------------------------------------
    public class VersionGraphOutput : IVersionGraphOutput
    {
-      [ResponseCollectionItems("results")]
       [JsonPropertyName("results")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IVersionGraph> Results { get; set; }

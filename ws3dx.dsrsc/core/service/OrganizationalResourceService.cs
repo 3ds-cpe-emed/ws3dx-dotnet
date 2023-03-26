@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsrsc.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -68,7 +67,7 @@ namespace ws3dx.dsrsc.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -88,7 +87,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}/dsrsc:ScopeLink";
 
-         return await GetGroup<IScopeLinkMask, NlsLabeledItemSet<IScopeLinkMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IScopeLinkMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -110,7 +109,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:OrganizationalResourceInstance/{instanceId}";
 
-         return await GetIndividual<IOrganizationalResourceInstanceMask, NlsLabeledItemSet<IOrganizationalResourceInstanceMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IOrganizationalResourceInstanceMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -134,7 +133,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:WorkerInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -158,7 +157,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:ResourceItemInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -179,7 +178,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -202,7 +201,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}/dsrsc:ImplementLink/{implementLinkId}";
 
-         return await GetIndividual<IImplementLinkMask, NlsLabeledItemSet<IImplementLinkMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IImplementLinkMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -233,7 +232,7 @@ namespace ws3dx.dsrsc.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<IOrganizationalResourceInstanceMask, NlsLabeledItemSet<IOrganizationalResourceInstanceMask>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<IOrganizationalResourceInstanceMask>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -265,7 +264,7 @@ namespace ws3dx.dsrsc.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -283,7 +282,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateOrganizationalResources>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateOrganizationalResources>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -304,7 +303,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}/dsrsc:WorkerInstance";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateWorkerInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateWorkerInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -326,7 +325,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}/dsrsc:ResourceItemInstance";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateResourceItemInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateResourceItemInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -346,7 +345,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}/dsrsc:OrganizationalResourceInstance";
 
-         return await PostGroup<IOrganizationalResourceInstanceMask, NlsLabeledItemSet<IOrganizationalResourceInstanceMask>, ICreateOrganizationalResourceInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IOrganizationalResourceInstanceMask, ICreateOrganizationalResourceInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -388,7 +387,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:ResourceItemInstance/{instanceId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateResourceItemInstance>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateResourceItemInstance>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -412,7 +411,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:WorkerInstance/{instanceId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateWorkerInstance>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateWorkerInstance>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -435,7 +434,7 @@ namespace ws3dx.dsrsc.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{organizationalResourceId}/dsrsc:OrganizationalResourceInstance/{instanceId}";
 
-         return await PatchIndividual<IOrganizationalResourceInstanceMask, NlsLabeledItemSet<IOrganizationalResourceInstanceMask>, IUpdateOrganizationalResourceInstance>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<IOrganizationalResourceInstanceMask, IUpdateOrganizationalResourceInstance>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -457,7 +456,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:OrganizationalResource/{orgResourceId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateOrganizationalResource>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateOrganizationalResource>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

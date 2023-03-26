@@ -16,13 +16,11 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dslc.data;
-using ws3dx.serialization.attribute;
 
 namespace ws3dx.dslc.core.data.impl
 {
    public class DuplicateOutput : IDuplicateOutput
    {
-      [ResponseCollectionItems("results")]
       [JsonPropertyName("results")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IDuplicate> Results { get; set; }

@@ -49,7 +49,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}version/getGraph";
 
-         return await PostGroup<IVersionGraph, IVersionGraphOutput, IObjRefInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IVersionGraph, IObjRefInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}version/create";
 
-         return await PostGroup<IDuplicate, IDuplicateOutput, IObjRefBranchInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IDuplicate, IObjRefBranchInput>(resourceURI, request);
       }
    }
 }

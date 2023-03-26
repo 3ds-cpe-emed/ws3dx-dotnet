@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsdo.data;
 using ws3dx.shared.utils;
 
@@ -54,7 +53,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}CheckinTicket";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IGetCheckInTicket>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IGetCheckInTicket>(resourceURI, request);
       }
    }
 }

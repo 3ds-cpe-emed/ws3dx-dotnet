@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsrsc.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -57,7 +56,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker/{workerId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -75,7 +74,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateWorkerResources>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateWorkerResources>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -113,7 +112,7 @@ namespace ws3dx.dsrsc.core.service
 
          string resourceURI = $"{GetBaseResource()}dsrsc:Worker/{workerId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateOrganizationalResource>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateOrganizationalResource>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

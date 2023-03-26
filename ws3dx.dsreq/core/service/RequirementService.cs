@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsreq.data;
 
 namespace ws3dx.dsreq.core.service
@@ -55,7 +54,7 @@ namespace ws3dx.dsreq.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsreq:Requirement/{reqId}";
 
-         return await GetIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<INewRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -71,7 +70,7 @@ namespace ws3dx.dsreq.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsreq:Requirement";
 
-         return await PostGroup<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, ICreateRequirement>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<INewRequirementMask, ICreateRequirement>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -91,7 +90,7 @@ namespace ws3dx.dsreq.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsreq:Requirement/{reqId}";
 
-         return await PatchIndividual<INewRequirementMask, NlsLabeledItemSet<INewRequirementMask>, IModifyRequirement>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<INewRequirementMask, IModifyRequirement>(resourceURI, request);
       }
    }
 }

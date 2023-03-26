@@ -49,7 +49,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}duplicate";
 
-         return await PostGroup<IDuplicate, IDuplicateOutput, IDuplicateInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IDuplicate, IDuplicateInput>(resourceURI, request);
       }
    }
 }

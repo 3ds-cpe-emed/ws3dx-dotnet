@@ -16,14 +16,12 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dsiss.data;
-using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
 
 namespace ws3dx.dsiss.core.data.impl
 {
    public class IssueSearch : IIssueSearch
    {
-      [ResponseCollectionItems("issue")]
       [JsonPropertyName("issue")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<ITypedUriIdentifier> Issue { get; set; }

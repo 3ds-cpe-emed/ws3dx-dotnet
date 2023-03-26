@@ -27,7 +27,7 @@ namespace ws3dx.core.serialization
       /// <summary>
       /// static map of deserializers by type
       /// </summary>
-      static Dictionary<Type, object> m_deserializerByTypeMap = new Dictionary<Type, object>();
+      private static readonly Dictionary<Type, object> m_deserializerByTypeMap = new Dictionary<Type, object>();
 
       /// <summary>
       /// Returns an cached instance of a deserializer based on its type. It creates it if it doesn't exist.
@@ -46,11 +46,11 @@ namespace ws3dx.core.serialization
          return m_deserializerByTypeMap[_type];
       }
 
-      public static dynamic Deserialize<T, S>(string _json)
+      public static dynamic DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName)
       {
          MaskSchemaDeserializer<T> schemaDeserializer = (MaskSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
 
-         return schemaDeserializer.Deserialize<S>(_json);
+         return schemaDeserializer.DeserializeCollection(_json, _wrapperCollectionJsonPropertyName);
       }
 
       public static dynamic Deserialize<T>(string _json)

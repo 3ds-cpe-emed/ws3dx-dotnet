@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dspfl.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
@@ -67,12 +66,12 @@ namespace ws3dx.dspfl.core.service
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+         return await SearchCollection<T>("member", searchQuery);
       }
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+         return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
       //---------------------------------------------------------------------------------------------
@@ -99,7 +98,7 @@ namespace ws3dx.dspfl.core.service
          IDictionary<string, string> headerParams = new Dictionary<string, string>();
          headerParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<IMatrixRuleResponse, NlsLabeledItemSet<IMatrixRuleResponse>>(resourceURI, headerParams: headerParams);
+         return await GetCollectionFromResponseArrayProperty<IMatrixRuleResponse>(resourceURI, "member", headerParams: headerParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -124,7 +123,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance/{variantInstanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -148,7 +147,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration/{productConfigurationId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -166,7 +165,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -187,7 +186,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -210,7 +209,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ConfigurationRule/{configRuleId}";
 
-         return await GetIndividual<IMatrixRuleResponse, NlsLabeledItemSet<IMatrixRuleResponse>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IMatrixRuleResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -235,7 +234,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance/{optionGroupInstanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -257,7 +256,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -279,7 +278,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -301,7 +300,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -322,7 +321,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateProductConfiguration>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateProductConfiguration>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -345,7 +344,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateOptionGroupInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateOptionGroupInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -371,7 +370,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance/{optionGroupInstanceId}/detach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IDetachOptionGroupInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IDetachOptionGroupInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -418,7 +417,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance/{optionGroupInstanceId}/attach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IAttachOptionGroupInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IAttachOptionGroupInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -441,7 +440,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateVariantInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateVariantInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -466,7 +465,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance/{variantInstanceId}/detach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IDetachVariantInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IDetachVariantInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -484,7 +483,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateModel>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateModel>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -509,7 +508,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration/{productConfigurationId}/modify";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IModifyProductConfiguration>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IModifyProductConfiguration>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -554,7 +553,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance/{variantInstanceId}/attach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IAttachVariantInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IAttachVariantInstances>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -579,7 +578,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration/{productConfigurationId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateProductConfiguration>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateProductConfiguration>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -602,7 +601,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:OptionGroupInstance/{optionGroupInstanceId}";
 
-         return await PatchIndividual<IOptionGroupInstanceMask, NlsLabeledItemSet<IOptionGroupInstanceMask>, IOrdered>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<IOptionGroupInstanceMask, IOrdered>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -623,7 +622,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IUpdateModelVersion>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IUpdateModelVersion>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -646,7 +645,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:VariantInstance/{variantInstanceId}";
 
-         return await PatchIndividual<IVariantInstanceMask, NlsLabeledItemSet<IVariantInstanceMask>, IUpdateVariantInstance>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<IVariantInstanceMask, IUpdateVariantInstance>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -717,7 +716,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ConfigurationRule";
 
-         return await PostGroup<IMatrixRuleResponse, NlsLabeledItemSet<IMatrixRuleResponse>, INewMatrixRules>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IMatrixRuleResponse, INewMatrixRules>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -740,7 +739,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ConfigurationRule";
 
-         return await PostGroup<IExpressionRuleResponse, NlsLabeledItemSet<IExpressionRuleResponse>, ICreateExpressionRule>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IExpressionRuleResponse, ICreateExpressionRule>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -766,7 +765,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ConfigurationRule/{ID}/modify";
 
-         return await PostGroup<IMatrixRuleResponse, NlsLabeledItemSet<IMatrixRuleResponse>, IModifyMatrixRule>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IMatrixRuleResponse, IModifyMatrixRule>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -792,7 +791,7 @@ namespace ws3dx.dspfl.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ConfigurationRule/{ID}/modify";
 
-         return await PostGroup<IExpressionRuleResponse, NlsLabeledItemSet<IExpressionRuleResponse>, IModifyExpressionRule>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IExpressionRuleResponse, IModifyExpressionRule>(resourceURI, request);
       }
    }
 }

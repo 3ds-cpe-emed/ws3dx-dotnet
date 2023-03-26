@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -68,12 +67,12 @@ namespace ws3dx.dsxcad.core.service
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+         return await SearchCollection<T>("member", searchQuery);
       }
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+         return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
 
       #endregion
@@ -94,7 +93,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:VisualizationFile";
 
-         return await GetGroup<IVisualizationFileMask, NlsLabeledItemSet<IVisualizationFileMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IVisualizationFileMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -115,7 +114,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -134,7 +133,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dslc:changeControl";
 
-         return await GetGroup<IChangeControlMask, NlsLabeledItemSet<IChangeControlMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IChangeControlMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -154,7 +153,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:xCADAttributes";
 
-         return await GetGroup<IXCADAttributesMask, NlsLabeledItemSet<IXCADAttributesMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IXCADAttributesMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -174,7 +173,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/dsxcad:AuthoringFile";
 
-         return await GetGroup<IAuthoringFileMask, NlsLabeledItemSet<IAuthoringFileMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IAuthoringFileMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -236,7 +235,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Attach";
 
-         return await PostIndividual<T, NlsLabeledItemSet<T>, IAttachXCADDrawing>(resourceURI, request);
+         return await PostIndividualFromResponseMemberProperty<T, IAttachXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -272,7 +271,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/Locate";
 
-         return await PostGroup<IRelatedId, NlsLabeledItemSet<IRelatedId>, ILocateXCADDrawing>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IRelatedId, ILocateXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -293,7 +292,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Modify";
 
-         return await PostIndividual<T, NlsLabeledItemSet<T>, IModifyXCADDrawingWithFiles>(resourceURI, request);
+         return await PostIndividualFromResponseMemberProperty<T, IModifyXCADDrawingWithFiles>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -335,7 +334,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}/Detach";
 
-         return await PostIndividual<T, NlsLabeledItemSet<T>, IDetachXCADDrawing>(resourceURI, request);
+         return await PostIndividualFromResponseMemberProperty<T, IDetachXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -356,7 +355,7 @@ namespace ws3dx.dsxcad.core.service
 
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing/{drawingId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IModifyXCADDrawing>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IModifyXCADDrawing>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -410,7 +409,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADDrawings>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateXCADDrawings>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -426,7 +425,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Drawing";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateXCADDrawingsFromTemplate>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateXCADDrawingsFromTemplate>(resourceURI, request);
       }
    }
 }

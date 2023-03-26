@@ -65,12 +65,12 @@ namespace ws3dx.project.risk.core.service
 
       public async Task<IList<IResponseRiskData>> Search(SearchQuery searchQuery)
       {
-         return await Search<IResponseRiskData, IResponseRisk>(searchQuery);
+         return await SearchCollection<IResponseRiskData>("data", searchQuery);
       }
 
       public async Task<IList<IResponseRiskData>> Search(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<IResponseRiskData, IResponseRisk>(searchQuery, _skip, _top);
+         return await SearchCollection<IResponseRiskData>("data", searchQuery, _skip, _top);
       }
 
       protected override string GetMaskParamName() { return null; }
@@ -110,7 +110,7 @@ namespace ws3dx.project.risk.core.service
          queryParams.Add("completed", completed.ToString());
          queryParams.Add("state", state);
 
-         return await GetGroup<IResponseRiskData, IResponseRisk>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseDataProperty<IResponseRiskData>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ namespace ws3dx.project.risk.core.service
       {
          string resourceURI = $"{GetBaseResource()}/risks/{riskId}";
 
-         return await GetIndividual<IResponseRiskData, IResponseRisk>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseRiskData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ namespace ws3dx.project.risk.core.service
       {
          string resourceURI = $"{GetBaseResource()}/risks";
 
-         return await PostGroup<IResponseRiskData, IResponseRisk, IRisk>(resourceURI, risks);
+         return await PostCollectionFromResponseDataProperty<IResponseRiskData, IRisk>(resourceURI, risks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ namespace ws3dx.project.risk.core.service
       {
          string resourceURI = $"{GetBaseResource()}/risks/{riskId}";
 
-         return await PutIndividual<IResponseRiskData, IResponseRisk, IRisk>(resourceURI, risks);
+         return await PutIndividualFromResponseDataProperty<IResponseRiskData, IRisk>(resourceURI, risks);
       }
 
       //---------------------------------------------------------------------------------------------

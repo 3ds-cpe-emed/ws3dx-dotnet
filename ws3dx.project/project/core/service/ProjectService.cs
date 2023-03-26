@@ -65,12 +65,12 @@ namespace ws3dx.project.project.core.service
 
       public async Task<IList<IResponseProjectData>> Search(SearchQuery searchQuery)
       {
-         return await Search<IResponseProjectData, IResponseProject>(searchQuery);
+         return await SearchCollection<IResponseProjectData>("data", searchQuery);
       }
 
       public async Task<IList<IResponseProjectData>> Search(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<IResponseProjectData, IResponseProject>(searchQuery, _skip, _top);
+         return await SearchCollection<IResponseProjectData>("data", searchQuery, _skip, _top);
       }
 
       protected override string GetMaskParamName() { return null; }
@@ -90,7 +90,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/risks/{riskId}";
 
-         return await GetIndividual<IResponseRiskData, IResponseRisk>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseRiskData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/issues";
 
-         return await GetGroup<IResponseIssueData, IResponseIssue>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseIssueData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments/{assessmentId}";
 
-         return await GetIndividual<IResponseAssessmentData, IResponseAssessment>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseAssessmentData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-         return await GetGroup<IResponseProjectData, IResponseProject>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseProjectData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ namespace ws3dx.project.project.core.service
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          queryParams.Add("allAssessments", allAssessments);
 
-         return await GetGroup<IResponseAssessmentData, IResponseAssessment>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseDataProperty<IResponseAssessmentData>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/issues/{issueId}";
 
-         return await GetIndividual<IResponseIssueData, IResponseIssue>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseIssueData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/programId/{programId}";
 
-         return await GetGroup<IResponseProjectData, IResponseProject>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseProjectData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -208,7 +208,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/risks";
 
-         return await GetGroup<IResponseRiskData, IResponseRisk>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseRiskData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/folderId/{folderId}";
 
-         return await GetIndividual<IResponseFolderData, IResponseFolder>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseFolderData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}";
 
-         return await GetIndividual<IResponseProjectData, IResponseProject>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseProjectData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -256,7 +256,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-         return await GetGroup<IResponseFolderData, IResponseFolder>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseFolderData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-         return await PostIndividual<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
+         return await PostIndividualFromResponseDataProperty<IResponseProjectData, IProjects>(resourceURI, projects);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-         return await PostIndividual<IResponseFolderData, IResponseFolder, IFolders>(resourceURI, folders);
+         return await PostIndividualFromResponseDataProperty<IResponseFolderData, IFolders>(resourceURI, folders);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -320,7 +320,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments";
 
-         return await PutGroup<IResponseAssessmentData, IResponseAssessment, IAssessments>(resourceURI, assessments);
+         return await PutCollectionFromResponseDataProperty<IResponseAssessmentData, IAssessments>(resourceURI, assessments);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}";
 
-         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
+         return await PutCollectionFromResponseDataProperty<IResponseProjectData, IProjects>(resourceURI, projects);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -352,7 +352,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/folders";
 
-         return await PutGroup<IResponseFolderData, IResponseFolder, IFolders>(resourceURI, folders);
+         return await PutCollectionFromResponseDataProperty<IResponseFolderData, IFolders>(resourceURI, folders);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -368,7 +368,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects/{projectId}/assessments/{assessmentId}";
 
-         return await PutGroup<IResponseAssessmentData, IResponseAssessment, IAssessments>(resourceURI, assessments);
+         return await PutCollectionFromResponseDataProperty<IResponseAssessmentData, IAssessments>(resourceURI, assessments);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -384,7 +384,7 @@ namespace ws3dx.project.project.core.service
       {
          string resourceURI = $"{GetBaseResource()}/projects";
 
-         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
+         return await PutCollectionFromResponseDataProperty<IResponseProjectData, IProjects>(resourceURI, projects);
       }
 
       //---------------------------------------------------------------------------------------------

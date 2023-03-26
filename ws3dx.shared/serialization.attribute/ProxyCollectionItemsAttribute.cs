@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------------------------------------------
-// Copyright 2023 Dassault Systèmes - CPE EMED
+// Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,
@@ -13,15 +13,23 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------------------------------------------------------------
-
 using System;
 
-namespace ws3dx.core.serialization.registry
+namespace ws3dx.serialization.attribute
 {
-   class ResponseCollectionSchemaHelper
+   /// <summary>
+   /// Jumps over (bypasses) an intermediate (proxy) class that is just used in json
+   /// as a "dummy collector" (e.g. { totalItems=2 , member = [ {...}, {...} ] } )
+   /// and going directly to its array
+   /// </summary>
+   [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+   public class ProxyCollectionItemsAttribute : Attribute
    {
-      public Type CollectionType { get; set; }
-      public string CollectionItemsJsonPropertyName { get; set; }
-      public Type CollectionItemsType { get; set; }
+      public string JsonPropertyName { get; }
+
+      public ProxyCollectionItemsAttribute(string jsonPropertyName)
+      {
+         JsonPropertyName = jsonPropertyName;
+      }
    }
 }

@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsxcad.data;
 using ws3dx.utils.search;
 
@@ -66,12 +65,12 @@ namespace ws3dx.dsxcad.core.service
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+         return await SearchCollection<T>("member", searchQuery);
       }
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+         return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
 
@@ -91,7 +90,7 @@ namespace ws3dx.dsxcad.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsxcad:Template/{templateId}";
 
-         return await GetIndividual<IXCADTemplateMask, NlsLabeledItemSet<IXCADTemplateMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IXCADTemplateMask>(resourceURI);
       }
    }
 }

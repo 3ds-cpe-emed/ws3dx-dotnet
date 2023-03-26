@@ -70,12 +70,12 @@ namespace ws3dx.project.program.core.service
 
       public async Task<IList<IResponseProgramData>> Search(SearchQuery searchQuery)
       {
-         return await Search<IResponseProgramData, IResponseProgram>(searchQuery);
+         return await SearchCollection<IResponseProgramData>("data", searchQuery);
       }
 
       public async Task<IList<IResponseProgramData>> Search(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<IResponseProgramData, IResponseProgram>(searchQuery, _skip, _top);
+         return await SearchCollection<IResponseProgramData>("data", searchQuery, _skip, _top);
       }
 
       #endregion
@@ -92,7 +92,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}";
 
-         return await GetIndividual<IResponseProgramData, IResponseProgram>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseProgramData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs";
 
-         return await GetGroup<IResponseProgramData, IResponseProgram>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseProgramData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}/projects";
 
-         return await GetGroup<IResponseProgramData, IResponseProgram>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseProgramData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs";
 
-         return await PostGroup<IResponseProgramData, IResponseProgram, IPrograms>(resourceURI, programs);
+         return await PostCollectionFromResponseDataProperty<IResponseProgramData, IPrograms>(resourceURI, programs);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}/projects";
 
-         return await PutGroup<IResponseProjectData, IResponseProject, IProjects>(resourceURI, projects);
+         return await PutCollectionFromResponseDataProperty<IResponseProjectData, IProjects>(resourceURI, projects);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ namespace ws3dx.project.program.core.service
       {
          string resourceURI = $"{GetBaseResource()}/programs/{programId}";
 
-         return await PutIndividual<IResponseProgramData, IResponseProgram, IPrograms>(resourceURI, programs);
+         return await PutIndividualFromResponseDataProperty<IResponseProgramData, IPrograms>(resourceURI, programs);
       }
 
       //---------------------------------------------------------------------------------------------

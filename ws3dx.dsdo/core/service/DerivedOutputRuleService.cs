@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsdo.data;
 
 namespace ws3dx.dsdo.core.service
@@ -61,7 +60,7 @@ namespace ws3dx.dsdo.core.service
          queryParams.Add("category", category);
          queryParams.Add("ruleType", ruleType);
 
-         return await GetGroup<IDerivedOutputRuleDetailMask, ItemSet<IDerivedOutputRuleDetailMask>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<IDerivedOutputRuleDetailMask>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -82,7 +81,7 @@ namespace ws3dx.dsdo.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputRules/{ID}";
 
-         return await GetIndividual<IDerivedOutputRuleDetailMask, NlsLabeledItemSet<IDerivedOutput>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IDerivedOutputRuleDetailMask>(resourceURI);
       }
    }
 }

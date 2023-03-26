@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dssrc.data;
 
 namespace ws3dx.dssrc.core.service
@@ -52,7 +51,7 @@ namespace ws3dx.dssrc.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dssrc:ManufacturerEquivalentItems/{meiId}";
 
-         return await GetIndividual<IManufacturerEquivalentItemMask, NlsLabeledItemSet<IManufacturerEquivalentItemMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IManufacturerEquivalentItemMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -69,7 +68,7 @@ namespace ws3dx.dssrc.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dssrc:ManufacturerEquivalentItems";
 
-         return await PostGroup<IManufacturerEquivalentItemMask, NlsLabeledItemSet<IManufacturerEquivalentItemMask>, INewManufacturerEquivalentItem[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IManufacturerEquivalentItemMask, INewManufacturerEquivalentItem[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -86,7 +85,7 @@ namespace ws3dx.dssrc.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dssrc:ManufacturerEquivalentItems/Locate";
 
-         return await PostGroup<IManufacturerEquivalentItemMask, NlsLabeledItemSet<IManufacturerEquivalentItemMask>, ILocateManufacturerEquivalentItems>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IManufacturerEquivalentItemMask, ILocateManufacturerEquivalentItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -106,7 +105,7 @@ namespace ws3dx.dssrc.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dssrc:ManufacturerEquivalentItems/{meiId}";
 
-         return await PatchGroup<IManufacturerEquivalentItemMask, NlsLabeledItemSet<IManufacturerEquivalentItemMask>, IUpdateManufacturerEquivalentItem>(resourceURI, request);
+         return await PatchCollectionFromResponseMemberProperty<IManufacturerEquivalentItemMask, IUpdateManufacturerEquivalentItem>(resourceURI, request);
       }
    }
 }

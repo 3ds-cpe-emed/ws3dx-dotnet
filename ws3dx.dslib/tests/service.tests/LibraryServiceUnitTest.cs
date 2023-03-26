@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
+using ws3dx.core.exception;
 using ws3dx.core.redirection;
 using ws3dx.dslib.core.service;
 using ws3dx.dslib.data;
@@ -34,11 +35,6 @@ namespace NUnitTestProject
       const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
       const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
       const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
-
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
-
       string m_username = string.Empty;
       string m_password = string.Empty;
       string m_passportUrl = string.Empty;
@@ -107,7 +103,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("AAA27_TEST")]
       public async Task Search_Full_ISimpleMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -129,9 +125,17 @@ namespace NUnitTestProject
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<ISimpleMask> ret = await libraryService.Search<ISimpleMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
+         IEnumerable<ISimpleMask> ret = null;
+         try
+         {
+            ret = await libraryService.Search<ISimpleMask>(searchByFreeText, skip, top);
+            Assert.IsNotNull(ret);
+         }
+         catch (SearchResponseException ex)
+         {
+            string errMsg = await ex.GetErrorMessage();
+            Assert.Fail(errMsg);
+         }
 
          int i = 0;
          foreach (ISimpleMask libFound in ret)
@@ -166,7 +170,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "5")]
+      [TestCase("AF02EA6D06390000624ACC28001C33EC", "5")]
       public async Task Get_ISimpleMask(string libId, string depth)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -177,7 +181,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "5")]
+      [TestCase("AF02EA6D06390000624ACC28001C33EC", "5")]
       public async Task Get_IExpandClassifiableClassesMask(string libId, string depth)
       {
          IPassportAuthentication passport = await Authenticate();

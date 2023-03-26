@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dslib.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -67,7 +66,7 @@ namespace ws3dx.dslib.core.service
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          queryParams.Add("$classId", classId);
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -124,7 +123,7 @@ namespace ws3dx.dslib.core.service
 
          string resourceURI = $"{GetBaseResource()}/dslib:ClassifiedItem/modify";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IModifyClassifiedItems[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IModifyClassifiedItems[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -165,7 +164,7 @@ namespace ws3dx.dslib.core.service
 
          string resourceURI = $"{GetBaseResource()}/dslib:ClassifiedItem/{clsItemId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IClassifiedItemAttributes>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IClassifiedItemAttributes>(resourceURI, request);
       }
    }
 }

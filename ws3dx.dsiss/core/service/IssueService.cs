@@ -71,7 +71,7 @@ namespace ws3dx.dsiss.core.service
 
       public async Task<IList<ITypedUriIdentifier>> Search(SearchQuery _searchQuery)
       {
-         return await Search<ITypedUriIdentifier, IIssueSearch>(_searchQuery);
+         return await SearchCollection<ITypedUriIdentifier>("issue", _searchQuery);
       }
 
       #endregion

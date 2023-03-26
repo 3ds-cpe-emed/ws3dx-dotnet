@@ -14,13 +14,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using ws3dx.serialization.attribute;
 
 namespace ws3dx.shared.data.impl
 {
    public class TypedUriIdentifierResources : ITypedUriIdentifierResources
    {
-      [ResponseCollectionItems("resources")]
       public IList<ITypedUriIdentifier> Resources { get; set; }
    }
 }

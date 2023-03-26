@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsmfg.data;
 
 namespace service
@@ -51,7 +50,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:AssignmentFilter/locate";
 
-         return await PostGroup<ILocateAssignmentFilterResponse, ItemSet<ILocateAssignmentFilterResponse>, ILocateAssignmentFilterRequestV1>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<ILocateAssignmentFilterResponse, ILocateAssignmentFilterRequestV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -69,7 +68,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:AssignmentFilter/locate";
 
-         return await PostGroup<ILocateAssignmentFilterResponse, ItemSet<ILocateAssignmentFilterResponse>, ILocateAssignmentFilterRequest>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<ILocateAssignmentFilterResponse, ILocateAssignmentFilterRequest>(resourceURI, request);
       }
    }
 }

@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -68,12 +67,12 @@ namespace service
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+         return await SearchCollection<T>("member", searchQuery);
       }
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+         return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
       //---------------------------------------------------------------------------------------------
@@ -95,7 +94,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeEngItem";
 
-         return await GetGroup<T, ItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -116,7 +115,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec";
 
-         return await GetGroup<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IScopeRequirementSpecMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -138,7 +137,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -161,7 +160,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement/{requirementId}";
 
-         return await GetIndividual<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IAssignedRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -184,7 +183,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:Dependency";
 
-         return await GetGroup<IDependencyMask, NlsLabeledItemSet<IDependencyMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IDependencyMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -208,7 +207,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -232,7 +231,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec/{requirementId}";
 
-         return await GetIndividual<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IScopeRequirementSpecMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -252,7 +251,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dslc:changeControl";
 
-         return await GetGroup<IChangeControlStatusMask, NlsLabeledItemSet<IChangeControlStatusMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IChangeControlStatusMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -273,7 +272,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -295,7 +294,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -315,7 +314,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:PartialScopeEngItem";
 
-         return await GetGroup<IPartialScopeEngItemMask, NlsLabeledItemSet<IPartialScopeEngItemMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IPartialScopeEngItemMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -335,7 +334,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement";
 
-         return await GetGroup<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IAssignedRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -358,7 +357,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:ImplementedEngOccurrence";
 
-         return await GetIndividual<IImplementedEngOccurrenceMask, NlsLabeledItemSet<IImplementedEngOccurrenceMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IImplementedEngOccurrenceMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -381,7 +380,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dscfg:Filterable";
 
-         return await GetGroup<IFilterableDetail, NlsLabeledItemSet<IFilterableDetail>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IFilterableDetail>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -406,7 +405,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -428,7 +427,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -448,7 +447,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter";
 
-         return await GetGroup<IAssignmentFilterMask, NlsLabeledItemSet<IAssignmentFilterMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IAssignmentFilterMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -508,7 +507,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement";
 
-         return await PostGroup<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>, ICreateAssignedRequirements>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IAssignedRequirementMask, ICreateAssignedRequirements>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -550,7 +549,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateResultingEngItems>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateResultingEngItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -596,7 +595,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/expand";
 
-         return await PostGroup<IMfgItemExpandV1, NlsLabeledItemSet<IMfgItemExpandV1>, IMfgItemExpandRequestPayloadV1>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IMfgItemExpandV1, IMfgItemExpandRequestPayloadV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -664,7 +663,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/replace";
 
-         return await PostGroup<T, NlsLabeledItemSet<IMfgItemInstanceReplace>, IMfgItemInstanceReplace>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IMfgItemInstanceReplace>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -702,7 +701,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateMfgItems>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateMfgItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -784,7 +783,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateMfgInstancesRef>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateMfgInstancesRef>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -805,7 +804,7 @@ namespace service
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec";
 
-         return await PostGroup<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>, ICreateScopeRequirementSpecs>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IScopeRequirementSpecMask, ICreateScopeRequirementSpecs>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -830,7 +829,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IMfgItemInstancePatch>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IMfgItemInstancePatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -852,7 +851,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured";
 
-         return await PatchGroup<T, NlsLabeledItemSet<T>, IConfiguredPatch>(resourceURI, request);
+         return await PatchCollectionFromResponseMemberProperty<T, IConfiguredPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -899,7 +898,7 @@ namespace service
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IResultingEngItemPatch>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IResultingEngItemPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1045,7 +1044,7 @@ namespace service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await PostGroup<ILocateMfgItemsResponse, NlsLabeledItemSet<ILocateMfgItemsResponse>, ILocateMfgItemsRequest>(resourceURI, request, queryParams: queryParams);
+         return await PostCollectionFromResponseMemberProperty<ILocateMfgItemsResponse, ILocateMfgItemsRequest>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -1084,7 +1083,7 @@ namespace service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await PostGroup<ILocateMfgItemsResponse, NlsLabeledItemSet<ILocateMfgItemsResponse>, ILocateMfgItems>(resourceURI, request, queryParams: queryParams);
+         return await PostCollectionFromResponseMemberProperty<ILocateMfgItemsResponse, ILocateMfgItems>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------

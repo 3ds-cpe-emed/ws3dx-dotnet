@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dslib.data;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dslib.core.data.impl
 {
@@ -153,6 +154,7 @@ namespace ws3dx.dslib.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Collabspace { get; set; }
 
+      [ProxyCollectionItems("member")]
       [JsonPropertyName("ChildClasses")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IExpandClassifiableClass> Children { get; set; }

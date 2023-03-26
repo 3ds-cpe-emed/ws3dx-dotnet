@@ -37,11 +37,6 @@ namespace NUnitTestProject
       const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
       const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
       const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
-
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
-
       string m_username = string.Empty;
       string m_password = string.Empty;
       string m_passportUrl = string.Empty;
@@ -129,14 +124,22 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task Create()
+      [TestCase("", "", "VPMReference")]
+      public async Task Create(string classId, string itemId, string itemType)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ClassifiedItemService classifiedItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         TypedUriIdentifier product = new TypedUriIdentifier();
+
+         product.Identifier = itemId;
+         product.Type = itemType;
+
          IAddClassifiedItems request = new AddClassifiedItems();
+
+         request.ClassID = classId;
+         request.ObjectsToClassify = new List<ITypedUriIdentifier>() { product };
 
          try
          {

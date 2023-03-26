@@ -49,7 +49,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}ownership/transfer";
 
-         return await PostGroup<ITransfer, ITransferOutput, ITransferListInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<ITransfer, ITransferListInput>(resourceURI, request);
       }
    }
 }

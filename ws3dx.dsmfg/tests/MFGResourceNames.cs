@@ -216,6 +216,5 @@ namespace ws3dx.dsmfg
       public const string LOGISTIC_TRANSFER_ENTERPRISE_ATTRIBUTES = "";
       public const string LOGISTIC_STATION_TYPE = "DELSCPLogisticsSiteRef";
       public const string LOGISTIC_STATION_ENTERPRISE_ATTRIBUTES = "";
-
    }
 }

@@ -50,7 +50,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await GetGroup<IResponseReferenceData, IResponseReference>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseReferenceData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
 
-         return await GetIndividual<IResponseTaskData, IResponseTask>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IResponseTaskData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await GetGroup<IResponseAssigneeData, IResponseAssignee>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseAssigneeData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
 
-         return await GetGroup<IResponseScopeData, IResponseScope>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseScopeData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/scopeId/{scopeId}";
 
-         return await GetGroup<IResponseTaskData, IResponseTask>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await GetGroup<IResponseDeliverableData, IResponseDeliverable>(resourceURI);
+         return await GetCollectionFromResponseDataProperty<IResponseDeliverableData>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ namespace ws3dx.project.task.core.service
             { "showProjectTasks", showProjectTasks.ToString() }
          };
 
-         return await GetGroup<IResponseTaskData, IResponseTask>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/ids";
 
-         return await PostGroup<IResponseTaskData, IResponseTask, string>(resourceURI, _idPayload);
+         return await PostCollectionFromResponseDataProperty<IResponseTaskData, string>(resourceURI, _idPayload);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await PostGroup<IResponseAssigneeData, IResponseAssignee, IAssignees>(resourceURI, assignees);
+         return await PostCollectionFromResponseDataProperty<IResponseAssigneeData, IAssignees>(resourceURI, assignees);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await PostGroup<IResponseReferenceData, IResponseReference, IReferences>(resourceURI, references);
+         return await PostCollectionFromResponseDataProperty<IResponseReferenceData, IReferences>(resourceURI, references);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await PostGroup<IResponseDeliverableData, IResponseDeliverable, IDeliverables>(resourceURI, deliverables);
+         return await PostCollectionFromResponseDataProperty<IResponseDeliverableData, IDeliverables>(resourceURI, deliverables);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -234,7 +234,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
 
-         return await PostGroup<IResponseScopeData, IResponseScope, IScopes>(resourceURI, scopes);
+         return await PostCollectionFromResponseDataProperty<IResponseScopeData, IScopes>(resourceURI, scopes);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PostGroup<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
+         return await PostCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
 
-         return await PutIndividual<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
+         return await PutIndividualFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -282,7 +282,7 @@ namespace ws3dx.project.task.core.service
       {
          string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PutGroup<IResponseTaskData, IResponseTask, ITasks>(resourceURI, tasks);
+         return await PutCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
       }
 
       //---------------------------------------------------------------------------------------------

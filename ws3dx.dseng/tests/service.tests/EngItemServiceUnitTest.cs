@@ -48,6 +48,8 @@ namespace NUnitTestProject
 
       private UserInfo m_userInfo = null;
 
+      private const string PART_NUMBER_TEST = "AAA27:0000002";
+
       public async Task<IPassportAuthentication> Authenticate()
       {
          UserPassport passport = new UserPassport(m_passportUrl);
@@ -94,7 +96,7 @@ namespace NUnitTestProject
          return __engItemService;
       }
 
-      [TestCase("")]
+      [TestCase("3784C760967A00006409AA5B000160E9")]
       public async Task GetEnterpriseItemNumber(string engItemId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -103,6 +105,8 @@ namespace NUnitTestProject
          IEnterpriseItemNumberMask ret = await engItemService.GetEnterpriseItemNumber(engItemId);
 
          Assert.IsNotNull(ret);
+
+         Assert.AreEqual(ret.PartNumber, PART_NUMBER_TEST);
       }
 
       [TestCase("", "")]
@@ -217,6 +221,7 @@ namespace NUnitTestProject
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IEngItemDefaultMask> ret = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+         Assert.IsNotNull(ret);
 
          int i = 0;
          foreach (IEngItemDefaultMask engItem in ret)
@@ -229,8 +234,6 @@ namespace NUnitTestProject
 
             if (i > 20) return;
          }
-
-         Assert.IsNotNull(ret);
       }
       [TestCase("search", 0, 50)]
       public async Task Search_Paged_IEngItemCommonMask(string search, int skip, int top)
@@ -715,7 +718,7 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("3784C760967A00006409AA5B000160E9", "AAA27:0000002")]
+      [TestCase("3784C760967A00006409AA5B000160E9", PART_NUMBER_TEST)]
       public async Task AttachEnterpriseItemNumber(string engItemId, string enterpriseItemNumber)
       {
          IPassportAuthentication passport = await Authenticate();

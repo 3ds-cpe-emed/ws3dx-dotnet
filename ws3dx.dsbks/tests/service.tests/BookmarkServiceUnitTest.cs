@@ -220,7 +220,7 @@ namespace NUnitTestProject
       }
 
       // Create ROOT BOOKMARK
-      [TestCase("AAA27WSBOOKMARK", "Description of bookmark")]
+      [TestCase("AAA27WSBOOKMARK1", "Description of bookmark")]
       public async Task Create_IBookmarkMask(string bookMarkTitle, string bookMarkDescription)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -249,7 +249,7 @@ namespace NUnitTestProject
       }
 
       // Create SUB-BOOKMARK
-      [TestCase("44C2728FF159000064183E6E001CC996", "AAA27WS-SUB-BOOKMARK", "Description of sub bookmark")]
+      [TestCase("44C2728FF159000064183E6E001CC996", "AAA27WS-SUB-BOOKMARK1", "Description of sub bookmark")]
       public async Task Create_IBookmarkDetailMask(string parentId, string bookMarkTitle, string bookMarkDescription)
       {
          IPassportAuthentication passport = await Authenticate();

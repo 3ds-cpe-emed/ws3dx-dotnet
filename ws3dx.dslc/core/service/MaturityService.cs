@@ -50,7 +50,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}maturity/changeState";
 
-         return await PostGroup<IChangeState, IChangeStateOutput, IChangeStateInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IChangeState, IChangeStateInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

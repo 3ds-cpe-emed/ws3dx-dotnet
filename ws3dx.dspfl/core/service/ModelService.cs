@@ -17,7 +17,6 @@ using System;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dspfl.data;
 using ws3dx.shared.utils;
 
@@ -56,7 +55,7 @@ namespace ws3dx.dspfl.core.service
 
          string resourceURI = $"{GetBaseResource()}/dspfl:Model/{modelId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
    }
 }

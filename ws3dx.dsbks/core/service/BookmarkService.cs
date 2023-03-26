@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsbks.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -68,12 +67,12 @@ namespace ws3dx.dsbks.core.service
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery);
+         return await SearchCollection<T>("member", searchQuery);
       }
 
       public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
       {
-         return await Search<T, NlsLabeledItemSet<T>>(searchQuery, _skip, _top);
+         return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
 
@@ -95,7 +94,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark/{bookmarkId}";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -114,7 +113,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ICreateBookmarks>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ICreateBookmarks>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -137,7 +136,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark/{bookmarkId}/attach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -178,7 +177,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark/{bookmarkId}/detach";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -197,7 +196,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark/BULKUPDATE";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IUpdateBookmark[]>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IUpdateBookmark[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -219,7 +218,7 @@ namespace ws3dx.dsbks.core.service
 
          string resourceURI = $"{GetBaseResource()}/dsbks:Bookmark/{bookmarkId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IModifyBookmark>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IModifyBookmark>(resourceURI, request);
       }
    }
 }

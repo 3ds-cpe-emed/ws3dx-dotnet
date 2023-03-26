@@ -16,7 +16,6 @@
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.extension;
-using ws3dx.shared.data.extension;
 
 namespace ws3dx.dsmfg.core.data.impl
 {

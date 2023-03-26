@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -57,7 +56,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -75,7 +74,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs";
 
-         return await PostIndividual<T, NlsLabeledItemSet<T>, ICreateDerivedOutput>(resourceURI, request);
+         return await PostIndividualFromResponseMemberProperty<T, ICreateDerivedOutput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -116,7 +115,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/Locate";
 
-         return await PostGroup<T, ItemSet<T>, ILocateDerivedOutputs>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, ILocateDerivedOutputs>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -141,7 +140,7 @@ namespace ws3dx.dsdo.core.service
 
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/Sync";
 
-         return await PostGroup<T, NlsLabeledItemSet<T>, IUpdateDerivedOutput>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, IUpdateDerivedOutput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

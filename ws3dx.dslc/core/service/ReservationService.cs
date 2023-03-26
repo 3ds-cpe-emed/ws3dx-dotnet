@@ -48,7 +48,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}reservation/reserve";
 
-         return await PostGroup<IReservation, IReservationOutput, IIdInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IReservation, IIdInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}reservation/unreserve";
 
-         return await PostGroup<IReservation, IReservationOutput, IIdInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<IReservation, IIdInput>(resourceURI, request);
       }
    }
 }

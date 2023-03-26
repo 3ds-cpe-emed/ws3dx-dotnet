@@ -48,7 +48,7 @@ namespace ws3dx.dslc.core.service
       {
          string resourceURI = $"{GetBaseResource()}sharing/getSharing";
 
-         return await PostGroup<ISharing, IGetSharingOutput, IGetSharingInput>(resourceURI, request);
+         return await PostCollectionFromResponseResultsProperty<ISharing, IGetSharingInput>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

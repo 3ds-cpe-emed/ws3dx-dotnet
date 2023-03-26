@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.data.collection.impl;
 using ws3dx.dsprcs.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
@@ -60,7 +59,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:InstructionInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -91,7 +90,7 @@ namespace ws3dx.dsprcs.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<ISecondaryCapableResourceMask, NlsLabeledItemSet<ISecondaryCapableResourceMask>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseArrayProperty<ISecondaryCapableResourceMask>(resourceURI, "member", queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -114,7 +113,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:SecondaryCapableResource/{secondaryResourceId}";
 
-         return await GetIndividual<ISecondaryCapableResourceMask, NlsLabeledItemSet<ISecondaryCapableResourceMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<ISecondaryCapableResourceMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -137,7 +136,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:TimeConstraint/{timeConstraintId}";
 
-         return await GetIndividual<ITimeConstraintMask, NlsLabeledItemSet<ITimeConstraintMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<ITimeConstraintMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -160,7 +159,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:AssignedRequirement/{PID}";
 
-         return await GetIndividual<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IAssignedRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -184,7 +183,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -208,7 +207,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ScopeRequirementSpec/{PID}";
 
-         return await GetIndividual<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IScopeRequirementSpecMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -229,7 +228,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -253,7 +252,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:SignOffInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -274,7 +273,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:AlertInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -297,7 +296,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:PrimaryCapableResource/{primaryResourceId}";
 
-         return await GetIndividual<IPrimaryCapableResourceMask, NlsLabeledItemSet<IPrimaryCapableResourceMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IPrimaryCapableResourceMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -317,7 +316,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs::AssignedRequirement";
 
-         return await GetGroup<IAssignedRequirementMask, NlsLabeledItemSet<IAssignedRequirementMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IAssignedRequirementMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -348,7 +347,7 @@ namespace ws3dx.dsprcs.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<IPrimaryCapableResourceMask, NlsLabeledItemSet<IPrimaryCapableResourceMask>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseArrayProperty<IPrimaryCapableResourceMask>(resourceURI, "member", queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -371,7 +370,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}/dscfg:Filterable";
 
-         return await GetGroup<IFilterableDetail, NlsLabeledItemSet<IFilterableDetail>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IFilterableDetail>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -402,7 +401,7 @@ namespace ws3dx.dsprcs.core.service
          queryParams.Add("$top", top.ToString());
          queryParams.Add("$skip", skip.ToString());
 
-         return await GetGroup<ITimeConstraintMask, NlsLabeledItemSet<ITimeConstraintMask>>(resourceURI, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<ITimeConstraintMask>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -426,7 +425,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:AlertInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -450,7 +449,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance/{instanceId}";
 
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -471,7 +470,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ScopeRequirementSpec";
 
-         return await GetGroup<IScopeRequirementSpecMask, NlsLabeledItemSet<IScopeRequirementSpecMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IScopeRequirementSpecMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -492,7 +491,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -515,7 +514,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}";
 
-         return await GetIndividual<IMfgOperationInstanceMask, NlsLabeledItemSet<IMfgOperationInstanceMask>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<IMfgOperationInstanceMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -536,7 +535,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:InstructionInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -558,7 +557,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -578,7 +577,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dslc:changeControl";
 
-         return await GetGroup<IChangeControlStatusMask, NlsLabeledItemSet<IChangeControlStatusMask>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IChangeControlStatusMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -597,7 +596,7 @@ namespace ws3dx.dsprcs.core.service
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationMask), typeof(IMfgOperationDetailMask) });
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}";
-         return await GetIndividual<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -618,7 +617,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:SignOffInstance";
 
-         return await GetGroup<T, NlsLabeledItemSet<T>>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -638,7 +637,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured/attach";
 
-         return await PostGroup<ITypedUriIdentifier, ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -699,7 +698,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation";
 
-         return await PostIndividual<T, NlsLabeledItemSet<T>, ICreateMfgOperation>(resourceURI, request);
+         return await PostIndividualFromResponseMemberProperty<T, ICreateMfgOperation>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -719,7 +718,7 @@ namespace ws3dx.dsprcs.core.service
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured/detach";
 
-         return await PostGroup<ITypedUriIdentifier, ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -818,7 +817,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured";
 
-         return await PatchGroup<T, NlsLabeledItemSet<T>, IConfiguredPatch>(resourceURI, request);
+         return await PatchCollectionFromResponseMemberProperty<T, IConfiguredPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -840,7 +839,7 @@ namespace ws3dx.dsprcs.core.service
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}";
 
-         return await PatchIndividual<T, NlsLabeledItemSet<T>, IMfgOperationPatch>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<T, IMfgOperationPatch>(resourceURI, request);
       }
    }
 }
