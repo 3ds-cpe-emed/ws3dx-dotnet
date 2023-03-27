@@ -22,6 +22,7 @@ using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.exception;
 using ws3dx.core.redirection;
+using ws3dx.dsmfg;
 using ws3dx.dsprcs.core.data.impl;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
@@ -486,14 +487,21 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IMfgProcessMask()
+      [TestCase(MFGResourceNames.WORKPLAN_TYPE, "AAA27 Process Name")]
+      public async Task Create_IMfgProcessMask(string _processType, string _processName)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewMfgProcess process = new NewMfgProcess();
+         process.Attributes = new MfgProcess();
+         process.Attributes.Type = _processType;
+         process.Attributes.Title = _processName;
+
          ICreateMfgProcess request = new CreateMfgProcess();
+         request.Items = new List<INewMfgProcess>() { process };
+
 
          try
          {
@@ -507,14 +515,20 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-      [TestCase()]
-      public async Task Create_IMfgProcessDetailMask()
+      [TestCase(MFGResourceNames.WORKPLAN_TYPE, "AAA27 Workplan Process Name")]
+      public async Task Create_IMfgProcessDetailMask(string _processType, string _processName)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgProcessService mfgProcessService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewMfgProcess process = new NewMfgProcess();
+         process.Attributes = new MfgProcess();
+         process.Attributes.Type = _processType;
+         process.Attributes.Title = _processName;
+
          ICreateMfgProcess request = new CreateMfgProcess();
+         request.Items = new List<INewMfgProcess>() { process };
 
          try
          {

@@ -19,6 +19,6 @@ namespace ws3dx.dsprcs.data
 {
    public interface ICreateItemSpecificationRequest
    {
-      public IList<IINewItemSpecification> Items { get; set; }
+      public IList<INewItemSpecification> Items { get; set; }
    }
 }

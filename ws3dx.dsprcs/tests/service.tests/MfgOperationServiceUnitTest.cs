@@ -22,6 +22,7 @@ using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.exception;
 using ws3dx.core.redirection;
+using ws3dx.dsmfg;
 using ws3dx.dsprcs.core.data.impl;
 using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
@@ -564,14 +565,21 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IMfgOperationMask()
+      [TestCase(MFGResourceNames.GENERAL_OP_TYPE, "AAA27 Operation Title")]
+      public async Task Create_IMfgOperationMask(string _operationType, string _operationName)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewMfgOperation operation = new NewMfgOperation();
+         operation.Attributes = new MfgOperationRequest();
+         operation.Attributes.Type = _operationType;
+         operation.Attributes.Name = _operationName;
+
          ICreateMfgOperation request = new CreateMfgOperation();
+         request.Items = new List<INewMfgOperation>() { operation };
+
 
          try
          {
@@ -585,14 +593,20 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-      [TestCase()]
-      public async Task Create_IMfgOperationDetailMask()
+      [TestCase(MFGResourceNames.GENERAL_OP_TYPE, "AAA27 Another Operation 2 Title")]
+      public async Task Create_IMfgOperationDetailMask(string _operationType, string _operationName)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewMfgOperation operation = new NewMfgOperation();
+         operation.Attributes = new MfgOperationRequest();
+         operation.Attributes.Type = _operationType;
+         operation.Attributes.Name = _operationName;
+
          ICreateMfgOperation request = new CreateMfgOperation();
+         request.Items = new List<INewMfgOperation>() { operation };
 
          try
          {

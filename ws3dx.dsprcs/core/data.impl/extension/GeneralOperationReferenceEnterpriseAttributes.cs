@@ -13,34 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
-using ws3dx.shared.data;
+using System.Collections.Generic;
+using ws3dx.dsprcs.data.extension;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class INewItemSpecification : IINewItemSpecification
+   public class GeneralOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IGeneralOperationReferenceEnterpriseAttributes
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Pass true for Scope link creation. Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isScope")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsScope { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Reference to the scope manufacturing item.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("itemRef")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ItemReference { get; set; }
+      //Specific Enterprise Attributes
    }
 }

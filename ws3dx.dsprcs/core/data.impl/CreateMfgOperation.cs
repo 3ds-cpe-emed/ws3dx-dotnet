@@ -23,6 +23,6 @@ namespace ws3dx.dsprcs.core.data.impl
    {
       [JsonPropertyName("items")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IINewMfgOperation> Items { get; set; }
+      public IList<INewMfgOperation> Items { get; set; }
    }
 }

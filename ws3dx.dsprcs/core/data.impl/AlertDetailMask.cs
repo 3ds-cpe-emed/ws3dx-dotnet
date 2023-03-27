@@ -199,7 +199,7 @@ namespace ws3dx.dsprcs.core.data.impl
 
       [JsonPropertyName("dsprcs:WorkInstructionEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public WorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
+      public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:AlertEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

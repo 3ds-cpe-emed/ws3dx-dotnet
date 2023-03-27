@@ -19,6 +19,6 @@ namespace ws3dx.dsprcs.data
 {
    public interface ICreateMfgOperation
    {
-      public IList<IINewMfgOperation> Items { get; set; }
+      public IList<INewMfgOperation> Items { get; set; }
    }
 }

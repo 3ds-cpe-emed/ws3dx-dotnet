@@ -174,7 +174,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       public string Actors { get; set; }
 
-      public WorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
+      public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 
       public ISignOffEnterpriseAttributes SingOffEnterpriseAttributes { get; set; }
    }

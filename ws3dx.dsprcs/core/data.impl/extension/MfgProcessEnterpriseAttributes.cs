@@ -14,10 +14,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.extension;
 
-namespace ws3dx.dsprcs.data.extension
+namespace ws3dx.dsprcs.data.impl.extension
 {
-   public interface WorkInstructionEnterpriseAttributes : IDictionary<string, object>
+   public class MfgProcessEnterpriseAttributes : Dictionary<string, object>, IMfgProcessEnterpriseAttributes
    {
       //Specific Enterprise Attributes
    }

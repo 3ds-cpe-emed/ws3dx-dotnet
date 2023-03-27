@@ -246,7 +246,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       public bool MaxIncluded { get; set; }
 
-      public WorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
+      public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 
       public IDataCollectEnterpriseAttributes DataCollectEnterpriseAttributes { get; set; }
    }

@@ -14,15 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.extension;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class CreateItemSpecificationRequest : ICreateItemSpecificationRequest
+   public class PunctualOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IPunctualOperationReferenceEnterpriseAttributes
    {
-      [JsonPropertyName("items")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<INewItemSpecification> Items { get; set; }
+      //Specific Enterprise Attributes
    }
 }

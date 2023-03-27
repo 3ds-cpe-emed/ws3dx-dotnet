@@ -147,7 +147,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       public string Text { get; set; }
 
-      public WorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
+      public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 
       public IInstructionEnterpriseAttributes InstructionEnterpriseAttributes { get; set; }
    }

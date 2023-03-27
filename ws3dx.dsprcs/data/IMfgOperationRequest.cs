@@ -53,7 +53,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedTime { get; set; }
+      public double? EstimatedTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -62,7 +62,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedTimeAddedValueRatio { get; set; }
+      public double? EstimatedTimeAddedValueRatio { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -71,7 +71,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MeasuredTime { get; set; }
+      public double? MeasuredTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -80,7 +80,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double TrackTime { get; set; }
+      public double? TrackTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -91,7 +91,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int TimeMode { get; set; }
+      public int? TimeMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -109,7 +109,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsTimeProportionalToQty { get; set; }
+      public bool? IsTimeProportionalToQty { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -118,7 +118,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool Interruptible { get; set; }
+      public bool? Interruptible { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -127,7 +127,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool ManageVariant { get; set; }
+      public bool? ManageVariant { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -136,7 +136,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool Rollup { get; set; }
+      public bool? Rollup { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -145,7 +145,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MaterialScrap { get; set; }
+      public double? MaterialScrap { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -154,7 +154,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double PreparationTime { get; set; }
+      public double? PreparationTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -163,7 +163,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double PreProcessingTime { get; set; }
+      public double? PreProcessingTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -172,7 +172,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double PostProcessingTime { get; set; }
+      public double? PostProcessingTime { get; set; }
 
       public IMagnitudeValue QuantityToBeProducedPerTime { get; set; }
 
@@ -183,7 +183,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double TimePerFastening { get; set; }
+      public double? TimePerFastening { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -192,7 +192,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double FasteningRate { get; set; }
+      public double? FasteningRate { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -201,7 +201,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int InputResources { get; set; }
+      public int? InputResources { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -210,7 +210,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double OccurrenceTime { get; set; }
+      public double? OccurrenceTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -219,7 +219,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int OccurrenceTimeMode { get; set; }
+      public int? OccurrenceTimeMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -228,7 +228,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Restart { get; set; }
+      public int? Restart { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -237,7 +237,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int StopingOnGoingOp { get; set; }
+      public int? StopingOnGoingOp { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -246,7 +246,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int RecorderLevel { get; set; }
+      public int? RecorderLevel { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -255,7 +255,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Lot { get; set; }
+      public int? Lot { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -264,7 +264,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double Proportion { get; set; }
+      public double? Proportion { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

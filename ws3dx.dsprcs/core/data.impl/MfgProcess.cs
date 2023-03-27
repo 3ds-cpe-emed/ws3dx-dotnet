@@ -74,7 +74,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("capacity")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Capacity { get; set; }
+      public int? Capacity { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -85,7 +85,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("cycleTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double CycleTime { get; set; }
+      public double? CycleTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -96,7 +96,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("flowModeIN")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int FlowModeIN { get; set; }
+      public int? FlowModeIN { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("flowModeOUT")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int FlowModeOUT { get; set; }
+      public int? FlowModeOUT { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -118,7 +118,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("meanTimeBetweenFailure")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MeanTimeBetweenFailure { get; set; }
+      public double? MeanTimeBetweenFailure { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -129,7 +129,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("meanTimeToRepair")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MeanTimeToRepair { get; set; }
+      public double? MeanTimeToRepair { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -140,7 +140,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("operationMode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int OperationMode { get; set; }
+      public int? OperationMode { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -151,7 +151,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("queuingModeIN")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int QueuingModeIN { get; set; }
+      public int? QueuingModeIN { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -162,7 +162,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("queuingModeOUT")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int QueuingModeOUT { get; set; }
+      public int? QueuingModeOUT { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -173,7 +173,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("totalProductionTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double TotalProductionTime { get; set; }
+      public double? TotalProductionTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -184,7 +184,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedDistance")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedDistance { get; set; }
+      public double? EstimatedDistance { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -195,7 +195,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("transferMode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int TransferMode { get; set; }
+      public int? TransferMode { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -206,7 +206,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("arrivalMode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ArrivalMode { get; set; }
+      public int? ArrivalMode { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -217,7 +217,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("initialDelay")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double InitialDelay { get; set; }
+      public double? InitialDelay { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

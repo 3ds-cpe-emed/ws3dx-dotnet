@@ -13,11 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
+using ws3dx.dsprcs.data.extension;
 
-namespace ws3dx.dsprcs.data
+namespace ws3dx.dsprcs.data.impl.extension
 {
-   public interface IINewMfgProcess
+   public class TransferOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ITransferOperationReferenceEnterpriseAttributes
    {
-      public IMfgProcess Attributes { get; set; }
+      //Specific Enterprise Attributes
    }
 }

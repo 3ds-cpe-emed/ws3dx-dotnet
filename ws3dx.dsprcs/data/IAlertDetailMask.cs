@@ -165,7 +165,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       public bool TrackComfirmation { get; set; }
 
-      public WorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
+      public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 
       public IAlertEnterpriseAttributes AlertEnterpriseAttributes { get; set; }
    }
