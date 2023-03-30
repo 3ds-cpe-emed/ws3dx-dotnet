@@ -16,6 +16,11 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -135,14 +140,20 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task Create()
+      [TestCase("AAA27 New Document from web services")]
+      public async Task Create(string _titleId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         IDocument document = new Document();
+         document.Data = new DocumentData();
+         document.Data.Title = _titleId;
+
          IDocuments documents = new Documents();
+         documents.Data = new List<IDocument>();
+         documents.Data.Add(document);
 
          try
          {
@@ -157,17 +168,94 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task AddFiles(string docId)
+      [TestCase("44C2728F84480000642550550001D78E", "WN_CTX_FD01_2", "E:\\Downloads\\WN_CTX_FD01_2.png")]
+      public async Task AddFiles(string docId, string title, string fileLocalPath)
       {
          IPassportAuthentication passport = await Authenticate();
 
          DocumentService documentService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         IFiles files = new Files();
+         // Add file to existing document in 2 steps
+         // step 1 - upload file         
+         // step 2 - add file
 
          try
          {
+            // Step 1 -  upload file
+            // request Check in ticket
+            ICheckInTicketResponse checkinTicketResponse = await documentService.GetCheckInTicket(docId, null, null);
+
+            Assert.AreEqual(checkinTicketResponse.StatusCode, 200);
+            string ticketParamName = checkinTicketResponse.Data[0].Data.TicketParamName;
+            string ticket = checkinTicketResponse.Data[0].Data.Ticket;
+            string ticketUrl = checkinTicketResponse.Data[0].Data.TicketURL;
+
+            // -----
+            //----
+            // Building the request using Multipart Form Data
+            // Create the file content part by copying the file contents
+            var fileContent = new StreamContent(File.OpenRead(fileLocalPath));
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+               Name = "\"file_0\"",
+               FileName = "\"" + Path.GetFileName(fileLocalPath) + "\""
+            };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+            // Create the ticket content
+            StringContent ticketContent = new StringContent(ticket);
+            ticketContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+               Name = $"\"{ticketParamName}\""
+            };
+
+            // -----
+            var requestContent = new MultipartFormDataContent();
+            requestContent.Add(ticketContent);
+            requestContent.Add(fileContent);
+
+            //Note: This was VERY hard to find however the 3DEXPERIENCE does not accept double quotes in the boundary
+            //definition... Need to remove them.
+            NameValueHeaderValue boundary = requestContent.Headers.ContentType.Parameters.First(o => o.Name == "boundary");
+            boundary.Value = boundary.Value.Replace("\"", String.Empty);
+
+            // ------
+
+            // Prepare request resource path / address --------
+            Uri ticketUrlUri = new Uri(ticketUrl);
+
+            string baseAddress = $"{ticketUrlUri.Scheme}://{ticketUrlUri.Host}/";
+
+            if (!ticketUrlUri.IsDefaultPort)
+            {
+               baseAddress += $":{ticketUrlUri.Port}";
+            }
+
+            HttpClient client = new HttpClient(new HttpClientHandler()) { BaseAddress = new Uri(baseAddress) };
+
+            HttpResponseMessage result = await client.PostAsync(ticketUrlUri.AbsolutePath, requestContent);
+
+            if (result.StatusCode != HttpStatusCode.OK)
+            {
+               throw new Exception(result.Content.ToString());
+            }
+
+            string receipt = await result.Content.ReadAsStringAsync();
+
+            receipt = receipt.Trim('\n'); ;
+
+            // Step 2 - add file ---
+            // -------
+            IDocumentFile docFile = new DocumentFile();
+            docFile.Data = new FileData();
+            docFile.Data.Title = title;
+            docFile.Data.Receipt = receipt;
+            docFile.UpdateAction = "CONNECT";
+
+            IFiles files = new Files();
+            files.Data = new List<IDocumentFile>();
+            files.Data.Add(docFile);
+
             IEnumerable<IDocumentFile> ret = await documentService.AddFiles(docId, files);
 
             Assert.IsNotNull(ret);

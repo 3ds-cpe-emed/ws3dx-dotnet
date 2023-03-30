@@ -273,8 +273,13 @@ namespace ws3dx.document.core.service
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files/CheckinTicket";
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
-         queryParams.Add("store", store);
-         queryParams.Add("policy", policy);
+         if (store != null) {
+            queryParams.Add("store", store);
+         }
+
+         if (policy != null) {
+            queryParams.Add("policy", policy);
+         }
 
          return await PutIndividual<ICheckInTicketResponse>(resourceURI, queryParams: queryParams);
       }
