@@ -233,14 +233,20 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task CreateProject()
+      [TestCase("Project I from ws")]
+      public async Task CreateProject(string _projectTitle)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProjectService projectService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         IProject project = new Project();
+         project.Data = new ProjectData();
+         project.Data.Title = _projectTitle;
+
          IProjects projects = new Projects();
+         projects.Data = new List<IProject>();
+         projects.Data.Add(project);
 
          try
          {

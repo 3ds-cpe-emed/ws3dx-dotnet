@@ -291,18 +291,18 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task CreateTask()
+      [TestCase("Task III from ws", "Task IV from ws")]
+      public async Task CreateTask(string _task1Title, string _task2Title)
       {
          IPassportAuthentication passport = await Authenticate();
 
          TaskService taskService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITaskData taskData1 = new WS3DX.TaskData();
-         taskData1.Title = "Task I - created from web services";
+         taskData1.Title = _task1Title;
 
          ITaskData taskData2 = new WS3DX.TaskData();
-         taskData2.Title = "Task II - created from web services";
+         taskData2.Title = _task2Title;
 
          ITask task1 = new WS3DX.Task();
          task1.Data = taskData1;

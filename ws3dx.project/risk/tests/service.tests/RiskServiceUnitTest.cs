@@ -143,7 +143,7 @@ namespace NUnitTestProject
          riskData.Title = "New Risk Created from Web Services";
          riskData.Probability = "1"; //1-Rare, 2-Unlikely, 3-Possible, 4-Likely, and 5-Almost Certain
          riskData.Impact = "2";
-         riskData.EffectiveDate = "2023-03-18"; //?
+         riskData.EffectiveDate = "2023-03-18T00:00:00.000Z"; //ISO-8601
          riskData.ContextId = "41DF2E16046E00006278C0B200000350";
 
          IRisk risks = new Risk();

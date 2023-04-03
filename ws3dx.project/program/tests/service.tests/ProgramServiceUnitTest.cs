@@ -123,14 +123,18 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task CreateProgram()
+      [TestCase("Program I title for ws")]
+      public async Task CreateProgram(string _programTitle)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ProgramService programService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
+         IProgram program = new Program();
+         program.Data = new ProgramData();
+         program.Data.Title = _programTitle;
          IPrograms programs = new Programs();
+         programs.Data = new List<IProgram>();
+         programs.Data.Add(program);
 
          try
          {
