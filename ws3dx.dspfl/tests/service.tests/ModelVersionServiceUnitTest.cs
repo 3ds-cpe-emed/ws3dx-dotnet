@@ -309,14 +309,22 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
-      [TestCase("")]
-      public async Task CreateProductConfiguration_IProductConfigurationCriteriaMask(string modelVersionId)
+      [TestCase("44C2728FFF280000643143440010CB4A", "AAA27WS3DX - Product Configuration 3")]
+      public async Task CreateProductConfiguration_IProductConfigurationCriteriaMask(string modelVersionId, string _pcTitle)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewProductConfiguration newProductConfiguration = new NewProductConfiguration();
+         newProductConfiguration.Type = "Product Configuration";
+         newProductConfiguration.VersionName = "";
+         newProductConfiguration.Attributes = new NewProductConfigurationData();
+         newProductConfiguration.Attributes.Title = _pcTitle;
+
          ICreateProductConfiguration request = new CreateProductConfiguration();
+         request.Items = new List<INewProductConfiguration>();
+         request.Items.Add(newProductConfiguration);
 
          try
          {
@@ -568,14 +576,22 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IModelVersionMask()
+      [TestCase("AAA27WS3DX Model Version")]
+      public async Task Create_IModelVersionMask(string _modelVersionTitle)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewModel newModel = new NewModel();
+         newModel.Attributes = new ModelVersion();
+         newModel.Attributes.Title = _modelVersionTitle;
+         newModel.Type        = "Products";
+         newModel.VersionName = "A";
+
          ICreateModel request = new CreateModel();
+         request.Items = new List<INewModel>();
+         request.Items.Add(newModel);
 
          try
          {

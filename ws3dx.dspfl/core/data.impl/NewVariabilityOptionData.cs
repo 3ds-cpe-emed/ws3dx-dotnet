@@ -21,6 +21,18 @@ namespace ws3dx.dspfl.core.data.impl
 {
    public class NewVariabilityOptionData : INewVariabilityOptionData
    {
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example:
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("title")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Title { get; set; }
+
       //------------------------------------------------------------------------------------------------
       //<summary>
       //

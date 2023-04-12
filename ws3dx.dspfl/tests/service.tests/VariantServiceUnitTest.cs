@@ -133,14 +133,25 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("44C2728F66390000643291E00014089E")]
       public async Task CreateValue(string variantId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          VariantService variantService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewVariantValue newVariantValue = new NewVariantValue();
+         newVariantValue.Type = "Variant Value";
+         newVariantValue.VersionName = "";
+         newVariantValue.Attributes = new NewVariantValueData();
+         newVariantValue.Attributes.SequenceNumber = 1;
+         newVariantValue.Attributes.Title = "Blue";
+         newVariantValue.Attributes.Description = "Blue color";
+         //newVariantValue.Attributes.Name = "Red";
+         //IN THINK TITLE IS MISSING AS AN ATTRIBUTE in NewVariantValueData _ REVIEW
          ICreateVariantValue request = new CreateVariantValue();
+         request.Items = new List<INewVariantValue>();
+         request.Items.Add(newVariantValue);
 
          try
          {
@@ -155,14 +166,22 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create()
+      [TestCase("AAA27WS3DX Color")]
+      public async Task Create(string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
          VariantService variantService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         INewVariant newVariant = new NewVariant();
+         newVariant.Type = "Variant";
+         newVariant.VersionName = "";
+         newVariant.Attributes = new NewVariantData();
+         newVariant.Attributes.Title = _title;
+         
          ICreateVariant request = new CreateVariant();
+         request.Items = new List<INewVariant>();
+         request.Items.Add(newVariant);
 
          try
          {
