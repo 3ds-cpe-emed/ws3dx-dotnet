@@ -92,11 +92,11 @@ namespace ws3dx.dsdo.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDownloadFileTicketResponse> GetDownloadTicket(string doId, string doFileId, IAddEmpty request)
+      public async Task<IDownloadFileTicketResponse> GetDownloadTicket(string doId, string doFileId, IEmpty request)
       {
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/DownloadTicket";
 
-         return await PostIndividual<IDownloadFileTicketResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IDownloadFileTicketResponse, IEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

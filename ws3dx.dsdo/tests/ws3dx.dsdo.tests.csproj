@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ws3dx.dseng\core\ws3dx.dseng.core.csproj" />
+    <ProjectReference Include="..\..\ws3dx.dsxcad\core\ws3dx.dsxcad.core.csproj" />
     <ProjectReference Include="..\core\ws3dx.dsdo.core.csproj" />
     <ProjectReference Include="..\data\ws3dx.dsdo.data.csproj" />
   </ItemGroup>

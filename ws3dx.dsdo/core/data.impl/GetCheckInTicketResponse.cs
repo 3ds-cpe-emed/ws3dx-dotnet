@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -14,18 +14,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
-using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data
 {
-   public class GetCheckInTicket : IGetCheckInTicket
+   public class GetCheckInTicketResponse : IGetCheckInTicketResponse
    {
-      [JsonPropertyName("ticketURL")]
+      [JsonPropertyName("success")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketURL { get; set; }
-      [JsonPropertyName("ticket")]
+      public string Success { get; set; }
+      [JsonPropertyName("statusCode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Ticket { get; set; }
+      public string StatusCode { get; set; }
+      [JsonPropertyName("data")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IGetCheckInTicketResponseData Data { get; set; }
    }
 }

@@ -13,11 +13,21 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsdo.data;
+using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data
 {
-   public class AddEmpty : IAddEmpty
+   public interface IGetCheckInTicketRequest
    {
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: 1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string FileCount { get; set; }
+
+      public ITypedUriId ReferencedObject { get; set; }
    }
 }

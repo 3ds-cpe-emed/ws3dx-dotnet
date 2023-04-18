@@ -19,13 +19,21 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsdo.core.data.impl
 {
-   public class GetCheckInTicket : IGetCheckInTicket
+   public class GetCheckInTicketRequest : IGetCheckInTicketRequest
    {
-      [JsonPropertyName("ticketURL")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: 1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("fileCount")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketURL { get; set; }
-      [JsonPropertyName("ticket")]
+      public string FileCount { get; set; }
+
+      [JsonPropertyName("referencedObject")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Ticket { get; set; }
+      public ITypedUriId ReferencedObject { get; set; }
    }
 }

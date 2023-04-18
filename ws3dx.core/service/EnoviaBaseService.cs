@@ -276,29 +276,6 @@ namespace ws3dx.core.service
          return __output;
       }
 
-      //protected IList<T> Deserialize<T, S>(string _json)
-      //{
-      //   IList<T> __output = null;
-
-      //   System.Diagnostics.Debug.WriteLine($"Deserialize<{typeof(T).Name}, {typeof(S).Name}>");
-      //   System.Diagnostics.Debug.WriteLine(_json);
-
-      //   try
-      //   {
-      //      __output = MaskDeserializationHandler.Deserialize<T, S>(_json);
-      //      //            var methodInfo = typeof(MaskDeserializationHandler).GetMethod("Deserialize", 2, new Type[] { typeof(string) });
-      //      //            var genericMethodInfo = methodInfo.MakeGenericMethod(new Type[] { typeof(T), typeof(S) });
-      //      //            __output = (IList<T>)genericMethodInfo.Invoke(null, new object[] { _json });
-      //   }
-      //   catch (Exception _ex)
-      //   {
-      //      System.Diagnostics.Debug.WriteLine(_ex.Message);
-      //      throw;
-      //   }
-
-      //   return __output;
-      //}
-
       #endregion
 
       #region GET
@@ -351,6 +328,7 @@ namespace ws3dx.core.service
       {
          return await GetIndividualFromResponseArrayProperty<T>(_requestUri, "member", queryParams, headerParams);
       }
+      
       protected async Task<T> GetIndividualFromResponseArrayProperty<T>(string _requestUri, string _wrappingCollectionArrayPropertyName, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
          IList<T> returnSet = await GetCollectionFromResponseArrayProperty<T>(_requestUri, _wrappingCollectionArrayPropertyName, queryParams, headerParams);
@@ -384,6 +362,55 @@ namespace ws3dx.core.service
       #endregion
 
       #region POST
+
+      protected async Task<T> PostIndividualNoMask<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      {
+         string responseContent = await PostNoMask(_requestUri, _payload, queryParams, headerParams);
+
+         return Deserialize<T>(responseContent);
+      }
+
+      protected async Task<IList<T>> PostCollectionNoMaskFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      {
+         return await PostCollectionNoMaskFromResponseCollectionProperty<T,P>(_requestUri, "member", _payload, queryParams, headerParams);
+      }
+
+      protected async Task<IList<T>> PostCollectionNoMaskFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      {
+         string responseContent = await PostNoMask(_requestUri, _payload, queryParams, headerParams);
+
+         return DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+      }
+
+      private async Task<string> PostNoMask(string _requestUri, object _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
+      {
+         if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
+
+         //mask
+         Dictionary<string, string> requestQueryParams = new Dictionary<string, string>();
+
+         if (queryParams != null)
+         {
+            foreach (string queryParamName in queryParams.Keys)
+            {
+               requestQueryParams.Add(queryParamName, queryParams[queryParamName]);
+            }
+         }
+
+         string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.CREATE);
+
+         //Send the Request
+         HttpResponseMessage response = await PostAsync(_requestUri, _body: serializedPayload, _queryParameters: requestQueryParams, _headers: headerParams);
+
+         //Handle the Response
+         if (response.StatusCode != System.Net.HttpStatusCode.OK)
+         {
+            // handle according to established exception policy
+            throw (new HttpResponseException(response));
+         }
+
+         return await response.Content.ReadAsStringAsync();
+      }
 
       private async Task<string> Post<T>(string _requestUri, object _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
@@ -623,13 +650,6 @@ namespace ws3dx.core.service
 
          return returnSet[0];
       }
-
-      //protected async Task<T> PutGroup<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
-      //{
-      //   string responseContent = await Put(_requestUri, _payload, queryParams, headerParams);
-
-      //   return Deserialize<T>(responseContent);
-      //}
 
       protected async Task<IList<T>> PutCollectionFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {

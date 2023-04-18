@@ -94,7 +94,7 @@ namespace NUnitTestProject
          return __derivedOutputRuleService;
       }
 
-      [TestCase("", "onXCADSave")]
+      [TestCase("", "ondemand")] //onXCADSave, ondemand
       public async Task GetAll(string category, string ruleType)
       {
          IPassportAuthentication passport = await Authenticate();

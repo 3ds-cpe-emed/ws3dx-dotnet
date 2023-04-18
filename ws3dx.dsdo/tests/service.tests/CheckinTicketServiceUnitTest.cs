@@ -93,48 +93,5 @@ namespace NUnitTestProject
          __checkinTicketService.SecurityContext = GetDefaultSecurityContext();
          return __checkinTicketService;
       }
-
-      [TestCase()]
-      public async Task Get_IDerivedOutputDetailMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         CheckinTicketService checkinTicketService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         IGetCheckInTicket request = new GetCheckInTicket();
-
-         try
-         {
-            IEnumerable<IDerivedOutputDetailMask> ret = await checkinTicketService.Get<IDerivedOutputDetailMask>(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase()]
-      public async Task Get_IDerivedOutputCompleteMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         CheckinTicketService checkinTicketService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         IGetCheckInTicket request = new GetCheckInTicket();
-
-         try
-         {
-            IEnumerable<IDerivedOutputCompleteMask> ret = await checkinTicketService.Get<IDerivedOutputCompleteMask>(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
    }
 }

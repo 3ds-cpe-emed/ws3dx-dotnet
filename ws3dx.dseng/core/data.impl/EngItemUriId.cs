@@ -1,5 +1,5 @@
-//------------------------------------------------------------------------------------------------------------------------------------
-// Copyright 2022 Dassault Systèmes - CPE EMED
+﻿//------------------------------------------------------------------------------------------------------------------------------------
+// Copyright 2023 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,
@@ -14,18 +14,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
-using ws3dx.shared.data;
+using ws3dx.shared.data.impl;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dseng.core.data.impl
 {
-   public class GetCheckInTicket : IGetCheckInTicket
+   public class EngItemUriId : TypedUriId
    {
-      [JsonPropertyName("ticketURL")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketURL { get; set; }
-      [JsonPropertyName("ticket")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Ticket { get; set; }
+      private string RELATIVE_PATH = "resource/v1/dseng/dseng:EngItem/";
+      private string TYPE = "VPMReference";
+
+      public EngItemUriId(string _id)
+      {
+         Id = _id;
+         Type = TYPE;
+         Source = "$3DSpace";
+         RelativePath = $"{RELATIVE_PATH}{Id}";
+      }
+
+      public EngItemUriId(string _id, string _source)
+      {
+         Id = _id;
+         Type = TYPE;
+         Source = _source;
+         RelativePath = $"{RELATIVE_PATH}{Id}";
+      }
    }
 }

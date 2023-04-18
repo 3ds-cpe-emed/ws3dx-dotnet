@@ -16,6 +16,13 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -25,6 +32,10 @@ using ws3dx.core.redirection;
 using ws3dx.dsdo.core.data.impl;
 using ws3dx.dsdo.core.service;
 using ws3dx.dsdo.data;
+using ws3dx.dseng.data;
+using ws3dx.dsxcad.core.data.impl;
+using ws3dx.shared.data;
+using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
@@ -94,6 +105,14 @@ namespace NUnitTestProject
          return __derivedOutputService;
       }
 
+      public CheckinTicketService InitiateCheckinTicketService(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      {
+         CheckinTicketService __checkinTicketService = new CheckinTicketService(_serviceUrl, _passport);
+         __checkinTicketService.Tenant = _tenant;
+         __checkinTicketService.SecurityContext = GetDefaultSecurityContext();
+         return __checkinTicketService;
+      }
+
       [TestCase("")]
       public async Task Get_IDerivedOutputDetailMask(string doId)
       {
@@ -116,14 +135,140 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task Create_IDerivedOutputDetailMask()
+      public async Task<string> UploadFile(IPassportAuthentication _passport, ITypedUriId _id, string _fileLocalPath)
+      {
+         CheckinTicketService checkinTicketService = InitiateCheckinTicketService(_passport, m_serviceUrl, m_tenant);
+
+         // Step 1 -  upload file
+         // request Check in ticket
+
+         IGetCheckInTicketRequest checkinTicketRequest = new GetCheckInTicketRequest();
+         checkinTicketRequest.FileCount = "1";
+         checkinTicketRequest.ReferencedObject = _id;
+
+         IGetCheckInTicketResponse checkinTicketResponse = await checkinTicketService.Get(checkinTicketRequest);
+
+         Assert.AreEqual(checkinTicketResponse.StatusCode, "200");
+         Assert.AreEqual(checkinTicketResponse.Success, "true");
+
+         string ticket          = checkinTicketResponse.Data.DataElements.Ticket;
+         string ticketUrl       = checkinTicketResponse.Data.DataElements.TicketURL;
+         string ticketParamName = "__fcs__jobTicket";
+
+         // -----
+         //----
+         // Building the request using Multipart Form Data
+         // Create the file content part by copying the file contents
+         var fileContent = new StreamContent(File.OpenRead(_fileLocalPath));
+         fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+         {
+            Name = "\"file\"",
+            FileName = "\"" + Path.GetFileName(_fileLocalPath) + "\""
+         };
+         fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+         // Create the ticket content
+         StringContent ticketContent = new StringContent(ticket);
+         ticketContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+         {
+            Name = $"\"{ticketParamName}\""
+         };
+
+         // -----
+         var requestContent = new MultipartFormDataContent();
+         requestContent.Add(ticketContent);
+         requestContent.Add(fileContent);
+
+         //Note: This was VERY hard to find however the 3DEXPERIENCE does not accept double quotes in the boundary
+         //definition... Need to remove them.
+         NameValueHeaderValue boundary = requestContent.Headers.ContentType.Parameters.First(o => o.Name == "boundary");
+         boundary.Value = boundary.Value.Replace("\"", String.Empty);
+
+         // ------
+
+         // Prepare request resource path / address --------
+         System.Uri ticketUrlUri = new System.Uri(ticketUrl);
+
+         string baseAddress = $"{ticketUrlUri.Scheme}://{ticketUrlUri.Host}/";
+
+         if (!ticketUrlUri.IsDefaultPort)
+         {
+            baseAddress += $":{ticketUrlUri.Port}";
+         }
+
+         HttpClient client = new HttpClient(new HttpClientHandler()) { BaseAddress = new System.Uri(baseAddress) };
+
+         HttpResponseMessage result = await client.PostAsync(ticketUrlUri.AbsolutePath, requestContent);
+
+         if (result.StatusCode != HttpStatusCode.OK)
+         {
+            throw new Exception(result.Content.ToString());
+         }
+
+         string receipt = await result.Content.ReadAsStringAsync();
+
+         receipt = receipt.Trim('\n'); ;
+
+         return receipt;
+      }
+
+      private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+      {
+         // Convert the input string to a byte array and compute the hash.
+         byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+         // Create a new Stringbuilder to collect the bytes
+         // and create a string.
+         var sBuilder = new StringBuilder();
+
+         // Loop through each byte of the hashed data
+         // and format each one as a hexadecimal string.
+         for (int i = 0; i < data.Length; i++)
+         {
+            sBuilder.Append(data[i].ToString("x2"));
+         }
+
+         // Return the hexadecimal string.
+         return sBuilder.ToString();
+      }
+
+      // ID 2661E4727D710000627CC3D6000106F1
+      // NAME prd-R1132100982379-00465895
+
+      [TestCase("2661E4727D710000627CC3D6000106F1", "E:\\downloads\\3DMaster_V2R0_221202.pdf")]
+      public async Task Create_IDerivedOutputDetailMask(string _id, string _doLocalFilePath)
       {
          IPassportAuthentication passport = await Authenticate();
 
          DerivedOutputService derivedOutputService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         ITypedUriId id = new XCADPartUriId(_id);
+
+         string receipt = await UploadFile(passport, id, _doLocalFilePath);
+
+         string checksum = "";
+
+         using (var md5 = MD5.Create())
+         {
+            using (var stream = File.OpenRead(_doLocalFilePath))
+            {
+               byte[] hash = md5.ComputeHash(stream);
+
+               checksum = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+            }
+         }
+
+         IDerivedOutputFile doFile = new DerivedOutputFile();
+         doFile.Checksum = checksum;
+         doFile.Filename = "3DMaster_V2R0_221202.pdf";
+         doFile.Format   = "PDF";
+         doFile.Receipt  = receipt;
+
          ICreateDerivedOutput request = new CreateDerivedOutput();
+
+         request.ReferencedObject   = id;
+         request.DerivedOutputFiles = new List<IDerivedOutputFile>();
+         request.DerivedOutputFiles.Add(doFile);
 
          try
          {
@@ -137,6 +282,7 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
+
       [TestCase()]
       public async Task Create_IDerivedOutputCompleteMask()
       {
@@ -166,7 +312,7 @@ namespace NUnitTestProject
 
          DerivedOutputService derivedOutputService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         IAddEmpty request = new AddEmpty();
+         IEmpty request = new Empty();
 
          try
          {

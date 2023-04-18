@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -44,11 +45,12 @@ namespace ws3dx.dsdo.core.service
       // using rule ID.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<ICreateDerivedOutputJobsResponse> Create(ICreateDerivedOutputJobs request)
+      public async Task<IList<ICreateDerivedOutputJobsResponse>> Create(ICreateDerivedOutputJobs request)
       {
          string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputJobs";
 
-         return await PostIndividual<ICreateDerivedOutputJobsResponse, ICreateDerivedOutputJobs>(resourceURI, request);
+         return await PostCollectionNoMaskFromResponseMemberProperty<ICreateDerivedOutputJobsResponse, ICreateDerivedOutputJobs>(resourceURI, request);
+      
       }
    }
 }

@@ -47,13 +47,11 @@ namespace ws3dx.dsdo.core.service
       // Output Entity Summary: Get checkin ticket for FCS upload.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Get<T>(IGetCheckInTicket request)
+      public async Task<IGetCheckInTicketResponse> Get(IGetCheckInTicketRequest request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
-
          string resourceURI = $"{GetBaseResource()}CheckinTicket";
 
-         return await PostCollectionFromResponseMemberProperty<T, IGetCheckInTicket>(resourceURI, request);
+         return await PostIndividualNoMask<IGetCheckInTicketResponse, IGetCheckInTicketRequest>(resourceURI, request);
       }
    }
 }

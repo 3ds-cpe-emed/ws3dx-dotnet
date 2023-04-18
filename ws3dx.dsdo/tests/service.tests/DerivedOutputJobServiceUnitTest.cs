@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
@@ -24,6 +25,8 @@ using ws3dx.core.redirection;
 using ws3dx.dsdo.core.data.impl;
 using ws3dx.dsdo.core.service;
 using ws3dx.dsdo.data;
+using ws3dx.dseng.core.data.impl;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -93,18 +96,36 @@ namespace NUnitTestProject
          return __derivedOutputJobService;
       }
 
-      [TestCase()]
-      public async Task Create()
+      //prd-R1132100982379-00055636 - 35B0B3DB533100005F1999AD00164023
+      //prd-R1132100982379-00073830 - 79DD880FF25300005F7F0CEA000E4CE1
+      [TestCase("35B0B3DB533100005F1999AD00164023", "79DD880FF25300005F7F0CEA000E4CE1", "28f7c75783da39a0aca083a2be16a27b350736f4ceabc5f2cd318e323bbdc33a")]
+      public async Task Create(string _referencedObjectId1, string _referencedObjectId2, string _derivedRuleId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          DerivedOutputJobService derivedOutputJobService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
+         ITypedUriId id1 = new EngItemUriId(_referencedObjectId1, m_serviceUrl);
+         ITypedUriId id2 = new EngItemUriId(_referencedObjectId2, m_serviceUrl);
+
+         IDerivedOutputConversionRequest derivedOutputConversionRequest1 = new DerivedOutputConversionRequest();
+         derivedOutputConversionRequest1.ReferencedObject = id1;
+         derivedOutputConversionRequest1.RuleID           = _derivedRuleId;
+
+         IDerivedOutputConversionRequest derivedOutputConversionRequest2 = new DerivedOutputConversionRequest();
+         derivedOutputConversionRequest2.ReferencedObject = id2;
+         derivedOutputConversionRequest2.RuleID = _derivedRuleId;
+
          ICreateDerivedOutputJobs request = new CreateDerivedOutputJobs();
+
+         request.ConversionRequests = new List<IDerivedOutputConversionRequest>();
+
+         request.ConversionRequests.Add(derivedOutputConversionRequest1);
+         request.ConversionRequests.Add(derivedOutputConversionRequest2);
 
          try
          {
-            ICreateDerivedOutputJobsResponse ret = await derivedOutputJobService.Create(request);
+            IList<ICreateDerivedOutputJobsResponse> ret = await derivedOutputJobService.Create(request);
 
             Assert.IsNotNull(ret);
          }

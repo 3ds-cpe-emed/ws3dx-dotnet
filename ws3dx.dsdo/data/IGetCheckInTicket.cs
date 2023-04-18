@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -13,21 +13,11 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.shared.data;
-
 namespace ws3dx.dsdo.data
 {
    public interface IGetCheckInTicket
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string FileCount { get; set; }
-
-      public ITypedUriId ReferencedObject { get; set; }
+      public string TicketURL { get; set; }
+      public string Ticket { get; set; }
    }
 }
