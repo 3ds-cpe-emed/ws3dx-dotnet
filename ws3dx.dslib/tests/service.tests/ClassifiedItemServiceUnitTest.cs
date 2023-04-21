@@ -124,28 +124,34 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "", "VPMReference")]
+      [TestCase("3784C760B0500000641C43C2001A4D7E", "44C2728F4E2300006405B1EF000CFEB5", "dseng:EngItem")]
       public async Task Create(string classId, string itemId, string itemType)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ClassifiedItemService classifiedItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         TypedUriIdentifier product = new TypedUriIdentifier();
+         TypedUriIdentifier product = new TypedUriIdentifier
+         {
+            Identifier = itemId,
+            Type = itemType,
+            RelativePath = "/resources/v1/modeler/dseng/dseng:EngItem/" + itemId,
+            Source = m_serviceUrl
+         };
 
-         product.Identifier = itemId;
-         product.Type = itemType;
-
-         IAddClassifiedItems request = new AddClassifiedItems();
-
-         request.ClassID = classId;
-         request.ObjectsToClassify = new List<ITypedUriIdentifier>() { product };
+         IAddClassifiedItems request = new AddClassifiedItems
+         {
+            ClassID = classId,
+            ObjectsToClassify = new List<ITypedUriIdentifier>() { product }
+         };
 
          try
          {
             IClassificationStatusResponse ret = await classifiedItemService.Create(request);
 
             Assert.IsNotNull(ret);
+
+            Assert.AreEqual(ret.ObjectsClassified, 1);
          }
          catch (HttpResponseException _ex)
          {
@@ -240,20 +246,34 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Remove()
+      [TestCase("3784C760B0500000641C43C2001A4D7E", "44C2728F4E2300006405B1EF000CFEB5", "dseng:EngItem")]
+      public async Task Remove(string classId, string itemId, string itemType)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ClassifiedItemService classifiedItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         IRemoveClassifiedItem request = new RemoveClassifiedItem();
+         ITypedUriIdentifier product = new TypedUriIdentifier
+         {
+            Identifier = itemId,
+            Type = itemType,
+            RelativePath = "/resources/v1/modeler/dseng/dseng:EngItem/" + itemId,
+            Source = m_serviceUrl
+         };
+
+         IRemoveClassifiedItem request = new RemoveClassifiedItem
+         {
+            ClassID = classId,
+            ObjectsToDeclassify = new List<ITypedUriIdentifier>() { product }
+         };
 
          try
          {
             IDeclassificationStatusResponse ret = await classifiedItemService.Remove(request);
 
             Assert.IsNotNull(ret);
+
+            Assert.AreEqual(ret.ObjectsDeclassified, 1);
          }
          catch (HttpResponseException _ex)
          {

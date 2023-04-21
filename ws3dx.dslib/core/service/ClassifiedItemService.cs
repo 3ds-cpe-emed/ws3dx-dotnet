@@ -85,7 +85,7 @@ namespace ws3dx.dslib.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dslib:ClassifiedItem";
 
-         return await PostIndividual<IClassificationStatusResponse, IAddClassifiedItems>(resourceURI, request);
+         return await PostIndividualNoMask<IClassificationStatusResponse, IAddClassifiedItems>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ namespace ws3dx.dslib.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dslib:ClassifiedItem/locate";
 
-         return await PostIndividual<IClassifiedItemLocateResponse, ITypedUriIdentifier>(resourceURI, request);
+         return await PostIndividualNoMask<IClassifiedItemLocateResponse, ITypedUriIdentifier>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ namespace ws3dx.dslib.core.service
       {
          string resourceURI = $"{GetBaseResource()}/dslib:ClassifiedItem/remove";
 
-         return await PostIndividual<IDeclassificationStatusResponse, IRemoveClassifiedItem>(resourceURI, request);
+         return await PostIndividualNoMask<IDeclassificationStatusResponse, IRemoveClassifiedItem>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
