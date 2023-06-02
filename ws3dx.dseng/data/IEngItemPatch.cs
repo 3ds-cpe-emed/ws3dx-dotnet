@@ -41,19 +41,28 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
+      // Example: true
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public bool? IsManufacturable { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
       // Example: Entity physical id
       //
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
 
-      public IChangeControl DslcChangeControl { get; set; }
+      public IChangeControl ChangeControl { get; set; }
 
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      public IConfigured DscfgConfigured { get; set; }
+      public IConfigured Configured { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
    }

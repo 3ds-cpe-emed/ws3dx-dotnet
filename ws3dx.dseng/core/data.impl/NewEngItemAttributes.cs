@@ -36,6 +36,17 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
+      // Example: true
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("isManufacturable")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? IsManufacturable { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
       // Example: My description
       //
       //<summary>

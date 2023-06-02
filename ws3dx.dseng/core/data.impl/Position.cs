@@ -29,7 +29,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a11")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A11 { get; set; }
+      public int? A11 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -40,7 +40,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a12")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A12 { get; set; }
+      public int? A12 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -51,7 +51,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a13")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A13 { get; set; }
+      public int? A13 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -62,7 +62,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a21")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A21 { get; set; }
+      public int? A21 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -73,7 +73,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a22")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A22 { get; set; }
+      public int? A22 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -84,7 +84,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a23")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A23 { get; set; }
+      public int? A23 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -95,7 +95,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a31")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A31 { get; set; }
+      public int? A31 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -106,7 +106,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a32")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A32 { get; set; }
+      public int? A32 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -117,7 +117,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("a33")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int A33 { get; set; }
+      public int? A33 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -128,7 +128,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("u1")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int U1 { get; set; }
+      public int? U1 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -139,7 +139,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("u2")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int U2 { get; set; }
+      public int? U2 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -150,6 +150,6 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("u3")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int U3 { get; set; }
+      public int? U3 { get; set; }
    }
 }

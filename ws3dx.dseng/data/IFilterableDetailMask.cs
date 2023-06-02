@@ -13,22 +13,20 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
+using ws3dx.serialization.attribute;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data
 {
-   public class AlternateMaskDefaultApplicabilityContext : IAlternateMaskDefaultApplicabilityContext
+   [MaskSchema("dsmvcfg:FilterableDetails")]
+   public interface IFilterableDetailMask
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Get the effectivity expression on instance.
       //
-      // Example: EE562168015FFCF14F940A513C63AA77
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("parent")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Parent { get; set; }
+      // </summary>
+      //----------------------------------------------------------------
+      public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
    }
 }

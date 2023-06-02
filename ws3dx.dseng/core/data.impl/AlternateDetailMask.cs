@@ -15,10 +15,11 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
+using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngInstanceMaskFilterable : IEngInstanceMaskFilterable
+   public class AlternateDetailMask : IAlternateDetailMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -34,7 +35,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Basic type value Example: My Type
+      // Description: Basic type value Example: DBType
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      // Description: Object created value Example: 10/19/2021 10:58:01 PM
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -67,36 +68,65 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Instance name Example: My name
+      // Description: Object revision value Example: A.1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("name")]
+      [JsonPropertyName("revision")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+      public string Revision { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Instance description vlaue Example: My description
+      // Description: Object current state value Example: Proposed
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
+      [JsonPropertyName("state")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
+      public string State { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Check if the Instance or Relationship is having effectivity on it or not. Example: 
-      // TRUE or FALSE
+      // Description: Object owner value Example: DB Owner
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("hasEffectivity")]
+      [JsonPropertyName("owner")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string HasEffectivity { get; set; }
+      public string Owner { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object organization value Example: MyCompany
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("organization")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Organization { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object collabspace value Example: Default
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("collabspace")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Collabspace { get; set; }
+
+      [JsonPropertyName("dseng:applicabilityContext")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
+
+      [JsonPropertyName("referencedObject")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public ITypedUriId ReferencedObject { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

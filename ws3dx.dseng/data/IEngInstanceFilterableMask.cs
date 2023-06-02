@@ -17,8 +17,8 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [MaskSchema("dsmveng:AlternateMask.Default")]
-   public interface IAlternateMaskDefault
+   [MaskSchema("dsmveng:EngInstanceMask.Filterable")]
+   public interface IEngInstanceFilterableMask
    {
       //----------------------------------------------------------------
       // <summary>
@@ -32,7 +32,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic type value Example: DBType
+      // Description: Basic type value Example: My Type
       //
       // </summary>
       //----------------------------------------------------------------
@@ -41,7 +41,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
       //
       // </summary>
       //----------------------------------------------------------------
@@ -50,7 +50,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object created value Example: 10/19/2021 10:58:01 PM
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
       //
       // </summary>
       //----------------------------------------------------------------
@@ -59,49 +59,30 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object revision value Example: A.1
+      // Description: Instance name Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Revision { get; set; }
+      public string Name { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object current state value Example: IN_WORK
+      // Description: Instance description vlaue Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
-      public string State { get; set; }
+      public string Description { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object owner value Example: DB Owner
+      // Description: Check if the Instance or Relationship is having effectivity on it or not. Example: 
+      // TRUE or FALSE
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Owner { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
-
-      public IAlternateMaskDefaultApplicabilityContext ApplicabilityContext { get; set; }
+      public string HasEffectivity { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

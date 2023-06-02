@@ -19,7 +19,7 @@ using ws3dx.shared.data;
 namespace ws3dx.dseng.data
 {
    [MaskSchema("dsmveng:AlternateMask.Details")]
-   public interface IAlternateMaskDetail
+   public interface IAlternateDetailMask
    {
       //----------------------------------------------------------------
       // <summary>
@@ -69,7 +69,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object current state value Example: IN_WORK
+      // Description: Object current state value Example: Proposed
       //
       // </summary>
       //----------------------------------------------------------------
@@ -102,7 +102,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Collabspace { get; set; }
 
-      public IAlternateMaskDetailApplicabilityContext ApplicabilityContext { get; set; }
+      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
 
       public ITypedUriId ReferencedObject { get; set; }
 

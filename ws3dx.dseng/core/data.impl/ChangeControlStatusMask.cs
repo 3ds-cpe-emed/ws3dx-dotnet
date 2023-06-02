@@ -14,11 +14,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
+using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngItemEnterpriseAttributes : Dictionary<string, object>, IEngItemEnterpriseAttributes
+   public class ChangeControlStatusMask : IChangeControlStatusMask
    {
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: [NONE, ANY, ID OR MANY]
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("Change Control Status")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string ChangeControlStatus { get; set; }
+
+      [JsonPropertyName("Controlling Changes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
    }
 }

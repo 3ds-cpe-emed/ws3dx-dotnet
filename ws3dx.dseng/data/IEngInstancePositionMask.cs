@@ -14,11 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.serialization.attribute;
+using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [MaskSchema("dsmveng:EngInstanceMask.Filterable")]
-   public interface IEngInstanceMaskFilterable
+   [MaskSchema("dsmveng:EngInstanceMask.Position")]
+   public interface IEngInstancePositionMask
    {
       //----------------------------------------------------------------
       // <summary>
@@ -74,15 +75,9 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Check if the Instance or Relationship is having effectivity on it or not. Example: 
-      // TRUE or FALSE
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string HasEffectivity { get; set; }
+      public ITypedUriId ReferencedObject { get; set; }
+
+      public IPosition Position { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

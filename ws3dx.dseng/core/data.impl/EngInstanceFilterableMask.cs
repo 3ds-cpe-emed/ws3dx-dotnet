@@ -15,11 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngInstanceMaskPosition : IEngInstanceMaskPosition
+   public class EngInstanceFilterableMask : IEngInstanceFilterableMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -87,13 +86,17 @@ namespace ws3dx.dseng.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
 
-      [JsonPropertyName("referencedObject")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Check if the Instance or Relationship is having effectivity on it or not. Example: 
+      // TRUE or FALSE
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("hasEffectivity")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
-
-      [JsonPropertyName("dseng:position")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPosition Position { get; set; }
+      public string HasEffectivity { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

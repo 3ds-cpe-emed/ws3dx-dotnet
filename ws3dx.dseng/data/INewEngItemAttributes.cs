@@ -32,6 +32,15 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
+      // Example: true
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public bool? IsManufacturable { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
       // Example: My description
       //
       // </summary>

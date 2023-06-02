@@ -45,7 +45,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
 
-      public IFilterable DscfgFilterable { get; set; }
+      public IFilterable Filterable { get; set; }
 
       public IPosition Position { get; set; }
    }

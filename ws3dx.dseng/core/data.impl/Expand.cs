@@ -13,28 +13,45 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
-using ws3dx.shared.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.core.impl
 {
-   public class ChangeControlMaskStatus : IChangeControlMaskStatus
+   public class Expand : IExpand
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: [NONE, ANY, ID OR MANY]
+      // Description: -1 for all level, and 1,2,3,.. for specific level Example: 1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("Change Control Status")]
+      [JsonPropertyName("expandDepth")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ChangeControlStatus { get; set; }
+      public int? ExpandDepth { get; set; }
 
-      [JsonPropertyName("Controlling Changes")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: true/false Example: true
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("withPath")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
+      public bool? WithPath { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: inputType is not proper. Please check the Filter Specification here: Web Services 
+      // and Events | 3DSpace | Advanced Filtering | The Public Filter Specification Example: {...}
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("filter")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Filter { get; set; }
    }
 }

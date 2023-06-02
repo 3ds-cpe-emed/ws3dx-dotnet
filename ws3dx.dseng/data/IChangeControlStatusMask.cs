@@ -13,22 +13,24 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
+using System.Collections.Generic;
+using ws3dx.serialization.attribute;
+using ws3dx.shared.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data
 {
-   public class FilterableDetail : IFilterableDetail
+   [MaskSchema("dsmvlc:ChangeControlMask.Status")]
+   public interface IChangeControlStatusMask
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: [NONE, ANY, ID OR MANY]
       //
-      // Description: Get the effectivity expression on instance.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("effectivityContent")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
+      // </summary>
+      //----------------------------------------------------------------
+      public string ChangeControlStatus { get; set; }
+
+      public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
    }
 }

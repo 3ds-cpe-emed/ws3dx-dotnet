@@ -13,20 +13,37 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [MaskSchema("dsmveng:EnterpriseReference.Details")]
-   public interface IEnterpriseReferenceDetail
+   public interface IExpand
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: Part Number Value
+      // Description: -1 for all level, and 1,2,3,.. for specific level Example: 1
       //
       // </summary>
       //----------------------------------------------------------------
-      public string PartNumber { get; set; }
+      public int? ExpandDepth { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: true/false Example: true
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public bool? WithPath { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: inputType is not proper. Please check the Filter Specification here: Web Services 
+      // and Events | 3DSpace | Advanced Filtering | The Public Filter Specification Example: {...}
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Filter { get; set; }
    }
 }

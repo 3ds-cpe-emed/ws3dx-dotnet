@@ -14,12 +14,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [MaskSchema("dsmveng:EngInstanceMask.Position")]
-   public interface IEngInstanceMaskPosition
+   [MaskSchema("dsmveng:AlternateMask.Default")]
+   public interface IAlternateMask
    {
       //----------------------------------------------------------------
       // <summary>
@@ -33,7 +32,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic type value Example: My Type
+      // Description: Basic type value Example: DBType
       //
       // </summary>
       //----------------------------------------------------------------
@@ -42,7 +41,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
       //
       // </summary>
       //----------------------------------------------------------------
@@ -51,7 +50,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      // Description: Object created value Example: 10/19/2021 10:58:01 PM
       //
       // </summary>
       //----------------------------------------------------------------
@@ -60,24 +59,49 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Instance name Example: My name
+      // Description: Object revision value Example: A.1
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Name { get; set; }
+      public string Revision { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Instance description vlaue Example: My description
+      // Description: Object current state value Example: Proposed
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Description { get; set; }
+      public string State { get; set; }
 
-      public ITypedUriId ReferencedObject { get; set; }
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object owner value Example: DB Owner
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Owner { get; set; }
 
-      public IPosition Position { get; set; }
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object organization value Example: MyCompany
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Organization { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object collabspace value Example: Default
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Collabspace { get; set; }
+
+      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

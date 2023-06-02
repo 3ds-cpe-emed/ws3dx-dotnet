@@ -20,7 +20,7 @@ using ws3dx.shared.data.dscfg;
 namespace ws3dx.dseng.data
 {
    [MaskSchema("dsmveng:EngItemMask.Config")]
-   public interface IEngItemConfigMask : IEngItemDetailsMask
+   public interface IEngItemConfigMask : IEngItemEnterprise
    {
       public IList<IConfigurationContext> ConfigurationContext { get; set; }
    }

@@ -55,7 +55,7 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dscfg:Filterable")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFilterable DscfgFilterable { get; set; }
+      public IFilterable Filterable { get; set; }
 
       [JsonPropertyName("dseng:position")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

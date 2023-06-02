@@ -15,11 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class AlternateMaskDetail : IAlternateMaskDetail
+   public class AlternateMask : IAlternateMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -79,7 +78,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object current state value Example: IN_WORK
+      // Description: Object current state value Example: Proposed
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -122,11 +121,7 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dseng:applicabilityContext")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IAlternateMaskDetailApplicabilityContext ApplicabilityContext { get; set; }
-
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

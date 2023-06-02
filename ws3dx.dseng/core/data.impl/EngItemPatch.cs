@@ -47,6 +47,17 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
+      // Example: true
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("isManufacturable")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? IsManufacturable { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
       // Example: Entity physical id
       //
       //<summary>
@@ -57,7 +68,7 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dslc:changeControl")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IChangeControl DslcChangeControl { get; set; }
+      public IChangeControl ChangeControl { get; set; }
 
       [JsonPropertyName("dseng:EnterpriseReference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -69,7 +80,7 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dscfg:Configured")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IConfigured DscfgConfigured { get; set; }
+      public IConfigured Configured { get; set; }
 
       [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

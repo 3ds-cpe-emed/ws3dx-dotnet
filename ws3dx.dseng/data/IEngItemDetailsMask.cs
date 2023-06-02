@@ -14,15 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
    [MaskSchema("dsmveng:EngItemMask.Details")]
-   public interface IEngItemDetailsMask : IItem
+   public interface IEngItemDetailsMask : IEngItemEnterprise
    {
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+      public string IsManufacturable { get; set; }
 
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
    }
 }
