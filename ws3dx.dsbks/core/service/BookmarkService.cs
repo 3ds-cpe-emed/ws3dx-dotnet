@@ -125,7 +125,7 @@ namespace ws3dx.dsbks.core.service
       // Description: Attaches multiple external items from a given bookmark and returns the bookmark or 
       // failure message in case of error. Maximum 50 items are allowed in a service call. Summary: Attaches 
       // the list of items in the given bookmark.
-      // <param name="ID">
+      // <param name="bookmarkId">
       // Description: dsbks:Bookmark object ID
       // </param>
       // </summary>
@@ -166,7 +166,7 @@ namespace ws3dx.dsbks.core.service
       // Description: Detaches multiple external items from a given bookmark and returns the bookmark or 
       // failure message in case of error. Maximum 50 items are allowed in a service call. Summary: Detaches 
       // the list of items in the given bookmark.
-      // <param name="ID">
+      // <param name="bookmarkId">
       // Description: dsbks:Bookmark object ID
       // </param>
       // </summary>
