@@ -13,20 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsmfg.data;
+using ws3dx.shared.utils;
 
 namespace ws3dx.dsmfg.core.service
 {
    // SDK Service
-   public class AssignmentFilterService : EnoviaBaseService
+   public class MfgItemInstanceService : EnoviaBaseService
    {
       private const string BASE_RESOURCE = "/resources/v1/modeler/dsmfg/";
 
-      public AssignmentFilterService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+      public MfgItemInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
       }
 
@@ -37,38 +39,25 @@ namespace ws3dx.dsmfg.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (POST) dsmfg:AssignmentFilter/locate
+      // (POST) dsmfg:MfgItemInstance/bulkFetch
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Locate and Get Manufacturing Item from the Assignment filter with the specified 
-      // engineering occurrences. Summary: Locate and Get Manufacturing Item from the Assignment filter 
-      // with the specified engineering occurrences.
+      // Description: Get Multiple Manufacturing Item Instances which are Indexed.
+      //  API Works only for Indexed Data only. 
+      //  The customer attributes or enterprise extension attributes are returned only with default sixw 
+      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
+      // Summary: Get Multiple Manufacturing Item Instances which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ILocateAssignmentFilterResponse>> LocateFromAssignmentFilter(ILocateAssignmentFilterRequestV1 request)
+      public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
       {
-         string resourceURI = $"{GetBaseResource()}dsmfg:AssignmentFilter/locate";
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
 
-         return await PostCollectionFromResponseMemberProperty<ILocateAssignmentFilterResponse, ILocateAssignmentFilterRequestV1>(resourceURI, request);
+         string resourceURI = $"{GetBaseResource()}dsmfg:MfgItemInstance/bulkFetch";
+
+         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsmfg:AssignmentFilter/locate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Locate and Get Manufacturing Item from the Assignment filter with the specified 
-      // engineering occurrences. Summary: Locate and Get Manufacturing Item from the Assignment filter 
-      // with the specified engineering occurrences.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ILocateAssignmentFilterResponse>> LocateFromAssignmentFilter(ILocateAssignmentFilterRequest request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsmfg:AssignmentFilter/locate";
-
-         return await PostCollectionFromResponseMemberProperty<ILocateAssignmentFilterResponse, ILocateAssignmentFilterRequest>(resourceURI, request);
-      }
    }
 }

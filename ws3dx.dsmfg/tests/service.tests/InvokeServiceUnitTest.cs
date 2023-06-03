@@ -14,7 +14,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-using service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
+using ws3dx.dsmfg.core.service;
 
 namespace NUnitTestProject
 {

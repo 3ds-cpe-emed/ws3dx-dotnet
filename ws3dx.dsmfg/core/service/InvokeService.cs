@@ -20,7 +20,7 @@ using ws3dx.core.service;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 
-namespace service
+namespace ws3dx.dsmfg.core.service
 {
    // SDK Service
    public class InvokeService : EnoviaBaseService

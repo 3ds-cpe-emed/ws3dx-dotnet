@@ -15,12 +15,121 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsmfg.data.extension;
 using ws3dx.serialization.attribute;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.data
 {
    [MaskSchema("dsmfg:MfgItemMask.Details")]
-   public interface IMfgItemMaskDetails : IMfgItemMask
+   public interface IMfgItemDetailMask
    {
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Reference name Example: My name
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Name { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Reference object title value Example: My title
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Title { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Reference description value Example: My description
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Description { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Id { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Basic type value Example: My Type
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Type { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Modified { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Created { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object revision value Example: A.1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Revision { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object current state value Example: In Work
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string State { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object owner value Example: John Doe
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Owner { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object organization value Example: MyCompany
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Organization { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object collabspace value Example: Default
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Collabspace { get; set; }
+
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -166,48 +275,59 @@ namespace ws3dx.dsmfg.data
       //----------------------------------------------------------------
       public string Magnitude { get; set; }
 
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
 
-      public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
 
       public ICreateKitEnterpriseAttributes CreateKitEnterpriseAttributes { get; set; }
 
-      public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
 
-      public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
 
-      public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
 
-      public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
 
-      public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
 
-      public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
 
-      public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
 
-      public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
 
-      public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
 
-      public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
 
-      public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
 
-      public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
 
-      public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
 
-      public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
 
-      public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
 
-      public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
 
-      public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
 
-      public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
 
-      public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Cestamp { get; set; }
    }
 }

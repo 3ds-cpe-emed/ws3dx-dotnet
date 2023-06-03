@@ -19,7 +19,7 @@ using ws3dx.shared.data;
 namespace ws3dx.dsmfg.data
 {
    [MaskSchema("dsmfg:ResultingEngItemMask.Default.utc")]
-   public interface IResultingEngItemUtcMask
+   public interface IResultingEngItemUTCMask
    {
       //----------------------------------------------------------------
       // <summary>

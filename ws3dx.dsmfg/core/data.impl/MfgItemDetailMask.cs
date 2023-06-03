@@ -16,62 +16,143 @@
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.extension;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.core.data.impl
 {
-   public class MfgItemMaskDetails : IMfgItemMaskDetails
+   public class MfgItemDetailMask : IMfgItemDetailMask
    {
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
-
-      [JsonPropertyName("revision")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Revision { get; set; }
-
-      [JsonPropertyName("state")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string State { get; set; }
-
-      [JsonPropertyName("owner")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Owner { get; set; }
-
-      [JsonPropertyName("organization")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Organization { get; set; }
-
-      [JsonPropertyName("collabspace")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Collabspace { get; set; }
-
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
-
-      [JsonPropertyName("type")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
-
-      [JsonPropertyName("created")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Created { get; set; }
-
-      [JsonPropertyName("modified")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Modified { get; set; }
-
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Reference name Example: My name
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
       [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Name { get; set; }
 
-      [JsonPropertyName("cestamp")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Reference object title value Example: My title
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("title")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cestamp { get; set; }
+      public string Title { get; set; }
 
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Reference description value Example: My description
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
       [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Id { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Basic type value Example: My Type
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("type")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Type { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("modified")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Modified { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("created")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Created { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object revision value Example: A.1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("revision")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Revision { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object current state value Example: In Work
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("state")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string State { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object owner value Example: John Doe
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("owner")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Owner { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object organization value Example: MyCompany
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("organization")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Organization { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object collabspace value Example: Default
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("collabspace")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Collabspace { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -223,7 +304,7 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("depthOfFeature")]
+      [JsonPropertyName("diameterOfFeature")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public double? DiameterOfFeature { get; set; }
 
@@ -250,13 +331,17 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Magnitude { get; set; }
 
+      [JsonPropertyName("dsmfg:EnterpriseReference")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+
       [JsonPropertyName("dsmfg:MfgItemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CreateAssemblyEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CreateKitEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -264,78 +349,89 @@ namespace ws3dx.dsmfg.core.data.impl
 
       [JsonPropertyName("dsmfg:CreateMaterialEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProvideEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ElementaryEndItemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:InstallationEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProcessContinuousCreateMaterialEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProcessContinuousProvideEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:MarkingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:AnnotationEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:TransformEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:MachineEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:BevelingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CuttingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:GrindingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:NoDrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:DrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:PreDrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:FastenEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:UnfastenEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:SplitProcessEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      public ICreateKitEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
    }
 }

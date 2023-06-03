@@ -23,7 +23,7 @@ using ws3dx.shared.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace service
+namespace ws3dx.dsmfg.core.service
 {
    // SDK Service
    public class MfgItemService : SearchService
@@ -129,15 +129,26 @@ namespace service
       // <param name="mfgItemId">
       // Description: dsmfg:MfgItem object ID
       // </param>
+      // <param name="top">
+      // Description: Represents the total number of items returned from the search, accepts a maximum 
+      // value of 10.
+      // </param>
+      // <param name="skip">
+      // Description: Represents the number of items to skip (to be used along with $top query parameter)
+      // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetResultingEngItems<T>(string mfgItemId)
+      public async Task<IEnumerable<T>> GetResultingEngItems<T>(string mfgItemId, int top, int skip)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUTCMask), typeof(IResultingEngItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>();
+         queryParams.Add("$top", top.ToString());
+         queryParams.Add("$skip", skip.ToString());
+
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -268,7 +279,7 @@ namespace service
       //---------------------------------------------------------------------------------------------		
       public async Task<T> Get<T>(string mfgItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMaskDetails), typeof(IMfgItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
@@ -401,7 +412,7 @@ namespace service
       //---------------------------------------------------------------------------------------------		
       public async Task<IEnumerable<T>> GetResultingEngItem<T>(string mfgItemId, string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUTCMask), typeof(IResultingEngItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 
@@ -545,7 +556,7 @@ namespace service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddResultingEngItem<T>(string mfgItemId, ICreateResultingEngItems request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUTCMask), typeof(IResultingEngItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
@@ -697,7 +708,7 @@ namespace service
       //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> Create<T>(ICreateMfgItems request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMaskDetails), typeof(IMfgItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem";
 
@@ -742,6 +753,28 @@ namespace service
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dscfg:Configured/detach";
 
          return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (POST) dsmfg:MfgItem/bulkfetch
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Gets multiple Manufacturing Items which are Indexed.
+      //  API Works only for Indexed Data only. 
+      //  The customer attributes or enterprise extension attributes are returned only with default sixw 
+      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
+      // Summary: Gets multiple Manufacturing Items which are Indexed.
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> Bulkfetch<T>(string[] request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/bulkfetch";
+
+         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -869,7 +902,7 @@ namespace service
       //---------------------------------------------------------------------------------------------
       public async Task<T> Update<T>(string mfgItemId, IMfgItemPatch request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMaskDetails), typeof(IMfgItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
@@ -894,7 +927,7 @@ namespace service
       //---------------------------------------------------------------------------------------------
       public async Task<T> UpdateResultingEngItem<T>(string engItemId, string mfgItemId, IResultingEngItemPatch request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUTCMask), typeof(IResultingEngItemMask) });
 
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem/{engItemId}";
 

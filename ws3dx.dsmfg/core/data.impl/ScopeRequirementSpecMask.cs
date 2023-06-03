@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 
@@ -27,6 +28,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Id { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -36,6 +39,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("type")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Type { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -45,6 +50,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("modified")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Modified { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -54,6 +61,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("created")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Created { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -63,6 +72,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("owner")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Owner { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -72,6 +83,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("organization")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Organization { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -81,8 +94,12 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("collabspace")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Collabspace { get; set; }
 
+      [JsonPropertyName("requirement")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier Requirement { get; set; }
 
       //------------------------------------------------------------------------------------------------
@@ -92,6 +109,8 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Cestamp { get; set; }
    }
 }

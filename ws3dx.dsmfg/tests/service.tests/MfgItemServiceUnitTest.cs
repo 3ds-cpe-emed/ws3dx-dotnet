@@ -14,7 +14,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-using service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,6 +28,7 @@ using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 using ws3dx.utils.search;
+using ws3dx.dsmfg.core.service;
 
 namespace NUnitTestProject
 {
@@ -127,24 +127,24 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
-      public async Task GetResultingEngItems_IResultingEngItemUtcMask(string mfgItemId)
+      [TestCase("", 100, 0)]
+      public async Task GetResultingEngItems_IResultingEngItemUtcMask(string mfgItemId, int top, int skip)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemUtcMask>(mfgItemId);
+         IEnumerable<IResultingEngItemUTCMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemUTCMask>(mfgItemId, top, skip );
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
-      public async Task GetResultingEngItems_IResultingEngItemMask(string mfgItemId)
+      [TestCase("", 100, 0)]
+      public async Task GetResultingEngItems_IResultingEngItemMask(string mfgItemId, int top, int skip)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResultingEngItemMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemMask>(mfgItemId);
+         IEnumerable<IResultingEngItemMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemMask>(mfgItemId, top, skip);
 
          Assert.IsNotNull(ret);
       }
@@ -225,12 +225,12 @@ namespace NUnitTestProject
       }
 
       [TestCase("")]
-      public async Task Get_IMfgItemMaskDetails(string mfgItemId)
+      public async Task Get_IMfgItemDetailMask(string mfgItemId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IMfgItemMaskDetails ret = await mfgItemService.Get<IMfgItemMaskDetails>(mfgItemId);
+         IMfgItemDetailMask ret = await mfgItemService.Get<IMfgItemDetailMask>(mfgItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -318,7 +318,7 @@ namespace NUnitTestProject
          IPassportAuthentication passport = await Authenticate();
 
          MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItem<IResultingEngItemUtcMask>(mfgItemId, engItemId);
+         IEnumerable<IResultingEngItemUTCMask> ret = await mfgItemService.GetResultingEngItem<IResultingEngItemUTCMask>(mfgItemId, engItemId);
 
          Assert.IsNotNull(ret);
       }
@@ -466,7 +466,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.AddResultingEngItem<IResultingEngItemUtcMask>(mfgItemId, request);
+            IEnumerable<IResultingEngItemUTCMask> ret = await mfgItemService.AddResultingEngItem<IResultingEngItemUTCMask>(mfgItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -662,7 +662,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IMfgItemMaskDetails> ret = await mfgItemService.Create<IMfgItemMaskDetails>(request);
+            IEnumerable<IMfgItemDetailMask> ret = await mfgItemService.Create<IMfgItemDetailMask>(request);
 
             Assert.IsNotNull(ret);
          }
@@ -1081,7 +1081,7 @@ namespace NUnitTestProject
          int i = 0;
          foreach (IMfgItemMask mfgItem in ret)
          {
-            IMfgItemMaskDetails mfgItemDetails = await mfgItemService.Get<IMfgItemMaskDetails>(mfgItem.Id);
+            IMfgItemDetailMask mfgItemDetails = await mfgItemService.Get<IMfgItemDetailMask>(mfgItem.Id);
 
             Assert.AreEqual(mfgItem.Id, mfgItemDetails.Id);
 
@@ -1089,6 +1089,35 @@ namespace NUnitTestProject
 
             if (i > 20) return;
          }
+      }
+
+      [TestCase("44C2728FE131000064099D210015C8CD", "44C2728FE131000064099D210015C8CD", "44C2728FE131000064099D210015C8CD")]
+      public async Task BulkFetch_GetDefaultMask(string id1, string id2, string id3)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         string[] bulkFetchInput = new[] { id1, id2, id3 };
+
+         IEnumerable<IMfgItemMask> ret = await mfgItemService.Bulkfetch<IMfgItemMask>(bulkFetchInput);
+
+         Assert.IsNotNull(ret);
+      }
+
+
+      [TestCase("44C2728FE131000064099D210015C8CD", "44C2728FE131000064099D210015C8CD", "44C2728FE131000064099D210015C8CD")]
+      public async Task BulkFetch_GetDetailMask(string id1, string id2, string id3)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgItemService mfgItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         string[] bulkFetchInput = new[] { id1, id2, id3 };
+
+         IEnumerable<IMfgItemDetailMask> ret = await mfgItemService.Bulkfetch<IMfgItemDetailMask>(bulkFetchInput);
+
+         Assert.IsNotNull(ret);
       }
    }
 }

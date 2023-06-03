@@ -782,34 +782,41 @@ namespace ws3dx.core.serialization
 
       private static dynamic GetNumberValue(JsonElement _value, Type _propertyType)
       {
+         Type parsedPropertyType = _propertyType;
+
+         if (_propertyType.IsGenericType && _propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+         {
+            parsedPropertyType = _propertyType.GetGenericArguments()[0];
+         }
+
          if (_value.ValueKind != JsonValueKind.Number) throw new ArgumentOutOfRangeException(nameof(_value));
 
-         if (_propertyType == typeof(double))
+         if (parsedPropertyType == typeof(double))
          {
             return _value.GetDouble();
          }
-         if (_propertyType == typeof(float))
+         if (parsedPropertyType == typeof(float))
          {
             return _value.GetSingle();
          }
-         if (_propertyType == typeof(decimal))
+         if (parsedPropertyType == typeof(decimal))
          {
             return _value.GetDecimal();
          }
-         if (_propertyType == typeof(long))
+         if (parsedPropertyType == typeof(long))
          {
             return _value.GetInt64();
          }
-         if (_propertyType == typeof(int))
+         if (parsedPropertyType == typeof(int))
          {
             return _value.GetInt32();
          }
-         if (_propertyType == typeof(short))
+         if (parsedPropertyType == typeof(short))
          {
             return _value.GetInt16();
          }
 
-         throw new ArgumentOutOfRangeException(nameof(_propertyType));
+         throw new ArgumentOutOfRangeException(nameof(parsedPropertyType));
       }
 
       private static void SetNumber(object _item, PropertyInfo _property, JsonElement _value)

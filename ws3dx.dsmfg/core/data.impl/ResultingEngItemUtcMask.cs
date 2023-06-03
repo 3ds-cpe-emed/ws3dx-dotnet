@@ -18,7 +18,7 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.core.data.impl
 {
-   public class ResultingEngItemUtcMask : IResultingEngItemUtcMask
+   public class ResultingEngItemUTCMask : IResultingEngItemUTCMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>

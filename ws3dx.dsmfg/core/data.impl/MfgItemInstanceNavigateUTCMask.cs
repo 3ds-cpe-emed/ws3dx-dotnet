@@ -38,6 +38,6 @@ namespace ws3dx.dsmfg.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("totalItems")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int TotalItems { get; set; }
+      public int? TotalItems { get; set; }
    }
 }
