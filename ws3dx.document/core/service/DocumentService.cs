@@ -160,13 +160,22 @@ namespace ws3dx.document.core.service
       //---------------------------------------------------------------------------------------------
       // <summary>
       // Description: Summary: Create new document and related file data.
+      // <param name="parentRelName">
+      // Description: The parent relationship to link the document; dependent on parentId(i.e. Reference 
+      // Document, SpecificationDocument). It is required if managing parents objects with this request.
+      // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IDocumentDataResponse>> Create(IDocuments documents)
+      public async Task<IEnumerable<IDocumentDataResponse>> Create(IDocuments documents, string parentRelName = null)
       {
          string resourceURI = $"{GetBaseResource()}/documents";
 
-         return await PostCollectionFromResponseDataProperty<IDocumentDataResponse, IDocuments>(resourceURI, documents);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>();
+         if (parentRelName != null) {
+            queryParams.Add("parentRelName", parentRelName);
+         }
+
+         return await PostCollectionFromResponseDataProperty<IDocumentDataResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -243,13 +252,22 @@ namespace ws3dx.document.core.service
       //---------------------------------------------------------------------------------------------
       // <summary>
       // Description: Summary: Update a given set of documents and their related data.
+      // <param name="parentRelName">
+      // Description: The parent relationship to link the document; dependent on parentId(i.e. Reference 
+      // Document, SpecificationDocument). It is required if managing parents objects with this request.
+      // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDocumentsResponse> UpdateMany(IDocuments documents)
+      public async Task<IDocumentsResponse> UpdateMany(IDocuments documents, string parentRelName = null)
       {
          string resourceURI = $"{GetBaseResource()}/documents";
 
-         return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>();
+         if (parentRelName!=null) {
+            queryParams.Add("parentRelName", parentRelName);
+         }
+
+         return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -323,13 +341,22 @@ namespace ws3dx.document.core.service
       //---------------------------------------------------------------------------------------------
       // <summary>
       // Description: Summary: Update the information for a given document object.
+      // <param name="parentRelName">
+      // Description: The parent relationship to link the document; dependent on parentId(i.e. Reference 
+      // Document, SpecificationDocument). It is required if managing parents objects with this request.
+      // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IDocumentsResponse> Update(string docId, IDocuments documents)
+      public async Task<IDocumentsResponse> Update(string docId, IDocuments documents, string parentRelName = null)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}";
 
-         return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>();
+         if (parentRelName != null) {
+            queryParams.Add("parentRelName", parentRelName);
+         }
+
+         return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
