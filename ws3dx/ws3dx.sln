@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33027.164
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.shared", "..\ws3dx.shared\ws3dx.shared.csproj", "{6116E708-758C-4F1C-A38C-AC8527C2A25A}"
 EndProject
@@ -126,6 +126,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsiss.data", "..\ws3dx.dsiss\data\ws3dx.dsiss.data.csproj", "{8B80FD95-42AB-45AB-9D23-EA7ADC42B204}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsiss.core", "..\ws3dx.dsiss\core\ws3dx.dsiss.core.csproj", "{4F995E10-8470-4147-9180-343A93E90C8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ws3dx.core.tests", "ws3dx.core.tests\ws3dx.core.tests.csproj", "{A1EDAC5F-E260-4FC2-A03D-13C08E6C7FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -381,6 +383,10 @@ Global
 		{4F995E10-8470-4147-9180-343A93E90C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F995E10-8470-4147-9180-343A93E90C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F995E10-8470-4147-9180-343A93E90C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1EDAC5F-E260-4FC2-A03D-13C08E6C7FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1EDAC5F-E260-4FC2-A03D-13C08E6C7FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1EDAC5F-E260-4FC2-A03D-13C08E6C7FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1EDAC5F-E260-4FC2-A03D-13C08E6C7FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
