@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ws3dx.dseng\core\ws3dx.dseng.core.csproj" />
-    <ProjectReference Include="..\..\ws3dx.dsrsc\core\ws3dx.dsrsc.core.csproj" />
+    <ProjectReference Include="..\ws3dx.dseng\core\ws3dx.dseng.core.csproj" />
   </ItemGroup>
 
 </Project>
