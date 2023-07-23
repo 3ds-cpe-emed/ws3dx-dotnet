@@ -19,7 +19,7 @@ namespace ws3dx.dseng.data
 {
    public interface IEngInstanceReplace
    {
-      public ITypedUriId ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public IEngInstanceReplaceAttributes Attributes { get; set; }
    }

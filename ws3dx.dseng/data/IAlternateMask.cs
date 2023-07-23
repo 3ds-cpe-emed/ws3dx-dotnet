@@ -101,7 +101,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Collabspace { get; set; }
 
-      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
+      public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

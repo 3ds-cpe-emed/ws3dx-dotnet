@@ -13,18 +13,17 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
+using ws3dx.shared.data.extension;
 
 namespace ws3dx.dseng.data
 {
-   [MaskSchema("dsmveng:AlternateMask.Details")]
-   public interface IAlternateDetailMask
+   public interface IEngItemBulkUpdateItem
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      // Example: {ID}
       //
       // </summary>
       //----------------------------------------------------------------
@@ -33,86 +32,48 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic type value Example: DBType
+      // Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Type { get; set; }
+      public string Title { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
+      // Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Modified { get; set; }
+      public string Description { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object created value Example: 10/19/2021 10:58:01 PM
+      // Example: true
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Created { get; set; }
+      public bool? IsManufacturable { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object revision value Example: A.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Revision { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object current state value Example: Proposed
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string State { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: DB Owner
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
-
-      public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
-
-      public ITypedUriIdentifier ReferencedObject { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      // Example: Entity physical id
       //
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
+
+      public IChangeControl ChangeControl { get; set; }
+
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+
+      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
+
+      public IConfigured Configured { get; set; }
+
+      public ICustomerAttributes CustomerAttributes { get; set; }
+
    }
 }

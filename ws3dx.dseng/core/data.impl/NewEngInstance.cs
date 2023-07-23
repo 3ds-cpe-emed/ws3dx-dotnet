@@ -23,7 +23,7 @@ namespace ws3dx.dseng.core.data.impl
    {
       [JsonPropertyName("referencedObject")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       [JsonPropertyName("attributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

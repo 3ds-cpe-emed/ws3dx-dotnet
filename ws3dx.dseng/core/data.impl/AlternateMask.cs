@@ -121,7 +121,7 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dseng:applicabilityContext")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
+      public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

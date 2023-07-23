@@ -314,6 +314,48 @@ namespace ws3dx.dseng.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dseng:EngItem/bulkfetch
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Get multiple Engineering Items which are Indexed. API Works only for Indexed Data. 
+      // The customer attributes or enterprise extension attributes are returned only with default sixw 
+      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
+      // Summary: Get multiple Engineering Items which are indexed
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkfetch";
+
+         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (POST) dseng:EngItem/bulkupdate
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Modifies multiple Engineering Item attributes Summary: Modifies multiple Engineering 
+      // Item attributes
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> BulkUpdate<T>(IEngItemBulkUpdateItem[] request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkupdate";
+
+         return await PostCollectionFromResponseMemberProperty<T, IEngItemBulkUpdateItem[]>(resourceURI, request);
+      }
+
+
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/evolution
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -432,7 +474,7 @@ namespace ws3dx.dseng.core.service
       public async Task<IResponseUnsetVariantEffectivity> UnsetInstanceVariantEffectivity(string engItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/variant";
-
+      
          return await PostIndividual<IResponseUnsetVariantEffectivity>(resourceURI);
       }
 
@@ -769,12 +811,12 @@ namespace ws3dx.dseng.core.service
       // Description: dseng:EngItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------   
-      public void AddExpand(string engItemId, IExpand request)
+      //---------------------------------------------------------------------------------------------
+      public async Task<IExpandResponse> Expand(string engItemId, IExpand request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/expand";
 
-         throw new NotImplementedException();
+         return await PostIndividual<IExpandResponse, IExpand>(resourceURI, request);
       }
    }
 }

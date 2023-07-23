@@ -1,5 +1,5 @@
-//------------------------------------------------------------------------------------------------------------------------------------
-// Copyright 2022 Dassault Systèmes - CPE EMED
+﻿//------------------------------------------------------------------------------------------------------------------------------------
+// Copyright 2023 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,
@@ -13,20 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
+
+using System.Collections.Generic;
 using ws3dx.dseng.data;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngInstanceReplace : IEngInstanceReplace
+   public class EngItemEnterpriseAttributes :  Dictionary<string, object>, IEngItemEnterpriseAttributes
    {
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ReferencedObject { get; set; }
-
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEngInstanceReplaceAttributes Attributes { get; set; }
    }
 }

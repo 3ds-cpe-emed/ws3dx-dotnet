@@ -16,7 +16,7 @@
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
 
-namespace ws3dx.dseng.core.impl
+namespace ws3dx.dseng.core.data.impl
 {
    public class Expand : IExpand
    {

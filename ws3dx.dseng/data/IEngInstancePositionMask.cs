@@ -75,7 +75,7 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Description { get; set; }
 
-      public ITypedUriId ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public IPosition Position { get; set; }
 

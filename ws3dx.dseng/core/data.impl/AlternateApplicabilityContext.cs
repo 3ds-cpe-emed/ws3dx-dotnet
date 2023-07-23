@@ -15,18 +15,31 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngInstanceReplace : IEngInstanceReplace
+   public class AlternateApplicabilityContext : IAlternateApplicabilityContext
    {
-      [JsonPropertyName("referencedObject")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("parent")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ReferencedObject { get; set; }
+      public string Parent { get; set; }
 
-      [JsonPropertyName("attributes")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("instance")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEngInstanceReplaceAttributes Attributes { get; set; }
+      public string Instance { get; set; }
    }
 }

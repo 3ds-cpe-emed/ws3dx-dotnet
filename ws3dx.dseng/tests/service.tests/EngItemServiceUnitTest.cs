@@ -14,9 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
@@ -323,7 +326,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "")]
+      [TestCase("0012C0507B420000610A3A6F000B3CD5", "221CD96CF43B000064BD8C01000BEBE6")]
       public async Task GetAlternate_IAlternateMaskDefault(string engItemId, string alternateId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -334,7 +337,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("", "")]
+      [TestCase("0012C0507B420000610A3A6F000B3CD5", "221CD96CF43B000064BD8C01000BEBE6")]
       public async Task GetAlternate_IAlternateMaskDetail(string engItemId, string alternateId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -356,7 +359,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("37DE0CE16865000060EFEEB100025C53")]
       public async Task GetAlternates_IAlternateMaskDefault(string engItemId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -367,7 +370,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
+      [TestCase("37DE0CE16865000060EFEEB100025C53")]
       public async Task GetAlternates_IAlternateMaskDetail(string engItemId)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -896,6 +899,78 @@ namespace NUnitTestProject
                Assert.IsNotNull(engItem.EnterpriseAttributes);
                Assert.IsNotNull(engItem.EnterpriseReference);
             }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+ 
+      // Exercises Bulk Fetch by passing the ids of the result of search into it.
+      // It does this for all the three masks available types.
+      [TestCase( "AAA27", 0, 10 )]
+      public async Task BulkFetch(string _search, int _skip, int _top)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         try
+         {
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
+
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+            string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+            IEnumerable<IEngItemDefaultMask> returnSetWithDefaultMask = await engItemService.BulkFetch<IEngItemDefaultMask>(engItemIdArray);
+
+            IEnumerable<IEngItemCommonMask> returnSetWithCommonMask = await engItemService.BulkFetch<IEngItemCommonMask>(engItemIdArray);
+
+            IEnumerable<IEngItemDetailsMask> returnSetWithDetailMask = await engItemService.BulkFetch<IEngItemDetailsMask>(engItemIdArray);
+
+            Assert.AreEqual(returnSetWithDefaultMask.Count(), returnSetWithCommonMask.Count(), returnSetWithDetailMask.Count());
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      // Exercises Bulk Fetch by modifying the description of all results of the search into it.
+      // It does this for all the three masks available types.
+      [TestCase("AAA27", 0, 5, "bulk update edit description")]
+      public async Task BulkUpdate(string _search, int _skip, int _top, string _description_update)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         try
+         {
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
+
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+            Tuple<string,string>[] engItemIdArray = engItemSearchResult.Select(engItem => new Tuple<string,string>(engItem.Id, engItem.Cestamp)).ToArray();
+
+            IEngItemBulkUpdateItem[] bulkUpdates = new IEngItemBulkUpdateItem[engItemIdArray.Length];
+
+            for (int i = 0; i < engItemIdArray.Length; i++)
+            {
+               bulkUpdates[i] = new EngItemBulkUpdateItem();
+               bulkUpdates[i].Id = engItemIdArray[i].Item1;
+               bulkUpdates[i].Cestamp = engItemIdArray[i].Item2;
+               bulkUpdates[i].Description = _description_update;
+            }
+
+            IEnumerable<IEngItemDefaultMask> returnSetWithDefaultMask = await engItemService.BulkUpdate<IEngItemDefaultMask>(bulkUpdates);
+
+            Assert.That(returnSetWithDefaultMask, Is.All.Matches<IEngItemDefaultMask>(engItem => engItem.Description.Equals(_description_update)));
+
          }
          catch (HttpResponseException _ex)
          {

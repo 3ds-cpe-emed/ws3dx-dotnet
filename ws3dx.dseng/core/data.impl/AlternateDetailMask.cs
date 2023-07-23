@@ -122,11 +122,11 @@ namespace ws3dx.dseng.core.data.impl
 
       [JsonPropertyName("dseng:applicabilityContext")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IAlternateParentApplicabilityContext ApplicabilityContext { get; set; }
+      public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
 
       [JsonPropertyName("referencedObject")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

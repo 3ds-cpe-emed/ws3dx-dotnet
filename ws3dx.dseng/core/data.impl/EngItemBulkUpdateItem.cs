@@ -16,15 +16,16 @@
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
+using ws3dx.shared.data.extension;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class EngInstancePositionMask : IEngInstancePositionMask
+   public class EngItemBulkUpdateItem : IEngItemBulkUpdateItem
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      // Example: {ID}
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -35,51 +36,18 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Basic type value Example: My Type
+      // Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
+      [JsonPropertyName("title")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+      public string Title { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("modified")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Modified { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("created")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Created { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Instance name Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Instance description vlaue Example: My description
+      // Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -87,23 +55,47 @@ namespace ws3dx.dseng.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
 
-      [JsonPropertyName("referencedObject")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: true
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("isManufacturable")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ReferencedObject { get; set; }
-
-      [JsonPropertyName("dseng:position")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPosition Position { get; set; }
+      public bool? IsManufacturable { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      // Example: Entity physical id
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Cestamp { get; set; }
+
+      [JsonPropertyName("dslc:changeControl")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IChangeControl ChangeControl { get; set; }
+
+      [JsonPropertyName("dseng:EnterpriseReference")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+
+      [JsonPropertyName("dseno:EnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dscfg:Configured")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IConfigured Configured { get; set; }
+
+      [JsonPropertyName("customerAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public ICustomerAttributes CustomerAttributes { get; set; }
+
    }
 }

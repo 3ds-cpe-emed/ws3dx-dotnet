@@ -19,7 +19,7 @@ namespace ws3dx.dseng.data
 {
    public interface INewEngInstance
    {
-      public ITypedUriId ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public INewEngInstanceAttributes Attributes { get; set; }
    }
