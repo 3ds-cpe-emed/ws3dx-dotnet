@@ -277,49 +277,51 @@ namespace ws3dx.dsmfg.data
 
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
+      public IMagnitudeValueInput RefQuantity { get; set; }
+
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
+      public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
 
       public ICreateKitEnterpriseAttributes CreateKitEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
+      public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
+      public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
+      public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
+      public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
+      public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
+      public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
+      public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
+      public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
+      public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
+      public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
+      public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
+      public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
+      public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
+      public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
+      public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
+      public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
+      public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

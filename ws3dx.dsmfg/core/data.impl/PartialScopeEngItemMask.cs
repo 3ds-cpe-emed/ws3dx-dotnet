@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
 
@@ -27,8 +28,12 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Id { get; set; }
 
+      [JsonPropertyName("partialScopeEngItem")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier PartialScopeEngItem { get; set; }
    }
 }

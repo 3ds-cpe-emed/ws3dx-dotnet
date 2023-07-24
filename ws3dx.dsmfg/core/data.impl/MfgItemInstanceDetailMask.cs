@@ -135,6 +135,39 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMagnitudeValue Quantity { get; set; }
 
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object lossQuantity value Example: 1.1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("lossQuantity")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? LossQuantity { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object isConstQty value Example: false
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("isConstQty")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? IsConstQty { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object useCase value Example: ProducingCoProduct
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("useCase")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string UseCase { get; set; }
+
       [JsonPropertyName("referencedObject")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier ReferencedObject { get; set; }

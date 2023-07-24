@@ -52,6 +52,8 @@ namespace ws3dx.dsmfg.data
 
       public ITypedUriIdentifier ResultingEngItem { get; set; }
 
+      public ITypedUriIdentifier ProductConfiguration { get; set; }
+
       //----------------------------------------------------------------
       // <summary>
       //		

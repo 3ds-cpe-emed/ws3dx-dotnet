@@ -14,6 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 
 namespace ws3dx.dsmfg.core.data.impl
@@ -27,8 +28,13 @@ namespace ws3dx.dsmfg.core.data.impl
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
+
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Id { get; set; }
 
+      [JsonPropertyName("assignmentFilters")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IItemOccurrence> AssignmentFilters { get; set; }
    }
 }

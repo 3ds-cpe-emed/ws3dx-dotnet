@@ -113,6 +113,33 @@ namespace ws3dx.dsmfg.data
 
       public IMagnitudeValue Quantity { get; set; }
 
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object lossQuantity value Example: 1.1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public double? LossQuantity { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object isConstQty value Example: false
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public bool? IsConstQty { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object useCase value Example: ProducingCoProduct
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string UseCase { get; set; }
+
       public ITypedUriIdentifier ReferencedObject { get; set; }
 
       //----------------------------------------------------------------

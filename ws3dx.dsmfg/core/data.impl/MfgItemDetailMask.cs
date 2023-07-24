@@ -335,13 +335,17 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
+      [JsonPropertyName("refQuantity")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IMagnitudeValueInput RefQuantity { get; set; }
+
       [JsonPropertyName("dsmfg:MfgItemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CreateAssemblyEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
+      public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CreateKitEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -349,79 +353,79 @@ namespace ws3dx.dsmfg.core.data.impl
 
       [JsonPropertyName("dsmfg:CreateMaterialEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
+      public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProvideEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
+      public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ElementaryEndItemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
+      public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:InstallationEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
+      public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProcessContinuousCreateMaterialEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
+      public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:ProcessContinuousProvideEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
+      public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:MarkingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
+      public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:AnnotationEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
+      public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:TransformEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
+      public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:MachineEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
+      public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:BevelingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
+      public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:CuttingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
+      public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:GrindingEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
+      public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:NoDrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
+      public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:DrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
+      public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:PreDrillEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
+      public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:FastenEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
+      public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:UnfastenEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
+      public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsmfg:SplitProcessEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateKitEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
