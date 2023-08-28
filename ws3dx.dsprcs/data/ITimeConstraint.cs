@@ -71,7 +71,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsProductFlow { get; set; }
+      public bool? IsProductFlow { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -89,7 +89,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsOptional { get; set; }
+      public bool? IsOptional { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double Delay { get; set; }
+      public double? Delay { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -125,7 +125,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int MaximumRetries { get; set; }
+      public int? MaximumRetries { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

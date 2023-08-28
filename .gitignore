@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/ws3dx.dsprcs/tests/service.tests/MfgOperationServiceUnitTest.cs

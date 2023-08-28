@@ -532,6 +532,51 @@ namespace ws3dx.dsprcs.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dsprcs:MfgProcess/{ID}/dsprcs:MfgOperationInstance
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Create Manufacturing Operation Instance under an Manufacturing Process. Summary: 
+      // Create Manufacturing Operation Instance under an Manufacturing Process.
+      // <param name="mfgProcessId">
+      // Description: dsprcs:MfgProcess object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddMfgOperationInstance<T>(string mfgProcessId, ICreateMfgOperationInstancesRefObject request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dsprcs:MfgOperationInstance";
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateMfgOperationInstancesRefObject>(resourceURI, request);
+      }
+
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (POST) dsprcs:MfgProcess/bulkfetch
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Gets multiple Manufacturing Processes which are Indexed. 
+      //  API Works only for Indexed Data only. 
+      //  The customer attributes or enterprise extension attributes are returned only with default sixw 
+      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
+      // Summary: Gets multiple Manufacturing Processes which are Indexed.
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessMask), typeof(IMfgProcessDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/bulkfetch";
+
+         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dsprcs:MfgProcess/locate
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -547,7 +592,7 @@ namespace ws3dx.dsprcs.core.service
       //  Additionally once the Manufacturing process is located based on matching criteria then response 
       // contains list of valid Manufacturing process references and also return its associated objects 
       // if defined in 'navigateTo' and 'navigateFrom'.
-      //  The supported types in 'navigateTo' is 'dsprcs:MfgProcessInstance'.
+      //  The supported types in 'navigateTo' is 'dsprcs:MfgProcessInstance' and 'dsrsc:ScopeLink'.
       //  And the supported types in 'navigateFrom' are dsprcs:PrimaryCapableResource, and dsprcs:ItemSpecification 
       // Summary: Locate or find set of Manufacturing Process dsprcs:MfgProcess based on the matched search 
       // criteria and other filter criteria.
@@ -620,6 +665,31 @@ namespace ws3dx.dsprcs.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dsprcs:MfgProcess/{PID}/dsprcs:MfgProcessInstance/{ID}/replace
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Replace the Manufacturing Process Instance Summary: Replace the Manufacturing Process 
+      // Instance
+      // <param name="mfgProcessId">
+      // Description: dsprcs:MfgProcessobject ID
+      // </param>
+      // <param name="mfgProcessInstanceId">
+      // Description: dsprcs:MfgProcessInstance object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<T> AddInstanceReplace<T>(string mfgProcessId, string mfgProcessInstanceId, IMfgProcessInstanceReplace request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessInstanceMask), typeof(IMfgProcessInstanceDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dsprcs:MfgProcessInstance/{mfgProcessInstanceId}/replace";
+
+         return await PostIndividualFromResponseMemberProperty<T, IMfgProcessInstanceReplace>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dsprcs:MfgProcess/{ID}/dscfg:Configured/attach
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -631,11 +701,11 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> AttachConfiguration(string mfgProcessId, ITypedUriIdentifier[] request)
+      public async Task<ITypedUriIdentifierResources> AttachConfiguration(string mfgProcessId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dscfg:Configured/attach";
 
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -693,11 +763,11 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> DetachConfiguration(string mfgProcessId, ITypedUriIdentifier[] request)
+      public async Task<ITypedUriIdentifierResources> DetachConfiguration(string mfgProcessId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dscfg:Configured/detach";
 
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -872,6 +942,50 @@ namespace ws3dx.dsprcs.core.service
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}";
 
          return await PatchIndividual<T, IMfgProcessPatch>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (PATCH) dsprcs:MfgProcess/{PID}/dsprcs:MfgOperationInstance/{ID}
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Modifies the Manufacturing Operation Instance attributes under MfgProcess Summary: 
+      // Modifies the Manufacturing Operation Instance attributes under MfgProcess
+      // <param name="mfgProcessId">
+      // Description: dsprcs:MfgProcessobject ID
+      // </param>
+      // <param name="mfgOperationInstanceId">
+      // Description: dsprcs:MfgOperationInstance object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<T> UpdateMfgOperationInstance<T>(string mfgProcessId, string mfgOperationInstanceId, IMfgOperationInstancePatch request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}";
+
+         return await PatchIndividualFromResponseMemberProperty<T, IMfgOperationInstancePatch>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (DELETE) dsprcs:MfgProcess/{ID}/dslc:changeControl
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Deactivate the Change Control. Summary: Deactivate the Change Control.
+      // <param name="mfgProcessId">
+      // Description: dsprcs:MfgProcess object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DetachChangeControl(string mfgProcessId)
+      {
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dslc:changeControl";
+
+         return await DeleteIndividual<IGenericResponse>(resourceURI);
       }
    }
 }

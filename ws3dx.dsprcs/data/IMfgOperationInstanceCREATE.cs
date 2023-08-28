@@ -13,52 +13,31 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
+using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface ILocateMfgProcessResponse
+   public interface IMfgOperationInstanceCREATE
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
+      // Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Source { get; set; }
+      public string Name { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: type Example: DELLmiWorkPlanSystemReference
+      // Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Type { get; set; }
+      public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id of dsprcs:MfgProcess Example: MfgProcessRefID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Identifier { get; set; }
+      public ICustomerAttributes CustomerAttributes { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsprcs/dsprcs:MfgProcess/MfgProcessRefID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
-
-      public IList<IMfgProcessInstance> MfgProcessInstance { get; set; }
-
-      public IList<IPrimaryCapableResourceLocate> PrimaryCapableResource { get; set; }
-
-      public IList<IItemSpecifications> ItemSpecification { get; set; }
    }
 }

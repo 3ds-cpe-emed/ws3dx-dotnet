@@ -19,45 +19,23 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class MfgProcessInstance : IMfgProcessInstance
+   public class MfgOperationInstanceDetailMask : IMfgOperationInstanceDetailMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Entity physical id of the dsprcs:MfgProcessInstance' Example: MfgProcessInstanceID1
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("identifier")]
+      [JsonPropertyName("id")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Identifier { get; set; }
+      public string Id { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("source")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: relativePath Example: /resources/v1/modeler/dsmfg/dsprcs:MfgProcess/MfgProcessParentID/dsprcs:MfgProcessInstance/MfgProcessInstanceID1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("relativePath")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Basic type value Example: DELLmiWorkPlanSystemInstance
+      // Description: Basic type value Example: My Type
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -68,13 +46,24 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Reference object title value Example: My title
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
+      [JsonPropertyName("modified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+      public string Modified { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("created")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Created { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -134,38 +123,50 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object created value Example: 2021/12/16@13:36:48:GMT
+      // Description: Reference Physical ID of Instance Example: String
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("created")]
+      [JsonPropertyName("reference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Created { get; set; }
+      public string Reference { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object modified value Example: 2021/12/16@13:36:48:GMT
+      // Description: Object wipQuantityRatio value Example: 1.1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("modified")]
+      [JsonPropertyName("wipQuantityRatio")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Modified { get; set; }
-
-      [JsonPropertyName("parentObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ParentObject { get; set; }
+      public double? WipQuantityRatio { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Number of instances Example: 1
+      // Description: Object scrapQuantityRatio value Example: 1.1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("totalItems")]
+      [JsonPropertyName("scrapQuantityRatio")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int TotalItems { get; set; }
+      public double? ScrapQuantityRatio { get; set; }
+
+      [JsonPropertyName("referencedObject")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public ITypedUriIdentifier ReferencedObject { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
+
    }
 }

@@ -118,7 +118,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isIgnored")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsIgnored { get; set; }
+      public bool? IsIgnored { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

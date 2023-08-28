@@ -13,68 +13,50 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class LocateMfgProcessResponse : ILocateMfgProcessResponse
+   public class MfgOperationInstancePatch : IMfgOperationInstancePatch
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
+      // Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("source")]
+      [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
+      public string Name { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: type Example: DELLmiWorkPlanSystemReference
+      // Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
+      [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+      public string Description { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Entity physical id of dsprcs:MfgProcess Example: MfgProcessRefID1
+      // Example: Object cestamp value
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("identifier")]
+      [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Identifier { get; set; }
+      public string Cestamp { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: relativePath Example: /resources/v1/modeler/dsprcs/dsprcs:MfgProcess/MfgProcessRefID1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("relativePath")]
+      [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
+      public ICustomerAttributes CustomerAttributes { get; set; }
 
-      [JsonPropertyName("dsprcs:MfgProcessInstance")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IMfgProcessInstance> MfgProcessInstance { get; set; }
-
-      [JsonPropertyName("dsprcs:PrimaryCapableResource")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IPrimaryCapableResourceLocate> PrimaryCapableResource { get; set; }
-
-      [JsonPropertyName("dsprcs:ItemSpecification")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IItemSpecifications> ItemSpecification { get; set; }
    }
 }

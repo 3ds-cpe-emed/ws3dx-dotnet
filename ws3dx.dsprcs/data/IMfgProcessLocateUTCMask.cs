@@ -59,6 +59,8 @@ namespace ws3dx.dsprcs.data
 
       public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
 
+      public IList<IScopeLink> ScopeLink { get; set; }
+
       public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }
 
       public IList<IItemSpecificationsUTC> ItemSpecification { get; set; }

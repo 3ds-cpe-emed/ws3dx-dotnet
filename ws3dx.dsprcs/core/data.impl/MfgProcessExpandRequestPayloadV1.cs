@@ -30,7 +30,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("expandDepth")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ExpandDepth { get; set; }
+      public int? ExpandDepth { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -41,6 +41,6 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("withPath")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool WithPath { get; set; }
+      public bool? WithPath { get; set; }
    }
 }

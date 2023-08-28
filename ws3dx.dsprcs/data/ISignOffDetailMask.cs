@@ -154,7 +154,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsPartialSignoffAllowed { get; set; }
+      public bool? IsPartialSignoffAllowed { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -163,7 +163,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsOptional { get; set; }
+      public bool? IsOptional { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

@@ -40,7 +40,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsScope { get; set; }
+      public bool? IsScope { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -78,6 +78,35 @@ namespace ws3dx.dsprcs.data
       // </summary>
       //----------------------------------------------------------------
       public ITypedUriIdentifier ScopeContext { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object usage value Example: Add
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Usage { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object usageQuantityRatio value Example: 1.1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public double? UsageQuantityRatio { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object overlap value Example: false
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public bool? Overlap { get; set; }
+
+      public ws3dx.dsprcs.data.IMagnitudeValue SendAheadQuantity { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

@@ -26,7 +26,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int ExpandDepth { get; set; }
+      public int? ExpandDepth { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -35,6 +35,6 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool WithPath { get; set; }
+      public bool? WithPath { get; set; }
    }
 }

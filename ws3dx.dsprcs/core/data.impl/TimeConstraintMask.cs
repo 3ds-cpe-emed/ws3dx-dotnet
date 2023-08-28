@@ -75,7 +75,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isProductFlow")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsProductFlow { get; set; }
+      public bool? IsProductFlow { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -97,7 +97,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isOptional")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsOptional { get; set; }
+      public bool? IsOptional { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -119,7 +119,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("delay")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double Delay { get; set; }
+      public double? Delay { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -152,7 +152,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("maximumRetries")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int MaximumRetries { get; set; }
+      public int? MaximumRetries { get; set; }
 
       [JsonPropertyName("fromOperationOcc")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

@@ -106,7 +106,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("dcType")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

@@ -184,7 +184,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("showMode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ShowMode { get; set; }
+      public int? ShowMode { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -195,7 +195,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("trackComfirmation")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool TrackComfirmation { get; set; }
+      public bool? TrackComfirmation { get; set; }
 
       [JsonPropertyName("dsprcs:WorkInstructionEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

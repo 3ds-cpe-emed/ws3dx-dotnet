@@ -17,7 +17,7 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs_MfgProcess.ExpandMask.Default.V1")]
+   [MaskSchema("dsprcs:MfgProcess.ExpandMask.Default.V1")]
    public interface IMfgProcessExpandMaskV1
    {
       //----------------------------------------------------------------

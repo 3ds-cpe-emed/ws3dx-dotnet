@@ -117,7 +117,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("numberOfMeasurements")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int NumberOfMeasurements { get; set; }
+      public int? NumberOfMeasurements { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -128,7 +128,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("dcType")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -181,7 +181,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("minIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool MinIncluded { get; set; }
+      public bool? MinIncluded { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -192,7 +192,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("maxIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool MaxIncluded { get; set; }
+      public bool? MaxIncluded { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -203,7 +203,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("controlMinIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool ControlMinIncluded { get; set; }
+      public bool? ControlMinIncluded { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -214,6 +214,6 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("controlMaxIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool ControlMaxIncluded { get; set; }
+      public bool? ControlMaxIncluded { get; set; }
    }
 }

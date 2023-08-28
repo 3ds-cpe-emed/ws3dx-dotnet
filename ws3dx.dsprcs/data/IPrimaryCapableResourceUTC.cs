@@ -53,7 +53,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double ResourcesQuantity { get; set; }
+      public double? ResourcesQuantity { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -62,7 +62,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsPreferred { get; set; }
+      public bool? IsPreferred { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -71,7 +71,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool ManuallyScheduled { get; set; }
+      public bool? ManuallyScheduled { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -80,7 +80,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Priority { get; set; }
+      public int? Priority { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -89,7 +89,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double ToolChangeoverTime { get; set; }
+      public double? ToolChangeoverTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -98,7 +98,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsReservedFromFirstStep { get; set; }
+      public bool? IsReservedFromFirstStep { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int CapableRscGroupIndex { get; set; }
+      public int? CapableRscGroupIndex { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -116,7 +116,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedTime { get; set; }
+      public double? EstimatedTime { get; set; }
 
       public ITypedUriIdentifier Resource { get; set; }
    }

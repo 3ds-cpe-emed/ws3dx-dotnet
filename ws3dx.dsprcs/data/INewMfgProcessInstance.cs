@@ -19,7 +19,7 @@ namespace ws3dx.dsprcs.data
 {
    public interface INewMfgProcessInstance
    {
-      public IUriIdentifier ReferencedObject { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public INewMfgProcessInstanceData Attributes { get; set; }
    }

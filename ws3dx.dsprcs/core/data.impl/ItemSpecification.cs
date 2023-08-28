@@ -53,7 +53,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isScope")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsScope { get; set; }
+      public bool? IsScope { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

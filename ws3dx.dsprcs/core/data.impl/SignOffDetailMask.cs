@@ -184,7 +184,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isPartialSignoffAllowed")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsPartialSignoffAllowed { get; set; }
+      public bool? IsPartialSignoffAllowed { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -195,7 +195,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isOptional")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsOptional { get; set; }
+      public bool? IsOptional { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

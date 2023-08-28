@@ -40,7 +40,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("value")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double Value { get; set; }
+      public double? Value { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

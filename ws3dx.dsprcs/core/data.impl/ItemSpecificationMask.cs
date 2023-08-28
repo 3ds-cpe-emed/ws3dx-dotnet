@@ -44,7 +44,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isScope")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsScope { get; set; }
+      public bool? IsScope { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -90,6 +90,43 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonPropertyName("scopeContext")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier ScopeContext { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object usage value Example: Add
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("usage")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Usage { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object usageQuantityRatio value Example: 1.1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("usageQuantityRatio")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? UsageQuantityRatio { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object overlap value Example: false
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("overlap")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? Overlap { get; set; }
+
+      [JsonPropertyName("sendAheadQuantity")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public dsprcs.data.IMagnitudeValue SendAheadQuantity { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

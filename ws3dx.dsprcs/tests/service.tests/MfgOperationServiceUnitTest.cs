@@ -510,7 +510,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<ITypedUriIdentifier> ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
+            ITypedUriIdentifierResources ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -621,6 +621,53 @@ namespace NUnitTestProject
          }
       }
 
+
+
+      [TestCase()]
+      public async Task BulkFetch_IMfgOperationMask()
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         string[] request = new string[] { };
+
+         try
+         {
+
+            IEnumerable<IMfgOperationMask> ret = await mfgOperationService.BulkFetch<IMfgOperationMask>(request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase()]
+      public async Task BulkFetch_IMfgOperationDetailMask()
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         string[] request = new string[] { };
+
+         try
+         {
+            IEnumerable<IMfgOperationDetailMask> ret = await mfgOperationService.BulkFetch<IMfgOperationDetailMask>(request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
       [TestCase("")]
       public async Task DetachConfiguration(string mfgOperationId)
       {
@@ -632,7 +679,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<ITypedUriIdentifier> ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
+            ITypedUriIdentifierResources ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -675,6 +722,50 @@ namespace NUnitTestProject
          try
          {
             IUnitaryVariantEffectivity ret = await mfgOperationService.SetInstanceVariantEffectivity(mfgOperationId, mfgOperationInstanceId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+
+      [TestCase("")]
+      public async Task AddInstance_IMfgOperationInstanceMask(string mfgOperationId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
+
+         try
+         {
+            IEnumerable<IMfgOperationInstanceMask> ret = await mfgOperationService.AddInstance<IMfgOperationInstanceMask>(mfgOperationId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+      [TestCase("")]
+      public async Task AddInstance_IMfgOperationInstanceDetailMask(string mfgOperationId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         MfgOperationService mfgOperationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
+
+         try
+         {
+            IEnumerable<IMfgOperationInstanceDetailMask> ret = await mfgOperationService.AddInstance<IMfgOperationInstanceDetailMask>(mfgOperationId, request);
 
             Assert.IsNotNull(ret);
          }

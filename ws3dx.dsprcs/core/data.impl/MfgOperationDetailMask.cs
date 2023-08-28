@@ -162,7 +162,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedTime { get; set; }
+      public double? EstimatedTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -173,7 +173,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedTime_AddedValueRatio")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedTimeAddedValueRatio { get; set; }
+      public double? EstimatedTimeAddedValueRatio { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -184,7 +184,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("measuredTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MeasuredTime { get; set; }
+      public double? MeasuredTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -195,7 +195,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("trackTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double TrackTime { get; set; }
+      public double? TrackTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -252,7 +252,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isTimeProportionalToQty")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsTimeProportionalToQty { get; set; }
+      public bool? IsTimeProportionalToQty { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -263,7 +263,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("interruptible")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Interruptible { get; set; }
+      public bool? Interruptible { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -274,7 +274,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("manageVariant")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool ManageVariant { get; set; }
+      public bool? ManageVariant { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -285,7 +285,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("rollup")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Rollup { get; set; }
+      public bool? Rollup { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -296,7 +296,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("materialScrap")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MaterialScrap { get; set; }
+      public double? MaterialScrap { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -307,7 +307,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("preparationTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double PreparationTime { get; set; }
+      public double? PreparationTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -318,7 +318,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("preProcessingTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double PreProcessingTime { get; set; }
+      public double? PreProcessingTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -329,7 +329,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("postProcessingTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double PostProcessingTime { get; set; }
+      public double? PostProcessingTime { get; set; }
 
       [JsonPropertyName("quantityToBeProducedPerTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -344,7 +344,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("timePerFastening")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double TimePerFastening { get; set; }
+      public double? TimePerFastening { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -355,7 +355,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("fasteningRate")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double FasteningRate { get; set; }
+      public double? FasteningRate { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -366,7 +366,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("inputResources")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int InputResources { get; set; }
+      public int? InputResources { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -377,7 +377,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("occurrenceTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double OccurrenceTime { get; set; }
+      public double? OccurrenceTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -388,7 +388,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("occurrenceTimeMode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int OccurrenceTimeMode { get; set; }
+      public int? OccurrenceTimeMode { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -399,7 +399,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("restart")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Restart { get; set; }
+      public int? Restart { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -410,7 +410,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("stopingOnGoingOp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int StopingOnGoingOp { get; set; }
+      public int? StopingOnGoingOp { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -421,7 +421,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("recorderLevel")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int RecorderLevel { get; set; }
+      public int? RecorderLevel { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -432,7 +432,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("lot")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Lot { get; set; }
+      public int? Lot { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -443,7 +443,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("proportion")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double Proportion { get; set; }
+      public double? Proportion { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -462,46 +462,46 @@ namespace ws3dx.dsprcs.core.data.impl
 
       [JsonPropertyName("dsprcs:DELLmiGeneralOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IGeneralOperationReferenceEnterpriseAttributes DELLmiGeneralOperationReferenceEnterpriseAttributes { get; set; }
+      public IGeneralOperationReferenceEnterpriseAttributes GeneralOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiLoadingOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ILoadingOperationReferenceEnterpriseAttributes DELLmiLoadingOperationReferenceEnterpriseAttributes { get; set; }
+      public ILoadingOperationReferenceEnterpriseAttributes LoadingOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiUnLoadingOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IUnLoadingOperationReferenceEnterpriseAttributes DELLmiUnLoadingOperationReferenceEnterpriseAttributes { get; set; }
+      public IUnLoadingOperationReferenceEnterpriseAttributes UnLoadingOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiRemoveMaterialOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IRemoveMaterialOperationReferenceEnterpriseAttributes DELLmiRemoveMaterialOperationReferenceEnterpriseAttributes { get; set; }
+      public IRemoveMaterialOperationReferenceEnterpriseAttributes RemoveMaterialOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiTransferOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITransferOperationReferenceEnterpriseAttributes DELLmiTransferOperationReferenceEnterpriseAttributes { get; set; }
+      public ITransferOperationReferenceEnterpriseAttributes TransferOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiPunctualOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPunctualOperationReferenceEnterpriseAttributes DELLmiPunctualOperationReferenceEnterpriseAttributes { get; set; }
+      public IPunctualOperationReferenceEnterpriseAttributes PunctualOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiCurveOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICurveOperationReferenceEnterpriseAttributes DELLmiCurveOperationReferenceEnterpriseAttributes { get; set; }
+      public ICurveOperationReferenceEnterpriseAttributes CurveOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiInterruptOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IInterruptOperationReferenceEnterpriseAttributes DELLmiInterruptOperationReferenceEnterpriseAttributes { get; set; }
+      public IInterruptOperationReferenceEnterpriseAttributes InterruptOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiBufferOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IBufferOperationReferenceEnterpriseAttributes DELLmiBufferOperationReferenceEnterpriseAttributes { get; set; }
+      public IBufferOperationReferenceEnterpriseAttributes BufferOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiSinkOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ISinkOperationReferenceEnterpriseAttributes DELLmiSinkOperationReferenceEnterpriseAttributes { get; set; }
+      public ISinkOperationReferenceEnterpriseAttributes SinkOperationReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiSourceOperationReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ISourceOperationReferenceEnterpriseAttributes DELLmiSourceOperationReferenceEnterpriseAttributes { get; set; }
+      public ISourceOperationReferenceEnterpriseAttributes SourceOperationReferenceEnterpriseAttributes { get; set; }
    }
 }

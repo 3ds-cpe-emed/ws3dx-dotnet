@@ -63,7 +63,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("rscTimeConst")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double RscTimeConst { get; set; }
+      public double? RscTimeConst { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -74,7 +74,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("rscTimePerQtyToProducedPerTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double RscTimePerQtyToProducedPerTime { get; set; }
+      public double? RscTimePerQtyToProducedPerTime { get; set; }
 
       [JsonPropertyName("resource")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

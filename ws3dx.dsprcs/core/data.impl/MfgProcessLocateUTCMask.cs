@@ -69,6 +69,10 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
 
+      [JsonPropertyName("dsrsc:ScopeLink")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IScopeLink> ScopeLink { get; set; }
+
       [JsonPropertyName("dsprcs:PrimaryCapableResource")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }

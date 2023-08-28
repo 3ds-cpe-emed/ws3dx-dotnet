@@ -41,7 +41,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: specify requested type Example: ["dsprcs:MfgProcessInstance"]
+      // Description: specify requested type Example: ["dsprcs:MfgProcessInstance","dsrsc:ScopeLink"]
       //
       //<summary>
       //------------------------------------------------------------------------------------------------

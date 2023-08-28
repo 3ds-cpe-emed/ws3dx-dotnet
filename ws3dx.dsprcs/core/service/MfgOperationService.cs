@@ -633,11 +633,13 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> AttachConfiguration(string mfgOperationId, ITypedUriIdentifier[] request)
+      public async Task<ITypedUriIdentifierResources> AttachConfiguration(string mfgOperationId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured/attach";
 
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
+
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+
       }
 
       //---------------------------------------------------------------------------------------------
@@ -703,6 +705,29 @@ namespace ws3dx.dsprcs.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dsprcs:MfgOperation/bulkfetch
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Gets multiple Manufacturing Operations which are Indexed. 
+      //  API Works only for Indexed Data only. 
+      //  The customer attributes or enterprise extension attributes are returned only with default sixw 
+      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
+      // Summary: Gets multiple Manufacturing Operations which are Indexed.
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationMask), typeof(IMfgOperationDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/bulkfetch";
+
+         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
+
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dsprcs:MfgOperation/{ID}/dscfg:Configured/detach
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -714,11 +739,13 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> DetachConfiguration(string mfgOperationId, ITypedUriIdentifier[] request)
+      public async Task<ITypedUriIdentifierResources> DetachConfiguration(string mfgOperationId, ITypedUriIdentifier[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dscfg:Configured/detach";
 
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
+
+         return await PostIndividual<ITypedUriIdentifierResources, ITypedUriIdentifier[]>(resourceURI, request);
+
       }
 
       //---------------------------------------------------------------------------------------------
@@ -777,6 +804,30 @@ namespace ws3dx.dsprcs.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dsprcs:MfgOperation/{ID}/dsprcs:MfgOperationInstance
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Create Manufacturing Operation Instance under an Manufacturing Operation. Summary: 
+      // Create Manufacturing Operation Instance under an Manufacturing Operation.
+      // <param name="mfgOperationId">
+      // Description: dsprcs:MfgOperation object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddInstance<T>(string mfgOperationId, ICreateMfgOperationInstancesRefObject request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:MfgOperationInstance";
+
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateMfgOperationInstancesRefObject>(resourceURI, request);
+
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dsprcs:MfgOperation/{PID}/dsprcs:MfgOperationInstance/{ID}/dscfg:Filterable/unset/evolution
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -796,6 +847,31 @@ namespace ws3dx.dsprcs.core.service
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}/dscfg:Filterable/unset/evolution";
 
          return await PostIndividual<IUnitaryEvolutionEffectivity>(resourceURI);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (PATCH) dsprcs:MfgOperation/{PID}/dsprcs:MfgOperationInstance/{ID}
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Modifies the Manufacturing Operation Instance attributes under MfgOperation Summary: 
+      // Modifies the Manufacturing Operation Instance attributes under MfgOperation
+      // <param name="mfgOperationId">
+      // Description: dsprcs:MfgOperationobject ID
+      // </param>
+      // <param name="mfgOperationInstanceId">
+      // Description: dsprcs:MfgOperationInstance object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> UpdateInstance<T>(string mfgOperationId, string mfgOperationInstanceId, IMfgOperationInstancePatch request)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}";
+
+         return await PatchCollectionFromResponseMemberProperty<T, IMfgOperationInstancePatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -840,6 +916,25 @@ namespace ws3dx.dsprcs.core.service
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}";
 
          return await PatchIndividualFromResponseMemberProperty<T, IMfgOperationPatch>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (DELETE) dsprcs:MfgOperation/{ID}/dslc:changeControl
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Deactivate the Change Control. Summary: Deactivate the Change Control.
+      // <param name="mfgOperationId">
+      // Description: dsprcs:MfgOperation object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DetachChangeControl(string mfgOperationId)
+      {
+         string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dslc:changeControl";
+
+         return await DeleteIndividual<IGenericResponse>(resourceURI);
       }
    }
 }

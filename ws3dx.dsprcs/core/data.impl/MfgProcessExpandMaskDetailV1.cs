@@ -15,16 +15,15 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dsprcs.data;
-using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class PrimaryCapableResourceLocate : IPrimaryCapableResourceLocate
+   public class MfgProcessExpandMaskDetailV1 : IMfgProcessExpandMaskDetailV1
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      // Description: Entity physical id Example: RRR57EA400003D265621266D00017RRR
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -35,7 +34,18 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Basic modified value Example: 2021/12/16@13:36:48:GMT
+      // Description: Basic type value Example: My Type
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("type")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Type { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Basic modified value Example: 2022-01-31T09:48:10Z
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -46,7 +56,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object created value Example: 2021/12/16@13:36:48:GMT
+      // Description: Object created value Example: 2022-01-31T09:48:10Z
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -57,93 +67,68 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Resource quantity real value Example: 1
+      // Description: Entity name Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("resourcesQuantity")]
+      [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double ResourcesQuantity { get; set; }
+      public string Name { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Boolean value whether is preferred Example: true
+      // Description: Entity description vlaue Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isPreferred")]
+      [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsPreferred { get; set; }
+      public string Description { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Boolean value whether is manually scheduled Example: false
+      // Description: Object owner value Example: John Doe
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("manuallyScheduled")]
+      [JsonPropertyName("owner")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool ManuallyScheduled { get; set; }
+      public string Owner { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Priority integer value Example: 1
+      // Description: Object organization value Example: MyCompany
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("priority")]
+      [JsonPropertyName("organization")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Priority { get; set; }
+      public string Organization { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Tool changeover time real value Example: 0
+      // Description: Object collabspace value Example: Default
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("toolChangeoverTime")]
+      [JsonPropertyName("collabspace")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double ToolChangeoverTime { get; set; }
+      public string Collabspace { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Boolean value whether is reserved from first step Example: true
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isReservedFromFirstStep")]
+      [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsReservedFromFirstStep { get; set; }
+      public string Cestamp { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Capable resource group index integer value Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("capableRscGroupIndex")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int CapableRscGroupIndex { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Estimated time real value Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("estimatedTime")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedTime { get; set; }
-
-      [JsonPropertyName("resource")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier Resource { get; set; }
    }
 }

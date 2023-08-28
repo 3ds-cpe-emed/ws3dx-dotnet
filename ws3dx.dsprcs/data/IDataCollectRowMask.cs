@@ -99,7 +99,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int NumberOfMeasurements { get; set; }
+      public int? NumberOfMeasurements { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -108,7 +108,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -145,7 +145,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool MinIncluded { get; set; }
+      public bool? MinIncluded { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -154,7 +154,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool MaxIncluded { get; set; }
+      public bool? MaxIncluded { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -163,7 +163,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool ControlMinIncluded { get; set; }
+      public bool? ControlMinIncluded { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -172,6 +172,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool ControlMaxIncluded { get; set; }
+      public bool? ControlMaxIncluded { get; set; }
+
    }
 }

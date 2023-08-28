@@ -154,7 +154,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int ShowMode { get; set; }
+      public int? ShowMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -163,7 +163,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool TrackComfirmation { get; set; }
+      public bool? TrackComfirmation { get; set; }
 
       public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 

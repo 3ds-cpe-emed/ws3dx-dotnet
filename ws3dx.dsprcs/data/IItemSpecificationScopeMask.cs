@@ -36,7 +36,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsScope { get; set; }
+      public bool? IsScope { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

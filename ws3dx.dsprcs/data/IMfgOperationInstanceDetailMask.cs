@@ -13,43 +13,27 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface IMfgProcessInstance
+   [MaskSchema("dsprcs:MfgOperationInstanceMask.Details")]
+   public interface IMfgOperationInstanceDetailMask
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Entity physical id of the dsprcs:MfgProcessInstance' Example: MfgProcessInstanceID1
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Identifier { get; set; }
+      public string Id { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Source { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsmfg/dsprcs:MfgProcess/MfgProcessParentID/dsprcs:MfgProcessInstance/MfgProcessInstanceID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: DELLmiWorkPlanSystemInstance
+      // Description: Basic type value Example: My Type
       //
       // </summary>
       //----------------------------------------------------------------
@@ -58,11 +42,20 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Reference object title value Example: My title
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Title { get; set; }
+      public string Modified { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Created { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -112,30 +105,40 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object created value Example: 2021/12/16@13:36:48:GMT
+      // Description: Reference Physical ID of Instance Example: String
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Created { get; set; }
+      public string Reference { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object modified value Example: 2021/12/16@13:36:48:GMT
+      // Description: Object wipQuantityRatio value Example: 1.1
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Modified { get; set; }
-
-      public ITypedUriIdentifier ParentObject { get; set; }
+      public double? WipQuantityRatio { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Number of instances Example: 1
+      // Description: Object scrapQuantityRatio value Example: 1.1
       //
       // </summary>
       //----------------------------------------------------------------
-      public int TotalItems { get; set; }
+      public double? ScrapQuantityRatio { get; set; }
+
+      public ITypedUriIdentifier ReferencedObject { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Cestamp { get; set; }
+
    }
 }

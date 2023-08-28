@@ -90,7 +90,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

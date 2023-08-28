@@ -63,7 +63,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("resourcesQuantity")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double ResourcesQuantity { get; set; }
+      public double? ResourcesQuantity { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -74,7 +74,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isPreferred")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsPreferred { get; set; }
+      public bool? IsPreferred { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -85,7 +85,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("manuallyScheduled")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool ManuallyScheduled { get; set; }
+      public bool? ManuallyScheduled { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -96,7 +96,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("priority")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Priority { get; set; }
+      public int? Priority { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("toolChangeoverTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double ToolChangeoverTime { get; set; }
+      public double? ToolChangeoverTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -118,7 +118,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isReservedFromFirstStep")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsReservedFromFirstStep { get; set; }
+      public bool? IsReservedFromFirstStep { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -129,7 +129,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("capableRscGroupIndex")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int CapableRscGroupIndex { get; set; }
+      public int? CapableRscGroupIndex { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -140,7 +140,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("estimatedTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EstimatedTime { get; set; }
+      public double? EstimatedTime { get; set; }
 
       [JsonPropertyName("resource")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

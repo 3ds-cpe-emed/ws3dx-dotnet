@@ -136,6 +136,6 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int TotalItems { get; set; }
+      public int? TotalItems { get; set; }
    }
 }

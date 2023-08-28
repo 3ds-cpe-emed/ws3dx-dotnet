@@ -163,7 +163,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -172,7 +172,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int SampleSize { get; set; }
+      public int? SampleSize { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -181,7 +181,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool HasMaxValuated { get; set; }
+      public bool? HasMaxValuated { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -190,7 +190,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool HasMinValuated { get; set; }
+      public bool? HasMinValuated { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -208,7 +208,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MaxValue { get; set; }
+      public double? MaxValue { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -217,7 +217,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MinValue { get; set; }
+      public double? MinValue { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -235,7 +235,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool MinIncluded { get; set; }
+      public bool? MinIncluded { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -244,7 +244,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool MaxIncluded { get; set; }
+      public bool? MaxIncluded { get; set; }
 
       public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 

@@ -195,7 +195,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("dcType")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int DcType { get; set; }
+      public int? DcType { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -206,7 +206,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("sampleSize")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int SampleSize { get; set; }
+      public int? SampleSize { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -217,7 +217,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("hasMaxValuated")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool HasMaxValuated { get; set; }
+      public bool? HasMaxValuated { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -228,7 +228,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("hasMinValuated")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool HasMinValuated { get; set; }
+      public bool? HasMinValuated { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -250,7 +250,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("maxValue")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MaxValue { get; set; }
+      public double? MaxValue { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -261,7 +261,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("minValue")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MinValue { get; set; }
+      public double? MinValue { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -283,7 +283,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("minIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool MinIncluded { get; set; }
+      public bool? MinIncluded { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -294,7 +294,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("maxIncluded")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool MaxIncluded { get; set; }
+      public bool? MaxIncluded { get; set; }
 
       [JsonPropertyName("dsprcs:WorkInstructionEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

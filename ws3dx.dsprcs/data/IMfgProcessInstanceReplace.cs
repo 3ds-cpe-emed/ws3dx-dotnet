@@ -17,34 +17,11 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface IItemSpecifications
+   public interface IMfgProcessInstanceReplace
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Indication of whether this is item act as scope or not. If false, then means this is 
-      // implement link. Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool IsScope { get; set; }
+      public IMfgProcessInstanceReplaceAttributes Attributes { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the scope manufacturing item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ItemReference { get; set; }
    }
 }

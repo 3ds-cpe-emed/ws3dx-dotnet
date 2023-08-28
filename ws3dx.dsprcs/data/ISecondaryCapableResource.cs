@@ -52,7 +52,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double RscTimeConst { get; set; }
+      public double? RscTimeConst { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -61,7 +61,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double RscTimePerQtyToProducedPerTime { get; set; }
+      public double? RscTimePerQtyToProducedPerTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

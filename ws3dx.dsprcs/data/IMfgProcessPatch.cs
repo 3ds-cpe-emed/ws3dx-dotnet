@@ -62,7 +62,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Capacity { get; set; }
+      public int? Capacity { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -71,7 +71,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double CycleTime { get; set; }
+      public double? CycleTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -80,7 +80,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int FlowModeIN { get; set; }
+      public int? FlowModeIN { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -89,7 +89,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int FlowModeOUT { get; set; }
+      public int? FlowModeOUT { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -98,7 +98,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MeanTimeBetweenFailure { get; set; }
+      public double? MeanTimeBetweenFailure { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MeanTimeToRepair { get; set; }
+      public double? MeanTimeToRepair { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -116,7 +116,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int OperationMode { get; set; }
+      public int? OperationMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -125,7 +125,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int QueuingModeIN { get; set; }
+      public int? QueuingModeIN { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -134,7 +134,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int QueuingModeOUT { get; set; }
+      public int? QueuingModeOUT { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -143,7 +143,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double TotalProductionTime { get; set; }
+      public double? TotalProductionTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -152,7 +152,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EstimatedDistance { get; set; }
+      public double? EstimatedDistance { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -161,7 +161,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int TransferMode { get; set; }
+      public int? TransferMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -170,7 +170,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int ArrivalMode { get; set; }
+      public int? ArrivalMode { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -179,7 +179,7 @@ namespace ws3dx.dsprcs.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double InitialDelay { get; set; }
+      public double? InitialDelay { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

@@ -13,16 +13,17 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.shared.data;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface IPrimaryCapableResourceLocate
+   [MaskSchema("dsprcs:MfgProcess.ExpandMask.Details.V1")]
+   public interface IMfgProcessExpandMaskDetailV1
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      // Description: Entity physical id Example: RRR57EA400003D265621266D00017RRR
       //
       // </summary>
       //----------------------------------------------------------------
@@ -31,7 +32,16 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Basic modified value Example: 2021/12/16@13:36:48:GMT
+      // Description: Basic type value Example: My Type
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Type { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Basic modified value Example: 2022-01-31T09:48:10Z
       //
       // </summary>
       //----------------------------------------------------------------
@@ -40,7 +50,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object created value Example: 2021/12/16@13:36:48:GMT
+      // Description: Object created value Example: 2022-01-31T09:48:10Z
       //
       // </summary>
       //----------------------------------------------------------------
@@ -49,75 +59,56 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Resource quantity real value Example: 1
+      // Description: Entity name Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public double ResourcesQuantity { get; set; }
+      public string Name { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Boolean value whether is preferred Example: true
+      // Description: Entity description vlaue Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsPreferred { get; set; }
+      public string Description { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Boolean value whether is manually scheduled Example: false
+      // Description: Object owner value Example: John Doe
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool ManuallyScheduled { get; set; }
+      public string Owner { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Priority integer value Example: 1
+      // Description: Object organization value Example: MyCompany
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Priority { get; set; }
+      public string Organization { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Tool changeover time real value Example: 0
+      // Description: Object collabspace value Example: Default
       //
       // </summary>
       //----------------------------------------------------------------
-      public double ToolChangeoverTime { get; set; }
+      public string Collabspace { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Boolean value whether is reserved from first step Example: true
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsReservedFromFirstStep { get; set; }
+      public string Cestamp { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Capable resource group index integer value Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int CapableRscGroupIndex { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Estimated time real value Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double EstimatedTime { get; set; }
-
-      public ITypedUriIdentifier Resource { get; set; }
    }
 }
