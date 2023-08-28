@@ -47,75 +47,75 @@ namespace NUnitTestProject
 
       UserInfo m_userInfo = null;
 
-      public async Task<IPassportAuthentication> Authenticate()
-      {
-         UserPassport passport = new UserPassport(m_passportUrl);
+        public async Task<IPassportAuthentication> Authenticate()
+        {
+            UserPassport passport = new UserPassport(m_passportUrl);
 
-         UserInfoRedirection userInfoRedirection = new UserInfoRedirection(m_serviceUrl, m_tenant)
-         {
-            Current = true,
-            IncludeCollaborativeSpaces = true,
-            IncludePreferredCredentials = true
-         };
+            UserInfoRedirection userInfoRedirection = new UserInfoRedirection(m_serviceUrl, m_tenant)
+            {
+                Current = true,
+                IncludeCollaborativeSpaces = true,
+                IncludePreferredCredentials = true
+            };
 
-         m_userInfo = await passport.CASLoginWithRedirection<UserInfo>(m_username, m_password, false, userInfoRedirection);
+            m_userInfo = await passport.CASLoginWithRedirection<UserInfo>(m_username, m_password, false, userInfoRedirection);
 
-         Assert.IsNotNull(m_userInfo);
+            Assert.IsNotNull(m_userInfo);
 
-         StringAssert.AreEqualIgnoringCase(m_userInfo.name, m_username);
+            StringAssert.AreEqualIgnoringCase(m_userInfo.name, m_username);
 
-         Assert.IsTrue(passport.IsCookieAuthenticated);
+            Assert.IsTrue(passport.IsCookieAuthenticated);
 
-         return passport;
-      }
+            return passport;
+        }
 
-      [SetUp]
-      public void Setup()
-      {
+        [SetUp]
+        public void Setup()
+        {
          m_username = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_USERNAME, EnvironmentVariableTarget.User); // e.g. AAA27
          m_password = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSWORD, EnvironmentVariableTarget.User); // e.g. your password
-         m_passportUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSPORT, EnvironmentVariableTarget.User); // e.g. https://eu1-ds-iam.3dexperience.3ds.com:443/3DPassport
+			m_passportUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSPORT, EnvironmentVariableTarget.User); // e.g. https://eu1-ds-iam.3dexperience.3ds.com:443/3DPassport
 
          m_serviceUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_ENOVIA, EnvironmentVariableTarget.User); // e.g. https://r1132100982379-eu1-space.3dexperience.3ds.com:443/enovia
          m_tenant = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_TENANT, EnvironmentVariableTarget.User); // e.g. R1132100982379
-      }
+		}
 
-      public string GetDefaultSecurityContext()
-      {
-         return m_userInfo.preferredcredentials.ToString();
-      }
+		public string GetDefaultSecurityContext()
+		{
+			return m_userInfo.preferredcredentials.ToString();
+		}
 
-      public BookmarkService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
-      {
+		public BookmarkService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+		{
          BookmarkService __bookmarkService = new BookmarkService(_serviceUrl, _passport)
          {
             Tenant = _tenant,
             SecurityContext = GetDefaultSecurityContext()
          };
-         return __bookmarkService;
-      }
+			return __bookmarkService;
+		}
 
       [TestCase("bookmark", 0, 50)]
-      public async Task Search_Paged_IBookmarkMask(string search, int skip, int top)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		public async Task Search_Paged_IBookmarkMask(string search, int skip, int top)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+			SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IBookmarkMask> ret = await bookmarkService.Search<IBookmarkMask>(searchByFreeText, skip, top);
-         Assert.IsNotNull(ret);
+			IEnumerable<IBookmarkMask> ret = await bookmarkService.Search<IBookmarkMask>(searchByFreeText, skip, top);
+			Assert.IsNotNull(ret);
 
          int i = 0;
          foreach (IBookmarkMask bksMask in ret)
          {
-            IEnumerable<IBookmarkDetailMask> bksEnum = await bookmarkService.Get<IBookmarkDetailMask>(bksMask.Id);
+            IEnumerable<IBookmarkDetailMask> bksEnum = await bookmarkService.Get<IBookmarkDetailMask>(bksMask.Id, top.ToString() , skip.ToString());
 
             foreach (IBookmarkDetailMask bksMaskDetail in bksEnum)
             {
                Assert.AreEqual(bksMaskDetail.Id, bksMask.Id);
-            }
+		}
 
             i++;
 
@@ -123,287 +123,287 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("search")]
-      public async Task Search_Full_IBookmarkMask(string search)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("search")]
+		public async Task Search_Full_IBookmarkMask(string search)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+			SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IBookmarkMask> ret = await bookmarkService.Search<IBookmarkMask>(searchByFreeText);
+			IEnumerable<IBookmarkMask> ret = await bookmarkService.Search<IBookmarkMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IBookmarkDetailMask(string search, int skip, int top)
-      {
-         IPassportAuthentication passport = await Authenticate();
+			Assert.IsNotNull(ret);
+		}
+		[TestCase("search", 0, 50)]
+		public async Task Search_Paged_IBookmarkDetailMask(string search, int skip, int top)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+			SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Search<IBookmarkDetailMask>(searchByFreeText, skip, top);
+			IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Search<IBookmarkDetailMask>(searchByFreeText, skip, top);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("search")]
-      public async Task Search_Full_IBookmarkDetailMask(string search)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("search")]
+		public async Task Search_Full_IBookmarkDetailMask(string search)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+			SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Search<IBookmarkDetailMask>(searchByFreeText);
+			IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Search<IBookmarkDetailMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("")]
-      public async Task Get_IBookmarkMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("", "", "")]
+		public async Task Get_IBookmarkMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IBookmarkMask> ret = await bookmarkService.Get<IBookmarkMask>(bookmarkId);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			IEnumerable<IBookmarkMask> ret = await bookmarkService.Get<IBookmarkMask>(bookmarkId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("")]
-      public async Task Get_IBookmarkDetailMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("" ,"" ,"")]
+		public async Task Get_IBookmarkDetailMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Get<IBookmarkDetailMask>(bookmarkId);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Get<IBookmarkDetailMask>(bookmarkId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("")]
-      public async Task Get_IBookmarkItemsMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("" ,"" ,"")]
+		public async Task Get_IBookmarkItemsMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Get<IBookmarkItemsMask>(bookmarkId);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Get<IBookmarkItemsMask>(bookmarkId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("")]
-      public async Task Get_IBookmarkSubBookmarksMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("" ,"" ,"")]
+		public async Task Get_IBookmarkSubBookmarksMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Get<IBookmarkSubBookmarksMask>(bookmarkId);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Get<IBookmarkSubBookmarksMask>(bookmarkId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
-      [TestCase("")]
-      public async Task Get_IBookmarkParentMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("" ,"" ,"")]
+		public async Task Get_IBookmarkParentMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Get<IBookmarkParentMask>(bookmarkId);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Get<IBookmarkParentMask>(bookmarkId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+			Assert.IsNotNull(ret);
+		}
 
       // Create ROOT BOOKMARK
       [TestCase("AAA27WSBOOKMARK1", "Description of bookmark")]
       public async Task Create_IBookmarkMask(string bookMarkTitle, string bookMarkDescription)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          INewBookmark newBookmark = new NewBookmark();
          newBookmark.Attributes = new NewBookmarkData();
          newBookmark.Attributes.Title = bookMarkTitle;
          newBookmark.Attributes.Description = bookMarkDescription;
 
-         ICreateBookmarks request = new CreateBookmarks();
+			ICreateBookmarks request = new CreateBookmarks();
          request.Items = new List<INewBookmark>() { newBookmark };
 
-         try
-         {
-            IEnumerable<IBookmarkMask> ret = await bookmarkService.Create<IBookmarkMask>(request);
+			try
+			{
+				IEnumerable<IBookmarkMask> ret = await bookmarkService.Create<IBookmarkMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
 
       // Create SUB-BOOKMARK
       [TestCase("44C2728FF159000064183E6E001CC996", "AAA27WS-SUB-BOOKMARK1", "Description of sub bookmark")]
       public async Task Create_IBookmarkDetailMask(string parentId, string bookMarkTitle, string bookMarkDescription)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          INewBookmark newBookmark = new NewBookmark();
          newBookmark.Attributes = new NewBookmarkData();
          newBookmark.Attributes.Title = bookMarkTitle;
          newBookmark.Attributes.Description = bookMarkDescription;
 
-         ICreateBookmarks request = new CreateBookmarks();
+			ICreateBookmarks request = new CreateBookmarks();
          request.Items = new List<INewBookmark>() { newBookmark };
          request.ParentId = parentId;
 
-         try
-         {
-            IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Create<IBookmarkDetailMask>(request);
+			try
+			{
+				IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Create<IBookmarkDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase()]
-      public async Task Create_IBookmarkLinkableMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase()]
+		public async Task Create_IBookmarkLinkableMask()
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         ICreateBookmarks request = new CreateBookmarks();
+			ICreateBookmarks request = new CreateBookmarks();
 
-         try
-         {
-            IEnumerable<IBookmarkLinkableMask> ret = await bookmarkService.Create<IBookmarkLinkableMask>(request);
+			try
+			{
+				IEnumerable<IBookmarkLinkableMask> ret = await bookmarkService.Create<IBookmarkLinkableMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
 
-      [TestCase("")]
-      public async Task Attach_IBookmarkMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("", "", "")]
+		public async Task Attach_IBookmarkMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            IEnumerable<IBookmarkMask> ret = await bookmarkService.Attach<IBookmarkMask>(bookmarkId, request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Attach_IBookmarkDetailMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Attach<IBookmarkDetailMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkMask> ret = await bookmarkService.Attach<IBookmarkMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Attach_IBookmarkItemsMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Attach_IBookmarkDetailMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Attach<IBookmarkItemsMask>(bookmarkId, request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Attach_IBookmarkSubBookmarksMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Attach<IBookmarkSubBookmarksMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Attach<IBookmarkDetailMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Attach_IBookmarkParentMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Attach_IBookmarkItemsMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Attach<IBookmarkParentMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Attach<IBookmarkItemsMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Attach_IBookmarkSubBookmarksMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
+
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+			try
+			{
+				IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Attach<IBookmarkSubBookmarksMask>(bookmarkId, top, skip, request);
+
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Attach_IBookmarkParentMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
+
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+			try
+			{
+				IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Attach<IBookmarkParentMask>(bookmarkId, top, skip, request);
+
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
 
       //[TestCase()]
       //public async Task Locate()
@@ -413,7 +413,7 @@ namespace NUnitTestProject
       //   BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
       //   ITypedUriIdentifier request = new TypedUriIdentifier();
-
+		
       //   try
       //   {
       //      ret = await bookmarkService.Locate(request);
@@ -427,153 +427,153 @@ namespace NUnitTestProject
       //   }
       //}
 
-      [TestCase("")]
-      public async Task Detach_IBookmarkMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+		[TestCase("", "", "")]
+		public async Task Detach_IBookmarkMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            IEnumerable<IBookmarkMask> ret = await bookmarkService.Detach<IBookmarkMask>(bookmarkId, request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Detach_IBookmarkDetailMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Detach<IBookmarkDetailMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkMask> ret = await bookmarkService.Detach<IBookmarkMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Detach_IBookmarkItemsMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Detach_IBookmarkDetailMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Detach<IBookmarkItemsMask>(bookmarkId, request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Detach_IBookmarkSubBookmarksMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Detach<IBookmarkSubBookmarksMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.Detach<IBookmarkDetailMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase("")]
-      public async Task Detach_IBookmarkParentMask(string bookmarkId)
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Detach_IBookmarkItemsMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Detach<IBookmarkParentMask>(bookmarkId, request);
+			try
+			{
+				IEnumerable<IBookmarkItemsMask> ret = await bookmarkService.Detach<IBookmarkItemsMask>(bookmarkId, top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+      [TestCase("", "", "")]
+      public async Task Detach_IBookmarkSubBookmarksMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-      [TestCase()]
-      public async Task BulkUpdate_IBookmarkMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+			try
+			{
+				IEnumerable<IBookmarkSubBookmarksMask> ret = await bookmarkService.Detach<IBookmarkSubBookmarksMask>(bookmarkId, top, skip, request);
+
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase("", "", "")]
+		public async Task Detach_IBookmarkParentMask(string bookmarkId, string top, string skip)
+		{
+			IPassportAuthentication passport = await Authenticate();
+
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+			try
+			{
+				IEnumerable<IBookmarkParentMask> ret = await bookmarkService.Detach<IBookmarkParentMask>(bookmarkId, top, skip, request);
+
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+
+		[TestCase()]
+		public async Task BulkUpdate_IBookmarkMask()
+		{
+			IPassportAuthentication passport = await Authenticate();
+
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          IUpdateBookmark[] request = new UpdateBookmark[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkMask> ret = await bookmarkService.BulkUpdate<IBookmarkMask>(request);
+			try
+			{
+				IEnumerable<IBookmarkMask> ret = await bookmarkService.BulkUpdate<IBookmarkMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-      [TestCase()]
-      public async Task BulkUpdate_IBookmarkDetailMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+		[TestCase()]
+		public async Task BulkUpdate_IBookmarkDetailMask()
+		{
+			IPassportAuthentication passport = await Authenticate();
 
-         BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+			BookmarkService bookmarkService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          IUpdateBookmark[] request = new UpdateBookmark[] { };
 
-         try
-         {
-            IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.BulkUpdate<IBookmarkDetailMask>(request);
+			try
+			{
+				IEnumerable<IBookmarkDetailMask> ret = await bookmarkService.BulkUpdate<IBookmarkDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+				Assert.IsNotNull(ret);
+			}
+			catch (HttpResponseException _ex)
+			{
+				string errorMessage = await _ex.GetErrorMessage();
+				Assert.Fail(errorMessage);
+			}
+		}
+	}
 }
