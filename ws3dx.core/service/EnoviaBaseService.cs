@@ -328,7 +328,7 @@ namespace ws3dx.core.service
       {
          return await GetIndividualFromResponseArrayProperty<T>(_requestUri, "member", queryParams, headerParams);
       }
-      
+
       protected async Task<T> GetIndividualFromResponseArrayProperty<T>(string _requestUri, string _wrappingCollectionArrayPropertyName, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
          IList<T> returnSet = await GetCollectionFromResponseArrayProperty<T>(_requestUri, _wrappingCollectionArrayPropertyName, queryParams, headerParams);
@@ -372,7 +372,7 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> PostCollectionNoMaskFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionNoMaskFromResponseCollectionProperty<T,P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PostCollectionNoMaskFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
       }
 
       protected async Task<IList<T>> PostCollectionNoMaskFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class

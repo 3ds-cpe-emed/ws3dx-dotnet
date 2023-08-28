@@ -25,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.dssrc.core.data.impl;
 using ws3dx.dssrc.core.service;
 using ws3dx.dssrc.data;
+using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
@@ -102,14 +103,34 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase()]
-      public async Task Create()
+      [TestCase("3784C7605B3B0000642470A000143BB7", "uuid:Supplier A")]
+      public async Task Create(string _engItemId, string _supplierId)
       {
          IPassportAuthentication passport = await Authenticate();
 
          ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         INewManufacturerEquivalentItem[] request = new NewManufacturerEquivalentItem[] { };
+         INewManufacturerEquivalentItem mei = new NewManufacturerEquivalentItem();
+
+         mei.EngItem = new TypedUriIdentifier();
+         mei.EngItem.Identifier = _engItemId;
+         mei.EngItem.Type = "VPMReference";
+         mei.EngItem.RelativePath = "resource/v1/dseng/dseng:EngItem/" + _engItemId;
+         mei.EngItem.Source = m_serviceUrl;
+
+         mei.ManufacturerCompany = new TypedUriIdentifier();
+         mei.ManufacturerCompany.Identifier = _supplierId;
+         mei.ManufacturerCompany.RelativePath = $"/3drdfpersist/resources/v1/modeler/dsvnp/dsvnp:SupplierCompany/{_supplierId}";
+         mei.ManufacturerCompany.Type = "SupplierCompany";
+         mei.ManufacturerCompany.Source = "https://r1132100982379-eu1-3dnetwork.3dexperience.3ds.com";
+         //mei.ManufacturerCompany.Source = m_serviceUrl;
+
+         mei.Manufacturer = "Supplier A";
+         mei.ManufacturerPartNumber = "RE-98372";
+         mei.PartSourceURL = "";
+         mei.PartSource = "Texas Instruments NAM";
+
+         INewManufacturerEquivalentItem[] request = new INewManufacturerEquivalentItem[1] { mei };
 
          try
          {

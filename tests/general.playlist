@@ -1,0 +1,175 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.dseng.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="EngItemServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.EngItemServiceTests.GetEnterpriseItemNumber" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetEnterpriseItemNumber(&quot;3784C760967A00006409AA5B000160E9&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.EngItemServiceTests.Search_Full_IEngItemDefaultMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Search_Full_IEngItemDefaultMask(&quot;New Engineering item created from Web Service&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.dsiss.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="IssueServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.IssueServiceTests.Search" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Search(&quot;AAA27&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.IssueServiceTests.Get" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Get(&quot;2CDF9777B61A0000600FCD2F000CF036&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.IssueServiceTests.Create" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Create(&quot;New Issue AAA27&quot;,&quot;Issue created from Web Services&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.dsbks.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="BookmarkServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.BookmarkServiceTests.Search_Paged_IBookmarkMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Search_Paged_IBookmarkMask(&quot;bookmark&quot;,0,50)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.BookmarkServiceTests.Create_IBookmarkMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Create_IBookmarkMask(&quot;AAA27WSBOOKMARK&quot;,&quot;Description of bookmark&quot;)" />
+                        <Property Name="DisplayName" Value="Create_IBookmarkMask(&quot;AAA27WSBOOKMARK1&quot;,&quot;Description of bookmark&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.BookmarkServiceTests.Create_IBookmarkDetailMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Create_IBookmarkDetailMask(&quot;44C2728FF159000064183E6E001CC996&quot;,&quot;AAA27WS-SUB-BOOKMARK&quot;,&quot;Description of sub bookmark&quot;)" />
+                        <Property Name="DisplayName" Value="Create_IBookmarkDetailMask(&quot;44C2728FF159000064183E6E001CC996&quot;,&quot;AAA27WS-SUB-BOOKMARK1&quot;,&quot;Description of sub bookmark&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.document.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="DocumentServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.DocumentServiceTests.Search_Paged" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Search_Paged(&quot;document&quot;,0,50)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+        <Rule Match="All">
+          <Property Name="Project" Value="ws3dx.dslib.tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="NUnitTestProject" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="LibraryServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.LibraryServiceTests.Search_Full_ISimpleMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Search_Full_ISimpleMask(&quot;AAA27_TEST&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.LibraryServiceTests.Get_ISimpleMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Get_ISimpleMask(&quot;AF02EA6D06390000624ACC28001C33EC&quot;,&quot;5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.LibraryServiceTests.Get_IExpandClassifiableClassesMask" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Get_IExpandClassifiableClassesMask(&quot;AF02EA6D06390000624ACC28001C33EC&quot;,&quot;5&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+                <Rule Match="All">
+                  <Property Name="Class" Value="ClassifiedItemServiceTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.ClassifiedItemServiceTests.Remove" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Remove(&quot;3784C760B0500000641C43C2001A4D7E&quot;,&quot;44C2728F4E2300006405B1EF000CFEB5&quot;,&quot;VPMReference&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="NUnitTestProject.ClassifiedItemServiceTests.Create" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Create(&quot;3784C760B0500000641C43C2001A4D7E&quot;,&quot;44C2728F4E2300006405B1EF000CFEB5&quot;,&quot;dseng:EngItem&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>
