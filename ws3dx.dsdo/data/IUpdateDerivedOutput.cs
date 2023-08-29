@@ -19,6 +19,6 @@ namespace ws3dx.dsdo.data
 {
    public interface IUpdateDerivedOutput
    {
-      public IList<IDerivedOutputFile> DerivedOutputFiles { get; set; }
+      public IList<IUpdateDerivedOutputFile> DerivedOutputFiles { get; set; }
    }
 }

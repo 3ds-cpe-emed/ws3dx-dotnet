@@ -18,39 +18,61 @@ using ws3dx.dsdo.data;
 
 namespace ws3dx.dsdo.core.data.impl
 {
-   public class DerivedOutputFileAttributes : IDerivedOutputFileAttributes
+   public class CreateDerivedOutputFile : ICreateDerivedOutputFile
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: visible
+      // Example: UjU5AAABwMACLcJmZh0Fe7bzCrHPMclJAbI26g6pJMiin8
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("name")]
+      [JsonPropertyName("receipt")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+      public string Receipt { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: true
+      // Example: STEP_b87da43e_5360_5e992f39_c87c_Default.stp
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("val")]
+      [JsonPropertyName("filename")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? Val { get; set; }
+      public string Filename { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: Optional keep
+      // Example: STEP
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("kind")]
+      [JsonPropertyName("format")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Kind { get; set; }
+      public string Format { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: e7d4437ce8ac6574495f2b9c95b89105
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("checksum")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Checksum { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: corelationID_DO
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("corelationID")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string CorelationID { get; set; }
    }
 }

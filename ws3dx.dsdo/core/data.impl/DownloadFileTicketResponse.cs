@@ -29,7 +29,7 @@ namespace ws3dx.dsdo.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("success")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Success { get; set; }
+      public bool? Success { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -40,7 +40,7 @@ namespace ws3dx.dsdo.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("statusCode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int StatusCode { get; set; }
+      public int? StatusCode { get; set; }
 
       [JsonPropertyName("data")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

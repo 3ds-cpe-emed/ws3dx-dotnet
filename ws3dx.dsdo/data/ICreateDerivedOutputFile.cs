@@ -13,12 +13,20 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 
 namespace ws3dx.dsdo.data
 {
-   public interface IDerivedOutputFileDetail
+   public interface ICreateDerivedOutputFile
    {
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: UjU5AAABwMACLcJmZh0Fe7bzCrHPMclJAbI26g6pJMiin8
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Receipt { get; set; }
+
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -49,48 +57,10 @@ namespace ws3dx.dsdo.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: true
+      // Example: corelationID_DO
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool? IsExternal { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: {MD5}ae6dc3f2306b9a386b61bc0874351001
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string SynchroStamp { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: catpartTOSTEP
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ConverterName { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: STEP_b87da43e_5360_5e992f39_c87c_Default.stp
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsSync { get; set; }
-
-      public IList<IDerivedOutputFileAttributes> StreamAttributes { get; set; }
+      public string CorelationID { get; set; }
    }
 }

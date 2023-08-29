@@ -22,6 +22,6 @@ namespace ws3dx.dsdo.data
    {
       public ITypedUriId ReferencedObject { get; set; }
 
-      public IList<IDerivedOutputFile> DerivedOutputFiles { get; set; }
+      public IList<ICreateDerivedOutputFile> DerivedOutputFiles { get; set; }
    }
 }

@@ -63,7 +63,7 @@ namespace ws3dx.dsdo.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isExternal")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsExternal { get; set; }
+      public bool? IsExternal { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -107,7 +107,7 @@ namespace ws3dx.dsdo.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isSync")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsSync { get; set; }
+      public bool? IsSync { get; set; }
 
       [JsonPropertyName("streamAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

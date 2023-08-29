@@ -23,6 +23,6 @@ namespace ws3dx.dsdo.core.data.impl
    {
       [JsonPropertyName("derivedoutputfiles")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IDerivedOutputFile> DerivedOutputFiles { get; set; }
+      public IList<IUpdateDerivedOutputFile> DerivedOutputFiles { get; set; }
    }
 }

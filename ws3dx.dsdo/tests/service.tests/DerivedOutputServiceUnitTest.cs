@@ -235,7 +235,7 @@ namespace NUnitTestProject
       // ID 2661E4727D710000627CC3D6000106F1
       // NAME prd-R1132100982379-00465895
 
-      [TestCase("2661E4727D710000627CC3D6000106F1", "E:\\downloads\\3DMaster_V2R0_221202.pdf")]
+      [TestCase("221CD96C0A1B000064C928600012881F", "E:\\downloads\\3DMaster_V2R0_221202.pdf")]
       public async Task Create_IDerivedOutputDetailMask(string _id, string _doLocalFilePath)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -258,17 +258,17 @@ namespace NUnitTestProject
             }
          }
 
-         IDerivedOutputFile doFile = new DerivedOutputFile();
+         ICreateDerivedOutputFile doFile = new CreateDerivedOutputFile();
          doFile.Checksum = checksum;
          doFile.Filename = "3DMaster_V2R0_221202.pdf";
          doFile.Format   = "PDF";
          doFile.Receipt  = receipt;
 
-         ICreateDerivedOutput request = new CreateDerivedOutput();
-
-         request.ReferencedObject   = id;
-         request.DerivedOutputFiles = new List<IDerivedOutputFile>();
-         request.DerivedOutputFiles.Add(doFile);
+         ICreateDerivedOutput request = new CreateDerivedOutput
+         {
+            ReferencedObject = id,
+            DerivedOutputFiles = new List<ICreateDerivedOutputFile> { doFile }
+         };
 
          try
          {

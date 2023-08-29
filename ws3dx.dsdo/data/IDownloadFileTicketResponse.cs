@@ -25,7 +25,7 @@ namespace ws3dx.dsdo.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool Success { get; set; }
+      public bool? Success { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -34,7 +34,7 @@ namespace ws3dx.dsdo.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int StatusCode { get; set; }
+      public int? StatusCode { get; set; }
 
       public IDownloadFileTicketData Data { get; set; }
    }
