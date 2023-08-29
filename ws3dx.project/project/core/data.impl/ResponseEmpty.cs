@@ -22,11 +22,11 @@ namespace ws3dx.project.project.core.data.impl
    {
       [JsonPropertyName("success")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Success { get; set; }
+      public bool? Success { get; set; }
 
       [JsonPropertyName("statusCode")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int StatusCode { get; set; }
+      public int? StatusCode { get; set; }
 
       [JsonPropertyName("csrf")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

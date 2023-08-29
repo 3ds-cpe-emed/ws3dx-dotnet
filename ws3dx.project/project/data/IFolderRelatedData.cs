@@ -21,6 +21,6 @@ namespace ws3dx.project.project.data
    {
       public IList<IFolderContent> Content { get; set; }
 
-      public IList<IFolderSovaccess> Sovaccess { get; set; }
+      public IList<IFolderSovaccess> SovAccess { get; set; }
    }
 }
