@@ -18,9 +18,9 @@ namespace ws3dx.project.task.data
 {
    public interface IRESULTS_EMPTY
    {
-      public bool Success { get; set; }
+      public bool? Success { get; set; }
 
-      public int StatusCode { get; set; }
+      public int? StatusCode { get; set; }
 
       public ICsrf Csrf { get; set; }
    }
