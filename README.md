@@ -27,10 +27,10 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |----------|-----------------|--------|
 |[Advanced-Filter Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAAdvancedFilteringWS/dsadvfilter_v1.htm)|[ws3dx.dsadvfilter](./ws3dx.dsadvfilter)| 2023x FD01/02/03 |
 |[Bookmark REST Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAABookmarkWS/BookmarkAPI1_v1.htm)|[ws3dx.dsbks](./ws3dx.dsbks)| 2023x FD01/02/03 |
-|[CAD Collaboration Web Services 1.5.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAXCADWS/dsxcad_v1.htm)|[ws3dx.dsxcad](./ws3dx.dsxcad)| 2023x FD01/02 |
+|[CAD Collaboration Web Services 1.5.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAXCADWS/dsxcad_v1.htm)|[ws3dx.dsxcad](./ws3dx.dsxcad)| 2023x FD01/02/03 |
 |[Issue Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAChangeWS/dslc_change_issue_v1.htm)|[ws3dx.dsiss](./ws3dx.dsiss)| 2023x FD01 |
 |[Derived Outputs Web Services 1.2.1](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADerivedOutputsWS/dsdo_v1.htm)|[ws3dx.dsdo](./ws3dx.dsdo)| 2023x FD01 |
-|[Document REST Services 1.1.5](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADocumentWS/dsdoc_v1.htm)|[ws3dx.document](./ws3dx.document)| 2023x FD01/02 |
+|[Document REST Services 1.1.5](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADocumentWS/dsdoc_v1.htm)|[ws3dx.document](./ws3dx.document)| 2023x FD01/02/03 |
 |[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2023x FD01/02/03 |
 |[IP Classification Web Services 1.1.2](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAClassificationWS/dslib_v1.htm)|[ws3dx.dslib](./ws3dx.dslib)| 2023x FD01 |
 |[Collaborative Lifecycle Web Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAALifecycleWS/dslc_lifecycle_v1.htm)|[ws3dx.dslc](./ws3dx.dslc)| 2023x FD01 |
@@ -38,7 +38,7 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |[Manufacturing Process Web Services 1.10.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufProcessWS/dsprcs_v1.htm)|[ws3dx.dsprcs](./ws3dx.dsprcs)| 2023x FD01/03 |
 |[dssrc: Manufacturer Equivalent Items corpus 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufacturerEqItemWS/dssrc_mei_v1.htm)|[ws3dx.dssrc](./ws3dx.dssrc)| 2023x FD01 |
 |[Portfolio Web Services 1.8.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAPortfolioWS/dspfl_v1.htm)|[ws3dx.dspfl](./ws3dx.dspfl)| 2023x FD01 |
-|[Project Rest Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsproject_v1.2.htm)|[ws3dx.project.project](./ws3dx.project/project)| 2023x FD01 |
+|[Project Rest Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsproject_v1.2.htm)|[ws3dx.project.project](./ws3dx.project/project)| 2023x FD01/03 |
 |[Task Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dstask_v1.htm)|[ws3dx.project.task](./ws3dx.project/task)| 2023x FD01 |
 |[Program Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsprogram_v1.htm)|[ws3dx.project.program](./ws3dx.project/program)| 2023x FD01 |
 |[Risk Management Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsrisk_v1.1.htm)|[ws3dx.project.risk](./ws3dx.project/risk)|  2023x FD01 |
