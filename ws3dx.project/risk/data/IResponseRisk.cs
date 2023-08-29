@@ -19,9 +19,9 @@ namespace ws3dx.project.risk.data
 {
    public interface IResponseRisk
    {
-      public bool Success { get; set; }
+      public bool? Success { get; set; }
 
-      public int StatusCode { get; set; }
+      public int? StatusCode { get; set; }
 
       public ICsrf Csrf { get; set; }
 
