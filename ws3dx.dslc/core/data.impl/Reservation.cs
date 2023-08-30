@@ -40,7 +40,7 @@ namespace ws3dx.dslc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("reserved")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Reserved { get; set; }
+      public bool? Reserved { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

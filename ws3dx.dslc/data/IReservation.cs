@@ -34,7 +34,7 @@ namespace ws3dx.dslc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool Reserved { get; set; }
+      public bool? Reserved { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

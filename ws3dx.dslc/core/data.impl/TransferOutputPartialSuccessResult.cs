@@ -74,7 +74,7 @@ namespace ws3dx.dslc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("Status")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int Status { get; set; }
+      public int? Status { get; set; }
 
       [JsonPropertyName("ErrorReport")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
