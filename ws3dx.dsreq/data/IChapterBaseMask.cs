@@ -13,52 +13,17 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsreq.data.extension;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dsreq.data
 {
-   public interface IModifyRequirementSpecification
+   [MaskSchema("dsreq:ChapterBaseMask")]
+   public interface IChapterBaseMask
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My Object Version Date
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string VersionDate { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Objective
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Objective { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Propagate Access
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string PropagateAccess { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: id
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Name
+      // Description: object name Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
@@ -67,16 +32,7 @@ namespace ws3dx.dsreq.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My Object Originator
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Originator { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Title
+      // Description: Object Title value Example: My title
       //
       // </summary>
       //----------------------------------------------------------------
@@ -85,7 +41,7 @@ namespace ws3dx.dsreq.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My Object Description
+      // Description: Object description value Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
@@ -94,16 +50,43 @@ namespace ws3dx.dsreq.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: User_trigram
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Owner { get; set; }
+      public string Id { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: A
+      // Description: Basic type value Example: My Type
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Type { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Modified { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Created { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object revision value Example: A.1
       //
       // </summary>
       //----------------------------------------------------------------
@@ -112,84 +95,46 @@ namespace ws3dx.dsreq.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: 01phdf093857590343
+      // Description: Object current state value Example: In Work
       //
       // </summary>
       //----------------------------------------------------------------
-      public string PhysicalId { get; set; }
+      public string State { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: CA id
+      // Description: Object owner value Example: John Doe
       //
       // </summary>
       //----------------------------------------------------------------
-      public string ChangeActionID { get; set; }
+      public string Owner { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My Object Notes
+      // Description: Object organization value Example: MyCompany
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Notes { get; set; }
+      public string Organization { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My Object Designated User
+      // Description: Object collabspace value Example: Default
       //
       // </summary>
       //----------------------------------------------------------------
-      public string DesignatedUser { get; set; }
+      public string Collabspace { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: e service production
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Vault { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: e service production
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Policy { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: TRUE/FALSE
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Propagate_Access { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Synopsis
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Synopsis { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: TRUE/FALSE
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string AccessType { get; set; }
-
-      public IRequirementSpecificationCustomerAttributes CustomerAttributes { get; set; }
+      public string Cestamp { get; set; }
    }
 }

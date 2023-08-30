@@ -17,35 +17,8 @@ using ws3dx.dsreq.data.extension;
 
 namespace ws3dx.dsreq.data
 {
-   public interface IModifyRequirementSpecification
+   public interface IModifyChapter
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Version Date
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string VersionDate { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Objective
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Objective { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Object Propagate Access
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string PropagateAccess { get; set; }
-
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -170,7 +143,7 @@ namespace ws3dx.dsreq.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Propagate_Access { get; set; }
+      public string PropagateAccess { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -190,6 +163,15 @@ namespace ws3dx.dsreq.data
       //----------------------------------------------------------------
       public string AccessType { get; set; }
 
-      public IRequirementSpecificationCustomerAttributes CustomerAttributes { get; set; }
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: Timestamp id
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Cestamp { get; set; }
+
+      public IChapterCustomerAttributes CustomerAttributes { get; set; }
    }
 }

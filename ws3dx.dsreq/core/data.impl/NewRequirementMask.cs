@@ -155,7 +155,7 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: High
+      // Example: String
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -195,17 +195,6 @@ namespace ws3dx.dsreq.core.data.impl
       [JsonPropertyName("ContentData")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string ContentData { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: String
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("ContentText")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ContentText { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

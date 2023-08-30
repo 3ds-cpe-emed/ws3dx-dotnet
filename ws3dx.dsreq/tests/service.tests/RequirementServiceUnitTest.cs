@@ -25,6 +25,7 @@ using ws3dx.core.redirection;
 using ws3dx.dsreq.core.data.impl;
 using ws3dx.dsreq.core.service;
 using ws3dx.dsreq.data;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -91,6 +92,17 @@ namespace NUnitTestProject
          return __requirementService;
       }
 
+      [TestCase("")]
+      public async Task GetChangeControl(string iD)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         RequirementService requirementService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IEnumerable<IChangeControlStatusMask> ret = await requirementService.GetChangeControl(iD);
+
+         Assert.IsNotNull(ret);
+      }
+
       [TestCase("C39D5789C074000061F02D540012B654")]
       public async Task Get(string reqId)
       {
@@ -101,6 +113,28 @@ namespace NUnitTestProject
          try
          {
             INewRequirementMask ret = await requirementService.Get(reqId);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("")]
+      public async Task AttachChangeControl(string iD)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         RequirementService requirementService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+
+         IAddEmpty request = new AddEmpty();
+
+         try
+         {
+            IGenericResponse ret = await requirementService.AttachChangeControl(iD, request);
 
             Assert.IsNotNull(ret);
          }

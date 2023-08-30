@@ -19,41 +19,8 @@ using ws3dx.dsreq.data.extension;
 
 namespace ws3dx.dsreq.core.data.impl
 {
-   public class ModifyRequirementSpecification : IModifyRequirementSpecification
+   public class ModifyChapter : IModifyChapter
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Version Date
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("versionDate")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string VersionDate { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Objective
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("objective")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Objective { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Propagate Access
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("propagateAccess")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PropagateAccess { get; set; }
-
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
@@ -206,7 +173,7 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("propagate_Access")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Propagate_Access { get; set; }
+      public string PropagateAccess { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -230,8 +197,19 @@ namespace ws3dx.dsreq.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string AccessType { get; set; }
 
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: Timestamp id
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
+
       [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IRequirementSpecificationCustomerAttributes CustomerAttributes { get; set; }
+      public IChapterCustomerAttributes CustomerAttributes { get; set; }
    }
 }

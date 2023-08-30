@@ -29,13 +29,14 @@ using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class RequirementSpecificationServiceTests
+   public class ChapterServiceTests
    {
       const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
       const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
       const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
       const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
       const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
+
       string m_username = string.Empty;
       string m_password = string.Empty;
       string m_passportUrl = string.Empty;
@@ -82,53 +83,48 @@ namespace NUnitTestProject
          return m_userInfo.preferredcredentials.ToString();
       }
 
-      public RequirementSpecificationService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      public ChapterService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
       {
-         RequirementSpecificationService __requirementSpecificationService = new RequirementSpecificationService(_serviceUrl, _passport)
-         {
-            Tenant = _tenant,
-            SecurityContext = GetDefaultSecurityContext()
-         };
-         return __requirementSpecificationService;
+         ChapterService __chapterService = new ChapterService(_serviceUrl, _passport);
+         __chapterService.Tenant = _tenant;
+         __chapterService.SecurityContext = GetDefaultSecurityContext();
+         return __chapterService;
       }
-
-      [TestCase("44C2728F273000006414E802000DBEFC")]
-      public async Task Get(string reqSpecId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         INewRequirementSpecificationMask ret = await requirementSpecificationService.Get(reqSpecId);
-
-         Assert.IsNotNull(ret);
-      }
-  
-
-
 
       [TestCase("")]
-      public async Task GetChangeControl(string iD)
+      public async Task Get(string chapterId)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IEnumerable<IChangeControlStatusMask> ret = await requirementSpecificationService.GetChangeControl(iD);
+         ChapterService chapterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IEnumerable<IChapterBaseMask> ret = await chapterService.Get(chapterId);
 
          Assert.IsNotNull(ret);
       }
 
       [TestCase("")]
-      public async Task AttachChangeControl(string iD)
+      public async Task GetChangeControl(string chapterId)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ChapterService chapterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IEnumerable<IChangeControlStatusMask> ret = await chapterService.GetChangeControl(chapterId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task AttachChangeControl(string chapterId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ChapterService chapterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
          IAddEmpty request = new AddEmpty();
 
          try
          {
-            IGenericResponse ret = await requirementSpecificationService.AttachChangeControl(iD, request);
+            IGenericResponse ret = await chapterService.AttachChangeControl(chapterId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -144,24 +140,13 @@ namespace NUnitTestProject
       {
          IPassportAuthentication passport = await Authenticate();
 
-         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ChapterService chapterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
 
-         ICreateRequirementSpecification request = new CreateRequirementSpecification();
-
-         request.Items = new List<INewRequirementSpecification>();
-
-         INewRequirementSpecification newRequirementSpec = new NewRequirementSpecification();
-         newRequirementSpec.Type = "Requirement Specification";
-         newRequirementSpec.VersionName = "1.1";
-         newRequirementSpec.Attributes = new NewRequirementSpecificationData();
-         newRequirementSpec.Attributes.Title = "New Requirement Specification from Web Services";
-         newRequirementSpec.Attributes.Description = "New Requirement Specification  Description from Web Services";
-
-         request.Items.Add(newRequirementSpec);
+         ICreateChapter request = new CreateChapter();
 
          try
          {
-            IEnumerable<INewRequirementSpecificationMask> ret = await requirementSpecificationService.Create(request);
+            IEnumerable<IChapterBaseMask> ret = await chapterService.Create(request);
 
             Assert.IsNotNull(ret);
          }

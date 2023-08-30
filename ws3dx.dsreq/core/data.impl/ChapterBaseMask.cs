@@ -15,60 +15,15 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dsreq.data;
-using ws3dx.dsreq.data.extension;
 
 namespace ws3dx.dsreq.core.data.impl
 {
-   public class ModifyRequirementSpecification : IModifyRequirementSpecification
+   public class ChapterBaseMask : IChapterBaseMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: My Object Version Date
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("versionDate")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string VersionDate { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Objective
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("objective")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Objective { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Propagate Access
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("propagateAccess")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PropagateAccess { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: id
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Name
+      // Description: object name Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -79,18 +34,7 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: My Object Originator
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("originator")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Originator { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Title
+      // Description: Object Title value Example: My title
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -101,7 +45,7 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: My Object Description
+      // Description: Object description value Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -112,18 +56,51 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: User_trigram
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("owner")]
+      [JsonPropertyName("id")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Owner { get; set; }
+      public string Id { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: A
+      // Description: Basic type value Example: My Type
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("type")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Type { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("modified")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Modified { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("created")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Created { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object revision value Example: A.1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -134,104 +111,56 @@ namespace ws3dx.dsreq.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: 01phdf093857590343
+      // Description: Object current state value Example: In Work
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("physicalId")]
+      [JsonPropertyName("state")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PhysicalId { get; set; }
+      public string State { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: CA id
+      // Description: Object owner value Example: John Doe
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("changeActionID")]
+      [JsonPropertyName("owner")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ChangeActionID { get; set; }
+      public string Owner { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: My Object Notes
+      // Description: Object organization value Example: MyCompany
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("notes")]
+      [JsonPropertyName("organization")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Notes { get; set; }
+      public string Organization { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: My Object Designated User
+      // Description: Object collabspace value Example: Default
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("designatedUser")]
+      [JsonPropertyName("collabspace")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string DesignatedUser { get; set; }
+      public string Collabspace { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: e service production
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("vault")]
+      [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Vault { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: e service production
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("policy")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Policy { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: TRUE/FALSE
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("propagate_Access")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Propagate_Access { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My Object Synopsis
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("synopsis")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Synopsis { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: TRUE/FALSE
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("accessType")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string AccessType { get; set; }
-
-      [JsonPropertyName("customerAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IRequirementSpecificationCustomerAttributes CustomerAttributes { get; set; }
+      public string Cestamp { get; set; }
    }
 }

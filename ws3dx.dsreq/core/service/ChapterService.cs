@@ -25,11 +25,11 @@ using ws3dx.utils.search;
 namespace ws3dx.dsreq.core.service
 {
    // SDK Service
-   public class RequirementSpecificationService : SearchService
+   public class ChapterService : SearchService
    {
       private const string BASE_RESOURCE = "/resources/v1/modeler/dsreq/";
 
-      public RequirementSpecificationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+      public ChapterService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
       }
 
@@ -37,15 +37,16 @@ namespace ws3dx.dsreq.core.service
       {
          return BASE_RESOURCE;
       }
+
       #region SearchService overrides
       protected override string GetSearchResource()
       {
-         return $"{GetBaseResource()}dsreq:RequirementSpecification/search";
+         return $"{GetBaseResource()}dsreq:Chapter/search";
       }
 
       protected override IEnumerable<Type> SearchConstraintTypes()
       {
-         return new List<Type>() { typeof(INewRequirementSpecificationMask) };
+         return new List<Type>() { typeof(IChapterBaseMask) };
       }
 
       protected override string GetSearchSkipParamName()
@@ -73,101 +74,101 @@ namespace ws3dx.dsreq.core.service
          return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (GET) /dsreq:RequirementSpecification/{ID}
+      // (GET) /dsreq:Chapter/{ID}
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Gets a Requirement Specification with an attributes list. Summary: Gets a Requirement 
-      // Specification
-      // <param name="reqSpecId">
-      // Description: dsreq:RequirementSpecification object ID
+      // Description: Gets a Chapter with an attributes list. Summary: Gets a Chapter
+      // <param name="chapterId">
+      // Description: dsreq:Chapter object ID
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<INewRequirementSpecificationMask> Get(string reqSpecId)
+      public async Task<IEnumerable<IChapterBaseMask>> Get(string chapterId)
       {
-         string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification/{reqSpecId}";
+         string resourceURI = $"{GetBaseResource()}dsreq:Chapter/{chapterId}";
 
-         return await GetIndividualFromResponseMemberProperty<INewRequirementSpecificationMask>(resourceURI);
+         return await GetCollectionFromResponseMemberProperty<IChapterBaseMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (GET) /dsreq:RequirementSpecification/{ID}/dslc:changeControl
+      // (GET) /dsreq:Chapter/{ID}/dslc:changeControl
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Gets a Change Control of an dsreq:RequirementSpecification Summary: Gets a Change 
-      // Control of an dsreq:RequirementSpecification
-      // <param name="ID">
-      // Description: dsreq:RequirementSpecification object ID
+      // Description: Gets a Change Control of an dsreq:Chapter Summary: Gets a Change Control of an 
+      // dsreq:Chapter
+      // <param name="chapterId">
+      // Description: dsreq:Chapter object ID
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IChangeControlStatusMask>> GetChangeControl(string reqSpecId)
+      public async Task<IEnumerable<IChangeControlStatusMask>> GetChangeControl(string chapterId)
       {
-         string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification/{reqSpecId}/dslc:changeControl";
+         string resourceURI = $"{GetBaseResource()}dsreq:Chapter/{chapterId}/dslc:changeControl";
 
          return await GetCollectionFromResponseMemberProperty<IChangeControlStatusMask>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (POST) /dsreq:RequirementSpecification/{ID}/dslc:changeControl
+      // (POST) /dsreq:Chapter/{ID}/dslc:changeControl
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
       // Description: Activate Change Control. Once object is change controlled, a change is required to 
       // perform any modification on the object. Summary: Activate Change Control
-      // <param name="ID">
-      // Description: dsreq:RequirementSpecification object ID
+      // <param name="chapterId">
+      // Description: dsreq:Chapter object ID
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> AttachChangeControl(string reqSpecId, IAddEmpty request)
+      public async Task<IGenericResponse> AttachChangeControl(string chapterId, IAddEmpty request)
       {
-         string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification/{reqSpecId}/dslc:changeControl";
+         string resourceURI = $"{GetBaseResource()}dsreq:Chapter/{chapterId}/dslc:changeControl";
 
          return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (POST) /dsreq:RequirementSpecification
+      // (POST) /dsreq:Chapter
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Create Requirement Specifications using payload items. A maximum of 10 items is 
-      // allowed. Summary: Create Requirement Specifications
+      // Description: Create Chapters using payload items. A maximum of 10 items is allowed. Summary: Create 
+      // Chapters
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<INewRequirementSpecificationMask>> Create(ICreateRequirementSpecification request)
+      public async Task<IEnumerable<IChapterBaseMask>> Create(ICreateChapter request)
       {
-         string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification";
+         string resourceURI = $"{GetBaseResource()}dsreq:Chapter";
 
-         return await PostCollectionFromResponseMemberProperty<INewRequirementSpecificationMask, ICreateRequirementSpecification>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<IChapterBaseMask, ICreateChapter>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
-      // (PATCH) /dsreq:RequirementSpecification/{ID}
+      // (PATCH) /dsreq:Chapter/{ID}
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Modifies the Requirement Specification with an attributes list. attributes Summary: 
-      // Modifies the Requirement Specification attributes
-      // <param name="reqSpecId">
-      // Description: dsreq:RequirementSpecification object ID
+      // Description: Modifies the Chapter with an attributes list. attributes Summary: Modifies the Chapter 
+      // attributes
+      // <param name="chapterId">
+      // Description: dsreq:Chapter object ID
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<INewRequirementSpecificationMask> Update(string reqSpecId, IModifyRequirementSpecification request)
+      public async Task<IChapterBaseMask> Update(string chapterId, IModifyChapter request)
       {
-         string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification/{reqSpecId}";
+         string resourceURI = $"{GetBaseResource()}dsreq:Chapter/{chapterId}";
 
-         return await PatchIndividualFromResponseMemberProperty<INewRequirementSpecificationMask, IModifyRequirementSpecification>(resourceURI, request);
+         return await PatchIndividualFromResponseMemberProperty<IChapterBaseMask, IModifyChapter>(resourceURI, request);
       }
    }
 }
