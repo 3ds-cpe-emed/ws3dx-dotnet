@@ -72,7 +72,7 @@ namespace ws3dx.dslib.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool Multivalued { get; set; }
+      public bool? Multivalued { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

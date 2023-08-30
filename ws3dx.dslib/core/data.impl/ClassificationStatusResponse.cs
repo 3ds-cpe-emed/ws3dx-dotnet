@@ -29,7 +29,7 @@ namespace ws3dx.dslib.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("ObjectsClassified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ObjectsClassified { get; set; }
+      public int? ObjectsClassified { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -40,7 +40,7 @@ namespace ws3dx.dslib.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("ObjectsNotClassified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ObjectsNotClassified { get; set; }
+      public int? ObjectsNotClassified { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

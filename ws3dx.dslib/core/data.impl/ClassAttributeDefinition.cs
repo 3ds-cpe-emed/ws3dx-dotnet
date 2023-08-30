@@ -86,7 +86,7 @@ namespace ws3dx.dslib.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("multivalued")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool Multivalued { get; set; }
+      public bool? Multivalued { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

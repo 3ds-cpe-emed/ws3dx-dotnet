@@ -29,7 +29,7 @@ namespace ws3dx.dslib.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("ObjectsDeclassified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ObjectsDeclassified { get; set; }
+      public int? ObjectsDeclassified { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -40,7 +40,7 @@ namespace ws3dx.dslib.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("ObjectsNotDeclassified")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int ObjectsNotDeclassified { get; set; }
+      public int? ObjectsNotDeclassified { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

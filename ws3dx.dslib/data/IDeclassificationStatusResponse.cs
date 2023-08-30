@@ -25,7 +25,7 @@ namespace ws3dx.dslib.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int ObjectsDeclassified { get; set; }
+      public int? ObjectsDeclassified { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -34,7 +34,7 @@ namespace ws3dx.dslib.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int ObjectsNotDeclassified { get; set; }
+      public int? ObjectsNotDeclassified { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
