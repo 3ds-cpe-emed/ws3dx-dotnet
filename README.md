@@ -37,7 +37,7 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |[Manufacturing Item Web Services 1.11.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufItemWS/dsmfg_v1.htm)|[ws3dx.dsmfg](./ws3dx.dsmfg)| 2023x FD01/02/03 |
 |[Manufacturing Process Web Services 1.10.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufProcessWS/dsprcs_v1.htm)|[ws3dx.dsprcs](./ws3dx.dsprcs)| 2023x FD01/03 |
 |[dssrc: Manufacturer Equivalent Items corpus 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufacturerEqItemWS/dssrc_mei_v1.htm)|[ws3dx.dssrc](./ws3dx.dssrc)| 2023x FD01 |
-|[Portfolio Web Services 1.8.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAPortfolioWS/dspfl_v1.htm)|[ws3dx.dspfl](./ws3dx.dspfl)| 2023x FD01 |
+|[Portfolio Web Services 1.9.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAPortfolioWS/dspfl_v1.htm)|[ws3dx.dspfl](./ws3dx.dspfl)| 2023x FD01/03 |
 |[Project Rest Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsproject_v1.2.htm)|[ws3dx.project.project](./ws3dx.project/project)| 2023x FD01/03 |
 |[Task Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dstask_v1.htm)|[ws3dx.project.task](./ws3dx.project/task)| 2023x FD01/03 |
 |[Program Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsprogram_v1.htm)|[ws3dx.project.program](./ws3dx.project/program)| 2023x FD01/03 |
