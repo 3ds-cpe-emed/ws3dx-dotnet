@@ -42,7 +42,7 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |[Task Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dstask_v1.htm)|[ws3dx.project.task](./ws3dx.project/task)| 2023x FD01/03 |
 |[Program Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsprogram_v1.htm)|[ws3dx.project.program](./ws3dx.project/program)| 2023x FD01/03 |
 |[Risk Management Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsrisk_v1.1.htm)|[ws3dx.project.risk](./ws3dx.project/risk)|  2023x FD01/03 |
-|[Raw Material Public Web Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAARawMaterialWS/dsrm_v1.htm)|[ws3dx.dsrm](./ws3dx.dsrm)| 2023x FD01 |
+|[Raw Material Public Web Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAARawMaterialWS/dsrm_v1.htm)|[ws3dx.dsrm](./ws3dx.dsrm)| 2023x FD01/03 |
 |[Requirement Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAARequirementWS/dsreq_v1.htm)|[ws3dx.dsreq](./ws3dx.dsreq)| 2023x FD01/03 |
 |[Resource Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAResourceWS/dsrsc_v1.htm)|[ws3dx.dsrsc](./ws3dx.dsrsc)| 2023x FD01 |
 

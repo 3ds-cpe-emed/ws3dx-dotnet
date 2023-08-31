@@ -16,6 +16,7 @@
 using System.Text.Json.Serialization;
 using ws3dx.data;
 using ws3dx.dsrm.data;
+using ws3dx.shared.data;
 using ws3dx.shared.data.extension;
 
 namespace ws3dx.dsrm.core.data.impl
@@ -80,6 +81,6 @@ namespace ws3dx.dsrm.core.data.impl
 
       [JsonPropertyName("dseng:EnterpriseReference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseReference EnterpriseReference { get; set; }
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
    }
 }
