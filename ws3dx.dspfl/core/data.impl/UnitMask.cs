@@ -13,12 +13,14 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dspfl.data;
+using ws3dx.shared.data.dscfg;
 
 namespace ws3dx.dspfl.core.data.impl
 {
-   public class ValueMask : IValueMask
+   public class UnitMask : IUnitMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -34,7 +36,7 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: Front Seat
+      // Description: Object Title value Example: My title
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -155,12 +157,68 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: 1
+      // Description: computed property Example: String
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("sequenceNumber")]
+      [JsonPropertyName("source")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? SequenceNumber { get; set; }
+      public string Source { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: computed property Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("relativePath")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string RelativePath { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("identifier")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Identifier { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Build Serial Number Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("serialNumber")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string SerialNumber { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Build Unit Number Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("unitNumber")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string UnitNumber { get; set; }
+
+      [JsonPropertyName("model")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IConfigurationContext> Model { get; set; }
+
+      [JsonPropertyName("modelVersion")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IConfigurationContext> ModelVersion { get; set; }
+
+      [JsonPropertyName("productConfiguration")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IConfigurationContext> ProductConfiguration { get; set; }
    }
 }

@@ -13,32 +13,11 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.serialization.attribute;
-using ws3dx.shared.data.dscfg;
 
 namespace ws3dx.dspfl.data
 {
-   [MaskSchema("dsmvpfl:ModelVersionBaseMask")]
-   public interface IModelVersionMask
+   public interface IModelVersionUnit
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Model01
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ModelName { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: D43DC670000029F45BA222F200000284
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ModelID { get; set; }
-
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -47,15 +26,6 @@ namespace ws3dx.dspfl.data
       // </summary>
       //----------------------------------------------------------------
       public string Name { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object Title value Example: My title
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -150,47 +120,11 @@ namespace ws3dx.dspfl.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string BasePrice { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsRoot { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsLeaf { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
       // Description: computed property Example: String
       //
       // </summary>
       //----------------------------------------------------------------
       public string Source { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Identifier { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -201,6 +135,22 @@ namespace ws3dx.dspfl.data
       //----------------------------------------------------------------
       public string RelativePath { get; set; }
 
-      public IConfigurationContext Model { get; set; }
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Build Serial Number Example: String
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string SerialNumber { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Build Unit Number Example: String
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string UnitNumber { get; set; }
    }
 }

@@ -165,7 +165,7 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsRoot { get; set; }
+      public bool? IsRoot { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -174,7 +174,7 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsLeaf { get; set; }
+      public bool? IsLeaf { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

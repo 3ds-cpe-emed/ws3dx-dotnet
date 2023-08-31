@@ -198,13 +198,13 @@ namespace NUnitTestProject
          option1.VersionName = "";
          option1.Attributes = new NewVariabilityOptionData();
          option1.Attributes.SequenceNumber = 1;
-         option1.Attributes.Title = "Option 1";
+         option1.Attributes.Name = "Option 1";
 
          INewVariabilityOption option2 = new NewVariabilityOption();
          option2.Type = "Variability Option";
          option2.VersionName = "";
          option2.Attributes = new NewVariabilityOptionData();
-         option2.Attributes.Title = "Option 2";
+         option2.Attributes.Name = "Option 2";
          option2.Attributes.SequenceNumber = 2;
 
          ICreateVariabilityOption request = new CreateVariabilityOption();

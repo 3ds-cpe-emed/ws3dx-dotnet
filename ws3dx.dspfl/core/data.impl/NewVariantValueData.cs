@@ -21,18 +21,6 @@ namespace ws3dx.dspfl.core.data.impl
 {
    public class NewVariantValueData : INewVariantValueData
    {
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: VAL01
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
-
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
@@ -64,7 +52,7 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("sequenceNumber")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int SequenceNumber { get; set; }
+      public int? SequenceNumber { get; set; }
 
       [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

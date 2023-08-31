@@ -13,12 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dspfl.data;
 
 namespace ws3dx.dspfl.core.data.impl
 {
-   public class ValueMask : IValueMask
+   public class ProductConfigurationUnitMask : IProductConfigurationUnitMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -30,17 +31,6 @@ namespace ws3dx.dspfl.core.data.impl
       [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Name { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: Front Seat
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -155,12 +145,27 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: 1
+      // Description: computed property Example: String
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("sequenceNumber")]
+      [JsonPropertyName("source")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? SequenceNumber { get; set; }
+      public string Source { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: computed property Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("relativePath")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string RelativePath { get; set; }
+
+      [JsonPropertyName("unit")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IProductConfigurationUnit> Unit { get; set; }
    }
 }

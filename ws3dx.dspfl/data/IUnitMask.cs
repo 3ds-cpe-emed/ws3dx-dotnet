@@ -13,32 +13,15 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data.dscfg;
 
 namespace ws3dx.dspfl.data
 {
-   [MaskSchema("dsmvpfl:ModelVersionBaseMask")]
-   public interface IModelVersionMask
+   [MaskSchema("dsmvpfl:UnitBaseMask")]
+   public interface IUnitMask
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Model01
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ModelName { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: D43DC670000029F45BA222F200000284
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ModelID { get; set; }
-
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -150,29 +133,11 @@ namespace ws3dx.dspfl.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: 0
+      // Description: computed property Example: String
       //
       // </summary>
       //----------------------------------------------------------------
-      public string BasePrice { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsRoot { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsLeaf { get; set; }
+      public string Source { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -181,7 +146,7 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Source { get; set; }
+      public string RelativePath { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -195,12 +160,25 @@ namespace ws3dx.dspfl.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: computed property Example: String
+      // Description: Build Serial Number Example: String
       //
       // </summary>
       //----------------------------------------------------------------
-      public string RelativePath { get; set; }
+      public string SerialNumber { get; set; }
 
-      public IConfigurationContext Model { get; set; }
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Build Unit Number Example: String
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string UnitNumber { get; set; }
+
+      public IList<IConfigurationContext> Model { get; set; }
+
+      public IList<IConfigurationContext> ModelVersion { get; set; }
+
+      public IList<IConfigurationContext> ProductConfiguration { get; set; }
    }
 }

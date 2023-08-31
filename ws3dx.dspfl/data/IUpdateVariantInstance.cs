@@ -34,6 +34,6 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int SequenceNumber { get; set; }
+      public int? SequenceNumber { get; set; }
    }
 }

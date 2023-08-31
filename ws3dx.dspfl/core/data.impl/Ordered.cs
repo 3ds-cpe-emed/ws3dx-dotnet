@@ -29,6 +29,6 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("sequenceNumber")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int SequenceNumber { get; set; }
+      public int? SequenceNumber { get; set; }
    }
 }

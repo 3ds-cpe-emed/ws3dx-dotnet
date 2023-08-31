@@ -143,7 +143,7 @@ namespace ws3dx.dspfl.core.service
       //---------------------------------------------------------------------------------------------		
       public async Task<T> GetProductConfiguration<T>(string modelVersionId, string productConfigurationId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IProductConfigurationMask), typeof(IProductConfigurationCriteriaMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IProductConfigurationMask), typeof(IProductConfigurationCriteriaMask), typeof(IProductConfigurationUnitMask) });
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration/{productConfigurationId}";
 
@@ -161,7 +161,7 @@ namespace ws3dx.dspfl.core.service
       //---------------------------------------------------------------------------------------------		
       public async Task<IEnumerable<T>> GetAll<T>()
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IModelVersionMask), typeof(IModelVersionDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IModelVersionMask), typeof(IModelVersionDetailMask), typeof(IModelVersionUnitMask) });
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion";
 
@@ -182,7 +182,7 @@ namespace ws3dx.dspfl.core.service
       //---------------------------------------------------------------------------------------------		
       public async Task<T> Get<T>(string modelVersionId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IModelVersionMask), typeof(IModelVersionDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IModelVersionMask), typeof(IModelVersionDetailMask), typeof(IModelVersionUnitMask) });
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}";
 
@@ -252,7 +252,7 @@ namespace ws3dx.dspfl.core.service
       //---------------------------------------------------------------------------------------------		
       public async Task<IEnumerable<T>> GetProductConfigurations<T>(string modelVersionId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IProductConfigurationMask), typeof(IProductConfigurationCriteriaMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IProductConfigurationMask), typeof(IProductConfigurationCriteriaMask), typeof(IProductConfigurationUnitMask) });
 
          string resourceURI = $"{GetBaseResource()}/dspfl:ModelVersion/{modelVersionId}/dspfl:ProductConfiguration";
 

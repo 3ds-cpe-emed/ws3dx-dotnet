@@ -18,7 +18,7 @@ using ws3dx.dspfl.data;
 
 namespace ws3dx.dspfl.core.data.impl
 {
-   public class ValueMask : IValueMask
+   public class ModelVersionUnit : IModelVersionUnit
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -30,17 +30,6 @@ namespace ws3dx.dspfl.core.data.impl
       [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Name { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: Front Seat
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -155,12 +144,45 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Example: 1
+      // Description: computed property Example: String
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("sequenceNumber")]
+      [JsonPropertyName("source")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? SequenceNumber { get; set; }
+      public string Source { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: computed property Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("relativePath")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string RelativePath { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Build Serial Number Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("serialNumber")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string SerialNumber { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Build Unit Number Example: String
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("unitNumber")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string UnitNumber { get; set; }
    }
 }

@@ -197,7 +197,7 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isRoot")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsRoot { get; set; }
+      public bool? IsRoot { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -208,7 +208,7 @@ namespace ws3dx.dspfl.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isLeaf")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsLeaf { get; set; }
+      public bool? IsLeaf { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

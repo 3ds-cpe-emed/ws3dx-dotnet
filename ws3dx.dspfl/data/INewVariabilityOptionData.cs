@@ -19,15 +19,6 @@ namespace ws3dx.dspfl.data
 {
    public interface INewVariabilityOptionData
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example:
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      public string Title { get; set; }
-
       //----------------------------------------------------------------
       // <summary>
       //		
@@ -53,7 +44,7 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int SequenceNumber { get; set; }
+      public int? SequenceNumber { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
    }

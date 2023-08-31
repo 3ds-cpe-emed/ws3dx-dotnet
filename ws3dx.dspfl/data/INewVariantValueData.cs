@@ -22,15 +22,6 @@ namespace ws3dx.dspfl.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example:
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
       // Example: VAL01
       //
       // </summary>
@@ -53,7 +44,7 @@ namespace ws3dx.dspfl.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int SequenceNumber { get; set; }
+      public int? SequenceNumber { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
    }

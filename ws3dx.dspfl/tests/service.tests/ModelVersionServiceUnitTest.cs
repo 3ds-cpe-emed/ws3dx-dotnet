@@ -145,6 +145,17 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
+      [TestCase("", "")]
+      public async Task GetProductConfiguration_IProductConfigurationUnitMask(string modelVersionId, string productConfigurationId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IProductConfigurationUnitMask ret = await modelVersionService.GetProductConfiguration<IProductConfigurationUnitMask>(modelVersionId, productConfigurationId);
+
+         Assert.IsNotNull(ret);
+      }
+
       [TestCase()]
       public async Task GetAll_IModelVersionMask()
       {
@@ -167,6 +178,17 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
+      [TestCase()]
+      public async Task GetAll_IModelVersionUnitMask()
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IEnumerable<IModelVersionUnitMask> ret = await modelVersionService.GetAll<IModelVersionUnitMask>();
+
+         Assert.IsNotNull(ret);
+      }
+
       [TestCase("")]
       public async Task Get_IModelVersionMask(string modelVersionId)
       {
@@ -185,6 +207,17 @@ namespace NUnitTestProject
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IModelVersionDetailMask ret = await modelVersionService.Get<IModelVersionDetailMask>(modelVersionId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task Get_IModelVersionUnitMask(string modelVersionId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IModelVersionUnitMask ret = await modelVersionService.Get<IModelVersionUnitMask>(modelVersionId);
 
          Assert.IsNotNull(ret);
       }
@@ -240,6 +273,17 @@ namespace NUnitTestProject
 
          ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IEnumerable<IProductConfigurationCriteriaMask> ret = await modelVersionService.GetProductConfigurations<IProductConfigurationCriteriaMask>(modelVersionId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task GetProductConfigurations_IProductConfigurationUnitMask(string modelVersionId)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         ModelVersionService modelVersionService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         IEnumerable<IProductConfigurationUnitMask> ret = await modelVersionService.GetProductConfigurations<IProductConfigurationUnitMask>(modelVersionId);
 
          Assert.IsNotNull(ret);
       }
