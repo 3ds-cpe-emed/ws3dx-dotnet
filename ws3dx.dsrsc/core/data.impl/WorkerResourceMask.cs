@@ -162,7 +162,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("isAsset")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool IsAsset { get; set; }
+      public bool? IsAsset { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

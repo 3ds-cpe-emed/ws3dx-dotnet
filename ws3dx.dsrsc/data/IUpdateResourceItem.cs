@@ -54,7 +54,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double CalculatedCycleTime { get; set; }
+      public double? CalculatedCycleTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -90,7 +90,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double ConsumableCost { get; set; }
+      public double? ConsumableCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -99,7 +99,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double CycleTime { get; set; }
+      public double? CycleTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -108,7 +108,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double EnergyCost { get; set; }
+      public double? EnergyCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -117,7 +117,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MeanTimeBeforeFailure { get; set; }
+      public double? MeanTimeBeforeFailure { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -126,7 +126,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MeanTimeToRepair { get; set; }
+      public double? MeanTimeToRepair { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -135,7 +135,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double MaintenanceCost { get; set; }
+      public double? MaintenanceCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -144,7 +144,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double PurchaseCost { get; set; }
+      public double? PurchaseCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -153,7 +153,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double RepairCost { get; set; }
+      public double? RepairCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -162,7 +162,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double SetUpTime { get; set; }
+      public double? SetUpTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -171,7 +171,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double SetUpTimeReduced { get; set; }
+      public double? SetUpTimeReduced { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -180,7 +180,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double TargetCost { get; set; }
+      public double? TargetCost { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
@@ -189,7 +189,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public double TargetedCycleTime { get; set; }
+      public double? TargetedCycleTime { get; set; }
 
       public IExtendedAttributes EnterpriseAttributes { get; set; }
    }

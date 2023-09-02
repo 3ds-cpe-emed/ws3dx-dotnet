@@ -194,7 +194,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("calculatedCycleTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double CalculatedCycleTime { get; set; }
+      public double? CalculatedCycleTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -205,7 +205,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("consumableCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double ConsumableCost { get; set; }
+      public double? ConsumableCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -216,7 +216,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("cycleTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double CycleTime { get; set; }
+      public double? CycleTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -227,7 +227,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("energyCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double EnergyCost { get; set; }
+      public double? EnergyCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -238,7 +238,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("meanTimeBeforeFailure")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MeanTimeBeforeFailure { get; set; }
+      public double? MeanTimeBeforeFailure { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -249,7 +249,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("meanTimeToRepair")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MeanTimeToRepair { get; set; }
+      public double? MeanTimeToRepair { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -260,7 +260,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("maintenanceCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double MaintenanceCost { get; set; }
+      public double? MaintenanceCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -271,7 +271,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("purchaseCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double PurchaseCost { get; set; }
+      public double? PurchaseCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -282,7 +282,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("repairCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double RepairCost { get; set; }
+      public double? RepairCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -293,7 +293,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("setUpTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double SetUpTime { get; set; }
+      public double? SetUpTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -304,7 +304,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("setUpTimeReduced")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double SetUpTimeReduced { get; set; }
+      public double? SetUpTimeReduced { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -315,7 +315,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("targetCost")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double TargetCost { get; set; }
+      public double? TargetCost { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -326,7 +326,7 @@ namespace ws3dx.dsrsc.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("targetedCycleTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double TargetedCycleTime { get; set; }
+      public double? TargetedCycleTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

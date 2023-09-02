@@ -135,7 +135,7 @@ namespace ws3dx.dsrsc.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public bool IsAsset { get; set; }
+      public bool? IsAsset { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
