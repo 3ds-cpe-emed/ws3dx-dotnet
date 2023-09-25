@@ -31,7 +31,7 @@ The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for
 |[Issue Web Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAChangeWS/dslc_change_issue_v1.htm)|[ws3dx.dsiss](./ws3dx.dsiss)| 2023x FD01/02/03 |
 |[Derived Outputs Web Services 1.2.1](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADerivedOutputsWS/dsdo_v1.htm)|[ws3dx.dsdo](./ws3dx.dsdo)| 2023x FD01/03 |
 |[Document REST Services 1.1.5](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADocumentWS/dsdoc_v1.htm)|[ws3dx.document](./ws3dx.document)| 2023x FD01/02/03 |
-|[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2023x FD01/02/03 |
+|[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2023x FD01/02/03/04 |
 |[IP Classification Web Services 1.1.2](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAClassificationWS/dslib_v1.htm)|[ws3dx.dslib](./ws3dx.dslib)| 2023x FD01/03 |
 |[Collaborative Lifecycle Web Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAALifecycleWS/dslc_lifecycle_v1.htm)|[ws3dx.dslc](./ws3dx.dslc)| 2023x FD01/03 |
 |[Manufacturing Item Web Services 1.11.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufItemWS/dsmfg_v1.htm)|[ws3dx.dsmfg](./ws3dx.dsmfg)| 2023x FD01/02/03 |
