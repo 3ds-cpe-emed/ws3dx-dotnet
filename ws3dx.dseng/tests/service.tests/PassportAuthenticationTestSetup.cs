@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -13,20 +13,19 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
-using ws3dx.authentication.data;
-using ws3dx.authentication.data.impl.passport;
-using ws3dx.core.data.impl;
-using ws3dx.core.exception;
-using ws3dx.core.redirection;
-using ws3dx.dseng.core.service;
-using ws3dx.shared.data;
 
-namespace NUnitTestProject
+using ws3dx.authentication.data.impl.passport;
+using ws3dx.authentication.data;
+using ws3dx.core.data.impl;
+using ws3dx.core.redirection;
+
+namespace ws3dx.dseng.tests.service.tests
 {
-   public class InvokeServiceTests
+   public class PassportAuthenticationTestSetup
    {
       private const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
       private const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
@@ -80,34 +79,14 @@ namespace NUnitTestProject
          return m_userInfo.preferredcredentials.ToString();
       }
 
-      public InvokeService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      public string GetServiceUrl()
       {
-         InvokeService __invokeService = new InvokeService(_serviceUrl, _passport);
-         __invokeService.Tenant = _tenant;
-         __invokeService.SecurityContext = GetDefaultSecurityContext();
-         return __invokeService;
+         return m_serviceUrl;
       }
 
-      [TestCase()]
-      public async Task DetachInstances()
+      public string GetTenant()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         InvokeService invokeService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         string[] request = new string[] { };
-
-         try
-         {
-            IGenericResponse ret = await invokeService.DetachInstances(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
+         return m_tenant;
       }
    }
 }
