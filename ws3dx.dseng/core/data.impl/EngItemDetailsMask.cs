@@ -84,6 +84,5 @@ namespace ws3dx.dseng.core.data.impl
       [JsonPropertyName("isManufacturable")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string IsManufacturable { get; set; }
-
    }
 }

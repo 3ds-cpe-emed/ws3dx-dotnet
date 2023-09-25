@@ -52,7 +52,7 @@ namespace ws3dx.core.serialization
          return _Deserialize(jsonContent, typeof(T));
       }
 
-      public IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty)
+      public IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty, bool _ignoreIfPropertyNotFound = false)
       {
          using JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
 
@@ -64,6 +64,8 @@ namespace ws3dx.core.serialization
 
          if (!root.TryGetProperty(_wrappingCollectionProperty, out memberRoot))
          {
+            if (_ignoreIfPropertyNotFound) { return new List<T>();}
+
             throw new ArgumentException($"Cannot find '{_wrappingCollectionProperty}' property in json root wrapping collection.");
          }
 

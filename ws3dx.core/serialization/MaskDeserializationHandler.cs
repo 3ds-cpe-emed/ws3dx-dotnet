@@ -46,11 +46,11 @@ namespace ws3dx.core.serialization
          return m_deserializerByTypeMap[_type];
       }
 
-      public static dynamic DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName)
+      public static dynamic DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
       {
          MaskSchemaDeserializer<T> schemaDeserializer = (MaskSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
 
-         return schemaDeserializer.DeserializeCollection(_json, _wrapperCollectionJsonPropertyName);
+         return schemaDeserializer.DeserializeCollection(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
       }
 
       public static dynamic Deserialize<T>(string _json)

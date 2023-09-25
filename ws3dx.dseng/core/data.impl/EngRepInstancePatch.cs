@@ -13,71 +13,44 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dseng.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class Expand : IExpand
+   public class EngRepInstancePatch : IEngRepInstancePatch
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: -1 for all level, and 1,2,3,.. for specific level Example: 1
+      // Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("expandDepth")]
+      [JsonPropertyName("name")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? ExpandDepth { get; set; }
+      public string Name { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: true/false Example: true
+      // Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("withPath")]
+      [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? WithPath { get; set; }
+      public string Description { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Default value: ["VPMReference"], Autorised value: "VPMReference", "VPMRepReference" 
-      // or any public subtypes of VPMReference and VPMRepReference (Drawing for example) Example: 
-      // ["VPMReference","VPMRepReference"]
+      // Example: Entity physical id
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type_filter_bo")]
+      [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> TypeFilterBo { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Default value: ["VPMInstance"], Autorised value: "VPMInstance", "VPMRepInstance" or 
-      // any public subtypes of VPMInstance and VPMRepInstance Example: ["VPMInstance","VPMRepInstance"]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type_filter_rel")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> TypeFilterRel { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: inputType is not proper. Please check the Filter Specification here: Web Services 
-      // and Events | 3DSpace | Advanced Filtering | The Public Filter Specification Example: {...}
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("filter")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Filter { get; set; }
+      public string Cestamp { get; set; }
    }
 }

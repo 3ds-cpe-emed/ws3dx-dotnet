@@ -17,11 +17,10 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-	public interface IEngItemEnterprise : IItem
-	{
-		public IEnterpriseItemNumber EnterpriseReference { get; set;}
+   public interface IEngItemEnterprise : IItem
+   {
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-		public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set;}
-
-	}
+      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
+   }
 }

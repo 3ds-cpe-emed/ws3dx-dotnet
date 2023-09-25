@@ -13,18 +13,12 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 
 namespace ws3dx.dseng.data
 {
-   public interface IAlternateInstanceApplicabilityContext
+   public interface ICreateEngRepInstances
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Instance { get; set; }
+      public IList<INewEngRepInstance> Instances { get; set; }
    }
 }

@@ -13,18 +13,33 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Text.Json.Serialization;
+using ws3dx.dseng.data;
 
-namespace ws3dx.dseng.data
+namespace ws3dx.dseng.core.data.impl
 {
-   public interface IAlternateInstanceApplicabilityContext
+   public class EngRepInstanceReplaceAttributes : IEngRepInstanceReplaceAttributes
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: EE562168015FFCF14F940A513C63AA77
+      //------------------------------------------------------------------------------------------------
+      //<summary>
       //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Instance { get; set; }
+      // Example: My name
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("name")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Name { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: My description
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("description")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Description { get; set; }
    }
 }

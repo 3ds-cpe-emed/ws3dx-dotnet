@@ -13,17 +13,18 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-using ws3dx.shared.data.extension;
 
 namespace ws3dx.dseng.data
 {
-   public interface IEngItemBulkUpdateItem
+   [MaskSchema("dsmveng:EngRepInstanceMask.Details")]
+   public interface IEngRepInstanceDetailMask
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: {ID}
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
       //
       // </summary>
       //----------------------------------------------------------------
@@ -32,47 +33,57 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My name
+      // Description: Basic type value Example: My Type
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Title { get; set; }
+      public string Type { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My description
+      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Modified { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Object created value Example: Dec 11, 2017 12:53 PM
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Created { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Instance name Example: My name
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Name { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Instance description vlaue Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
       public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
+      public ITypedUriIdentifier ReferencedObject { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: Entity physical id
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
-
-      public IChangeControl ChangeControl { get; set; }
-
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
-
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
-
-      public IConfigured Configured { get; set; }
-
-      public ICustomerAttributes CustomerAttributes { get; set; }
    }
 }

@@ -16,15 +16,25 @@
 
 namespace ws3dx.dseng.data
 {
-   public interface IAlternateInstanceApplicabilityContext
+   public interface IEngRepInstanceReplaceAttributes
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: EE562168015FFCF14F940A513C63AA77
+      // Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Instance { get; set; }
+      public string Name { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: My description
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string Description { get; set; }
+
    }
 }

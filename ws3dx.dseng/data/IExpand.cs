@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 
 namespace ws3dx.dseng.data
 {
@@ -35,6 +36,27 @@ namespace ws3dx.dseng.data
       // </summary>
       //----------------------------------------------------------------
       public bool? WithPath { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Default value: ["VPMReference"], Autorised value: "VPMReference", "VPMRepReference" 
+      // or any public subtypes of VPMReference and VPMRepReference (Drawing for example) Example: 
+      // ["VPMReference","VPMRepReference"]
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public IList<string> TypeFilterBo { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Description: Default value: ["VPMInstance"], Autorised value: "VPMInstance", "VPMRepInstance" or 
+      // any public subtypes of VPMInstance and VPMRepInstance Example: ["VPMInstance","VPMRepInstance"]
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public IList<string> TypeFilterRel { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

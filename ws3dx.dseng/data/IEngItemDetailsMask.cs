@@ -21,6 +21,5 @@ namespace ws3dx.dseng.data
    public interface IEngItemDetailsMask : IEngItemEnterprise
    {
       public string IsManufacturable { get; set; }
-
    }
 }
