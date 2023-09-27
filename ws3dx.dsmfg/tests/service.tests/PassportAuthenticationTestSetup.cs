@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -13,40 +13,32 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
-using ws3dx.core.exception;
 using ws3dx.core.redirection;
-using ws3dx.dsmfg.core.data.impl;
-using ws3dx.dsmfg.data;
-using ws3dx.dsmfg.core.service;
 
-namespace NUnitTestProject
+namespace ws3dx.dseng.tests.service.tests
 {
-   public class AssignmentFilterServiceTests
+   public class PassportAuthenticationTestSetup
    {
-      const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
-      const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
-      const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
-      const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
-      const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
+      private const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
+      private const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
+      private const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
+      private const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
+      private const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
 
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
+      private string m_username = string.Empty;
+      private string m_password = string.Empty;
+      private string m_passportUrl = string.Empty;
+      private string m_serviceUrl = string.Empty;
+      private string m_tenant = string.Empty;
 
-      string m_username = string.Empty;
-      string m_password = string.Empty;
-      string m_passportUrl = string.Empty;
-      string m_serviceUrl = string.Empty;
-      string m_tenant = string.Empty;
-
-      UserInfo m_userInfo = null;
+      private UserInfo m_userInfo = null;
 
       public async Task<IPassportAuthentication> Authenticate()
       {
@@ -86,57 +78,14 @@ namespace NUnitTestProject
          return m_userInfo.preferredcredentials.ToString();
       }
 
-      public AssignmentFilterService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      public string GetServiceUrl()
       {
-         AssignmentFilterService __assignmentFilterService = new AssignmentFilterService(_serviceUrl, _passport);
-         __assignmentFilterService.Tenant = _tenant;
-         __assignmentFilterService.SecurityContext = GetDefaultSecurityContext();
-         return __assignmentFilterService;
+         return m_serviceUrl;
       }
 
-      [TestCase()]
-      public async Task LocateFromAssignmentFilter()
+      public string GetTenant()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         AssignmentFilterService assignmentFilterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         ILocateAssignmentFilterRequestV1 request = new LocateAssignmentFilterRequestV1();
-
-         try
-         {
-            IEnumerable<ILocateAssignmentFilterResponse> ret = await assignmentFilterService.LocateFromAssignmentFilter(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
+         return m_tenant;
       }
-
-      //[TestCase()]
-      //public async Task LocateFromAssignmentFilter()
-      //{
-      //   IPassportAuthentication passport = await Authenticate();
-
-      //   AssignmentFilterService assignmentFilterService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-      //   ILocateAssignmentFilterRequest request = new LocateAssignmentFilterRequest();
-
-      //   try
-      //   {
-      //      IEnumerable<ILocateAssignmentFilterResponse> ret = await assignmentFilterService.LocateFromAssignmentFilter(request);
-
-      //      Assert.IsNotNull(ret);
-      //   }
-      //   catch (HttpResponseException _ex)
-      //   {
-      //      string errorMessage = await _ex.GetErrorMessage();
-      //      Assert.Fail(errorMessage);
-      //   }
-      //}
-
    }
 }
