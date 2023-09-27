@@ -19,9 +19,121 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.core.data.impl
 {
-   public class ResultingEngItemUTCMask : ResultingEngItemMask, IResultingEngItemUTCMask
+   public class ResultingEngItemUtcMask : IResultingEngItemUtcMask
    {
-      [JsonPropertyName("productConfiguration")]
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Id { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Usage value Example: EIN
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("usage")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Usage { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Indicates whether the resulting engineering item is computed or not. Only if the 
+      // computed attribute is explicitly set in database, the attribute is shown in the response otherwise 
+      // not. Example: false
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("computed")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? Computed { get; set; }
+
+      [JsonPropertyName("resultingEngItem")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public ITypedUriIdentifier ResultingEngItem { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Basic modified value in UTC Example: 2022-01-31T09:48:10Z
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("modified")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Modified { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object created value in UTC Example: 2022-01-31T09:48:10Z
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("created")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Created { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("Cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object owner value Example: John Doe
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("owner")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Owner { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object organization value Example: MyCompany
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("organization")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Organization { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object collabspace value Example: Default
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("collabspace")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Collabspace { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object collabspace value Example: Default
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("ProductConfiguration")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier ProductConfiguration { get; set; }
    }

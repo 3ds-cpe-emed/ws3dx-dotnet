@@ -14,26 +14,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using ws3dx.dsmfg.data;
 
-namespace ws3dx.dsmfg.core.data.impl
-{
-   public class AssignmentFilterMask : IAssignmentFilterMask
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical id of the dsmfg:MfgItem Example: 4C58429C00003E7C6023077C0000CF84
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
-
-      [JsonPropertyName("assignmentFilters")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IItemOccurrence> AssignmentFilters { get; set; }
-   }
+namespace ws3dx.dsmfg.data.extension
+{	
+	public interface IServiceItemEnterpriseAttributes : IDictionary<string,object>
+	{	
+		//Specific Enterprise Attributes
+	}
 }

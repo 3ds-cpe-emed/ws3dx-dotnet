@@ -13,27 +13,13 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsmfg.data.extension;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using ws3dx.dsmfg.data;
 
-namespace ws3dx.dsmfg.core.data.impl
+namespace ws3dx.dsmfg.core.data.impl.extension
 {
-   public class AssignmentFilterMask : IAssignmentFilterMask
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical id of the dsmfg:MfgItem Example: 4C58429C00003E7C6023077C0000CF84
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
-
-      [JsonPropertyName("assignmentFilters")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IItemOccurrence> AssignmentFilters { get; set; }
-   }
+	public class ServicePartEnterpriseAttributes : Dictionary<string, object>, IServicePartEnterpriseAttributes
+	{
+		// Specific Enterprise Attributes
+	}
 }

@@ -14,6 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
+using ws3dx.dsmfg.core.data.impl.extension;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.extension;
 using ws3dx.shared.data;
@@ -339,6 +340,102 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMagnitudeValueInput RefQuantity { get; set; }
 
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object essentiality value. This Attribute is applicable only for Service Items Example: 
+      // essentiality value
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("essentiality")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Essentiality { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Mean Time Between Failure. This Attribute is applicable only for Service Items Example: 
+      // 10.5
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("estimatedMTBF")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? EstimatedMTBF { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Mean Time Between Unscheduled Removal. This Attribute is applicable only for Service 
+      // Items Example: 10.5
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("estimatedMTBUR")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? EstimatedMTBUR { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Mean Time To Repair. This Attribute is applicable only for Service Items Example: 
+      // 10.5
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("estimatedMTTR")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? EstimatedMTTR { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Maximum Lifetime value. This Attribute is applicable only for Service Items Example: 
+      // 10.5
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("lifeLimit")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public double? LifeLimit { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object repairable value. This Attribute is applicable only for Service Items Example: 
+      // Yes/No
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("repairable")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Repairable { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object replaceable value. This Attribute is applicable only for Service Items Example: 
+      // Yes/No
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("replaceable")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Replaceable { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Object replacementType value. This Attribute is applicable only for Service Items 
+      // Example: LineAndShop/ShopOnly/NotDefined
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("replacementType")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string ReplacementType { get; set; }
+
       [JsonPropertyName("dsmfg:MfgItemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
@@ -426,6 +523,29 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonPropertyName("dsmfg:SplitProcessEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      [JsonPropertyName("dsmfg:ServiceItemEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServiceItemEnterpriseAttributes ServiceItemEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsmfg:ServiceAssemblyEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServiceAssemblyEnterpriseAttributes ServiceAssemblyEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsmfg:ServicePartEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServicePartEnterpriseAttributes ServicePartEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsmfg:ServiceKitEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServiceKitEnterpriseAttributes ServiceKitEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsmfg:ContinuousServiceItemEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IContinuousServiceItemEnterpriseAttributes ContinuousServiceItemEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsmfg:ContinuousServicePartEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IContinuousServicePartEnterpriseAttributes ContinuousServicePartEnterpriseAttributes { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

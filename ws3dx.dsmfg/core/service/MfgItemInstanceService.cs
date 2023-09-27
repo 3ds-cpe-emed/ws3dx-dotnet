@@ -58,6 +58,5 @@ namespace ws3dx.dsmfg.core.service
 
          return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
       }
-
    }
 }
