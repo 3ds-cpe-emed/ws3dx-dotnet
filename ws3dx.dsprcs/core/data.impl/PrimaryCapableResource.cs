@@ -67,7 +67,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Resource quantity real value Example: 1
+      // Description: Resource quantity real value Example: 10.5
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Tool changeover time real value Example: 0
+      // Description: Tool changeover time real value Example: 20.5
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Estimated time real value Example: 0
+      // Description: Estimated time real value Example: 20.5
       //
       //<summary>
       //------------------------------------------------------------------------------------------------

@@ -47,6 +47,5 @@ namespace ws3dx.dsprcs.data
       public string Cestamp { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
-
    }
 }

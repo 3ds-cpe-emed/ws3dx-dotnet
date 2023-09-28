@@ -35,7 +35,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:PrimaryCapableResource/bulkfetch
@@ -46,11 +45,11 @@ namespace ws3dx.dsprcs.core.service
       // Gets multiple dsprcs:PrimaryCapableResource connections which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IPrimaryCapableResourceMask>> BulkFetch(string[] request)
+      public async Task<(IList<IPrimaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:PrimaryCapableResource/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty<IPrimaryCapableResourceMask, string[]>(resourceURI, request);
+         return await PostBulkCollection<IPrimaryCapableResourceMask, string[]>(resourceURI, request);
       }
    }
 }

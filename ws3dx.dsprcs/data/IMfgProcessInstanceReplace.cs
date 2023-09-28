@@ -22,6 +22,5 @@ namespace ws3dx.dsprcs.data
       public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public IMfgProcessInstanceReplaceAttributes Attributes { get; set; }
-
    }
 }

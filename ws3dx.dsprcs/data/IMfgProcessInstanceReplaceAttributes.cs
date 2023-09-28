@@ -35,6 +35,5 @@ namespace ws3dx.dsprcs.data
       // </summary>
       //----------------------------------------------------------------
       public string Description { get; set; }
-
    }
 }

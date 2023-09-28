@@ -139,6 +139,5 @@ namespace ws3dx.dsprcs.data
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
-
    }
 }

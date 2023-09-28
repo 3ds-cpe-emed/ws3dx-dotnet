@@ -174,7 +174,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       public double? PostProcessingTime { get; set; }
 
-      public IMagnitudeValue QuantityToBeProducedPerTime { get; set; }
+      public IMagnitudeValueAuth QuantityToBeProducedPerTime { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

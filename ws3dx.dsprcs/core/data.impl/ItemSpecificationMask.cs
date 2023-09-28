@@ -105,17 +105,6 @@ namespace ws3dx.dsprcs.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Object usageQuantityRatio value Example: 1.1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("usageQuantityRatio")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? UsageQuantityRatio { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
       // Description: Object overlap value Example: false
       //
       //<summary>

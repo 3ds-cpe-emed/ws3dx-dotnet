@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsmfg.data.extension;
 using ws3dx.dsprcs.data.extension;
 using ws3dx.serialization.attribute;
 
@@ -277,19 +278,24 @@ namespace ws3dx.dsprcs.data
 
       public IWorkPlanEnterpriseAttributes WorkPlanEnterpriseAttributes { get; set; }
 
-      public IQtyControlProcessReferenceEnterpriseAttributes DELLmiQtyControlProcessReferenceEnterpriseAttributes { get; set; }
+      public IQtyControlProcessReferenceEnterpriseAttributes QtyControlProcessReferenceEnterpriseAttributes { get; set; }
 
-      public IGeneralSystemReferenceEnterpriseAttributes DELLmiGeneralSystemReferenceEnterpriseAttributes { get; set; }
+      public IGeneralSystemReferenceEnterpriseAttributes GeneralSystemReferenceEnterpriseAttributes { get; set; }
 
-      public ITransformationSystemReferenceEnterpriseAttributes DELLmiTransformationSystemReferenceEnterpriseAttributes { get; set; }
+      public ITransformationSystemReferenceEnterpriseAttributes TransformationSystemReferenceEnterpriseAttributes { get; set; }
 
-      public ITransferSystemReferenceEnterpriseAttributes DELLmiTransferSystemReferenceEnterpriseAttributes { get; set; }
+      public ITransferSystemReferenceEnterpriseAttributes TransferSystemReferenceEnterpriseAttributes { get; set; }
 
-      public IStorageSystemReferenceEnterpriseAttributes DELLmiStorageSystemReferenceEnterpriseAttributes { get; set; }
+      public IStorageSystemReferenceEnterpriseAttributes StorageSystemReferenceEnterpriseAttributes { get; set; }
 
       public IBufferSystemEnterpriseAttributes BufferSystemEnterpriseAttributes { get; set; }
 
       public ISinkSystemEnterpriseAttributes SinkSystemEnterpriseAttributes { get; set; }
 
+      public ISourceSystemEnterpriseAttributes SourceSystemEnterpriseAttributes { get; set; }
+
+      public IServiceHeaderWorkPlanEnterpriseAttributes ServiceHeaderWorkPlanEnterpriseAttributes { get; set; }
+
+      public IServiceWorkPlanEnterpriseAttributes ServiceWorkPlanEnterpriseAttributes { get; set; }
    }
 }

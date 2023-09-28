@@ -173,6 +173,5 @@ namespace ws3dx.dsprcs.data
       // </summary>
       //----------------------------------------------------------------
       public bool? ControlMaxIncluded { get; set; }
-
    }
 }

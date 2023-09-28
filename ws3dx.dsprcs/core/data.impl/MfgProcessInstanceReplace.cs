@@ -28,6 +28,5 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonPropertyName("attributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IMfgProcessInstanceReplaceAttributes Attributes { get; set; }
-
    }
 }

@@ -13,22 +13,12 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 
 namespace ws3dx.dsprcs.data.extension
 {
-   public interface ICustomerAttributes
+   public interface ICustomerAttributes : IDictionary<string, object>
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Attribute DB Value Example: Attribute DB Value
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string CustomAttr1 { get; set; }
-
-      public ICustomerAttributesDBcustomExtension DBcustomExtension { get; set; }
-
-      public ICustomerAttributesDBcustomAttributesGroup DBcustomAttributesGroup { get; set; }
+      //Specific Enterprise Attributes
    }
 }

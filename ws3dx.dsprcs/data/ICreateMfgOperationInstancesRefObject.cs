@@ -20,6 +20,5 @@ namespace ws3dx.dsprcs.data
    public interface ICreateMfgOperationInstancesRefObject
    {
       public IList<ICreateMfgOperationInstancesRefObjectInstances> Instances { get; set; }
-
    }
 }

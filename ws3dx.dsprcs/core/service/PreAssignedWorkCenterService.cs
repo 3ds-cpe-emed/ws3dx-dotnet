@@ -35,7 +35,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:PreAssignedWorkCenter/bulkfetch
@@ -46,11 +45,11 @@ namespace ws3dx.dsprcs.core.service
       // Gets multiple dsprcs:PreAssignedWorkCenter connections which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IPreAssignedWorkCenterMask>> BulkFetch(string[] request)
+      public async Task<(IList<IPreAssignedWorkCenterMask>, IList<string>)> BulkFetch(string[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:PreAssignedWorkCenter/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty<IPreAssignedWorkCenterMask, string[]>(resourceURI, request);
+         return await PostBulkCollection<IPreAssignedWorkCenterMask, string[]>(resourceURI, request);
       }
    }
 }

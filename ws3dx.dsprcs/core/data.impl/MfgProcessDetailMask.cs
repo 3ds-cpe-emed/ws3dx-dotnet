@@ -339,23 +339,23 @@ namespace ws3dx.dsprcs.core.data.impl
 
       [JsonPropertyName("dsprcs:DELLmiQtyControlProcessReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IQtyControlProcessReferenceEnterpriseAttributes DELLmiQtyControlProcessReferenceEnterpriseAttributes { get; set; }
+      public IQtyControlProcessReferenceEnterpriseAttributes QtyControlProcessReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiGeneralSystemReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IGeneralSystemReferenceEnterpriseAttributes DELLmiGeneralSystemReferenceEnterpriseAttributes { get; set; }
+      public IGeneralSystemReferenceEnterpriseAttributes GeneralSystemReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiTransformationSystemReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITransformationSystemReferenceEnterpriseAttributes DELLmiTransformationSystemReferenceEnterpriseAttributes { get; set; }
+      public ITransformationSystemReferenceEnterpriseAttributes TransformationSystemReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiTransferSystemReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITransferSystemReferenceEnterpriseAttributes DELLmiTransferSystemReferenceEnterpriseAttributes { get; set; }
+      public ITransferSystemReferenceEnterpriseAttributes TransferSystemReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:DELLmiStorageSystemReferenceEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IStorageSystemReferenceEnterpriseAttributes DELLmiStorageSystemReferenceEnterpriseAttributes { get; set; }
+      public IStorageSystemReferenceEnterpriseAttributes StorageSystemReferenceEnterpriseAttributes { get; set; }
 
       [JsonPropertyName("dsprcs:BufferSystemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -368,5 +368,14 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonPropertyName("dsprcs:SourceSystemEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ISourceSystemEnterpriseAttributes SourceSystemEnterpriseAttributes { get; set; }
+
+      [JsonPropertyName("dsprcs:ServiceHeaderWorkPlanEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServiceHeaderWorkPlanEnterpriseAttributes ServiceHeaderWorkPlanEnterpriseAttributes { get; set; }
+
+
+      [JsonPropertyName("dsprcs:ServiceWorkPlanEnterpriseAttributes ")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IServiceWorkPlanEnterpriseAttributes ServiceWorkPlanEnterpriseAttributes { get; set; }
    }
 }

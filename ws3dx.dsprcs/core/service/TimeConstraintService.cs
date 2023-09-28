@@ -35,7 +35,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:TimeConstraint/bulkfetch
@@ -46,11 +45,11 @@ namespace ws3dx.dsprcs.core.service
       // multiple dsprcs:TimeConstraint connections which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITimeConstraintMask>> BulkFetch(string[] request)
+      public async Task<(IList<ITimeConstraintMask>, IList<string>)> BulkFetch(string[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:TimeConstraint/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty <ITimeConstraintMask, string[]>(resourceURI, request);
+         return await PostBulkCollection<ITimeConstraintMask, string[]>(resourceURI, request);
       }
    }
 }

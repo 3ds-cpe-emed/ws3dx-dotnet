@@ -38,6 +38,5 @@ namespace ws3dx.dsprcs.data
       public string Description { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
-
    }
 }

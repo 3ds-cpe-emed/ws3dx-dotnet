@@ -37,7 +37,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:MfgProcessInstance/bulkfetch
@@ -48,13 +47,13 @@ namespace ws3dx.dsprcs.core.service
       // Manufacturing Process Instance which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
+      public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessInstanceMask), typeof(IMfgProcessInstanceDetailMask) });
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcessInstance/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
+         return await PostBulkCollection<T, string[]>(resourceURI, request);
       }
    }
 }

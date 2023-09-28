@@ -35,7 +35,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:SecondaryCapableResource/bulkfetch
@@ -46,11 +45,11 @@ namespace ws3dx.dsprcs.core.service
       // Gets multiple dsprcs:SecondaryCapableResource connections which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ISecondaryCapableResourceMask>> BulkFetch(string[] request)
+      public async Task<(IList<ISecondaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:SecondaryCapableResource/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty <ISecondaryCapableResourceMask, string[]>(resourceURI, request);
+         return await PostBulkCollection<ISecondaryCapableResourceMask, string[]>(resourceURI, request);
       }
    }
 }

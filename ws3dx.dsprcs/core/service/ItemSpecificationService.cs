@@ -35,7 +35,6 @@ namespace ws3dx.dsprcs.core.service
          return BASE_RESOURCE;
       }
 
-
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsprcs:ItemSpecification/bulkfetch
@@ -46,11 +45,11 @@ namespace ws3dx.dsprcs.core.service
       // multiple dsprcs:ItemSpecification connections which are Indexed.
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IItemSpecificationMask>> BulkFetch(string[] request)
+      public async Task<(IList<IItemSpecificationMask>, IList<string>)> BulkFetch(string[] request)
       {
          string resourceURI = $"{GetBaseResource()}dsprcs:ItemSpecification/bulkfetch";
 
-         return await PostCollectionFromResponseMemberProperty<IItemSpecificationMask, string[]>(resourceURI, request);
+         return await PostBulkCollection<IItemSpecificationMask, string[]>(resourceURI, request);
       }
    }
 }

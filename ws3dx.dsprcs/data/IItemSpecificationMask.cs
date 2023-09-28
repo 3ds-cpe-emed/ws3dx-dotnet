@@ -91,15 +91,6 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Object usageQuantityRatio value Example: 1.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? UsageQuantityRatio { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
       // Description: Object overlap value Example: false
       //
       // </summary>

@@ -24,6 +24,5 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonPropertyName("resource")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ITypedUriIdentifier Resource { get; set; }
-
    }
 }

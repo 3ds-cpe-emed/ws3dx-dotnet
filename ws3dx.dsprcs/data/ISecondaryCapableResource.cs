@@ -48,7 +48,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Resource time const real value Example: 0
+      // Description: Resource time const real value Example: 10.5
       //
       // </summary>
       //----------------------------------------------------------------
@@ -57,7 +57,7 @@ namespace ws3dx.dsprcs.data
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: Resource time per quantity to produced per time real value Example: 0
+      // Description: Resource time per quantity to produced per time real value Example: 20.5
       //
       // </summary>
       //----------------------------------------------------------------

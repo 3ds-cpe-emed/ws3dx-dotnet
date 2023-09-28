@@ -41,6 +41,5 @@ namespace ws3dx.dsprcs.core.data.impl
       [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
-
    }
 }

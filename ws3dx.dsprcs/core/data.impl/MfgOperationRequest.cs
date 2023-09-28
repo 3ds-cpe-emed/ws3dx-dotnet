@@ -212,7 +212,7 @@ namespace ws3dx.dsprcs.core.data.impl
 
       [JsonPropertyName("quantityToBeProducedPerTime")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMagnitudeValue QuantityToBeProducedPerTime { get; set; }
+      public IMagnitudeValueAuth QuantityToBeProducedPerTime { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
