@@ -14,10 +14,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
-namespace ws3dx.dsxcad.data
+using ws3dx.authentication.data;
+using ws3dx.dsxcad.core.service;
+
+namespace NUnitTestProject
 {
-   public interface INewXCADProductFromTemplate
+   public class PartServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      public ICreateXCADProductFromTemplateAttributes Attributes { get; set; }
+      public PartService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new PartService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }

@@ -13,30 +13,47 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsxcad.data.extension;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsxcad.core.data.impl;
+using ws3dx.dsxcad.core.service;
+using ws3dx.dsxcad.data;
+using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.data
+namespace NUnitTestProject
 {
-   public interface ICreateXCADDrawingFromTemplateItemsAttributes
+   public class PartService_changeControl_UnitTests : PartServiceTestsSetup
    {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+      [TestCase("")]
+      public async Task GetChangeControl(string partId)
+      {
+         PartService partService = ServiceFactoryCreate(await Authenticate());
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+         IEnumerable<IChangeControlMask> ret = await partService.GetChangeControl(partId);
 
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task ChangeControl(string partId)
+      {
+         PartService partService = ServiceFactoryCreate(await Authenticate());
+
+         IAddEmpty request = new AddEmpty();
+
+         try
+         {
+            IGenericResponse ret = await partService.ChangeControl(partId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

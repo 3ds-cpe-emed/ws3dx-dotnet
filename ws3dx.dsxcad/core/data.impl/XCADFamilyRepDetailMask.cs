@@ -173,7 +173,7 @@ namespace ws3dx.dsxcad.core.data.impl
 
       [JsonPropertyName("DerivedItems")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IXCADFamilyRepMaskDetailDerivedItems DerivedItems { get; set; }
+      public IXCADFamilyRepDerivedItems DerivedItems { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>

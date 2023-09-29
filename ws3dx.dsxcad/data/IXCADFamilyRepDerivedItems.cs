@@ -13,33 +13,20 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsxcad.data.extension;
-using ws3dx.shared.data;
 
 namespace ws3dx.dsxcad.data
 {
-   public interface ICreateXCADPartFromTemplateItemsAttributes
+   public interface IXCADFamilyRepDerivedItems
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Example: My name
+      // Example: String
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Title { get; set; }
+      public string Active { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
-
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
-
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+      public IXCADFamilyRepDerivedItemReference ReferencedObject { get; set; }
    }
 }

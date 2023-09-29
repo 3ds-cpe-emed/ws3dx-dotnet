@@ -13,11 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Text.Json.Serialization;
+using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.extension;
 
-namespace ws3dx.dsxcad.data
+namespace ws3dx.dsxcad.core.data.impl
 {
-   public interface INewXCADProductFromTemplate
+   public class CreateXCADDrawingFromTemplateAttributes : ICreateXCADDrawingFromTemplateAttributes
    {
-      public ICreateXCADProductFromTemplateAttributes Attributes { get; set; }
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: My name
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("title")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Title { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: My description
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("description")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Description { get; set; }
+
+      [JsonPropertyName("dsdrw:EnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
    }
 }

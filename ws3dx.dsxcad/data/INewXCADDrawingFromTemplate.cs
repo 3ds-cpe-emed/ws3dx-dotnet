@@ -18,6 +18,6 @@ namespace ws3dx.dsxcad.data
 {
    public interface INewXCADDrawingFromTemplate
    {
-      public ICreateXCADDrawingFromTemplateItemsAttributes Attributes { get; set; }
+      public ICreateXCADDrawingFromTemplateAttributes Attributes { get; set; }
    }
 }

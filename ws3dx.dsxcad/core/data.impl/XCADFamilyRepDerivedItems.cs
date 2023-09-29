@@ -18,7 +18,7 @@ using ws3dx.dsxcad.data;
 
 namespace ws3dx.dsxcad.core.data.impl
 {
-   public class XCADFamilyRepMaskDetailDerivedItems : IXCADFamilyRepMaskDetailDerivedItems
+   public class XCADFamilyRepDerivedItems : IXCADFamilyRepDerivedItems
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
@@ -33,6 +33,6 @@ namespace ws3dx.dsxcad.core.data.impl
 
       [JsonPropertyName("referencedObject")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IXCADFamilyRepMaskDetailDerivedItemsRefObj ReferencedObject { get; set; }
+      public IXCADFamilyRepDerivedItemReference ReferencedObject { get; set; }
    }
 }

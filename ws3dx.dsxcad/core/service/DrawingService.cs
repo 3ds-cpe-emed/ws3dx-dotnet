@@ -76,6 +76,7 @@ namespace ws3dx.dsxcad.core.service
       }
 
       #endregion
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (GET) dsxcad:Drawing/{ID}/dsxcad:VisualizationFile

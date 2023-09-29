@@ -13,15 +13,49 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.utils.search;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace NUnitTestProject
 {
-   public class NewXCADPartFromTemplate : INewXCADPartFromTemplate
+   public class TemplateService_Template_UnitTests : TemplateServiceTestsSetup
    {
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateXCADPartFromTemplateAttributes Attributes { get; set; }
+      [TestCase("search", 0, 50)]
+      public async Task Search_Paged_IXCADTemplateMask(string search, int skip, int top)
+      {
+         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText, skip, top);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("search")]
+      public async Task Search_Full_IXCADTemplateMask(string search)
+      {
+         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+
+         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+         IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task Get(string templateId)
+      {
+         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+
+         IXCADTemplateMask ret = await templateService.Get(templateId);
+
+         Assert.IsNotNull(ret);
+      }
    }
 }

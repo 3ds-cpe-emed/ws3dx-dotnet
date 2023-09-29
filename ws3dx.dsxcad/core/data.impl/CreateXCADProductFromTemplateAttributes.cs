@@ -15,64 +15,41 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.extension;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsxcad.core.data.impl
 {
-   public class XCADFamilyRepMaskDetailDerivedItemsRefObj : IXCADFamilyRepMaskDetailDerivedItemsRefObj
+   public class CreateXCADProductFromTemplateAttributes : ICreateXCADProductFromTemplateAttributes
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: source Example: $3DSpace
+      // Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("source")]
+      [JsonPropertyName("title")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
+      public string Title { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: 3DBOMType Example: dsxcad:Part
+      // Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
+      [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+      public string Description { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
+      [JsonPropertyName("dseno:EnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: relativePath Example: resource/v1/dsxcad/dsxcad:Part/0A57A84A1A..
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("relativePath")]
+      [JsonPropertyName("dseng:EnterpriseReference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Active status of the Item Example: true/false
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("active")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Active { get; set; }
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
    }
 }

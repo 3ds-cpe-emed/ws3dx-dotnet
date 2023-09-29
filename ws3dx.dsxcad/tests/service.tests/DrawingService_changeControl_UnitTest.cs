@@ -13,11 +13,47 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsxcad.core.data.impl;
+using ws3dx.dsxcad.core.service;
+using ws3dx.dsxcad.data;
+using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.data
+namespace NUnitTestProject
 {
-   public interface INewXCADProductFromTemplate
+   public class DrawingService_changeControl_UnitTests : DrawingServiceTestsSetup
    {
-      public ICreateXCADProductFromTemplateAttributes Attributes { get; set; }
+      [TestCase("")]
+      public async Task GetChangeControl(string drawingId)
+      {
+         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+         IEnumerable<IChangeControlMask> ret = await drawingService.GetChangeControl(drawingId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task ChangeControl(string drawingId)
+      {
+         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+         IAddEmpty request = new AddEmpty();
+
+         try
+         {
+            IGenericResponse ret = await drawingService.ChangeControl(drawingId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

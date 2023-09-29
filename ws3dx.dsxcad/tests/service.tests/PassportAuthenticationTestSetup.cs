@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -13,41 +13,32 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+
 using NUnit.Framework;
-
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.redirection;
-using ws3dx.dsxcad.core.service;
-using ws3dx.dsxcad.data;
-using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class TemplateServiceTests
+   public class PassportAuthenticationTestSetup
    {
-      const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
-      const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
-      const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
-      const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
-      const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
+      private const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
+      private const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
+      private const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
+      private const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
+      private const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
 
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
+      private string m_username = string.Empty;
+      private string m_password = string.Empty;
+      private string m_passportUrl = string.Empty;
+      private string m_serviceUrl = string.Empty;
+      private string m_tenant = string.Empty;
 
-      string m_username = string.Empty;
-      string m_password = string.Empty;
-      string m_passportUrl = string.Empty;
-      string m_serviceUrl = string.Empty;
-      string m_tenant = string.Empty;
-
-      UserInfo m_userInfo = null;
+      private UserInfo m_userInfo = null;
 
       public async Task<IPassportAuthentication> Authenticate()
       {
@@ -87,51 +78,14 @@ namespace NUnitTestProject
          return m_userInfo.preferredcredentials.ToString();
       }
 
-      public TemplateService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      public string GetServiceUrl()
       {
-         TemplateService __templateService = new TemplateService(_serviceUrl, _passport);
-         __templateService.Tenant = _tenant;
-         __templateService.SecurityContext = GetDefaultSecurityContext();
-         return __templateService;
+         return m_serviceUrl;
       }
 
-      [TestCase("")]
-      public async Task Get(string templateId)
+      public string GetTenant()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         TemplateService templateService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-         IXCADTemplateMask ret = await templateService.Get(templateId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("solidworks")]
-      public async Task Search_Full_IXCADTemplateMask(string search)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         TemplateService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADTemplateMask> ret = await representationService.Search<IXCADTemplateMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADTemplateMask(string search, int skip, int top)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         TemplateService representationService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADTemplateMask> ret = await representationService.Search<IXCADTemplateMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
+         return m_tenant;
       }
    }
 }

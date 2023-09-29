@@ -67,7 +67,7 @@ namespace ws3dx.dsxcad.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: relativePath Example: resource/v1/dsxcad/dsxcad:Representation/B1F3B0568...
+      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Representation/B1F3B0568...
       //
       //<summary>
       //------------------------------------------------------------------------------------------------

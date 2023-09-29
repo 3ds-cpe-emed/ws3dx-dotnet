@@ -13,54 +13,33 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsxcad.data.extension;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsxcad.data
 {
-   public interface IXCADFamilyRepMaskDetailDerivedItemsRefObj
+   public interface ICreateXCADProductFromTemplateAttributes
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: source Example: $3DSpace
+      // Example: My name
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Source { get; set; }
+      public string Title { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: 3DBOMType Example: dsxcad:Part
+      // Example: My description
       //
       // </summary>
       //----------------------------------------------------------------
-      public string Type { get; set; }
+      public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: resource/v1/dsxcad/dsxcad:Part/0A57A84A1A..
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Active status of the Item Example: true/false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Active { get; set; }
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
    }
 }

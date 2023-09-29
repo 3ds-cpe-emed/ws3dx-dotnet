@@ -13,11 +13,46 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsxcad.core.data.impl;
+using ws3dx.dsxcad.core.service;
+using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.data
+namespace NUnitTestProject
 {
-   public interface INewXCADProductFromTemplate
+   public class PartService_VisualizationFile_UnitTests : PartServiceTestsSetup
    {
-      public ICreateXCADProductFromTemplateAttributes Attributes { get; set; }
+      [TestCase("")]
+      public async Task GetVisualizationFile(string partId)
+      {
+         PartService partService = ServiceFactoryCreate(await Authenticate());
+
+         IEnumerable<IVisualizationFileMask> ret = await partService.GetVisualizationFile(partId);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task GetVisualizationFileDownloadTicket(string partId)
+      {
+         PartService partService = ServiceFactoryCreate(await Authenticate());
+
+         IAddEmpty request = new AddEmpty();
+
+         try
+         {
+            IFileDownloadTicket ret = await partService.GetVisualizationFileDownloadTicket(partId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

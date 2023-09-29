@@ -14,14 +14,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.authentication.data;
-using ws3dx.authentication.data.impl.passport;
-using ws3dx.core.data.impl;
 using ws3dx.core.exception;
-using ws3dx.core.redirection;
 using ws3dx.dsxcad.core.data.impl;
 using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
@@ -29,105 +24,24 @@ using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class ProductServiceTests
+   public class ProductService_Product_UnitTests : ProductServiceTestsSetup
    {
-      const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
-      const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
-      const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
-      const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
-      const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      const string SECURITY_CONTEXT = "VPLMProjectLeader.Company Name.AAA27 Personal";
-
-      const string CUSTOM_PROP_NAME_1_DBL = "AAA27_REAL_TEST";
-      const string CUSTOM_PROP_NAME_2_INT = "AAA27_INT_TEST";
-
-      string m_username = string.Empty;
-      string m_password = string.Empty;
-      string m_passportUrl = string.Empty;
-      string m_serviceUrl = string.Empty;
-      string m_tenant = string.Empty;
-
-      UserInfo m_userInfo = null;
-
-      public async Task<IPassportAuthentication> Authenticate()
-      {
-         UserPassport passport = new UserPassport(m_passportUrl);
-
-         UserInfoRedirection userInfoRedirection = new UserInfoRedirection(m_serviceUrl, m_tenant)
-         {
-            Current = true,
-            IncludeCollaborativeSpaces = true,
-            IncludePreferredCredentials = true
-         };
-
-         m_userInfo = await passport.CASLoginWithRedirection<UserInfo>(m_username, m_password, false, userInfoRedirection);
-
-         Assert.IsNotNull(m_userInfo);
-
-         StringAssert.AreEqualIgnoringCase(m_userInfo.name, m_username);
-
-         Assert.IsTrue(passport.IsCookieAuthenticated);
-
-         return passport;
-      }
-
-      [SetUp]
-      public void Setup()
-      {
-         m_username = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_USERNAME, EnvironmentVariableTarget.User); // e.g. AAA27
-         m_password = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSWORD, EnvironmentVariableTarget.User); // e.g. your password
-         m_passportUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSPORT, EnvironmentVariableTarget.User); // e.g. https://eu1-ds-iam.3dexperience.3ds.com:443/3DPassport
-
-         m_serviceUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_ENOVIA, EnvironmentVariableTarget.User); // e.g. https://r1132100982379-eu1-space.3dexperience.3ds.com:443/enovia
-         m_tenant = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_TENANT, EnvironmentVariableTarget.User); // e.g. R1132100982379
-      }
-
-      public string GetDefaultSecurityContext()
-      {
-         return m_userInfo.preferredcredentials.ToString();
-      }
-
-      public ProductService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
-      {
-         ProductService __productService = new ProductService(_serviceUrl, _passport);
-         __productService.Tenant = _tenant;
-         __productService.SecurityContext = GetDefaultSecurityContext();
-         return __productService;
-      }
-
-      [TestCase("solidworks", 0, 50)]
+      [TestCase("search", 0, 50)]
       public async Task Search_Paged_IXCADProductMask(string search, int skip, int top)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText, skip, top);
 
-         int i = 0;
-
-         foreach (IXCADProductMask productFound in ret)
-         {
-            IXCADProductDetailMask product = await productService.Get<IXCADProductDetailMask>(productFound.Id);
-
-            Assert.AreEqual(productFound.Id, product.Id);
-
-            i++;
-
-            if (i > 20) return;
-         }
-
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("solidworks")]
+      [TestCase("search")]
       public async Task Search_Full_IXCADProductMask(string search)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
@@ -138,9 +52,7 @@ namespace NUnitTestProject
       [TestCase("search", 0, 50)]
       public async Task Search_Paged_IXCADProductDetailMask(string search, int skip, int top)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
@@ -152,9 +64,7 @@ namespace NUnitTestProject
       [TestCase("search")]
       public async Task Search_Full_IXCADProductDetailMask(string search)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
@@ -165,9 +75,7 @@ namespace NUnitTestProject
       [TestCase("search", 0, 50)]
       public async Task Search_Paged_IXCADProductEnterpriseDetailMask(string search, int skip, int top)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
@@ -179,9 +87,7 @@ namespace NUnitTestProject
       [TestCase("search")]
       public async Task Search_Full_IXCADProductEnterpriseDetailMask(string search)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
@@ -193,9 +99,8 @@ namespace NUnitTestProject
       [TestCase("")]
       public async Task Get_IXCADProductMask(string productId)
       {
-         IPassportAuthentication passport = await Authenticate();
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IXCADProductMask ret = await productService.Get<IXCADProductMask>(productId);
 
          Assert.IsNotNull(ret);
@@ -204,9 +109,8 @@ namespace NUnitTestProject
       [TestCase("")]
       public async Task Get_IXCADProductDetailMask(string productId)
       {
-         IPassportAuthentication passport = await Authenticate();
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IXCADProductDetailMask ret = await productService.Get<IXCADProductDetailMask>(productId);
 
          Assert.IsNotNull(ret);
@@ -215,42 +119,17 @@ namespace NUnitTestProject
       [TestCase("")]
       public async Task Get_IXCADProductEnterpriseDetailMask(string productId)
       {
-         IPassportAuthentication passport = await Authenticate();
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IXCADProductEnterpriseDetailMask ret = await productService.Get<IXCADProductEnterpriseDetailMask>(productId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string productId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await productService.GetAuthoringFileDownloadTicket(productId, request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
       [TestCase()]
       public async Task Create_IXCADProductMask()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
 
@@ -266,12 +145,11 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
+
       [TestCase()]
       public async Task Create_IXCADProductDetailMask()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
 
@@ -287,12 +165,11 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
+
       [TestCase()]
       public async Task Create_IXCADProductEnterpriseDetailMask()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ProductService productService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
 
          ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
 

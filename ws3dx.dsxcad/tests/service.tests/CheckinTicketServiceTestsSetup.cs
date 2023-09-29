@@ -13,38 +13,21 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
-using ws3dx.dsxcad.data.extension;
 
-namespace ws3dx.dsxcad.core.data.impl
+using ws3dx.authentication.data;
+using ws3dx.dsxcad.core.service;
+
+namespace NUnitTestProject
 {
-   public class CreateXCADDrawingFromTemplateItemsAttributes : ICreateXCADDrawingFromTemplateItemsAttributes
+   public class CheckinTicketServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
-
-      [JsonPropertyName("dsdrw:EnterpriseAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+      public CheckinTicketService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new CheckinTicketService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }

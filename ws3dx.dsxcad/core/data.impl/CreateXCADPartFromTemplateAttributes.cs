@@ -15,64 +15,41 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.extension;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsxcad.core.data.impl
 {
-   public class AttachXCADDrawing : IAttachXCADDrawing
+   public class CreateXCADPartFromTemplateAttributes : ICreateXCADPartFromTemplateAttributes
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Type of the dependency link between the two object Example: process
+      // Example: My name
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cadlinktype")]
+      [JsonPropertyName("title")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cadlinktype { get; set; }
+      public string Title { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Entity physical ID Example: B1F3B0568B4500005EBAC3C400156385
+      // Example: My description
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("ID")]
+      [JsonPropertyName("description")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ID { get; set; }
+      public string Description { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Source Example: $3DSpace
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("source")]
+      [JsonPropertyName("dseng:EnterpriseReference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: 3DBOMype Example: dsxcad:Representation
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
+      [JsonPropertyName("dseno:EnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Representation/B1F3B0568...
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("relativePath")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
+      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
    }
 }

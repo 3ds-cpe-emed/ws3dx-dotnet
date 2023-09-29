@@ -141,7 +141,7 @@ namespace ws3dx.dsxcad.data
 
       public IAuthoringFile AuthoringFile { get; set; }
 
-      public IXCADFamilyRepMaskDetailDerivedItems DerivedItems { get; set; }
+      public IXCADFamilyRepDerivedItems DerivedItems { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

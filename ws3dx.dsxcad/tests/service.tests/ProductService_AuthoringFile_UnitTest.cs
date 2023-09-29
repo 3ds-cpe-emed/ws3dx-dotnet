@@ -13,12 +13,35 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
+using NUnit.Framework;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsxcad.core.data.impl;
+using ws3dx.dsxcad.core.service;
+using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.data.extension
+namespace NUnitTestProject
 {
-   public interface IFamilyEnterpriseAttributes : IDictionary<string, object>
+   public class ProductService_AuthoringFile_UnitTests : ProductServiceTestsSetup
    {
-      //Specific Enterprise Attributes
+      [TestCase("")]
+      public async Task GetAuthoringFileDownloadTicket(string productId)
+      {
+         ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+         IAddEmpty request = new AddEmpty();
+
+         try
+         {
+            IFileDownloadTicket ret = await productService.GetAuthoringFileDownloadTicket(productId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

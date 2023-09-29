@@ -18,34 +18,12 @@ using ws3dx.dsxcad.data;
 
 namespace ws3dx.dsxcad.core.data.impl
 {
-   public class AttachXCADDrawing : IAttachXCADDrawing
+   public class XCADFamilyRepDerivedItemReference : IXCADFamilyRepDerivedItemReference
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: Type of the dependency link between the two object Example: process
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cadlinktype")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cadlinktype { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical ID Example: B1F3B0568B4500005EBAC3C400156385
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("ID")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ID { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Source Example: $3DSpace
+      // Description: source Example: $3DSpace
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -56,7 +34,7 @@ namespace ws3dx.dsxcad.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: 3DBOMype Example: dsxcad:Representation
+      // Description: 3DBOMType Example: dsxcad:Part
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -67,12 +45,34 @@ namespace ws3dx.dsxcad.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Representation/B1F3B0568...
+      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Id { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Part/0A57A84A1A..
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("relativePath")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string RelativePath { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Description: Active status of the Item Example: true/false
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("active")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Active { get; set; }
    }
 }

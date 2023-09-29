@@ -22,6 +22,6 @@ namespace ws3dx.dsxcad.core.data.impl
    {
       [JsonPropertyName("attributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateXCADDrawingFromTemplateItemsAttributes Attributes { get; set; }
+      public ICreateXCADDrawingFromTemplateAttributes Attributes { get; set; }
    }
 }
