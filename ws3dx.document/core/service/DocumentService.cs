@@ -146,11 +146,11 @@ namespace ws3dx.document.core.service
       // Description: Summary: Get the information for a given document object.
       // </summary>
       //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IDocumentDataResponse>> Get(string docId)
+      public async Task<IDocumentDataResponse> Get(string docId)
       {
          string resourceURI = $"{GetBaseResource()}/documents/{docId}";
 
-         return await GetCollectionFromResponseDataProperty<IDocumentDataResponse>(resourceURI);
+         return await GetIndividualFromResponseDataProperty<IDocumentDataResponse>(resourceURI);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ namespace ws3dx.document.core.service
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          if (parentRelName != null) {
-            queryParams.Add("parentRelName", parentRelName);
+         queryParams.Add("parentRelName", parentRelName);
          }
 
          return await PostCollectionFromResponseDataProperty<IDocumentDataResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
@@ -264,7 +264,7 @@ namespace ws3dx.document.core.service
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          if (parentRelName!=null) {
-            queryParams.Add("parentRelName", parentRelName);
+         queryParams.Add("parentRelName", parentRelName);
          }
 
          return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
@@ -291,13 +291,8 @@ namespace ws3dx.document.core.service
          string resourceURI = $"{GetBaseResource()}/documents/{docId}/files/CheckinTicket";
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
-         if (store != null) {
-            queryParams.Add("store", store);
-         }
-
-         if (policy != null) {
-            queryParams.Add("policy", policy);
-         }
+         queryParams.Add("store", store);
+         queryParams.Add("policy", policy);
 
          return await PutIndividual<ICheckInTicketResponse>(resourceURI, queryParams: queryParams);
       }
@@ -353,7 +348,7 @@ namespace ws3dx.document.core.service
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>();
          if (parentRelName != null) {
-            queryParams.Add("parentRelName", parentRelName);
+         queryParams.Add("parentRelName", parentRelName);
          }
 
          return await PutIndividual<IDocumentsResponse, IDocuments>(resourceURI, documents, queryParams: queryParams);
