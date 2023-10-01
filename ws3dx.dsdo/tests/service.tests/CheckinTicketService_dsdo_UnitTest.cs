@@ -13,32 +13,36 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsdo.core.data.impl;
+using ws3dx.dsdo.core.service;
 using ws3dx.dsdo.data;
-using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace NUnitTestProject
 {
-   public class DerivedOutput : IDerivedOutput
+   public class CheckinTicketService_dsdo_UnitTests : CheckinTicketServiceTestsSetup
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: F6AF82561E5700005EB271EE0003C500
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+      [TestCase()]
+      public async Task Get_IDerivedOutputDetailMask()
+      {
+         CheckinTicketService checkinTicketService = ServiceFactoryCreate(await Authenticate());
 
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+         IGetCheckInTicketRequest request = new GetCheckInTicketRequest();
 
-      [JsonPropertyName("derivedoutputfiles")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IDerivedOutputFileDetail> DerivedOutputFiles { get ; set ; }
+         try
+         {
+            IGetCheckInTicketResponse ret = await checkinTicketService.Get(request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }
