@@ -74,6 +74,11 @@ namespace ws3dx.dsiss.core.service
          return await SearchCollection<ITypedUriIdentifier>("issue", _searchQuery);
       }
 
+      public async Task<IList<ITypedUriIdentifier>> Search(SearchQuery searchQuery, long _skip, long _top)
+      {
+         return await SearchCollection<ITypedUriIdentifier>("issue", searchQuery, _skip, _top);
+      }
+
       #endregion
       //---------------------------------------------------------------------------------------------
       // <remarks>
