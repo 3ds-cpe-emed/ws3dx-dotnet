@@ -13,11 +13,21 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsreq.data;
 
-namespace ws3dx.dsreq.core.data.impl
+using ws3dx.authentication.data;
+using ws3dx.dsreq.core.service;
+
+namespace NUnitTestProject
 {
-   public class AddEmpty : IAddEmpty
+   public class RequirementServiceTestsSetup : PassportAuthenticationTestSetup
    {
+      public RequirementService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new RequirementService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }

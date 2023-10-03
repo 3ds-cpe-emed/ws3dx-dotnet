@@ -13,10 +13,49 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dsreq.core.service;
+using ws3dx.dsreq.data;
+using ws3dx.shared.data;
+using ws3dx.shared.data.impl;
 
-namespace ws3dx.dsreq.data
+namespace NUnitTestProject
 {
-   public interface IAddEmpty
+   public class RequirementSpecificationService_changeControl_UnitTests : RequirementSpecificationServiceTestsSetup
    {
+
+      [TestCase("")]
+      public async Task GetChangeControl(string iD)
+      {
+         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(await Authenticate());
+
+         IEnumerable<IChangeControlStatusMask> ret = await requirementSpecificationService.GetChangeControl(iD);
+
+         Assert.IsNotNull(ret);
+      }
+
+      [TestCase("")]
+      public async Task AttachChangeControl(string iD)
+      {
+         RequirementSpecificationService requirementSpecificationService = ServiceFactoryCreate(await Authenticate());
+
+         IEmpty request = new Empty();
+
+         try
+         {
+            IGenericResponse ret = await requirementSpecificationService.AttachChangeControl(iD, request);
+
+            Assert.IsNotNull(ret);
+
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

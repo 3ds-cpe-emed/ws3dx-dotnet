@@ -126,11 +126,11 @@ namespace ws3dx.dsreq.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> AttachChangeControl(string reqSpecId, IAddEmpty request)
+      public async Task<IGenericResponse> AttachChangeControl(string reqSpecId, IEmpty request)
       {
          string resourceURI = $"{GetBaseResource()}dsreq:RequirementSpecification/{reqSpecId}/dslc:changeControl";
 
-         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse, IEmpty>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
