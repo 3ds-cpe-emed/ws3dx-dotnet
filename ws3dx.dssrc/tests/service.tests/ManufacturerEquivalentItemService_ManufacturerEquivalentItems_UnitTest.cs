@@ -14,14 +14,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
-using ws3dx.authentication.data.impl.passport;
-using ws3dx.core.data.impl;
 using ws3dx.core.exception;
-using ws3dx.core.redirection;
 using ws3dx.dssrc.core.data.impl;
 using ws3dx.dssrc.core.service;
 using ws3dx.dssrc.data;
@@ -29,75 +25,14 @@ using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class ManufacturerEquivalentItemServiceTests
+   public class ManufacturerEquivalentItemService_ManufacturerEquivalentItems_UnitTests : ManufacturerEquivalentItemServiceTestsSetup
    {
-      const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
-      const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
-      const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
-      const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
-      const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
-      string m_username = string.Empty;
-      string m_password = string.Empty;
-      string m_passportUrl = string.Empty;
-      string m_serviceUrl = string.Empty;
-      string m_tenant = string.Empty;
-
-      UserInfo m_userInfo = null;
-
-      public async Task<IPassportAuthentication> Authenticate()
-      {
-         UserPassport passport = new UserPassport(m_passportUrl);
-
-         UserInfoRedirection userInfoRedirection = new UserInfoRedirection(m_serviceUrl, m_tenant)
-         {
-            Current = true,
-            IncludeCollaborativeSpaces = true,
-            IncludePreferredCredentials = true
-         };
-
-         m_userInfo = await passport.CASLoginWithRedirection<UserInfo>(m_username, m_password, false, userInfoRedirection);
-
-         Assert.IsNotNull(m_userInfo);
-
-         StringAssert.AreEqualIgnoringCase(m_userInfo.name, m_username);
-
-         Assert.IsTrue(passport.IsCookieAuthenticated);
-
-         return passport;
-      }
-
-      [SetUp]
-      public void Setup()
-      {
-         m_username = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_USERNAME, EnvironmentVariableTarget.User); // e.g. AAA27
-         m_password = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSWORD, EnvironmentVariableTarget.User); // e.g. your password
-         m_passportUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_PASSPORT, EnvironmentVariableTarget.User); // e.g. https://eu1-ds-iam.3dexperience.3ds.com:443/3DPassport
-
-         m_serviceUrl = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_ENOVIA, EnvironmentVariableTarget.User); // e.g. https://r1132100982379-eu1-space.3dexperience.3ds.com:443/enovia
-         m_tenant = Environment.GetEnvironmentVariable(DS3DXWS_AUTH_TENANT, EnvironmentVariableTarget.User); // e.g. R1132100982379
-      }
-
-      public string GetDefaultSecurityContext()
-      {
-         return m_userInfo.preferredcredentials.ToString();
-      }
-
-      public ManufacturerEquivalentItemService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
-      {
-         ManufacturerEquivalentItemService __manufacturerEquivalentItemService = new ManufacturerEquivalentItemService(_serviceUrl, _passport)
-         {
-            Tenant = _tenant,
-            SecurityContext = GetDefaultSecurityContext()
-         };
-         return __manufacturerEquivalentItemService;
-      }
 
       [TestCase("")]
       public async Task Get(string meiId)
       {
-         IPassportAuthentication passport = await Authenticate();
+         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(await Authenticate());
 
-         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
          IManufacturerEquivalentItemMask ret = await manufacturerEquivalentItemService.Get(meiId);
 
          Assert.IsNotNull(ret);
@@ -106,9 +41,7 @@ namespace NUnitTestProject
       [TestCase("3784C7605B3B0000642470A000143BB7", "uuid:Supplier A")]
       public async Task Create(string _engItemId, string _supplierId)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(await Authenticate());
 
          INewManufacturerEquivalentItem mei = new NewManufacturerEquivalentItem();
 
@@ -116,7 +49,7 @@ namespace NUnitTestProject
          mei.EngItem.Identifier = _engItemId;
          mei.EngItem.Type = "VPMReference";
          mei.EngItem.RelativePath = "resource/v1/dseng/dseng:EngItem/" + _engItemId;
-         mei.EngItem.Source = m_serviceUrl;
+         mei.EngItem.Source = GetServiceUrl();
 
          mei.ManufacturerCompany = new TypedUriIdentifier();
          mei.ManufacturerCompany.Identifier = _supplierId;
@@ -148,9 +81,7 @@ namespace NUnitTestProject
       [TestCase()]
       public async Task Locate()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
+         ManufacturerEquivalentItemService manufacturerEquivalentItemService = ServiceFactoryCreate(await Authenticate());
 
          ILocateManufacturerEquivalentItems request = new LocateManufacturerEquivalentItems();
 
@@ -159,6 +90,7 @@ namespace NUnitTestProject
             IEnumerable<IManufacturerEquivalentItemMask> ret = await manufacturerEquivalentItemService.Locate(request);
 
             Assert.IsNotNull(ret);
+
          }
          catch (HttpResponseException _ex)
          {
