@@ -13,16 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using ws3dx.dslc.data;
 
-namespace ws3dx.dslc.core.data.impl
+using ws3dx.authentication.data;
+using ws3dx.dslc.core.service;
+using ws3dx.tests.service.tests;
+
+namespace NUnitTestProject
 {
-   public class GetSharingOutput : IGetSharingOutput
+   public class VersionServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      [JsonPropertyName("results")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IGetSharingResult> Results { get; set; }
+      public VersionService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new VersionService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }

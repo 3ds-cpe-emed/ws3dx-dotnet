@@ -13,26 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using ws3dx.dslc.data;
 
-namespace ws3dx.dslc.core.data.impl
+using ws3dx.authentication.data;
+using ws3dx.dslc.core.service;
+using ws3dx.tests.service.tests;
+
+namespace NUnitTestProject
 {
-   //------------------------------------------------------------------------------------------------
-   // <summary>
-   //
-   // Example: [{"owner":"user2","organization":"MyOrganization","collabspace":"My Collaboration 
-   // Space","id":"F718B05686760000926EEB5BE7400900","Status":200},{"owner":"user2","organization":"MyOrganization","collabspace":"My 
-   // Collaboration Space","id":"F718B05686760000988EEB5BE7400900","Status":400,"ErrorReport":{"errorMessage":"Insufficient 
-   // rights to transfer."}}]
-   //
-   // </summary>
-   //------------------------------------------------------------------------------------------------
-   public class TransferOutputPartialSuccess : ITransferOutputPartialSuccess
+   public class DuplicateServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      [JsonPropertyName("results")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITransferOutputPartialSuccessResult> Results { get; set; }
+      public DuplicateService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new DuplicateService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }

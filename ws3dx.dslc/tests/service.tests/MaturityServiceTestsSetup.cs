@@ -13,43 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 using ws3dx.authentication.data;
-using ws3dx.core.service;
-using ws3dx.dslc.data;
+using ws3dx.dslc.core.service;
+using ws3dx.tests.service.tests;
 
-namespace ws3dx.dslc.core.service
+namespace NUnitTestProject
 {
-   // SDK Service
-   public class OwnershipService : EnoviaBaseService
+   public class MaturityServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dslc/";
-
-      public OwnershipService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+      public MaturityService ServiceFactoryCreate(IPassportAuthentication _passport)
       {
-      }
-
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) ownership/transfer
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Transfer the ownership for a list of objects. Operation is limited to 1000 objects 
-      // at a time. Summary: Transfer ownership
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITransferOutputPartialSuccessResult>> Transfer(ITransferListInput request)
-      {
-         string resourceURI = $"{GetBaseResource()}ownership/transfer";
-
-         return await PostCollectionFromResponseResultsProperty<ITransferOutputPartialSuccessResult, ITransferListInput>(resourceURI, request);
+         return new MaturityService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
       }
    }
 }

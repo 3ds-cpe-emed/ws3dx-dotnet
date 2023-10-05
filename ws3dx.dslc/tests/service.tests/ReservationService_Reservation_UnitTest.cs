@@ -13,16 +13,59 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dslc.core.data.impl;
+using ws3dx.dslc.core.service;
 using ws3dx.dslc.data;
 
-namespace ws3dx.dslc.core.data.impl
+namespace NUnitTestProject
 {
-   public class TransferOutput : ITransferOutput
+   public class ReservationService_Reservation_UnitTests : ReservationServiceTestsSetup
    {
-      [JsonPropertyName("results")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITransfer> Results { get; set; }
+
+      [TestCase()]
+      public async Task Reserve()
+      {
+         ReservationService reservationService = ServiceFactoryCreate(await Authenticate());
+
+         IIdInput request = new IdInput();
+
+         try
+         {
+            IEnumerable<IReservation> ret = await reservationService.Reserve(request);
+
+            Assert.IsNotNull(ret);
+
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase()]
+      public async Task Unreserve()
+      {
+         ReservationService reservationService = ServiceFactoryCreate(await Authenticate());
+
+         IIdInput request = new IdInput();
+
+         try
+         {
+            IEnumerable<IReservation> ret = await reservationService.Unreserve(request);
+
+            Assert.IsNotNull(ret);
+
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

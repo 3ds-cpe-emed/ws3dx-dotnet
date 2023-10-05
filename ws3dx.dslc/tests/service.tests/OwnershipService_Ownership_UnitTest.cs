@@ -13,12 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dslc.core.data.impl;
+using ws3dx.dslc.core.service;
+using ws3dx.dslc.data;
 
-namespace ws3dx.dslc.data
+namespace NUnitTestProject
 {
-   public interface IReservationOutput
+   public class OwnershipService_Ownership_UnitTests : OwnershipServiceTestsSetup
    {
-      public IList<IReservation> Results { get; set; }
+
+      [TestCase()]
+      public async Task Transfer()
+      {
+         OwnershipService ownershipService = ServiceFactoryCreate(await Authenticate());
+
+         ITransferListInput request = new TransferListInput();
+
+         try
+         {
+            IEnumerable<ITransferOutputPartialSuccessResult> ret = await ownershipService.Transfer(request);
+
+            Assert.IsNotNull(ret);
+
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

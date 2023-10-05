@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------------------------------
 // Copyright 2022 Dassault Systèmes - CPE EMED
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
@@ -13,36 +13,32 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
-using ws3dx.core.exception;
 using ws3dx.core.redirection;
-using ws3dx.dslc.core.data.impl;
-using ws3dx.dslc.core.service;
-using ws3dx.dslc.data;
 
-namespace NUnitTestProject
+namespace ws3dx.tests.service.tests
 {
-   public class DuplicateServiceTests
+   public class PassportAuthenticationTestSetup
    {
-      const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
-      const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
-      const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
-      const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
-      const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
+      private const string DS3DXWS_AUTH_USERNAME = "DS3DXWS_AUTH_USERNAME";
+      private const string DS3DXWS_AUTH_PASSWORD = "DS3DXWS_AUTH_PASSWORD";
+      private const string DS3DXWS_AUTH_PASSPORT = "DS3DXWS_AUTH_PASSPORT";
+      private const string DS3DXWS_AUTH_ENOVIA = "DS3DXWS_AUTH_ENOVIA";
+      private const string DS3DXWS_AUTH_TENANT = "DS3DXWS_AUTH_TENANT";
 
-      string m_username = string.Empty;
-      string m_password = string.Empty;
-      string m_passportUrl = string.Empty;
-      string m_serviceUrl = string.Empty;
-      string m_tenant = string.Empty;
+      private string m_username = string.Empty;
+      private string m_password = string.Empty;
+      private string m_passportUrl = string.Empty;
+      private string m_serviceUrl = string.Empty;
+      private string m_tenant = string.Empty;
 
-      UserInfo m_userInfo = null;
+      private UserInfo m_userInfo = null;
 
       public async Task<IPassportAuthentication> Authenticate()
       {
@@ -82,34 +78,14 @@ namespace NUnitTestProject
          return m_userInfo.preferredcredentials.ToString();
       }
 
-      public DuplicateService ServiceFactoryCreate(IPassportAuthentication _passport, string _serviceUrl, string _tenant)
+      public string GetServiceUrl()
       {
-         DuplicateService __duplicateService = new DuplicateService(_serviceUrl, _passport);
-         __duplicateService.Tenant = _tenant;
-         __duplicateService.SecurityContext = GetDefaultSecurityContext();
-         return __duplicateService;
+         return m_serviceUrl;
       }
 
-      [TestCase()]
-      public async Task Duplicate()
+      public string GetTenant()
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         DuplicateService duplicateService = ServiceFactoryCreate(passport, m_serviceUrl, m_tenant);
-
-         IDuplicateInput request = new DuplicateInput();
-
-         try
-         {
-            IEnumerable<IDuplicate> ret = await duplicateService.Duplicate(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
+         return m_tenant;
       }
    }
 }

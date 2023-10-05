@@ -13,19 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 
-namespace ws3dx.dslc.data
-{     //------------------------------------------------------------------------------------------------
-      // <summary>
-      //
-      // 
-      //
-      // </summary>
-      //------------------------------------------------------------------------------------------------
+using ws3dx.authentication.data;
+using ws3dx.dslc.core.service;
+using ws3dx.tests.service.tests;
 
-   public interface ITransferOutputPartialSuccess
+namespace NUnitTestProject
+{
+   public class ReservationServiceTestsSetup : PassportAuthenticationTestSetup
    {
-      public IList<ITransferOutputPartialSuccessResult> Results { get; set; }
+      public ReservationService ServiceFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new ReservationService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
    }
 }
