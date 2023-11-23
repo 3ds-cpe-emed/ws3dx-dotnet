@@ -145,7 +145,7 @@ namespace NUnitTestProject
          newVariantValue.VersionName = "";
          newVariantValue.Attributes = new NewVariantValueData();
          newVariantValue.Attributes.SequenceNumber = 1;
-         newVariantValue.Attributes.Title = "Blue";
+         //newVariantValue.Attributes.Title = "Blue";
          newVariantValue.Attributes.Description = "Blue color";
          //newVariantValue.Attributes.Name = "Red";
          //IN THINK TITLE IS MISSING AS AN ATTRIBUTE in NewVariantValueData _ REVIEW
