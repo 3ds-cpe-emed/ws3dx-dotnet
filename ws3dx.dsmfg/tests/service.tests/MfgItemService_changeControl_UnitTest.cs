@@ -17,6 +17,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
+using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.core.service;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;

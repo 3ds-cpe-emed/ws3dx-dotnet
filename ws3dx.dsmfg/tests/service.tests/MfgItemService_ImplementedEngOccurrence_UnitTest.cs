@@ -17,6 +17,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
+using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.core.service;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
@@ -29,7 +30,7 @@ namespace NUnitTestProject
       public async Task GetInstanceImplementedEngOccurrence(string mfgItemId, string instanceId)
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-         IEnumerable<IImplementedEngOccurrenceMask> ret = await mfgItemService.GetInstanceImplementedEngOccurrence(mfgItemId, instanceId);
+         IImplementedEngOccurrenceMask ret = await mfgItemService.GetInstanceImplementedEngOccurrence(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -43,27 +44,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.DetachImplementedEngOccurrenceFromInstance(request, instanceId, mfgItemId);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
-      [TestCase("", "")]
-      public async Task DetachImplementedEngOccurrenceFromInstance(string instanceId, string mfgItemId)
-      {
-         MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-         IItemOccurrence request = new ItemOccurrence();
-
-         try
-         {
-            IGenericResponse ret = await mfgItemService.DetachImplementedEngOccurrenceFromInstance(request, instanceId, mfgItemId);
+            IGenericResponse ret = await mfgItemService.DetachImplementedEngOccurrenceFromInstance(mfgItemId, instanceId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -83,27 +64,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.AttachImplementedEngOccurrenceToInstance(request, instanceId, mfgItemId);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
-      [TestCase("", "")]
-      public async Task AttachImplementedEngOccurrenceToInstance(string instanceId, string mfgItemId)
-      {
-         MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-         IItemOccurrence request = new ItemOccurrence();
-
-         try
-         {
-            IGenericResponse ret = await mfgItemService.AttachImplementedEngOccurrenceToInstance(request, instanceId, mfgItemId);
+            IGenericResponse ret = await mfgItemService.AttachImplementedEngOccurrenceToInstance(mfgItemId, instanceId, request);
 
             Assert.IsNotNull(ret);
          }

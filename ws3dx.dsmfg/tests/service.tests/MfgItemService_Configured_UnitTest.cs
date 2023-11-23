@@ -20,6 +20,7 @@ using ws3dx.core.exception;
 using ws3dx.dsmfg.core.service;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
+using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
@@ -48,7 +49,7 @@ namespace NUnitTestProject
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-         ITypedUriIdentifier request = new TypedUriIdentifier();
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
          try
          {
@@ -68,7 +69,7 @@ namespace NUnitTestProject
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-         ITypedUriIdentifier request = new TypedUriIdentifier();
+         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
          try
          {

@@ -17,6 +17,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
+using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.core.service;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
@@ -35,7 +36,7 @@ namespace NUnitTestProject
       }
 
       [TestCase("")]
-      public async Task DetachAssignmentFilter(string mfgItemId)
+      public async Task DetachAssignmentFilterV1(string mfgItemId)
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
@@ -43,7 +44,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(request, mfgItemId);
+            IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -63,7 +64,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(request, mfgItemId);
+            IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -75,7 +76,7 @@ namespace NUnitTestProject
       }
 
       [TestCase("")]
-      public async Task AttachAssignmentFilter(string mfgItemId)
+      public async Task AttachAssignmentFilterV1(string mfgItemId)
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
@@ -83,7 +84,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.AttachAssignmentFilter(request, mfgItemId);
+            IGenericResponse ret = await mfgItemService.AttachAssignmentFilter(mfgItemId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -103,7 +104,7 @@ namespace NUnitTestProject
 
          try
          {
-            IGenericResponse ret = await mfgItemService.AttachAssignmentFilter(request, mfgItemId);
+            IGenericResponse ret = await mfgItemService.AttachAssignmentFilter(mfgItemId, request);
 
             Assert.IsNotNull(ret);
          }

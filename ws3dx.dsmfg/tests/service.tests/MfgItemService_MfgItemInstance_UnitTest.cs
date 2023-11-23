@@ -17,6 +17,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
+using ws3dx.dsmfg.core.data.impl;
 using ws3dx.dsmfg.core.service;
 using ws3dx.dsmfg.data;
 
@@ -28,7 +29,7 @@ namespace NUnitTestProject
       public async Task GetInstance_IMfgItemInstanceMask(string mfgItemId, string instanceId)
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-         IEnumerable<IMfgItemInstanceMask> ret = await mfgItemService.GetInstance<IMfgItemInstanceMask>(mfgItemId, instanceId);
+         IMfgItemInstanceMask ret = await mfgItemService.GetInstance<IMfgItemInstanceMask>(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
@@ -37,7 +38,7 @@ namespace NUnitTestProject
       public async Task GetInstance_IMfgItemInstanceDetailMask(string mfgItemId, string instanceId)
       {
          MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-         IEnumerable<IMfgItemInstanceDetailMask> ret = await mfgItemService.GetInstance<IMfgItemInstanceDetailMask>(mfgItemId, instanceId);
+         IMfgItemInstanceDetailMask ret = await mfgItemService.GetInstance<IMfgItemInstanceDetailMask>(mfgItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
