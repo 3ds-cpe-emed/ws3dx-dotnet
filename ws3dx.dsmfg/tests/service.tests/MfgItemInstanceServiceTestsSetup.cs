@@ -15,7 +15,8 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using ws3dx.authentication.data;
-using ws3dx.dseng.tests.service.tests;
+using ws3dx.dsmfg.tests.service.tests;
+using ws3dx.dsmfg.core.service;
 
 namespace NUnitTestProject
 {

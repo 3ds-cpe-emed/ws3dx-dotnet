@@ -22,7 +22,7 @@ using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.redirection;
 
-namespace ws3dx.dseng.tests.service.tests
+namespace ws3dx.dsmfg.tests.service.tests
 {
    public class PassportAuthenticationTestSetup
    {
