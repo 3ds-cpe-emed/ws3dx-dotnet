@@ -52,7 +52,7 @@ namespace ws3dx.core.serialization
          return _Deserialize(jsonContent, typeof(T));
       }
 
-      public IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty, bool _ignoreIfPropertyNotFound = false)
+      public virtual IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty, bool _ignoreIfPropertyNotFound = false)
       {
          using JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
 
