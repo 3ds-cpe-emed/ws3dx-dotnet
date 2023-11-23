@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace ws3dx.core.serialization
 {
@@ -46,11 +47,36 @@ namespace ws3dx.core.serialization
          return m_deserializerByTypeMap[_type];
       }
 
-      public static dynamic DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
+      public static void RegisterDeserializer(Type _type, object _deserializer) {
+         if (IsDeserializerTypeRegistered(_type)) {
+            throw new Exception($"Type '{_type.Name}' has a registered deserializer");
+         }
+         m_deserializerByTypeMap.Add(_type, _deserializer);
+      }
+
+      public static bool IsDeserializerTypeRegistered(Type _type)
       {
-         MaskSchemaDeserializer<T> schemaDeserializer = (MaskSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
+         return m_deserializerByTypeMap.ContainsKey(_type);
+      }
+
+      public static void DeregisterDeserializer(Type _type)
+      {
+         if (m_deserializerByTypeMap.ContainsKey(_type))
+         {
+            m_deserializerByTypeMap.Remove(_type);
+         }
+      }
+
+      public static IList<OT> DeserializeCollection<IT, OT>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
+      {
+         MaskSchemaDeserializer<OT> schemaDeserializer = (MaskSchemaDeserializer<OT>)GetCachedInstanceForType(typeof(IT));
 
          return schemaDeserializer.DeserializeCollection(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
+      }
+
+      public static IList<T> DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
+      {
+         return DeserializeCollection<T,T>(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
       }
 
       public static dynamic Deserialize<T>(string _json)
