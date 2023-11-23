@@ -25,6 +25,7 @@ using ws3dx.core.exception;
 using ws3dx.dsprcs.core.data.impl;
 using ws3dx.authentication.data;
 using ws3dx.dsmfg;
+using System.Text.Json;
 
 namespace NUnitTestProject
 {
@@ -179,7 +180,7 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IMfgProcessExpandMaskV1> ret = await mfgProcessService.Expand<IMfgProcessExpandMaskV1>(mfgProcessId, request);
+            IEnumerable<JsonElement> ret = await mfgProcessService.Expand<IMfgProcessExpandMaskV1>(mfgProcessId, request);
 
             Assert.IsNotNull(ret);
          }
@@ -190,7 +191,7 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
+      [TestCase("B70C12CD21081900655CE3A10013D4DB")]
       public async Task AddExpand_IMfgProcessExpandMaskDetailV1(string mfgProcessId)
       {
          MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
@@ -199,7 +200,31 @@ namespace NUnitTestProject
 
          try
          {
-            IEnumerable<IMfgProcessExpandMaskDetailV1> ret = await mfgProcessService.Expand<IMfgProcessExpandMaskDetailV1>(mfgProcessId, request);
+            IEnumerable<JsonElement> ret = await mfgProcessService.Expand<IMfgProcessExpandMaskDetailV1>(mfgProcessId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("B70C12CD21081900655CE3A10013D4DB")]
+      public async Task Expand_IMfgProcessExpandMaskDetailV1(string mfgProcessId)
+      {
+         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+         IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1()
+         {
+            ExpandDepth = -1,
+            WithPath = true
+         };
+
+         try
+         {
+            IEnumerable<JsonElement> ret = await mfgProcessService.Expand<IMfgProcessExpandMaskDetailV1>(mfgProcessId, request);
 
             Assert.IsNotNull(ret);
          }

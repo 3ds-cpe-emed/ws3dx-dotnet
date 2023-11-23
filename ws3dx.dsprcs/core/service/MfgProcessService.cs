@@ -15,8 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
+using ws3dx.core.serialization;
 using ws3dx.core.service;
 using ws3dx.data.collection.impl;
 using ws3dx.dsprcs.data;
@@ -33,6 +35,29 @@ namespace ws3dx.dsprcs.core.service
 
       public MfgProcessService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
+         // Find a more dynamic way to register the relation between a "mask type" (e.g.IMfgProcessExpandMaskV1) and
+         // its deserializer object / instance JsonElementCollectionDeserializer.Instance
+         if (!MaskDeserializationHandler.IsDeserializerTypeRegistered(typeof(IMfgProcessExpandMaskV1)))
+         {
+            MaskDeserializationHandler.RegisterDeserializer(typeof(IMfgProcessExpandMaskV1), JsonGenericCollectionDeserializer.Instance);
+         }
+
+         if (!MaskDeserializationHandler.IsDeserializerTypeRegistered(typeof(IMfgProcessExpandMaskDetailV1)))
+         {
+            MaskDeserializationHandler.RegisterDeserializer(typeof(IMfgProcessExpandMaskDetailV1), JsonGenericCollectionDeserializer.Instance);
+         }
+      }
+      ~MfgProcessService()
+      {
+         if (MaskDeserializationHandler.IsDeserializerTypeRegistered(typeof(IMfgProcessExpandMaskV1)))
+         {
+            MaskDeserializationHandler.DeregisterDeserializer(typeof(IMfgProcessExpandMaskV1));
+         }
+
+         if (MaskDeserializationHandler.IsDeserializerTypeRegistered(typeof(IMfgProcessExpandMaskDetailV1)))
+         {
+            MaskDeserializationHandler.DeregisterDeserializer(typeof(IMfgProcessExpandMaskDetailV1));
+         }
       }
 
       protected string GetBaseResource()
@@ -653,13 +678,13 @@ namespace ws3dx.dsprcs.core.service
       // </param>
       // </summary>
       //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Expand<T>(string mfgProcessId, IMfgProcessExpandRequestPayloadV1 request)
+      public async Task<IEnumerable<JsonElement>> Expand<T>(string mfgProcessId, IMfgProcessExpandRequestPayloadV1 request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessExpandMaskV1), typeof(IMfgProcessExpandMaskDetailV1) });
 
          string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/expand";
 
-         return await PostCollectionFromResponseMemberProperty<T, IMfgProcessExpandRequestPayloadV1>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<T, JsonElement, IMfgProcessExpandRequestPayloadV1>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------

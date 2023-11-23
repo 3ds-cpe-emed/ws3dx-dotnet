@@ -52,7 +52,7 @@ namespace ws3dx.core.serialization
          return _Deserialize(jsonContent, typeof(T));
       }
 
-      public IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty, bool _ignoreIfPropertyNotFound = false)
+      public virtual IList<T> DeserializeCollection(string jsonContent, string _wrappingCollectionProperty, bool _ignoreIfPropertyNotFound = false)
       {
          using JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
 
@@ -294,9 +294,6 @@ namespace ws3dx.core.serialization
 
          dynamic __item = Activator.CreateInstance(classImpType);
 
-         // Methods to CONVERT property values for deserialization, overriding direct attribute assignment.
-         IDictionary<string, MethodInfo> jsonOverrideMethods = GetOverrideDeserializationMethods(classImpType);
-
          JsonElement.ObjectEnumerator jen = _jsonObject.EnumerateObject();
 
          while (jen.MoveNext())
@@ -304,15 +301,6 @@ namespace ws3dx.core.serialization
             JsonProperty jProp = jen.Current;
 
             string jPropName = jProp.Name;
-
-            if (jsonOverrideMethods.ContainsKey(jPropName))
-            {
-               MethodInfo deserializeMethod = jsonOverrideMethods[jPropName];
-
-               deserializeMethod.Invoke(__item, new object[] { jProp.Value });
-
-               continue;
-            }
 
             if (!TypeHasMatchingProperty(classImpType, jPropName))
             {
@@ -458,45 +446,6 @@ namespace ws3dx.core.serialization
          }
 
          return true;
-      }
-
-      // Study an alternative to attributes for this purpose? e.g. events or an interface method?
-      protected static IDictionary<string, MethodInfo> GetOverrideDeserializationMethods(Type _type, bool _useCache = true)
-      {
-         if (_useCache)
-         {
-            if (m_propConversionMethodsByType.ContainsKey(_type))
-            {
-               return m_propConversionMethodsByType[_type];
-            }
-         }
-
-         Dictionary<string, MethodInfo> __jsonMappableMethods = new Dictionary<string, MethodInfo>();
-
-         // Do Type Properties
-         MethodInfo[] methods = _type.GetMethods(BindingFlags.Instance | BindingFlags.Public);
-
-         foreach (MethodInfo method in methods)
-         {
-            //Check if the property has a JSONPropertyName attribute assigned and used it instead.
-            DeserializePropertyAttribute jsonPropertyNameAttribute = method.GetCustomAttribute<DeserializePropertyAttribute>();
-
-            if (jsonPropertyNameAttribute == null) continue;
-
-            string jPropNameParsed = jsonPropertyNameAttribute.PropertyName;
-
-            __jsonMappableMethods.Add(jPropNameParsed, method);
-
-            //TODO: Validate the expected method signature
-            //...
-         }
-
-         if (_useCache)
-         {
-            m_propConversionMethodsByType[_type] = __jsonMappableMethods;
-         }
-
-         return __jsonMappableMethods;
       }
       #endregion
 
