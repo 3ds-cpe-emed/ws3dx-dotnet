@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Authors>Dassault Systèmes - CPE EMED</Authors>
-    <Version>1.0.1</Version>
+    <Version>425.3.1</Version>
     <Company>Dassault Systèmes</Company>
     <Description>Core/base module</Description>
     <Copyright>Copyright ©  2023</Copyright>

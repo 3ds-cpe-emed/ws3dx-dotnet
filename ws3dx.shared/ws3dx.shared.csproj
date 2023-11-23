@@ -17,6 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>3DEXPERIENCE "web service" ".NET"</PackageTags>
     <AssemblyName>ws3dx.shared</AssemblyName>
+    <Version>425.3.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

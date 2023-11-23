@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+     <Version>425.4.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
