@@ -17,6 +17,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Web;
 using ws3dx.constants;
 using ws3dx.utils;
 using HttpRequestHeaders = ws3dx.constants.HttpRequestHeaders;
@@ -80,13 +81,15 @@ namespace ws3dx.core.service
 
       public void AddQueryParameter(string _name, string _value)
       {
+         string urlEncodedValue = HttpUtility.UrlEncode(_value);
+
          if (m_query.IsNullOrEmpty())
          {
-            m_query = string.Format("{0}={1}", _name, _value);
+            m_query = string.Format("{0}={1}", _name, urlEncodedValue);
          }
          else
          {
-            m_query += string.Format("&{0}={1}", _name, _value);
+            m_query += string.Format("&{0}={1}", _name, urlEncodedValue);
          }
 
          this.RequestUri = new UriRelative(string.Format("{0}?{1}", m_path, m_query));
