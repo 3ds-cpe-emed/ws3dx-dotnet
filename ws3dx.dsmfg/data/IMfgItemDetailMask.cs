@@ -252,67 +252,67 @@ namespace ws3dx.dsmfg.data
 
       public IMfgItemEnterpriseAttributes MfgItemEnterpriseAttributes { get; set; }
 
-      public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
+      //public ICreateAssemblyEnterpriseAttributes CreateAssemblyEnterpriseAttributes { get; set; }
 
-      public ICreateKitEnterpriseAttributes CreateKitEnterpriseAttributes { get; set; }
+      //public ICreateKitEnterpriseAttributes CreateKitEnterpriseAttributes { get; set; }
 
-      public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
+      //public ICreateMaterialEnterpriseAttributes CreateMaterialEnterpriseAttributes { get; set; }
 
-      public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
+      //public IProvideEnterpriseAttributes ProvideEnterpriseAttributes { get; set; }
 
-      public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
+      //public IElementaryEndItemEnterpriseAttributes ElementaryEndItemEnterpriseAttributes { get; set; }
 
-      public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
+      //public IInstallationEnterpriseAttributes InstallationEnterpriseAttributes { get; set; }
 
-      public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
+      //public IProcessContinuousCreateMaterialEnterpriseAttributes ProcessContinuousCreateMaterialEnterpriseAttributes { get; set; }
 
-      public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
+      //public IProcessContinuousProvideEnterpriseAttributes ProcessContinuousProvideEnterpriseAttributes { get; set; }
 
-      public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
+      //public IMarkingEnterpriseAttributes MarkingEnterpriseAttributes { get; set; }
 
-      public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
+      //public IAnnotationEnterpriseAttributes AnnotationEnterpriseAttributes { get; set; }
 
-      public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
+      //public ITransformEnterpriseAttributes TransformEnterpriseAttributes { get; set; }
 
-      public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
+      //public IMachineEnterpriseAttributes MachineEnterpriseAttributes { get; set; }
 
-      public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
+      //public IBevelingEnterpriseAttributes BevelingEnterpriseAttributes { get; set; }
 
-      public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
+      //public ICuttingEnterpriseAttributes CuttingEnterpriseAttributes { get; set; }
 
-      public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
+      //public IGrindingEnterpriseAttributes GrindingEnterpriseAttributes { get; set; }
 
-      public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
+      //public INoDrillEnterpriseAttributes NoDrillEnterpriseAttributes { get; set; }
 
-      public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
+      //public IDrillEnterpriseAttributes DrillEnterpriseAttributes { get; set; }
 
-      public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
+      //public IPreDrillEnterpriseAttributes PreDrillEnterpriseAttributes { get; set; }
 
-      public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
+      //public IFastenEnterpriseAttributes FastenEnterpriseAttributes { get; set; }
 
-      public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
+      //public IUnfastenEnterpriseAttributes UnfastenEnterpriseAttributes { get; set; }
 
-      public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
+      //public ISplitProcessEnterpriseAttributes SplitProcessEnterpriseAttributes { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+      ////----------------------------------------------------------------
+      //// <summary>
+      ////		
+      //// Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+      ////
+      //// </summary>
+      ////----------------------------------------------------------------
+      //public string Cestamp { get; set; }
 
-      public IServiceItemEnterpriseAttributes ServiceItemEnterpriseAttributes { get; set; }
+      //public IServiceItemEnterpriseAttributes ServiceItemEnterpriseAttributes { get; set; }
 
-      public IServiceAssemblyEnterpriseAttributes ServiceAssemblyEnterpriseAttributes { get; set; }
+      //public IServiceAssemblyEnterpriseAttributes ServiceAssemblyEnterpriseAttributes { get; set; }
 
-      public IServicePartEnterpriseAttributes ServicePartEnterpriseAttributes { get; set; }
+      //public IServicePartEnterpriseAttributes ServicePartEnterpriseAttributes { get; set; }
 
-      public IServiceKitEnterpriseAttributes ServiceKitEnterpriseAttributes { get; set; }
+      //public IServiceKitEnterpriseAttributes ServiceKitEnterpriseAttributes { get; set; }
 
-      public IContinuousServiceItemEnterpriseAttributes ContinuousServiceItemEnterpriseAttributes { get; set; }
+      //public IContinuousServiceItemEnterpriseAttributes ContinuousServiceItemEnterpriseAttributes { get; set; }
 
-      public IContinuousServicePartEnterpriseAttributes ContinuousServicePartEnterpriseAttributes { get; set; }
+      //public IContinuousServicePartEnterpriseAttributes ContinuousServicePartEnterpriseAttributes { get; set; }
    }
 }

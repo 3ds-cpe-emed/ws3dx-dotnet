@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using ws3dx.core.serialization.registry;
 
 namespace ws3dx.core.serialization
 {
@@ -37,6 +38,16 @@ namespace ws3dx.core.serialization
       /// <returns></returns>
       internal static object GetCachedInstanceForType(Type _type)
       {
+         if (!GlobalSchemaAttributeRegistry.IsInitialized)
+         {
+            GlobalSchemaAttributeRegistry.Initialize();
+         }
+
+         if (GlobalSchemaAttributeRegistry.TypeSchemaRegistry.HasBaseType(_type))
+         {
+            return GlobalSchemaAttributeRegistry.TypeSchemaRegistry.GetDeserializerInstanceForType(_type);
+         }
+
          if (!m_deserializerByTypeMap.ContainsKey(_type))
          {
             Type serializerType = typeof(MaskSchemaDeserializer<>).MakeGenericType(_type);
@@ -69,7 +80,7 @@ namespace ws3dx.core.serialization
 
       public static IList<OT> DeserializeCollection<IT, OT>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
       {
-         MaskSchemaDeserializer<OT> schemaDeserializer = (MaskSchemaDeserializer<OT>)GetCachedInstanceForType(typeof(IT));
+         CoreSchemaDeserializer<OT> schemaDeserializer = (CoreSchemaDeserializer<OT>)GetCachedInstanceForType(typeof(IT));
 
          return schemaDeserializer.DeserializeCollection(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
       }
@@ -81,7 +92,7 @@ namespace ws3dx.core.serialization
 
       public static dynamic Deserialize<T>(string _json)
       {
-         MaskSchemaDeserializer<T> schemaDeserializer = (MaskSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
+         CoreSchemaDeserializer<T> schemaDeserializer = (CoreSchemaDeserializer<T>)GetCachedInstanceForType(typeof(T));
 
          return schemaDeserializer.Deserialize(_json);
       }
