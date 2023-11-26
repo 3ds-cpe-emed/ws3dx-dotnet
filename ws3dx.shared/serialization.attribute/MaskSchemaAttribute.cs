@@ -19,7 +19,7 @@ using System;
 namespace ws3dx.serialization.attribute
 {
    /// <summary>
-   /// Describe an interface that defines a given mask schema
+   /// Associates an interface with a given mask schema. The interface definition will match the expected type mask return data.
    /// </summary>
    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
    public class MaskSchemaAttribute : Attribute
