@@ -27,9 +27,8 @@ namespace ws3dx.core.serialization.registry
       const string ATTRIBUTE_MASK_SCHEMA_NAME = "MaskName";
 
       IDictionary<string, IList<MaskSchemaInterfaceInfo>> m_masksSchemaInterfaceInfoByMaskName = new Dictionary<string, IList<MaskSchemaInterfaceInfo>>();
-      IDictionary<Type, IList<MaskSchemaInterfaceInfo>> m_masksSchemaInterfaceInfoByType = new Dictionary<Type, IList<MaskSchemaInterfaceInfo>>();
 
-      public void Parse(IList<Assembly> _assemblies)
+      public void Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
       {
          foreach (Assembly assembly in _assemblies)
          {
@@ -70,34 +69,21 @@ namespace ws3dx.core.serialization.registry
             }
          }
 
-         //Index by Type for faster retrieval of implementation class
          foreach (string maskKey in m_masksSchemaInterfaceInfoByMaskName.Keys)
          {
-            IList<MaskSchemaInterfaceInfo> maskSchemaInterfaceInfoList = m_masksSchemaInterfaceInfoByMaskName[maskKey];
-
-            foreach (MaskSchemaInterfaceInfo maskSchemaInterfaceInfo in maskSchemaInterfaceInfoList)
+            foreach (MaskSchemaInterfaceInfo maskSchemaInterfaceInfo in m_masksSchemaInterfaceInfoByMaskName[maskKey])
             {
-               if (!m_masksSchemaInterfaceInfoByType.ContainsKey(maskSchemaInterfaceInfo.MaskInterface))
+               if (!_itfImplClassDict.ContainsKey(maskSchemaInterfaceInfo.MaskInterface.GUID))
                {
-                  m_masksSchemaInterfaceInfoByType.Add(maskSchemaInterfaceInfo.MaskInterface, new List<MaskSchemaInterfaceInfo>());
+                  _itfImplClassDict.Add(maskSchemaInterfaceInfo.MaskInterface.GUID, new List<Type>());
                }
 
-               m_masksSchemaInterfaceInfoByType[maskSchemaInterfaceInfo.MaskInterface].Add(maskSchemaInterfaceInfo);
+               foreach (Type implClassType in maskSchemaInterfaceInfo.MaskImplClassList)
+               {
+                  _itfImplClassDict[maskSchemaInterfaceInfo.MaskInterface.GUID].Add(implClassType);
+               }
             }
          }
-      }
-
-      public IList<MaskSchemaInterfaceInfo> GetMaskSchemaInterfaceInfo(string _masksSchemaName)
-      {
-         if (!m_masksSchemaInterfaceInfoByMaskName.ContainsKey(_masksSchemaName)) return null;
-
-         return m_masksSchemaInterfaceInfoByMaskName[_masksSchemaName];
-      }
-
-      public IList<MaskSchemaInterfaceInfo> GetCachedDefaultImplementationClass(Type _interface)
-      {
-         if (!m_masksSchemaInterfaceInfoByType.ContainsKey(_interface)) return null;
-         return m_masksSchemaInterfaceInfoByType[_interface];
       }
    }
 }

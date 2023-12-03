@@ -32,12 +32,9 @@ namespace ws3dx.core.serialization
    /// <typeparam name="T">Represents the inner type</typeparam>
    public abstract class CoreSchemaDeserializer<T>
    {
-      private const string TYPE_PROPERTY_NAME = "type";
-
       #region type cache - for performance reasons
       private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> m_propsMapByType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
       private static readonly IDictionary<Type, bool> m_isGenericDictionaryByType = new Dictionary<Type, bool>();
-      private static readonly IDictionary<Type, IDictionary<string, MethodInfo>> m_propConversionMethodsByType = new Dictionary<Type, IDictionary<string, MethodInfo>>();
       #endregion
 
       public abstract dynamic DeserializeElement(JsonElement _jsonElem, Type _deserialElemType);
@@ -410,7 +407,7 @@ namespace ws3dx.core.serialization
       {
          object deserializerInst = MaskDeserializationHandler.GetCachedInstanceForType(_itemType);
 
-         MethodInfo method = deserializerInst.GetType().GetMethod(nameof(DeserializeItem), BindingFlags.NonPublic | BindingFlags.Instance);
+         MethodInfo method = deserializerInst.GetType().GetMethod(nameof(DeserializeElement), BindingFlags.Public | BindingFlags.Instance);
 
          return method.Invoke(deserializerInst, new object[] { _jsonElement, _itemType });
       }
@@ -450,51 +447,6 @@ namespace ws3dx.core.serialization
       #endregion
 
       #region Type properties cached methods
-
-      /// <summary>
-      /// Returns the type property value if it exists.
-      /// </summary>
-      /// <param name="_jsonObject"></param>
-      /// <param name="__type"></param>
-      /// <returns></returns>
-      protected static bool TryGetTypePropertyValue(JsonElement _jsonObject, out string __type)
-      {
-         if (_jsonObject.ValueKind != JsonValueKind.Object) throw new ArgumentException($"_jsonObject argument should be a json object not a {_jsonObject.ValueKind}");
-
-         __type = null;
-
-         if (!IsKindOfItemType(_jsonObject)) return false;
-
-         __type = GetItemType(_jsonObject);
-
-         return true;
-      }
-
-      /// <summary>
-      /// Checks if the json object has a type property.
-      /// Items are by definition json objects that have a specific type.
-      /// </summary>
-      /// <param name="jsonElement"></param>
-      /// <returns></returns>
-      protected static bool IsKindOfItemType(JsonElement jsonElement)
-      {
-         JsonElement jsonValue;
-         if (jsonElement.TryGetProperty(TYPE_PROPERTY_NAME, out jsonValue))
-         {
-            return jsonValue.ValueKind == JsonValueKind.String;
-         }
-         return false;
-      }
-
-      /// <summary>
-      /// Get the value of the type property name (validation that it exists should be done with the IsItem method)
-      /// </summary>
-      /// <param name="jsonElement"></param>
-      /// <returns></returns>
-      protected static string GetItemType(JsonElement jsonElement)
-      {
-         return jsonElement.GetProperty(TYPE_PROPERTY_NAME).GetString();
-      }
 
       /// <summary>
       /// Checks if the type has a property with a given name.

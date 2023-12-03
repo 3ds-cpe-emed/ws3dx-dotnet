@@ -22,34 +22,39 @@ namespace ws3dx.core.serialization.registry
 {
    internal static class GlobalSchemaAttributeRegistry
    {
-      private static MaskSchemaRegistry m_glbSchemaMaskRegistry = null;
-      private static IDictionary<Guid, IList<Type>> m_glbInterfaceImplClasses = null;
+      private static IDictionary<Guid, IList<Type>> m_glbInterfaceImplClasses = new Dictionary<Guid, IList<Type>>();
 
-      private static bool IsInitialized { get; set; } = false;
+      public static TypeSchemaRegistry TypeSchemaRegistry { get ; private set; }
+      public static MaskSchemaRegistry MaskSchemaRegistry { get; private set; }
 
-      private static void Initialize()
+      public static bool IsInitialized { get; private set; } = false;
+
+      public static void Initialize()
       {
          IList<Assembly> assemblies = GetAllRelevantAssemblies();
 
-         m_glbSchemaMaskRegistry = new MaskSchemaRegistry();
-         m_glbSchemaMaskRegistry.Parse(assemblies);
+         MaskSchemaRegistry = new MaskSchemaRegistry();
+         MaskSchemaRegistry.Parse(assemblies, ref m_glbInterfaceImplClasses);
 
-         m_glbInterfaceImplClasses = Parse(assemblies);
+         TypeSchemaRegistry = new TypeSchemaRegistry();
+         TypeSchemaRegistry.Parse(assemblies, ref m_glbInterfaceImplClasses);
+
+         Parse(assemblies, ref m_glbInterfaceImplClasses);
 
          IsInitialized = true;
       }
 
-      private static IDictionary<Guid, IList<Type>> Parse(IList<Assembly> _assemblies)
+      private static void  Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
       {
          IDictionary<Guid, Type> interfaceTypeList = new Dictionary<Guid, Type>();
          IList<Type> classTypeList = new List<Type>();
-         IDictionary<Guid, IList<Type>> __contextClassImpTypeListByInterfaceType = new Dictionary<Guid, IList<Type>>();
+         //IDictionary<Guid, IList<Type>> __contextClassImpTypeListByInterfaceType = new Dictionary<Guid, IList<Type>>();
 
          #region adding well known collection generic type definitions
          // IList -> List
-         __contextClassImpTypeListByInterfaceType.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
+         _itfImplClassDict.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
          // IDictionary -> Dictionary
-         __contextClassImpTypeListByInterfaceType.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
+         _itfImplClassDict.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
          #endregion
 
          foreach (Assembly assembly in _assemblies)
@@ -80,16 +85,14 @@ namespace ws3dx.core.serialization.registry
                {
                   Guid classInterfaceTypeGuid = classInterfaceType.GUID;
 
-                  if (!__contextClassImpTypeListByInterfaceType.ContainsKey(classInterfaceTypeGuid))
+                  if (!_itfImplClassDict.ContainsKey(classInterfaceTypeGuid))
                   {
-                     __contextClassImpTypeListByInterfaceType.Add(classInterfaceTypeGuid, new List<Type>());
+                     _itfImplClassDict.Add(classInterfaceTypeGuid, new List<Type>());
                   }
-                  __contextClassImpTypeListByInterfaceType[classInterfaceTypeGuid].Add(classType);
+                  _itfImplClassDict[classInterfaceTypeGuid].Add(classType);
                }
             }
          }
-
-         return __contextClassImpTypeListByInterfaceType;
       }
 
       private static IList<Assembly> GetAllRelevantAssemblies()
@@ -125,24 +128,10 @@ namespace ws3dx.core.serialization.registry
 
       public static Type GetDefaultImplementationClass(Type _interfaceMaskDef)
       {
-         if (!IsInitialized)
-         {
+         if (!_interfaceMaskDef.IsInterface) throw new Exception("GetDefaultImplementationClass expects a type interface");
+
+         if (!IsInitialized) {
             Initialize();
-         }
-
-         IList<MaskSchemaInterfaceInfo> maskSchemaInterfaceInfos = m_glbSchemaMaskRegistry.GetCachedDefaultImplementationClass(_interfaceMaskDef);
-         if (maskSchemaInterfaceInfos?.Count > 0)
-         {
-            IList<Type> maskClassImpList = maskSchemaInterfaceInfos[0].MaskImplClassList;
-            if ((maskClassImpList == null) || (maskClassImpList.Count == 0))
-            {
-               //This should never happen. A mask interface should always be deployed with
-               //an implementation class.
-               return null;
-            }
-
-            //TODO: Log if more than one MaskInterfaceInfo is received for the same type (this shouldn't happen either)
-            return maskClassImpList[0];
          }
 
          Type interfaceDef = _interfaceMaskDef;
@@ -152,9 +141,9 @@ namespace ws3dx.core.serialization.registry
             interfaceDef = _interfaceMaskDef.GetGenericTypeDefinition();
          }
 
-         if (m_glbInterfaceImplClasses.TryGetValue(interfaceDef.GUID, out IList<Type> interfaceImplClassList) && interfaceImplClassList?.Count > 0)
+         if (m_glbInterfaceImplClasses.TryGetValue(interfaceDef.GUID, out IList<Type> implClassList))
          {
-            return interfaceImplClassList[0];
+            return implClassList.Count > 0 ?  implClassList[0] : null;
          }
 
          return null;
