@@ -24,7 +24,7 @@ using ws3dx.dseng.data;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_Alternate_UnitTests : EngItemServiceSetup
+   public class EngItemService_Alternate_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("0012C0507B420000610A3A6F000B3CD5", "221CD96CF43B000064BD8C01000BEBE6")]
       public async Task GetAlternate_IAlternateMask(string engItemId, string alternateId)
@@ -71,7 +71,7 @@ namespace NUnitTestProject
 
          IEnumerable<IAlternateDetailMask> ret = await engItemService.GetAlternates<IAlternateDetailMask>(engItemId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+         }
    }
 }

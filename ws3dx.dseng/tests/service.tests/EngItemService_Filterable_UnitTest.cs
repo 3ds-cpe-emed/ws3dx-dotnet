@@ -27,7 +27,7 @@ using ws3dx.dseng.core.data.impl;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_Filterable_UnitTests : EngItemServiceSetup
+   public class EngItemService_Filterable_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("", "")]
       public async Task GetInstanceEffectivity(string engItemId, string instanceId)

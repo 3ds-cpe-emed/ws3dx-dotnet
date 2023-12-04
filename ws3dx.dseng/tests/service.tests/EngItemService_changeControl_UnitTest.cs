@@ -27,7 +27,7 @@ using ws3dx.dseng.core.data.impl;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_changeControl_UnitTests : EngItemServiceSetup
+   public class EngItemService_changeControl_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("")]
       public async Task GetChangeControl(string engItemId)

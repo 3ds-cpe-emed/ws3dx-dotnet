@@ -31,7 +31,7 @@ using System.Linq;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_EngItem_UnitTests : EngItemServiceSetup
+   public class EngItemService_EngItem_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("", "")]
       public async Task Get_IEngItemDefaultMask(string engItemId)
