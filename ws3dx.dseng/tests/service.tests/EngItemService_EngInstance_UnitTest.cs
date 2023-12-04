@@ -26,7 +26,7 @@ using ws3dx.dseng.data;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_EngInstance_UnitTests : EngItemServiceSetup
+   public class EngItemService_EngInstance_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("", "", "")]
       public async Task GetInstance_IEngInstanceFilterableMask(string engItemId, string instanceId)

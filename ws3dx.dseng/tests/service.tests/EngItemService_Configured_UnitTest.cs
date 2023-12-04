@@ -27,7 +27,7 @@ using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_Configured_UnitTests : EngItemServiceSetup
+   public class EngItemService_Configured_UnitTests : EngItemServiceTestsSetup
    {
       [TestCase("")]
       public async Task GetConfiguration_IConfiguredDetail(string engItemId)

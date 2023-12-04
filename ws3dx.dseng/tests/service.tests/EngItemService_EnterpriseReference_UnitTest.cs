@@ -26,7 +26,7 @@ using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class EngItemService_EnterpriseReference_UnitTests : EngItemServiceSetup
+   public class EngItemService_EnterpriseReference_UnitTests : EngItemServiceTestsSetup
    {
       private const string PART_NUMBER_TEST = "AAA27:0000002";
 

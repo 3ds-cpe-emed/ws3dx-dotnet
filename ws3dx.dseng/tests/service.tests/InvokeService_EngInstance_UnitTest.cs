@@ -24,7 +24,7 @@ using ws3dx.core.exception;
 
 namespace NUnitTestProject
 {
-   public class InvokeService_EngInstance_UnitTests : InvokeServiceSetup
+   public class InvokeService_EngInstance_UnitTests : InvokeServiceTestsSetup
    {
       [TestCase()]
       public async Task DetachInstances()

@@ -20,14 +20,15 @@ using ws3dx.dseng.tests.service.tests;
 
 namespace NUnitTestProject
 {
-   public class EngItemServiceSetup : PassportAuthenticationTestSetup
+   public class EngItemServiceTestsSetup : PassportAuthenticationTestSetup
    {
       public EngItemService ServiceFactoryCreate(IPassportAuthentication _passport)
       {
-         EngItemService __engItemService = new EngItemService(GetServiceUrl(), _passport);
-         __engItemService.Tenant = GetTenant();
-         __engItemService.SecurityContext = GetDefaultSecurityContext();
-         return __engItemService;
+         return new EngItemService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
       }
    }
 }
