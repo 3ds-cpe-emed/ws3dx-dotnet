@@ -117,7 +117,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -142,7 +147,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -164,7 +174,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
 
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -185,7 +200,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -256,6 +276,25 @@ namespace ws3dx.dseng.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (GET) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Gets a Geolocation of an dseng:EngItem Summary: Gets a Geolocation of an dseng:EngItem
+      // <param name="engItemId">
+      // Description: dseng:EngItem object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------		
+      public async Task<IGeolocationMask> GetGeolocation(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+
+         return await GetIndividualFromResponseMemberProperty<IGeolocationMask>(resourceURI);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -317,7 +356,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -361,6 +405,26 @@ namespace ws3dx.dseng.core.service
 
       //---------------------------------------------------------------------------------------------
       // <remarks>
+      // (POST) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Service to attach geolocation to a single reference. Summary: Service to attach 
+      // geolocation to a single reference.
+      // <param name="engItemId">
+      // Description: dseng:EngItem object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<IGeolocationMask>> AddGeolocation(string engItemId, ICreateGeolocation request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+
+         return await PostCollectionFromResponseMemberProperty<IGeolocationMask, ICreateGeolocation>(resourceURI, request);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
       // (POST) dseng:EngItem/bulkfetch
       // </remarks>
       //---------------------------------------------------------------------------------------------
@@ -368,7 +432,7 @@ namespace ws3dx.dseng.core.service
       // Description: Get multiple Engineering Items which are Indexed. API Works only for Indexed Data. 
       // The customer attributes or enterprise extension attributes are returned only with default sixw 
       // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
-      // Summary: Get multiple Engineering Items which are indexed
+      // Summary: Get multiple Engineering Items which are indexed     
       // </summary>
       //---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
@@ -377,7 +441,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkfetch";
 
-         return await PostBulkCollection<T, string[]>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostBulkCollection<T, string[]>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -402,7 +471,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}/replace";
 
-         return await PostIndividualFromResponseMemberProperty<T, IEngRepInstanceReplace>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostIndividualFromResponseMemberProperty<T, IEngRepInstanceReplace>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -424,7 +498,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
 
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngRepInstances>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngRepInstances>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -439,13 +518,18 @@ namespace ws3dx.dseng.core.service
       //---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkUpdate<T>(IEngItemBulkUpdateItem[] request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask), typeof(IEngItemConfigMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkupdate";
 
-         return await PostBulkCollection<T, IEngItemBulkUpdateItem[]>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostBulkCollection<T, IEngItemBulkUpdateItem[]>(resourceURI, request, queryParams: queryParams);
       }
-     
+
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/evolution
@@ -505,7 +589,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/replace";
 
-         return await PostCollectionFromResponseMemberProperty<T, IEngInstanceReplace>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, IEngInstanceReplace>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -523,7 +612,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem";
 
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngItem>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngItem>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -648,7 +742,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngInstances>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngInstances>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -672,6 +771,26 @@ namespace ws3dx.dseng.core.service
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/evolution";
 
          return await PostIndividual<IResponseUnsetEvolutionEffectivity>(resourceURI);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (PATCH) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Modifies the Geolocation of an dseng:EngItem attributes Summary: Modifies the 
+      // Geolocation of an dseng:EngItem attributes
+      // <param name="engItemId">
+      // Description: dseng:EngItem object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<IGeolocationMask>> UpdateGeolocation(string engItemId, IGeolocationPatch request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+
+         return await PatchCollectionFromResponseMemberProperty<IGeolocationMask, IGeolocationPatch>(resourceURI, request);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -716,7 +835,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
-         return await PatchIndividualFromResponseMemberProperty<T, IEngInstancePatch>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PatchIndividualFromResponseMemberProperty<T, IEngInstancePatch>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -760,7 +884,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-         return await PatchIndividualFromResponseMemberProperty<T, IEngItemPatch>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PatchIndividualFromResponseMemberProperty<T, IEngItemPatch>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -785,7 +914,12 @@ namespace ws3dx.dseng.core.service
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}";
 
-         return await PatchIndividualFromResponseMemberProperty<T, IEngRepInstancePatch>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PatchIndividualFromResponseMemberProperty<T, IEngRepInstancePatch>(resourceURI, request, queryParams: queryParams);
       }
 
       //---------------------------------------------------------------------------------------------
@@ -867,6 +1001,25 @@ namespace ws3dx.dseng.core.service
       public async Task<IGenericResponse> DeleteAlternate(string engItemId, string alternateId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
+
+         return await DeleteIndividual<IGenericResponse>(resourceURI);
+      }
+
+      //---------------------------------------------------------------------------------------------
+      // <remarks>
+      // (DELETE) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      // </remarks>
+      //---------------------------------------------------------------------------------------------
+      // <summary>
+      // Description: Delete a Geolocation Summary: Delete a Geolocation
+      // <param name="engItemId">
+      // Description: dseng:EngItem object ID
+      // </param>
+      // </summary>
+      //---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DeleteGeolocation(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
 
          return await DeleteIndividual<IGenericResponse>(resourceURI);
       }
