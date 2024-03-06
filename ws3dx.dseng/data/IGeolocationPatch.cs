@@ -16,114 +16,60 @@
 
 namespace ws3dx.dseng.data
 {
-   public interface IPosition
+   public interface IGeolocationPatch
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 1
+      // Example: 12.45
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A11 { get; set; }
+      public double? Azimuth { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: true
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A12 { get; set; }
+      public bool? Activate { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 12345.56
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A13 { get; set; }
+      public double? Axis1 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 56789.2
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A21 { get; set; }
+      public double? Axis2 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 1
+      // Example: 125.0
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A22 { get; set; }
+      public double? Axis3 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: Timestamp id
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A23 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? A31 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? A32 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? A33 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector X in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U1 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Y in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U2 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Z in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U3 { get; set; }
+      public string Cestamp { get; set; }
    }
 }

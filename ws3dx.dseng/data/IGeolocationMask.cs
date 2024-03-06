@@ -13,117 +13,74 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   public interface IPosition
+   [MaskSchema("dsmvgeoloc:GeolocMask.Default")]
+   public interface IGeolocationMask
    {
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 1
+      // Example: epsg::2000
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A11 { get; set; }
+      public string CrsId { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 12.45
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A12 { get; set; }
+      public double? Azimuth { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: true
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A13 { get; set; }
+      public string Activate { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 12345.56
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A21 { get; set; }
+      public double? Axis1 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 1
+      // Example: 56789.2
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A22 { get; set; }
+      public double? Axis2 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 125.0
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A23 { get; set; }
+      public double? Axis3 { get; set; }
 
       //----------------------------------------------------------------
       // <summary>
       //		
-      // Description: rotation matrix coefficient Example: 0
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       // </summary>
       //----------------------------------------------------------------
-      public int? A31 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? A32 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? A33 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector X in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U1 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Y in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U2 { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Z in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? U3 { get; set; }
+      public string Cestamp { get; set; }
    }
 }

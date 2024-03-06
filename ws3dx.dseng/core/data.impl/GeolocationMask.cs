@@ -18,138 +18,83 @@ using ws3dx.dseng.data;
 
 namespace ws3dx.dseng.core.data.impl
 {
-   public class Position : IPosition
+   public class GeolocationMask : IGeolocationMask
    {
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 1
+      // Example: epsg::2000
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a11")]
+      [JsonPropertyName("crsId")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A11 { get; set; }
+      public string CrsId { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 12.45
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a12")]
+      [JsonPropertyName("azimuth")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A12 { get; set; }
+      public double? Azimuth { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 0
+      // Example: true
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a13")]
+      [JsonPropertyName("activate")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A13 { get; set; }
+      public string Activate { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 12345.56
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a21")]
+      [JsonPropertyName("axis1")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A21 { get; set; }
+      public double? Axis1 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 1
+      // Example: 56789.2
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a22")]
+      [JsonPropertyName("axis2")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A22 { get; set; }
+      public double? Axis2 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 0
+      // Example: 125.0
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a23")]
+      [JsonPropertyName("axis3")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A23 { get; set; }
+      public double? Axis3 { get; set; }
 
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: rotation matrix coefficient Example: 0
+      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a31")]
+      [JsonPropertyName("cestamp")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A31 { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a32")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A32 { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a33")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? A33 { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector X in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u1")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? U1 { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector Y in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u2")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? U2 { get; set; }
-
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector Z in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u3")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? U3 { get; set; }
+      public string Cestamp { get; set; }
    }
 }
