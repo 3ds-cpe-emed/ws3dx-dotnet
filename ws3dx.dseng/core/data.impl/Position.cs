@@ -122,7 +122,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: translation vector X Example: 0
+      // Description: translation vector X in mm Example: 0
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: translation vector Y Example: 0
+      // Description: translation vector Y in mm Example: 0
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
-      // Description: translation vector Z Example: 0
+      // Description: translation vector Z in mm Example: 0
       //
       //<summary>
       //------------------------------------------------------------------------------------------------
