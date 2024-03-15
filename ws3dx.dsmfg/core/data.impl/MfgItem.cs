@@ -16,6 +16,7 @@
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.extension;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.core.data.impl
 {
@@ -252,6 +253,10 @@ namespace ws3dx.dsmfg.core.data.impl
       [JsonPropertyName("magnitude")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Magnitude { get; set; }
+
+      [JsonPropertyName("dsmfg:EnterpriseReference")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       [JsonPropertyName("dsmfg:MfgEnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

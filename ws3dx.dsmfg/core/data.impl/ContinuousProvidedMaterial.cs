@@ -13,23 +13,16 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using NUnit.Framework;
-using System.Threading.Tasks;
-
-using ws3dx.dsmfg.core.service;
+using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
+using ws3dx.dsmfg.data.extension;
 
-namespace NUnitTestProject
+namespace ws3dx.dsmfg.core.data.impl
 {
-   public class MfgItemService_TypeSchemas_UnitTests : MfgItemServiceTestsSetup
+   public class ContinuousProvidedMaterial : MfgItemDetailMask, IContinuousProvidedMaterial
    {
-      [TestCase("AF8E4289295538006563506E00153753")] //CreateAssembly
-      public async Task Get_IMfgItemDetailMask(string mfgItemId)
-      {
-         MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-         IMfgAssembly ret = (IMfgAssembly)await mfgItemService.Get<IMfgItemDetailMask>(mfgItemId);
-
-         Assert.IsNotNull(ret);
-      }
+      [JsonPropertyName("dsmfg:ProcessContinuousProvideEnterpriseAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IProcessContinuousCreateMaterialEnterpriseAttributes EnterpriseAttributes { get; set; }
    }
 }

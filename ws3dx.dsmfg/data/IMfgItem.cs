@@ -14,7 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsmfg.data.extension;
-using IMfgItemCustomerAttributes = ws3dx.dsmfg.data.extension.IMfgItemCustomerAttributes;
+using ws3dx.shared.data;
 
 namespace ws3dx.dsmfg.data
 {
@@ -209,6 +209,8 @@ namespace ws3dx.dsmfg.data
       // </summary>
       //----------------------------------------------------------------
       public string Magnitude { get; set; }
+
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       public IMfgItemEnterpriseAttributes MfgEnterpriseAttributes { get; set; }
 

@@ -14,6 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsmfg.data.extension;
+using ws3dx.shared.data;
 using IMfgItemCustomerAttributes = ws3dx.dsmfg.data.extension.IMfgItemCustomerAttributes;
 
 namespace ws3dx.dsmfg.data
@@ -209,6 +210,8 @@ namespace ws3dx.dsmfg.data
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
+
+      public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       public IMfgItemEnterpriseAttributes MfgEnterpriseAttributes { get; set; }
 

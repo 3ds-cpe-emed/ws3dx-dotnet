@@ -88,7 +88,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetScopeEngItem<T>(string mfgItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IScopeEngItemUtcMask), typeof(IScopeEngItemMask) });
@@ -111,7 +111,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IScopeRequirementSpecMask>> GetScopeRequirementSpecs(string mfgItemId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec";
@@ -138,7 +138,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: Represents the number of items to skip (to be used along with $top query parameter)
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetResultingEngItems<T>(string mfgItemId, int top, int skip)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
@@ -167,7 +167,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:AssignedRequirement object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IAssignedRequirementMask> GetAssignedRequirement(string mfgItemId, string requirementId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement/{requirementId}";
@@ -190,7 +190,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItemInstance Successor object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IDependencyMask>> GetInstanceDependency(string mfgItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:Dependency";
@@ -212,7 +212,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItemInstance object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<T> GetInstance<T>(string mfgItemId, string instanceId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
@@ -238,7 +238,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:ScopeRequirementSpec object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IScopeRequirementSpecMask> GetScopeRequirementSpec(string mfgItemId, string requirementId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ScopeRequirementSpec/{requirementId}";
@@ -258,7 +258,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IChangeControlStatusMask>> GetChangeControl(string mfgItemId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dslc:changeControl";
@@ -277,7 +277,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<T> Get<T>(string mfgItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
@@ -299,7 +299,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetConfiguration<T>(string mfgItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
@@ -321,7 +321,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IPartialScopeEngItemMask>> GetPartialScopeEngItem(string mfgItemId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:PartialScopeEngItem";
@@ -341,7 +341,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IAssignedRequirementMask>> GetAssignedRequirements(string mfgItemId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignedRequirement";
@@ -364,7 +364,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItemInstance object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IImplementedEngOccurrenceMask> GetInstanceImplementedEngOccurrence(string mfgItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dsmfg:ImplementedEngOccurrence";
@@ -387,7 +387,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItemInstance object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IFilterableDetail>> GetInstanceEffectivity(string mfgItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgItemInstance/{instanceId}/dscfg:Filterable";
@@ -410,7 +410,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:ResultingEngItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetResultingEngItem<T>(string mfgItemId, string engItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemUtcMask), typeof(IResultingEngItemMask) });
@@ -432,7 +432,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetInstances<T>(string mfgItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
@@ -454,7 +454,7 @@ namespace ws3dx.dsmfg.core.service
       // Description: dsmfg:MfgItem object ID
       // </param>
       // </summary>
-      //---------------------------------------------------------------------------------------------		
+      //---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<IAssignmentFilterMask>> GetAssignmentFilters(string mfgItemId)
       {
          string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:AssignmentFilter";
@@ -894,8 +894,8 @@ namespace ws3dx.dsmfg.core.service
       // </remarks>
       //---------------------------------------------------------------------------------------------
       // <summary>
-      // Description: Modifies the Manufacturing Item attributes Summary: Modifies the Manufacturing Item 
-      // attributes
+      // Description: Modifies the Manufacturing Item attributes. Summary: Modifies the Manufacturing Item 
+      // attributes.
       // <param name="mfgItemId">
       // Description: dsmfg:MfgItem object ID
       // </param>
@@ -1161,7 +1161,7 @@ namespace ws3dx.dsmfg.core.service
 
          return await PostIndividual<IGenericResponse, IDetachAssignmentFilter>(resourceURI, request);
       }
-
+ 
       //---------------------------------------------------------------------------------------------
       // <remarks>
       // (POST) dsmfg:MfgItem/{PID}/dsmfg:MfgItemInstance/{ID}/dsmfg:ImplementedEngOccurrence/attach
