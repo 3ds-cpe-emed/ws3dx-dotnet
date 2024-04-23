@@ -52,9 +52,17 @@ namespace ws3dx.core.serialization.registry
 
          #region adding well known collection generic type definitions
          // IList -> List
-         _itfImplClassDict.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
+         if (!_itfImplClassDict.ContainsKey(typeof(IList<>).GUID))
+         {
+            _itfImplClassDict.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
+         }
+
          // IDictionary -> Dictionary
-         _itfImplClassDict.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
+         if (!_itfImplClassDict.ContainsKey(typeof(IDictionary<,>).GUID)) 
+         {
+            _itfImplClassDict.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
+         }
+
          #endregion
 
          foreach (Assembly assembly in _assemblies)
@@ -89,7 +97,11 @@ namespace ws3dx.core.serialization.registry
                   {
                      _itfImplClassDict.Add(classInterfaceTypeGuid, new List<Type>());
                   }
-                  _itfImplClassDict[classInterfaceTypeGuid].Add(classType);
+
+                  if (!_itfImplClassDict[classInterfaceTypeGuid].Contains(classType))
+                  {
+                     _itfImplClassDict[classInterfaceTypeGuid].Add(classType);
+                  }
                }
             }
          }

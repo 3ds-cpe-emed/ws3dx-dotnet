@@ -104,7 +104,23 @@ namespace ws3dx.core.serialization.registry
 
                foreach (Type implClass in implClassList)
                {
-                  _itfImplClassDict[typeSchemaInterface.GUID].Add(implClass);
+                  IList<Type> activeImplClasses = _itfImplClassDict[typeSchemaInterface.GUID];
+
+                  bool isDuplicated = false;
+                  
+                  foreach (Type activeImplClass in activeImplClasses)
+                  {
+                     if (activeImplClass.GUID == implClass.GUID)
+                     {
+                        isDuplicated = true;
+                        break;
+                     }
+                  }
+
+                  if (!isDuplicated)
+                  {
+                     _itfImplClassDict[typeSchemaInterface.GUID].Add(implClass);
+                  }
                }
             }
          }
