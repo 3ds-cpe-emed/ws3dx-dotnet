@@ -39,14 +39,9 @@ namespace ws3dx.core.serialization.registry
          {
             if (!candidateImplClassType.IsClass) continue;
 
-            Type[] candidateImplClassTypeInterfaceTypeArray = candidateImplClassType.GetInterfaces();
-
-            //https://stackoverflow.com/questions/7563269/find-only-non-inherited-interfaces
-            var exceptInheritedInterfaces = candidateImplClassTypeInterfaceTypeArray.Except(
-              candidateImplClassTypeInterfaceTypeArray.SelectMany(t => t.GetInterfaces())
-            );
-
-            foreach (Type candidateImplClassTypeInterfaceType in exceptInheritedInterfaces)
+            Type[] directlyImplementedInterfaces = GetDirectlyImplementedInterfaces(candidateImplClassType);
+            
+            foreach (Type candidateImplClassTypeInterfaceType in directlyImplementedInterfaces)
             {
                if (candidateImplClassTypeInterfaceType == _interfaceType)
                {
@@ -57,6 +52,67 @@ namespace ws3dx.core.serialization.registry
          }
 
          return __output;
+      }
+
+      // ------
+      // Returns only "directly implemented" interfaces, excluding inherited interfaces.
+      // Logic adapted from https://stackoverflow.com/questions/52758745/get-interfaces-implemented-by-class
+      // ------
+      public static Type[] GetDirectlyImplementedInterfaces(this Type _classType)
+      {
+         if (!_classType.IsClass)
+         {
+            throw new NotSupportedException($"{_classType} needs to be a class.");
+         }
+
+         //All of the interfaces implemented by the class
+         HashSet<Type> parsedInterfaces = new HashSet<Type>(_classType.GetInterfaces());
+
+         //Type one step down the hierarchy
+         Type baseType = _classType.BaseType;
+
+         if (baseType != null)
+         {
+            while (baseType != null)
+            {
+               foreach (Type baseTypeInterface in baseType.GetInterfaces())
+               {
+                  if (parsedInterfaces.Contains(baseTypeInterface))
+                  {
+                     parsedInterfaces.Remove(baseTypeInterface);
+                  }
+               }
+               baseType = baseType.BaseType;
+            }
+         }
+       
+         //NOTE: allInterfaces now only includes interfaces implemented by the most derived class and
+         //interfaces implemented by those(interfaces of the most derived class)
+
+         //We want to remove interfaces that are implemented by other interfaces
+         //i.e
+         //public interface A : B{}
+         //public interface B {}
+         //public class Top : A{} → We only want to dump interface A so interface B must be removed
+
+         HashSet<Type> interfacesToRemoveSet = new HashSet<Type>();
+        
+         //Considering class A given above allInterfaces contain A and B now
+         foreach (var implementedByMostDerivedClass in parsedInterfaces)
+         {
+            //For interface A this will only contain single element, namely B
+            //For interface B this will an empty array
+            foreach (var implementedByOtherInterfaces in implementedByMostDerivedClass.GetInterfaces())
+            {
+               interfacesToRemoveSet.Add(implementedByOtherInterfaces);
+            }
+         }
+
+         //Finally remove the interfaces that do not belong to the most derived class.
+         parsedInterfaces.ExceptWith(interfacesToRemoveSet);
+
+         //Result
+         return parsedInterfaces.ToArray();
       }
 
       static internal IDictionary<string, IList<Type>> GetTypesByMaskName<T>(Assembly _assembly, string _attributeName) where T : System.Attribute

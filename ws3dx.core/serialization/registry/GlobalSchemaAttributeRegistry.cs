@@ -79,7 +79,7 @@ namespace ws3dx.core.serialization.registry
 
          foreach (Type classType in classTypeList)
          {
-            foreach (Type classInterfaceType in classType.GetInterfaces())
+            foreach (Type classInterfaceType in RegistryUtils.GetDirectlyImplementedInterfaces(classType))
             {
                if (interfaceTypeList.ContainsKey(classInterfaceType.GUID))
                {
