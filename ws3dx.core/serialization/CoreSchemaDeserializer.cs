@@ -457,14 +457,14 @@ namespace ws3dx.core.serialization
       protected static bool TypeHasMatchingProperty(Type _type, string _propertyName)
       {
          // Do Type Properties
-         IDictionary<string, PropertyInfo> jsonMappableProperties = GetTypePropsDictionary(_type);
+         IDictionary<string, PropertyInfo> jsonMappableProperties = GetTypePropsDictionary(_type, false);
          return jsonMappableProperties.ContainsKey(_propertyName);
       }
 
       protected static PropertyInfo GetPropertyInfo(Type _itemType, string _propertyName)
       {
          // Do Type Properties
-         IDictionary<string, PropertyInfo> jsonMappableProperties = GetTypePropsDictionary(_itemType);
+         IDictionary<string, PropertyInfo> jsonMappableProperties = GetTypePropsDictionary(_itemType, false);
 
          if (jsonMappableProperties == null) return null;
 
@@ -477,9 +477,10 @@ namespace ws3dx.core.serialization
       /// Gets Type Properties from Reflection. Uses cached values for the second time onwards for performance reasons.
       /// </summary>
       /// <param name="_type"></param>
+      /// <param name="_isCaseSensitive">Permissive for cases when there are some upper-lower case differences between the schema documentation and what is actually implemented (e.g. derivedoutputFiles vs derivedOutputFiles)</param> 
       /// <param name="_useCache"></param>
       /// <returns></returns>
-      protected static IDictionary<string, PropertyInfo> GetTypePropsDictionary(Type _type, bool _useCache = true)
+      protected static IDictionary<string, PropertyInfo> GetTypePropsDictionary(Type _type, bool _isCaseSensitive = true,  bool _useCache = true)
       {
          if (_useCache)
          {
@@ -489,7 +490,7 @@ namespace ws3dx.core.serialization
             }
          }
 
-         Dictionary<string, PropertyInfo> __jsonMappableProperties = new Dictionary<string, PropertyInfo>();
+         Dictionary<string, PropertyInfo> __jsonMappableProperties = !_isCaseSensitive ? new Dictionary<string, PropertyInfo>(StringComparer.InvariantCultureIgnoreCase) : new Dictionary<string, PropertyInfo>();
 
          // Do Type Properties
          PropertyInfo[] properties = _type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
