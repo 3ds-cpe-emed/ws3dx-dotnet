@@ -98,7 +98,12 @@ namespace ws3dx.core.service
 
          if (HasMask)
          {
-            queryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+            string maskValueFromType = MaskNameUtils.GetMaskNameFromType(typeof(T), false);
+            
+            if (maskValueFromType != null)
+            {
+               queryParams.Add(GetMaskParamName(), maskValueFromType);
+            }
          }
 
          if (!IsSearchSkipParamNameEmpty) queryParams.Add(GetSearchSkipParamName(), _skip.ToString());

@@ -54,7 +54,8 @@ namespace ws3dx.core.serialization
 
          return true;
       }
-      public static string GetMaskNameFromType(Type type)
+
+      public static string GetMaskNameFromType(Type type, bool _raiseExceptionIfMissing = true, bool _raiseExceptionIfMultiple = true)
       {
          MaskSchemaAttribute[] attributes;
          if (type.IsInterface)
@@ -69,12 +70,19 @@ namespace ws3dx.core.serialization
             attributes = (MaskSchemaAttribute[])type.GetCustomAttributes(typeof(MaskSchemaAttribute), true);
          }
 
-         if ((attributes == null) || (attributes.Length == 0))
+         if ((attributes == null) || (attributes.Length == 0)) 
          {
-            throw new Exception($"No Mask Schema Definition attribute associated to type {type.Name}");
+            if (_raiseExceptionIfMissing)
+            {
+               throw new Exception($"No Mask Schema Definition attribute associated to type {type.Name}");
+            }
+            else
+            {
+               return null;
+            }
          }
 
-         if (attributes.Length > 1)
+         if ((attributes.Length > 1) && _raiseExceptionIfMultiple)
          {
             throw new Exception($"Multiple Mask Schema Definition attributes associated to type {type.Name}");
          }

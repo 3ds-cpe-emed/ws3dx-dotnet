@@ -289,7 +289,12 @@ namespace ws3dx.core.service
 
          if (HasMask)
          {
-            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+            string maskValueFromType = MaskNameUtils.GetMaskNameFromType(typeof(T), false);
+
+            if (maskValueFromType != null)
+            {
+               requestQueryParams.Add(GetMaskParamName(), maskValueFromType);
+            }
          }
 
          if (queryParams != null)
@@ -422,7 +427,11 @@ namespace ws3dx.core.service
 
          if (HasMask)
          {
-            requestQueryParams.Add(GetMaskParamName(), MaskNameUtils.GetMaskNameFromType(typeof(T)));
+            string maskValueFromType = MaskNameUtils.GetMaskNameFromType(typeof(T), false);
+            
+            if (maskValueFromType != null) {
+               requestQueryParams.Add(GetMaskParamName(), maskValueFromType);
+            }
          }
 
          if (queryParams != null)
