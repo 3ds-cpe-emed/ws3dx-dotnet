@@ -22,6 +22,5 @@ namespace ws3dx.dseng.data
       public ITypedUriIdentifier ReferencedObject { get; set; }
 
       public INewEngRepInstanceAttributes Attributes { get; set; }
-
    }
 }

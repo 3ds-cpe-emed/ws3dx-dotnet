@@ -35,6 +35,5 @@ namespace ws3dx.dseng.data
       // </summary>
       //----------------------------------------------------------------
       public string Description { get; set; }
-
    }
 }

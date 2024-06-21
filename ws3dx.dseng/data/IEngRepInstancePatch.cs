@@ -44,6 +44,5 @@ namespace ws3dx.dseng.data
       // </summary>
       //----------------------------------------------------------------
       public string Cestamp { get; set; }
-
    }
 }
