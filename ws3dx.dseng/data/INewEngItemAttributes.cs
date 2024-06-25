@@ -47,6 +47,15 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       public string Description { get; set; }
 
+      //----------------------------------------------------------------
+      // <summary>
+      //		
+      // Example: My Version Comments
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string VersionComment { get; set; }
+
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
       public IEnterpriseAttributes EnterpriseAttributes { get; set; }

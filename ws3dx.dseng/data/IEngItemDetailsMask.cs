@@ -20,6 +20,7 @@ namespace ws3dx.dseng.data
    [MaskSchema("dsmveng:EngItemMask.Details")]
    public interface IEngItemDetailsMask : IEngItemEnterprise
    {
+      public string VersionComment { get; set; }
       public string IsManufacturable { get; set; }
    }
 }

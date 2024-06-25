@@ -41,6 +41,15 @@ namespace ws3dx.dseng.data
       //----------------------------------------------------------------
       // <summary>
       //		
+      // Example: My Version Comments
+      //
+      // </summary>
+      //----------------------------------------------------------------
+      public string VersionComment { get; set; }
+
+      //----------------------------------------------------------------
+      // <summary>
+      //		
       // Example: true
       //
       // </summary>

@@ -47,6 +47,17 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       //<summary>
       //
+      // Example: My Version Comments
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("versionComment")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string VersionComment { get; set; }
+
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
       // Example: true
       //
       //<summary>

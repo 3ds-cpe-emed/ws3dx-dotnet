@@ -55,6 +55,17 @@ namespace ws3dx.dseng.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
 
+      //------------------------------------------------------------------------------------------------
+      //<summary>
+      //
+      // Example: My Version Comments
+      //
+      //<summary>
+      //------------------------------------------------------------------------------------------------
+      [JsonPropertyName("versionComment")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string VersionComment { get; set; }
+
       [JsonPropertyName("dseng:EnterpriseReference")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IEnterpriseItemNumber EnterpriseReference { get; set; }

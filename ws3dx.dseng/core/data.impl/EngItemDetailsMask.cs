@@ -81,6 +81,10 @@ namespace ws3dx.dseng.core.data.impl
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
 
+      [JsonPropertyName("versionComment")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string VersionñComment { get; set; }
+
       [JsonPropertyName("isManufacturable")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string IsManufacturable { get; set; }
