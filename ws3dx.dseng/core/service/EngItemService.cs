@@ -76,41 +76,96 @@ namespace ws3dx.dseng.core.service
          return await SearchCollection<T>("member", searchQuery, _skip, _top);
       }
       #endregion
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dseng:EnterpriseReference
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Enterprise Reference of an Engineering Item Summary: Gets a Enterprise Reference 
-      // of an Engineering Item
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnterpriseItemNumberMask> GetEnterpriseItemNumber(string engItemId)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
 
-         return await GetIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask>(resourceURI);
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Engineering Item Instance. Maximum of 100 instances can be retrieved. In case of more data,
+      /// please use the /resources/v1/modeler/dseng/dseng:EngItem/{ID}/expand API instead
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dseng:EngInstance
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="skip">
+      /// </param>
+      /// <param name="top">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> GetInstances<T>(string engItemId, int skip = 0, int top = 100 )
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" },
+            { "$skip", skip.ToString()},
+            { "$top", top.ToString()}
+         };
+
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Engineering Item Instance Summary: Gets a Engineering Item Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Create Engineering Item Instance to an Engineering Item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:EngInstance
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="configurationAuthoringContext">
+      /// Work Under Evolution. Will be ignored if DS-Change-Authoring-Context is set
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddInstance<T>(string engItemId, ICreateEngInstances request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+         if (configurationAuthoringContext != null) { headerParams.Add("DS-Configuration-Authoring-Context", configurationAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngInstances>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Engineering Item Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<T> GetInstance<T>(string engItemId, string instanceId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
@@ -125,49 +180,132 @@ namespace ws3dx.dseng.core.service
          return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Engineering Item Representation Instance Summary: Gets a Engineering Item 
-      // Representation Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngRepInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> GetRepInstance<T>(string engItemId, string repInstanceId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Deletes the Engineering Item Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="configurationAuthoringContext">
+      /// Work Under Evolution. Will be ignored if DS-Change-Authoring-Context is set
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEmpty> DeleteInstance(string engItemId, string instanceId, string changeAuthoringContext = null, string configurationAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}";
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+         if (configurationAuthoringContext != null) { headerParams.Add("DS-Configuration-Authoring-Context", configurationAuthoringContext); }
+
+         return await DeleteIndividual<IEmpty>(resourceURI, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies the Engineering Item Instance attributes
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> UpdateInstance<T>(string engItemId, string instanceId, IEngInstancePatch request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>
          {
             { "$mva", "true" }
          };
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
+         return await PatchIndividualFromResponseMemberProperty<T, IEngInstancePatch>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dseng:EngRepInstance
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Engineering Item Representation Instance Summary: Gets all the Engineering Item 
-      // Representation Instances.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Replace the Engineering Item Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/replace
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="configurationAuthoringContext">
+      /// Work Under Evolution. Will be ignored if DS-Change-Authoring-Context is set
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> ReplaceInstance<T>(string engItemId, string instanceId, IEngInstanceReplace request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/replace";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+         if (configurationAuthoringContext != null) { headerParams.Add("DS-Configuration-Authoring-Context", configurationAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, IEngInstanceReplace>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Engineering Item Representation Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dseng:EngRepInstance
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetRepInstances<T>(string engItemId)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
@@ -182,21 +320,248 @@ namespace ws3dx.dseng.core.service
          return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Engineering Item Summary: Gets a Engineering Item
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Create Engineering Representation Instance to an Engineering Item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:EngRepInstance
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddRepInstance<T>(string engItemId, ICreateEngRepInstances request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngRepInstances>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Engineering Item Representation Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngRepInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> GetRepInstance<T>(string engItemId, string instanceId)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}";
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Deletes the Engineering Item Representation Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngRepInstance object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IAddEmpty> DeleteRepInstance(string engItemId, string instanceId, string changeAuthoringContext = null)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await DeleteIndividual<IAddEmpty>(resourceURI, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies the Engineering Item Representation Instance attributes
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngRepInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> UpdateRepInstance<T>(string engItemId, string instanceId, IEngRepInstancePatch request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PatchIndividualFromResponseMemberProperty<T, IEngRepInstancePatch>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Replace the Engineering Item Representation Instance
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}/replace
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngRepInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> ReplaceRepInstance<T>(string engItemId, string instanceId, IEngRepInstanceReplace request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}/replace";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostIndividualFromResponseMemberProperty<T, IEngRepInstanceReplace>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Expand Engineering Item based on the expandDepth and filter specified. By default
+      /// expandDepth is 1 and no filter is applied. Only the first 10000 results will be fetched with
+      /// default Mask dskern:Mask.Default applied. no option to change the Mask.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/expand
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IExpandResponse> Expand(string engItemId, IExpand request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/expand";
+
+         return await PostIndividualNoMask<IExpandResponse, IExpand>(resourceURI, request);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Creates engineering items.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> Create<T>(ICreateEngItem request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostCollectionFromResponseMemberProperty<T, ICreateEngItem>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Engineering Item
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<T> Get<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
@@ -208,233 +573,83 @@ namespace ws3dx.dseng.core.service
          return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dscfg:Configured
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: This extension gets the Enabled Criteria and Configuration Contexts of Configured 
-      // object Summary: Gets a Object Configuration information
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetConfiguration<T>(string engItemId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Delete a Engineering Item
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> Delete(string engItemId, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
 
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+         return await DeleteIndividual<IGenericResponse>(resourceURI, headerParams: headerParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Change Control of an Engineering Item Summary: Gets a Change Control of an 
-      // Engineering Item
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IChangeControlStatusMask> GetChangeControl(string engItemId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies the Engineering Item attributes
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> Update<T>(string engItemId, IEngItemPatch request, string changeAuthoringContext = null)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
 
-         return await GetIndividual<IChangeControlStatusMask>(resourceURI);
-      }
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{PID}/dseng:Alternate/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Engineering Item Alternates Summary: Gets a Engineering Item Alternates
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="alternateId">
-      // Description: dseng:Alternate object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> GetAlternate<T>(string engItemId, string alternateId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
-
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dsgeoloc:Geolocation
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Geolocation of an dseng:EngItem Summary: Gets a Geolocation of an dseng:EngItem
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IGeolocationMask> GetGeolocation(string engItemId)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
-
-         return await GetIndividualFromResponseMemberProperty<IGeolocationMask>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: This extension gets the effectivity of an Object instance/relationship Summary: Gets 
-      // a Instance effectivity information.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IFilterableDetailMask>> GetInstanceEffectivity(string engItemId, string instanceId)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable";
-
-         return await GetCollectionFromResponseMemberProperty<IFilterableDetailMask>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dseng:Alternate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets All Alternate items connected to Primary Engieering item. Summary: Gets All 
-      // Alternate items connected to Primary Engieering item.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetAlternates<T>(string engItemId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
-
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dseng:EngItem/{ID}/dseng:EngInstance
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Engineering Item Instance Summary: Gets all the Engineering Item Instances.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<T>> GetInstances<T>(string engItemId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
 
          IDictionary<string, string> queryParams = new Dictionary<string, string>
          {
             { "$mva", "true" }
          };
 
-         return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
+         return await PatchIndividualFromResponseMemberProperty<T, IEngItemPatch>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dscfg:Configured/attach
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to attach a list of configuration context to a single reference. Summary: 
-      // Service to attach a list of configuration context to a single reference.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> AttachConfiguration(string engItemId, ITypedUriIdentifier[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/attach";
-
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Activate the Change Control Summary: Activate the Change Control
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> AttachChangeControl(string engItemId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
-
-         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dsgeoloc:Geolocation
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to attach geolocation to a single reference. Summary: Service to attach 
-      // geolocation to a single reference.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IGeolocationMask>> AddGeolocation(string engItemId, ICreateGeolocation request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
-
-         return await PostCollectionFromResponseMemberProperty<IGeolocationMask, ICreateGeolocation>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Get multiple Engineering Items which are Indexed. API Works only for Indexed Data. 
-      // The customer attributes or enterprise extension attributes are returned only with default sixw 
-      // mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed. 
-      // Summary: Get multiple Engineering Items which are indexed     
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Get multiple Engineering Items which are Indexed. API Works only for Indexed Data. The
+      /// customer attributes or enterprise extension attributes are returned only with default sixw
+      /// mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is
+      /// changed.
+      /// Maximum of 1000 items can be passed to fetch the information
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/bulkfetch
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask) });
@@ -449,118 +664,430 @@ namespace ws3dx.dseng.core.service
          return await PostBulkCollection<T, string[]>(resourceURI, request, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}/replace
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Replace the Engineering Item Representation Instance Summary: Replace the Engineering 
-      // Item Representation Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngRepInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<T> ReplaceRepInstance<T>(string engItemId, string repInstanceId, IEngRepInstanceReplace request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies multiple Engineering Item attributes, Maximum of 50 items can be passed to update 
+      /// the information.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/bulkupdate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<(IList<T>, IList<string>)> BulkUpdate<T>(IEngItemBulkUpdateItem[] request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}/replace";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PostIndividualFromResponseMemberProperty<T, IEngRepInstanceReplace>(resourceURI, request, queryParams: queryParams);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:EngRepInstance
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create Engineering Representation Instance to an Engineering Item. Summary: Create 
-      // Engineering Representation Instances
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> AddRepInstance<T>(string engItemId, ICreateEngRepInstances request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngRepInstances>(resourceURI, request, queryParams: queryParams);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/bulkupdate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies multiple Engineering Item attributes Summary: Modifies multiple Engineering 
-      // Item attributes
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<T>, IList<string>)> BulkUpdate<T>(IEngItemBulkUpdateItem[] request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask), typeof(IEngItemConfigMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkupdate";
 
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
          IDictionary<string, string> queryParams = new Dictionary<string, string>
          {
             { "$mva", "true" }
          };
 
-         return await PostBulkCollection<T, IEngItemBulkUpdateItem[]>(resourceURI, request, queryParams: queryParams);
+         return await PostBulkCollection<T, IEngItemBulkUpdateItem[]>(resourceURI, request, headerParams: headerParams, queryParams: queryParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/evolution
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to set the effectivity evolution expression (XML) on a single relationship. 
-      // WARNING: Coherency between Evolution and Variant Expression are under users responsibility.<br><br>Please 
-      // find below the list of possible error codes and error messages: <br> 102 : The parent reference 
-      // of the given instance does not have a Configuration Context. <br>106 : The input instance is 
-      // controlled by a Change. Evolution effectivity cannot be edited. <br>117 : The input effectivity 
-      // expression or data used in the expression is not correct. <br>118 : Instance's identifier in the 
-      // input is not valid or correct. <br>119 : Effectivity cannot be set due to dictionary data. <br>120 
-      // : The criteria is not enabled on the parent reference. <br>121 : The root reference is a 3DPart 
-      // which is not configurable. <br>122 : The root reference is XCAD controlled which is not configurable. 
-      // <br>123 : Model provided in the input expression is not part of Configuration Context. <br>124 
-      // : Model provided in the input expression is not accessible or does not exist. <br>125 : Input 
-      // expression not well-formatted (No model found). <br>126 : The criteria used in the input expression 
-      // is not enabled on parent reference. <br>127 : Error occured during the save of the new effectivities. 
-      // <br>128 : Error occured during the update of Configuration Revision effectivities. <br>129 : 
-      // Effectivities cannot be set because changing at least one of them would impact frozen evolution 
-      // range. <br>130 : The parent reference is not configurable. <br>199 : Failure detected during 
-      // operation. <br> Summary: Service to set the effectivities evolution expression (XML).
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets where used Parent Engineering Item using indexed queries. Only the first 1000 results
+      /// will be fetched with default response. no option to change the Mask.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/locate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IAddEmpty> Locate(ILocateEngInstances request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/locate";
+
+         return await PostIndividual<IAddEmpty, ILocateEngInstances>(resourceURI, request);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets All Alternate items connected to Primary Engieering item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dseng:Alternate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> GetAlternates<T>(string engItemId)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
+
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Create Engineering Item Alternates to an Engineering Item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:Alternate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternates request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostCollectionFromResponseMemberProperty<T, IAddAlternates>(resourceURI, request, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Create Engineering Item Alternates to an Engineering Item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:Alternate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesInstance request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostCollectionFromResponseMemberProperty<T, IAddAlternatesInstance>(resourceURI, request, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Create Engineering Item Alternates to an Engineering Item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:Alternate
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesParent request, string changeAuthoringContext = null)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostCollectionFromResponseMemberProperty<T, IAddAlternatesParent>(resourceURI, request, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Engineering Item Alternates
+      /// </summary>
+      /// <typeparam name="T"></typeparam>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{PID}/dseng:Alternate/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="alternateId">
+      /// dseng:Alternate object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<T> GetAlternate<T>(string engItemId, string alternateId)
+      {
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
+
+         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Delete a Engineering Item Alternates
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{PID}/dseng:Alternate/{ID}
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="alternateId">
+      /// dseng:Alternate object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DeleteAlternate(string engItemId, string alternateId, string changeAuthoringContext = null)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await DeleteIndividual<IGenericResponse>(resourceURI, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Enterprise Reference of an Engineering Item
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dseng:EnterpriseReference
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnterpriseItemNumberMask> GetEnterpriseItemNumber(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
+
+         return await GetIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Adding Enterprise Reference to an Engineering Item
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dseng:EnterpriseReference
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnterpriseItemNumberMask> AttachEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request, string changeAuthoringContext = null)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies the Enterprise Reference of an Engineering item.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{ID}/dseng:EnterpriseReference
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnterpriseItemNumberMask> UpdateEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request, string changeAuthoringContext = null)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
+
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PatchIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request, headerParams: headerParams);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Change Control of an Engineering Item
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dslc:changeControl
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IChangeControlStatusMask> GetChangeControl(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
+
+         return await GetIndividualFromResponseMemberProperty<IChangeControlStatusMask>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Activate the Change Control
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dslc:changeControl
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> AttachChangeControl(string engItemId, IAddEmpty request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
+
+         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Deactivate the Change Control.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{ID}/dslc:changeControl
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DetachChangeControl(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
+
+         return await DeleteIndividual<IGenericResponse>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// This extension gets the effectivity of an Object instance/relationship
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<IFilterableDetailMask>> GetInstanceEffectivity(string engItemId, string instanceId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable";
+
+         return await GetCollectionFromResponseMemberProperty<IFilterableDetailMask>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// <para>
+      /// Service to set the effectivity evolution expression (XML) on a single relationship. WARNING:
+      /// Coherency between Evolution and Variant Expression are under users responsibility.
+      /// </para>
+      /// <para>
+      /// Please find below the list of possible error codes and error messages:
+      /// 102 : The parent reference of the given instance does not have a Configuration Context.
+      /// 106 : The input instance is controlled by a Change. Evolution effectivity cannot be edited.
+      /// 117 : The input effectivity expression or data used in the expression is not correct.
+      /// 118 : Instance's identifier in the input is not valid or correct.
+      /// 119 : Effectivity cannot be set due to dictionary data.
+      /// 120 : The criteria is not enabled on the parent reference.
+      /// 121 : The root reference is a 3DPart which is not configurable.
+      /// 122 : The root reference is XCAD controlled which is not configurable.
+      /// 123 : Model provided in the input expression is not part of Configuration Context.
+      /// 124 : Model provided in the input expression is not accessible or does not exist.
+      /// 125 : Input expression not well-formatted (No model found).
+      /// 126 : The criteria used in the input expression is not enabled on parent reference.
+      /// 127 : Error occured during the save of the new effectivities.
+      /// 128 : Error occured during the update of Configuration Revision effectivities.
+      /// 129 : Effectivities cannot be set because changing at least one of them would impact frozen
+      /// evolution range.
+      /// 130 : The parent reference is not configurable.
+      /// 199 : Failure detected during operation.
+      /// </para>
+      ///
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/evolution
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<ISetEvolutionResponse> SetInstanceEvolutionEffectivity(string engItemId, string instanceId, ISetEvolutionEffectivities request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/set/evolution";
@@ -568,204 +1095,22 @@ namespace ws3dx.dseng.core.service
          return await PostIndividual<ISetEvolutionResponse, ISetEvolutionEffectivities>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/replace
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Replace the Engineering Item Instance Summary: Replace the Engineering Item Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> ReplaceInstance<T>(string engItemId, string instanceId, IEngInstanceReplace request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/replace";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PostCollectionFromResponseMemberProperty<T, IEngInstanceReplace>(resourceURI, request, queryParams: queryParams);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Creates engineering items. Summary: Creates engineering items.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Create<T>(ICreateEngItem request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngItem>(resourceURI, request, queryParams: queryParams);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dscfg:Configured/detach
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to detach a list of configuration context from a single reference. Summary: 
-      // Service to detach a list of configuration context from a single reference.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<ITypedUriIdentifier>> DetachConfiguration(string engItemId, ITypedUriIdentifier[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/detach";
-
-         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/unset/variant
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to unset the variant effectivities. If unsetVariant service is executed under 
-      // Work Under (Change Action) then it may lead to a new evolution of existing relationship. Summary: 
-      // Service to unset the variant effectivities
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IResponseUnsetVariantEffectivity> UnsetInstanceVariantEffectivity(string engItemId, string instanceId)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/variant";
-
-         return await PostIndividual<IResponseUnsetVariantEffectivity>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:EnterpriseReference
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Adding Enterprise Reference to an Engineering Item Summary: Adding Enterprise Reference 
-      // to an Engineering Item
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnterpriseItemNumberMask> AttachEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
-
-         return await PostIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/variant
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to set the effectivity variant expression (XML) on a single relationship. If 
-      // setVariant service is executed under Work Under (Change Action) then it may lead to a new evolution 
-      // of existing relationship. WARNING: Coherency between Evolution and Variant Expression are under 
-      // users responsibility.<br><br>Please find below the list of possible error codes and error messages: 
-      // <br> 102 : The parent reference of the given instance does not have a Configuration Context. 
-      // <br>117 : The input effectivity expression or data used in the expression is not correct. <br>118 
-      // : Instance's identifier in the input is not valid or correct. <br>119 : Effectivity cannot be 
-      // set due to dictionary data. <br>120 : The criteria is not enabled on the parent reference. <br>121 
-      // : The root reference is a 3DPart which is not configurable. <br>122 : The root reference is XCAD 
-      // controlled which is not configurable. <br>123 : Model provided in the input expression is not 
-      // part of Configuration Context. <br>124 : Model provided in the input expression is not accessible 
-      // or does not exist. <br>125 : Input expression not well-formatted (No model found). <br>126 : The 
-      // criteria used in the input expression is not enabled on parent reference. <br>127 : Error occured 
-      // during the save of the new effectivities. <br>128 : Error occured during the update of Configuration 
-      // Revision effectivities. <br>129 : Effectivities cannot be set because changing at least one of 
-      // them would impact frozen evolution range. <br>130 : The parent reference is not configurable. 
-      // <br>199 : Failure detected during operation. <br> Summary: Service to set the effectivities 
-      // variant expression (XML).
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<ISetVariantResponse> SetInstanceVariantEffectivity(string engItemId, string instanceId, ISetVariantEffectivities request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/set/variant";
-
-         return await PostIndividual<ISetVariantResponse, ISetVariantEffectivities>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:EngInstance
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create Engineering Item Instance to an Engineering Item. Summary: Create Engineering 
-      // Item Instance.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> AddInstance<T>(string engItemId, ICreateEngInstances request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PostCollectionFromResponseMemberProperty<T, ICreateEngInstances>(resourceURI, request, queryParams: queryParams);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/unset/evolution
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to unset the evolution effectivities. Summary: Service to unset the evolution 
-      // effectivities.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to unset the evolution effectivities.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/unset/evolution
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<IResponseUnsetEvolutionEffectivity> UnsetInstanceEvolutionEffectivity(string engItemId, string instanceId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/evolution";
@@ -773,89 +1118,127 @@ namespace ws3dx.dseng.core.service
          return await PostIndividual<IResponseUnsetEvolutionEffectivity>(resourceURI);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{ID}/dsgeoloc:Geolocation
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the Geolocation of an dseng:EngItem attributes Summary: Modifies the 
-      // Geolocation of an dseng:EngItem attributes
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<IGeolocationMask>> UpdateGeolocation(string engItemId, IGeolocationPatch request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to set the effectivity variant expression (XML) on a single relationship. If
+      /// setVariant service is executed under Work Under (Change Action) then it may lead to a new
+      /// evolution of existing relationship. WARNING: Coherency between Evolution and Variant
+      /// Expression are under users responsibility.
+      ///
+      /// Please find below the list of possible error codes and error messages:
+      /// 102 : The parent reference of the given instance does not have a Configuration Context.
+      /// 117 : The input effectivity expression or data used in the expression is not correct.
+      /// 118 : Instance's identifier in the input is not valid or correct.
+      /// 119 : Effectivity cannot be set due to dictionary data.
+      /// 120 : The criteria is not enabled on the parent reference.
+      /// 121 : The root reference is a 3DPart which is not configurable.
+      /// 122 : The root reference is XCAD controlled which is not configurable.
+      /// 123 : Model provided in the input expression is not part of Configuration Context.
+      /// 124 : Model provided in the input expression is not accessible or does not exist.
+      /// 125 : Input expression not well-formatted (No model found).
+      /// 126 : The criteria used in the input expression is not enabled on parent reference.
+      /// 127 : Error occured during the save of the new effectivities.
+      /// 128 : Error occured during the update of Configuration Revision effectivities.
+      /// 129 : Effectivities cannot be set because changing at least one of them would impact frozen 
+      /// evolution range.
+      /// 130 : The parent reference is not configurable.
+      /// 199 : Failure detected during operation.
+      ///
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/set/variant
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Change Action physical id Ex: pid:DB4F8256517400005EEC5A6E000FEBBC
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<ISetVariantResponse> SetInstanceVariantEffectivity(string engItemId, string instanceId, ISetVariantEffectivities request, string changeAuthoringContext = null)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/set/variant";
 
-         return await PatchCollectionFromResponseMemberProperty<IGeolocationMask, IGeolocationPatch>(resourceURI, request);
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostIndividual<ISetVariantResponse, ISetVariantEffectivities>(resourceURI, request, headerParams: headerParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{ID}/dseng:EnterpriseReference
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the Enterprise Reference of an Engineering item. Summary: Modifies the 
-      // Enterprise Reference of an Engineering item.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnterpriseItemNumberMask> UpdateEnterpriseItemNumber(string engItemId, IEnterpriseItemNumber request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to unset the variant effectivities. If unsetVariant service is executed under Work
+      /// Under (Change Action) then it may lead to a new evolution of existing relationship.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:Filterable/unset/variant
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Change Action physical id Ex: pid:DB4F8256517400005EEC5A6E000FEBBC
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IResponseUnsetVariantEffectivity> UnsetInstanceVariantEffectivity(string engItemId, string instanceId, string changeAuthoringContext = null)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EnterpriseReference";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:Filterable/unset/variant";
 
-         return await PatchIndividualFromResponseMemberProperty<IEnterpriseItemNumberMask, IEnterpriseItemNumber>(resourceURI, request);
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+         return await PostIndividual<IResponseUnsetVariantEffectivity>(resourceURI, headerParams: headerParams);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the Engineering Item Instance attributes Summary: Modifies the Engineering 
-      // Item Instance attributes
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<T> UpdateInstance<T>(string engItemId, string instanceId, IEngInstancePatch request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// This extension gets the Enabled Criteria and Configuration Contexts of Configured object
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dscfg:Configured
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<T>> GetConfiguration<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
 
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
 
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PatchIndividualFromResponseMemberProperty<T, IEngInstancePatch>(resourceURI, request, queryParams: queryParams);
+         return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{ID}/dscfg:Configured
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Enables the criteria of single reference Summary: Modifies Configuration Information 
-      // of configured object
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Enables the criteria of single reference
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{ID}/dscfg:Configured
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<T> UpdateConfiguration<T>(string engItemId, IConfiguredPatch request)
       {
          GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
@@ -865,158 +1248,201 @@ namespace ws3dx.dseng.core.service
          return await PatchIndividualFromResponseMemberProperty<T, IConfiguredPatch>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the Engineering Item attributes Summary: Modifies the Engineering Item 
-      // attributes
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<T> Update<T>(string engItemId, IEngItemPatch request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to attach a list of configuration context to a single reference.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dscfg:Configured/attach
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<ITypedUriIdentifier>> AttachConfiguration(string engItemId, ITypedUriIdentifier[] request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask) });
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/attach";
 
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PatchIndividualFromResponseMemberProperty<T, IEngItemPatch>(resourceURI, request, queryParams: queryParams);
+         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the Engineering Item Representation Instance attributes Summary: Modifies 
-      // the Engineering Item Representation Instance attributes
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngRepInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<T> UpdateRepInstance<T>(string engItemId, string repInstanceId, IEngRepInstancePatch request)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to detach a list of configuration context from a single reference.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dscfg:Configured/detach
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<ITypedUriIdentifier>> DetachConfiguration(string engItemId, ITypedUriIdentifier[] request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured/detach";
 
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
-         {
-            { "$mva", "true" }
-         };
-
-         return await PatchIndividualFromResponseMemberProperty<T, IEngRepInstancePatch>(resourceURI, request, queryParams: queryParams);
+         return await PostCollectionFromResponseResourcesProperty<ITypedUriIdentifier, ITypedUriIdentifier[]>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a Engineering Item Summary: Delete a Engineering Item
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> Delete(string engItemId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to create a static mapping for an instance.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:ConfiguredInstance/set
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IPhysicalId> SetConfiguredInstance(string engItemId, string instanceId, ISetConfiguredInstance request)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:ConfiguredInstance/set";
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
+         return await PostIndividual<IPhysicalId, ISetConfiguredInstance>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Deactivate the Change Control. Summary: Deactivate the Change Control.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> DetachChangeControl(string engItemId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to update static mapping for an instance.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:ConfiguredInstance/update
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IPhysicalId> UpdateConfiguredInstance(string engItemId, string instanceId, ISetConfiguredInstance request)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:ConfiguredInstance/update";
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
+         return await PostIndividual<IPhysicalId, ISetConfiguredInstance>(resourceURI, request);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{PID}/dseng:EngRepInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Deletes the Engineering Item Representation Instance Summary: Deletes the Engineering 
-      // Item Representation Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngRepInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEmpty> DeleteRepInstance(string engItemId, string repInstanceId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to detach static mapping for an instance.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:ConfiguredInstance/unset
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IPhysicalId> UnsetConfiguredInstance(string engItemId, string instanceId)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{repInstanceId}";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:ConfiguredInstance/unset";
 
-         return await DeleteIndividual<IEmpty>(resourceURI);
+         return await PostIndividual<IPhysicalId>(resourceURI);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{PID}/dseng:Alternate/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a Engineering Item Alternates Summary: Delete a Engineering Item Alternates
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="alternateId">
-      // Description: dseng:Alternate object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> DeleteAlternate(string engItemId, string alternateId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to get static mapping for an instance.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{PID}/dseng:EngInstance/{ID}/dscfg:ConfiguredInstance
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="instanceId">
+      /// dseng:EngInstance object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGetConfiguredInstance> GetConfiguredInstance(string engItemId, string instanceId)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/dscfg:ConfiguredInstance";
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
+         return await GetIndividual<IGetConfiguredInstance>(resourceURI);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{ID}/dsgeoloc:Geolocation
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a Geolocation Summary: Delete a Geolocation
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Gets a Geolocation of an dseng:EngItem
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (GET) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGeolocationMask> GetGeolocation(string engItemId)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+
+         return await GetIndividualFromResponseMemberProperty<IGeolocationMask>(resourceURI);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Service to attach geolocation to a single reference.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<IGeolocationMask>> AddGeolocation(string engItemId, ICreateGeolocation request)
+      {
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
+
+         return await PostCollectionFromResponseMemberProperty<IGeolocationMask, ICreateGeolocation>(resourceURI, request);
+      }
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Delete a Geolocation
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (DELETE) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
       public async Task<IGenericResponse> DeleteGeolocation(string engItemId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
@@ -1024,114 +1450,26 @@ namespace ws3dx.dseng.core.service
          return await DeleteIndividual<IGenericResponse>(resourceURI);
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dseng:EngItem/{PID}/dseng:EngInstance/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Deletes the Engineering Item Instance Summary: Deletes the Engineering Item Instance
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dseng:EngInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEmpty> DeleteInstance(string engItemId, string instanceId)
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Modifies the Geolocation of an dseng:EngItem attributes
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (PATCH) dseng:EngItem/{ID}/dsgeoloc:Geolocation
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="engItemId">
+      /// dseng:EngItem object ID
+      /// </param>
+      /// <param name="request">
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IEnumerable<IGeolocationMask>> UpdateGeolocation(string engItemId, IGeolocationPatch request)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
+         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dsgeoloc:Geolocation";
 
-         return await DeleteIndividual<IEmpty>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:Alternate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create Engineering Item Alternates to an Engineering Item. Summary: Create Engineering 
-      // Item Alternates.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternates request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
-
-         return await PostCollectionFromResponseMemberProperty<T, IAddAlternates>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:Alternate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create Engineering Item Alternates to an Engineering Item. Summary: Create Engineering 
-      // Item Alternates.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesParent request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
-
-         return await PostCollectionFromResponseMemberProperty<T, IAddAlternatesParent>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/dseng:Alternate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create Engineering Item Alternates to an Engineering Item. Summary: Create Engineering 
-      // Item Alternates.
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesInstance request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
-
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
-
-         return await PostCollectionFromResponseMemberProperty<T, IAddAlternatesInstance>(resourceURI, request);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dseng:EngItem/{ID}/expand
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Expand Engineering Item based on the expandDepth and filter specified. By default 
-      // expandDepth is 1 and no filter is applied. Only the first 10000 results will be fetched with 
-      // default Mask dskern:Mask.Default applied. no option to change the Mask. Summary: Expand Engineering 
-      // Item using indexed queries
-      // <param name="engItemId">
-      // Description: dseng:EngItem object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IExpandResponse> Expand(string engItemId, IExpand request)
-      {
-         string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/expand";
-
-         return await PostIndividual<IExpandResponse, IExpand>(resourceURI, request);
+         return await PatchCollectionFromResponseMemberProperty<IGeolocationMask, IGeolocationPatch>(resourceURI, request);
       }
    }
 }

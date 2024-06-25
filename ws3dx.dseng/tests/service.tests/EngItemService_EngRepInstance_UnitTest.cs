@@ -163,5 +163,45 @@ namespace NUnitTestProject
             Assert.Fail(errorMessage);
          }
       }
+
+      [TestCase("", "")]
+      public async Task ReplaceEngRepInstance_IEngInstanceDefaultMask(string engItemId, string instanceId)
+      {
+         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
+
+         IEngRepInstanceReplace request = new EngRepInstanceReplace();
+
+         try
+         {
+            IEngInstanceDefaultMask ret = await engItemService.ReplaceRepInstance<IEngInstanceDefaultMask>(engItemId, instanceId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("", "")]
+      public async Task ReplaceEngRepInstance_IEngRepInstanceDetailMask(string engItemId, string instanceId)
+      {
+         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
+
+         IEngRepInstanceReplace request = new EngRepInstanceReplace();
+
+         try
+         {
+            IEngRepInstanceDetailMask ret = await engItemService.ReplaceRepInstance<IEngRepInstanceDetailMask>(engItemId, instanceId, request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

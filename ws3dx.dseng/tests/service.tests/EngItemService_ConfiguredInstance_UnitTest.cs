@@ -14,48 +14,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
 using System.Threading.Tasks;
-
-using ws3dx.authentication.data;
+using ws3dx.core.exception;
+using ws3dx.dseng.core.data.impl;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
 
-using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
-
 namespace NUnitTestProject
 {
-   public class EngItemService_changeControl_UnitTests : EngItemServiceTestsSetup
+   public class EngItemService_ConfiguredInstance_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("")]
-      public async Task GetChangeControl(string engItemId)
+      [TestCase("", "")]
+      public async Task GetConfiguredInstance(string engItemId, string instanceId)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IChangeControlStatusMask ret = await engItemService.GetChangeControl(engItemId);
+         IGetConfiguredInstance ret = await engItemService.GetConfiguredInstance(engItemId, instanceId);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
-      public async Task AttachChangeControl(string engItemId)
+      [TestCase("", "")]
+      public async Task UnsetConfiguredInstance(string engItemId, string instanceId)
       {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IAddEmpty request = new AddEmpty();
+         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
 
          try
          {
-            IGenericResponse ret = await engItemService.AttachChangeControl(engItemId, request);
+            IPhysicalId ret = await engItemService.UnsetConfiguredInstance(engItemId, instanceId);
 
             Assert.IsNotNull(ret);
-
          }
          catch (HttpResponseException _ex)
          {
@@ -64,18 +53,38 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task DetachChangeControl(string engItemId)
+      [TestCase("", "")]
+      public async Task SetConfiguredInstance(string engItemId, string instanceId)
       {
          EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
 
+         ISetConfiguredInstance request = new SetConfiguredInstance();
 
          try
          {
-            IGenericResponse ret = await engItemService.DetachChangeControl(engItemId);
+            IPhysicalId ret = await engItemService.SetConfiguredInstance(engItemId, instanceId, request);
 
             Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
 
+      [TestCase("", "")]
+      public async Task UpdateConfiguredInstance(string engItemId, string instanceId)
+      {
+         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
+
+         ISetConfiguredInstance request = new SetConfiguredInstance();
+
+         try
+         {
+            IPhysicalId ret = await engItemService.UpdateConfiguredInstance(engItemId, instanceId, request);
+
+            Assert.IsNotNull(ret);
          }
          catch (HttpResponseException _ex)
          {

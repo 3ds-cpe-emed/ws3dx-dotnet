@@ -13,6 +13,7 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
@@ -34,21 +35,34 @@ namespace ws3dx.dseng.core.service
          return BASE_RESOURCE;
       }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) invoke/dseng:detachEngInstances
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Detach engineering item instances from an Engineering Item version. Summary: Detach 
-      // engineering item instances
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> DetachInstances(string[] request)
+
+      ///---------------------------------------------------------------------------------------------
+      /// <summary>
+      /// Detach engineering item instances from an Engineering Item version.
+      /// </summary>
+      ///---------------------------------------------------------------------------------------------
+      /// <remarks>
+      /// (POST) invoke/dseng:detachEngInstances
+      /// </remarks>
+      ///---------------------------------------------------------------------------------------------
+      /// <param name="request">
+      /// </param>
+      /// <param name="changeAuthoringContext">
+      /// Work Under Change Action
+      /// </param>
+      /// <param name="configurationAuthoringContext">
+      /// Work Under Evolution. Will be ignored if DS-Change-Authoring-Context is set
+      /// </param>
+      ///---------------------------------------------------------------------------------------------
+      public async Task<IGenericResponse> DetachInstances(string[] request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
       {
          string resourceURI = $"{GetBaseResource()}invoke/dseng:detachEngInstances";
 
-         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request);
+         IDictionary<string, string> headerParams = new Dictionary<string, string>();
+         if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+         if (configurationAuthoringContext != null) { headerParams.Add("DS-Configuration-Authoring-Context", configurationAuthoringContext); }
+
+         return await PostIndividual<IGenericResponse, string[]>(resourceURI, request, headerParams: headerParams);
       }
    }
 }
