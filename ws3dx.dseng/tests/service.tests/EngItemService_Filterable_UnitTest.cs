@@ -14,46 +14,114 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
+using ws3dx.dseng.data.impl;
 using ws3dx.shared.data.dscfg;
-using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
+using ws3dx.utils;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_Filterable_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("", "")]
-      public async Task GetInstanceEffectivity(string engItemId, string instanceId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstanceEffectivity(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEnumerable<IFilterableDetailMask> ret = await engItemService.GetInstanceEffectivity(engItemId, instanceId);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         Assert.IsNotNull(ret);
-      }
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
 
-      [TestCase("", "")]
-      public async Task SetInstanceEvolutionEffectivity(string engItemId, string instanceId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         ISetEvolutionEffectivities request = new SetEvolutionEffectivities();
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
 
          try
          {
-            ISetEvolutionResponse ret = await engItemService.SetInstanceEvolutionEffectivity(engItemId, instanceId, request);
+            foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+            {
+               IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+               Assert.IsNotNull(ret);
 
-            Assert.IsNotNull(ret);
+               foreach (IEngInstanceDefaultMask engInstance in ret)
+               {
+                  IEnumerable<IFilterableDetailMask> filterInstance = await engItemService.GetInstanceEffectivity(engItemSearchResult.First().Id, engInstance.Id);
+
+                  Assert.IsNotNull(filterInstance);
+               }
+            }
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task SetInstanceEvolutionEffectivity(string _title, string _rev)
+      {
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         string lastEffectivityEvolutionValue = null;
+         try
+         {
+            foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+            {
+               IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+               Assert.IsNotNull(ret);
+
+               foreach (IEngInstanceDefaultMask engInstance in ret)
+               {
+                  IEnumerable<IFilterableDetailMask> filterInstanceResponse = await engItemService.GetInstanceEffectivity(engItemSearchResult.First().Id, engInstance.Id);
+
+                  Assert.IsNotNull(filterInstanceResponse);
+                  Assert.Greater(filterInstanceResponse.Count(), 0);
+                  Assert.IsNotNull(filterInstanceResponse.First());
+
+                  IFilterableDetailMask filterDetailMask = filterInstanceResponse.First();
+
+                  JsonElement effectivityContent = (JsonElement)filterDetailMask.EffectivityContent;
+                  JsonElement effectivityContentPropertyValue;
+                  if (!effectivityContent.TryGetProperty("Effectivity_Evolution", out effectivityContentPropertyValue))
+                  {
+                     throw new System.Exception("Missing EffectivityEvolution property");
+                  }
+
+                  string effectivityContentString = effectivityContentPropertyValue.GetString();
+
+                  if (!effectivityContentString.IsNullOrEmpty())
+                  {
+                     lastEffectivityEvolutionValue = effectivityContentString;
+                  }
+
+                  if ((lastEffectivityEvolutionValue != null) && effectivityContentString.IsNullOrEmpty())
+                  {
+                     ISetEvolutionEffectivities request = new SetEvolutionEffectivities();
+                     request.EvolutionContent = lastEffectivityEvolutionValue;
+
+                     ISetEvolutionResponse instanceEvolutionEffectivity = await engItemService.SetInstanceEvolutionEffectivity(engItem.Id, engInstance.Id, request);
+
+                     Assert.IsNotNull(instanceEvolutionEffectivity);
+                  }
+               }
+            }
          }
          catch (HttpResponseException _ex)
          {
@@ -82,20 +150,62 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("", "")]
-      public async Task SetInstanceVariantEffectivity(string engItemId, string instanceId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task SetInstanceVariantEffectivity(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         ISetVariantEffectivities request = new SetVariantEffectivities();
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
 
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         string lastEffectivityVariantValue = null;
          try
          {
-            ISetVariantResponse ret = await engItemService.SetInstanceVariantEffectivity(engItemId, instanceId, request);
+            foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+            {
+               IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+               Assert.IsNotNull(ret);
 
-            Assert.IsNotNull(ret);
+               foreach (IEngInstanceDefaultMask engInstance in ret)
+               {
+                  IEnumerable<IFilterableDetailMask> filterInstanceResponse = await engItemService.GetInstanceEffectivity(engItemSearchResult.First().Id, engInstance.Id);
+
+                  Assert.IsNotNull(filterInstanceResponse);
+                  Assert.Greater(filterInstanceResponse.Count(), 0);
+                  Assert.IsNotNull(filterInstanceResponse.First());
+
+                  IFilterableDetailMask filterDetailMask = filterInstanceResponse.First();
+
+                  JsonElement effectivityContent = (JsonElement)filterDetailMask.EffectivityContent;
+                  JsonElement effectivityContentPropertyValue;
+                  if (!effectivityContent.TryGetProperty("Effectivity_Variant", out effectivityContentPropertyValue))
+                  {
+                     throw new System.Exception("Missing Effectivity_Variant property");
+                  }
+
+                  string effectivityContentString = effectivityContentPropertyValue.GetString();
+
+                  if (!effectivityContentString.IsNullOrEmpty())
+                  {
+                     lastEffectivityVariantValue = effectivityContentString;
+                  }
+
+                  if ((lastEffectivityVariantValue != null) && effectivityContentString.IsNullOrEmpty())
+                  {
+                     ISetVariantEffectivities request = new SetVariantEffectivities();
+                     request.VariantContent = lastEffectivityVariantValue;
+
+                     ISetVariantResponse instanceVariantEffectivity = await engItemService.SetInstanceVariantEffectivity(engItem.Id, engInstance.Id, request);
+
+                     Assert.IsNotNull(instanceVariantEffectivity);
+                  }
+               }
+            }
          }
          catch (HttpResponseException _ex)
          {

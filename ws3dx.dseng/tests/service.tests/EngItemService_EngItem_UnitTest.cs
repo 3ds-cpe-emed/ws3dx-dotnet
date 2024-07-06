@@ -14,74 +14,122 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
-
-using ws3dx.utils.search;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
-using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
+using ws3dx.dseng.data.impl;
 using ws3dx.shared.data.impl;
-using System.Linq;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_EngItem_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("", "")]
-      public async Task Get_IEngItemDefaultMask(string engItemId)
+      [TestCase("AAA27", 0, 10)]
+      public async Task Get_IEngItemDefaultMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngItemDefaultMask ret = await engItemService.Get<IEngItemDefaultMask>(engItemId);
+         SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+         string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+         foreach (string engItemId in engItemIdArray)
+         {
+            IEngItemDefaultMask ret = await engItemService.Get<IEngItemDefaultMask>(engItemId);
+
+            Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Id, engItemId);
+         }
       }
 
-      [TestCase("", "")]
-      public async Task Get_IEngItemConfigMask(string engItemId)
+      [TestCase("AAA27", 0, 10)]
+      public async Task Get_IEngItemConfigMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngItemConfigMask ret = await engItemService.Get<IEngItemConfigMask>(engItemId);
+         SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+         string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+         foreach (string engItemId in engItemIdArray)
+         {
+            IEngItemConfigMask ret = null;
+
+            try
+            {
+               ret = await engItemService.Get<IEngItemConfigMask>(engItemId);
+            }
+
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
+
+            Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Id, engItemId);
+         }
       }
 
-      [TestCase("", "")]
-      public async Task Get_IEngItemDetailsMask(string engItemId)
+      [TestCase("AAA27", 0, 10)]
+      public async Task Get_IEngItemDetailsMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngItemDetailsMask ret = await engItemService.Get<IEngItemDetailsMask>(engItemId);
+         SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDetailsMask> engItemSearchResult = await engItemService.Search<IEngItemDetailsMask>(searchByFreeText, _skip, _top);
+
+         string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+         foreach (string engItemId in engItemIdArray)
+         {
+            IEngItemDetailsMask ret = await engItemService.Get<IEngItemDetailsMask>(engItemId);
+
+            Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Id, engItemId);
+         }
       }
 
-      [TestCase("", "")]
-      public async Task Get_IEngItemCommonMask(string engItemId)
+      [TestCase("AAA27", 0, 10)]
+      public async Task Get_IEngItemCommonMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngItemCommonMask ret = await engItemService.Get<IEngItemCommonMask>(engItemId);
+         SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+         string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+         foreach (string engItemId in engItemIdArray)
+         {
+            IEngItemCommonMask ret = await engItemService.Get<IEngItemCommonMask>(engItemId);
+
+            Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Id, engItemId);
+         }
+
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("AAA27", 0, 10)]
       public async Task Search_Paged_IEngItemDefaultMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -121,7 +169,7 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("AAA27", 0, 10)]
       public async Task Search_Paged_IEngItemDetailsMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -135,7 +183,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("AAA27")]
       public async Task Search_Full_IEngItemDetailsMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -144,12 +192,14 @@ namespace NUnitTestProject
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IEngItemDetailsMask> ret = await engItemService.Search<IEngItemDetailsMask>(searchByFreeText);
+         IList<IEngItemDetailsMask> ret = await engItemService.Search<IEngItemDetailsMask>(searchByFreeText);
+
+         TestContext.Out.Write("retrieved : " + ret.Count);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search", 0, 50)]
+      [TestCase("AAA27", 0, 50)]
       public async Task Search_Paged_IEngItemCommonMask(string search, int skip, int top)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -163,7 +213,7 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("search")]
+      [TestCase("AAA27")]
       public async Task Search_Full_IEngItemCommonMask(string search)
       {
          IPassportAuthentication passport = await Authenticate();
@@ -172,15 +222,15 @@ namespace NUnitTestProject
 
          SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IEngItemCommonMask> ret = await engItemService.Search<IEngItemCommonMask>(searchByFreeText);
+         IList<IEngItemCommonMask> ret = await engItemService.Search<IEngItemCommonMask>(searchByFreeText);
+
+         TestContext.Out.Write("retrieved : " + ret.Count);
 
          Assert.IsNotNull(ret);
       }
 
-      // Exercises Bulk Fetch by passing the ids of the result of search into it.
-      // It does this for all the three masks available types.
       [TestCase("AAA27", 0, 10)]
-      public async Task BulkFetch(string _search, int _skip, int _top)
+      public async Task BulkFetch_IEngItemDefaultMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -197,16 +247,10 @@ namespace NUnitTestProject
             IList<string> errorIdList = null;
 
             IEnumerable<IEngItemDefaultMask> returnSetWithDefaultMask = null;
-            IEnumerable<IEngItemCommonMask> returnSetWithCommonMask = null;
-            IEnumerable<IEngItemDetailsMask> returnSetWithDetailMask = null;
 
             (returnSetWithDefaultMask, errorIdList) = await engItemService.BulkFetch<IEngItemDefaultMask>(engItemIdArray);
 
-            (returnSetWithCommonMask, errorIdList)  = await engItemService.BulkFetch<IEngItemCommonMask>(engItemIdArray);
-
-            (returnSetWithDetailMask, errorIdList)  = await engItemService.BulkFetch<IEngItemDetailsMask>(engItemIdArray);
-
-            Assert.AreEqual(returnSetWithDefaultMask.Count(), returnSetWithCommonMask.Count(), returnSetWithDetailMask.Count());
+            Assert.IsNotNull(returnSetWithDefaultMask);
          }
          catch (HttpResponseException _ex)
          {
@@ -215,20 +259,28 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkFetch_IEngItemDefaultMask()
+      [TestCase("AAA27", 0, 10)]
+      public async Task BulkFetch_IEngItemDetailsMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         string[] request = new string[] { };
-
          try
          {
-            (IEnumerable<IEngItemDefaultMask> ret, IList<string> errorIdList) = await engItemService.BulkFetch<IEngItemDefaultMask>(request);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+            string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+            IList<string> errorIdList = null;
+
+            IEnumerable<IEngItemDetailsMask> returnSetWithDetailMask = null;
+
+            (returnSetWithDetailMask, errorIdList) = await engItemService.BulkFetch<IEngItemDetailsMask>(engItemIdArray);
+
+            Assert.IsNotNull(returnSetWithDetailMask);
          }
          catch (HttpResponseException _ex)
          {
@@ -237,20 +289,28 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkFetch_IEngItemDetailsMask()
+      [TestCase("AAA27", 0, 10)]
+      public async Task BulkFetch_IEngItemCommonMask(string _search, int _skip, int _top)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         string[] request = new string[] { };
-
          try
          {
-            (IEnumerable<IEngItemDetailsMask> ret, IList<string> errorIdList) = await engItemService.BulkFetch<IEngItemDetailsMask>(request);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+            string[] engItemIdArray = engItemSearchResult.Select(engItem => engItem.Id).ToArray<string>();
+
+            IList<string> errorIdList = null;
+
+            IEnumerable<IEngItemCommonMask> returnSetWithCommonMask = null;
+
+            (returnSetWithCommonMask, errorIdList) = await engItemService.BulkFetch<IEngItemCommonMask>(engItemIdArray);
+
+            Assert.IsNotNull(returnSetWithCommonMask);
          }
          catch (HttpResponseException _ex)
          {
@@ -259,32 +319,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkFetch_IEngItemCommonMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         string[] request = new string[] { };
-
-         try
-         {
-            (IEnumerable<IEngItemCommonMask> ret, IList<string> errorIdList) = await engItemService.BulkFetch<IEngItemCommonMask>(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
-      // Exercises Bulk Fetch by modifying the description of all results of the search into it.
-      // It does this for all the three masks available types.
       [TestCase("AAA27", 0, 5, "bulk update edit description")]
-      public async Task BulkUpdate(string _search, int _skip, int _top, string _description_update)
+      public async Task BulkUpdate_IEngItemDefaultMask(string _search, int _skip, int _top, string _description_update)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -298,7 +334,7 @@ namespace NUnitTestProject
 
             IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
 
-            Tuple<string, string>[] engItemIdArray = engItemSearchResult.Select(engItem => new Tuple<string, string>(engItem.Id, engItem.Cestamp)).ToArray();
+            Tuple<string, string>[] engItemIdArray = engItemSearchResult.Where(engItem => engItem.State.Equals("IN_WORK")).Select(engItem => new Tuple<string, string>(engItem.Id, engItem.Cestamp)).ToArray();
 
             IEngItemBulkUpdateItem[] bulkUpdates = new IEngItemBulkUpdateItem[engItemIdArray.Length];
 
@@ -321,8 +357,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkUpdate_IEngItemDefaultMask()
+      [TestCase("AAA27", 0, 5, "bulk update edit description")]
+      public async Task BulkUpdate_IEngItemConfigMask(string _search, int _skip, int _top, string _description_update)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -332,9 +368,25 @@ namespace NUnitTestProject
 
          try
          {
-            (IEnumerable<IEngItemDefaultMask> ret, IList<string> errorIdList) = await engItemService.BulkUpdate<IEngItemDefaultMask>(request);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText, _skip, _top);
+
+            Tuple<string, string>[] engItemIdArray = engItemSearchResult.Where(engItem => engItem.State.Equals("IN_WORK")).Select(engItem => new Tuple<string, string>(engItem.Id, engItem.Cestamp)).ToArray();
+
+            IEngItemBulkUpdateItem[] bulkUpdates = new IEngItemBulkUpdateItem[engItemIdArray.Length];
+
+            for (int i = 0; i < engItemIdArray.Length; i++)
+            {
+               bulkUpdates[i] = new EngItemBulkUpdateItem();
+               bulkUpdates[i].Id = engItemIdArray[i].Item1;
+               bulkUpdates[i].Cestamp = engItemIdArray[i].Item2;
+               bulkUpdates[i].Description = _description_update;
+            }
+
+            (IEnumerable<IEngItemConfigMask> returnSetWithDefaultMask, IList<string> errIdList) = await engItemService.BulkUpdate<IEngItemConfigMask>(bulkUpdates);
+
+            Assert.That(returnSetWithDefaultMask, Is.All.Matches<IEngItemConfigMask>(engItem => engItem.Description.Equals(_description_update)));
          }
          catch (HttpResponseException _ex)
          {
@@ -343,8 +395,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkUpdate_IEngItemConfigMask()
+      [TestCase("AAA27", 0, 5, "bulk update edit description")]
+      public async Task BulkUpdate_IEngItemDetailsMask(string _search, int _skip, int _top, string _description_update)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -354,9 +406,25 @@ namespace NUnitTestProject
 
          try
          {
-            (IEnumerable<IEngItemConfigMask> ret, IList<string> errorIdList) = await engItemService.BulkUpdate<IEngItemConfigMask>(request);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemDetailsMask> engItemSearchResult = await engItemService.Search<IEngItemDetailsMask>(searchByFreeText, _skip, _top);
+
+            Tuple<string, string>[] engItemIdArray = engItemSearchResult.Where(engItem => engItem.State.Equals("IN_WORK")).Select(engItem => new Tuple<string, string>(engItem.Id, engItem.Cestamp)).ToArray();
+
+            IEngItemBulkUpdateItem[] bulkUpdates = new IEngItemBulkUpdateItem[engItemIdArray.Length];
+
+            for (int i = 0; i < engItemIdArray.Length; i++)
+            {
+               bulkUpdates[i] = new EngItemBulkUpdateItem();
+               bulkUpdates[i].Id = engItemIdArray[i].Item1;
+               bulkUpdates[i].Cestamp = engItemIdArray[i].Item2;
+               bulkUpdates[i].Description = _description_update;
+            }
+
+            (IEnumerable<IEngItemDetailsMask> returnSetWithDefaultMask, IList<string> errIdList) = await engItemService.BulkUpdate<IEngItemDetailsMask>(bulkUpdates);
+
+            Assert.That(returnSetWithDefaultMask, Is.All.Matches<IEngItemDetailsMask>(engItem => engItem.Description.Equals(_description_update)));
          }
          catch (HttpResponseException _ex)
          {
@@ -365,8 +433,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkUpdate_IEngItemDetailsMask()
+      [TestCase("AAA27", 0, 5, "bulk update edit description")]
+      public async Task BulkUpdate_IEngItemCommonMask(string _search, int _skip, int _top, string _description_update)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -376,9 +444,25 @@ namespace NUnitTestProject
 
          try
          {
-            (IEnumerable<IEngItemDetailsMask> ret, IList<string> errorIdList) = await engItemService.BulkUpdate<IEngItemDetailsMask>(request);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(_search);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemCommonMask> engItemSearchResult = await engItemService.Search<IEngItemCommonMask>(searchByFreeText, _skip, _top);
+
+            Tuple<string, string>[] engItemIdArray = engItemSearchResult.Where(engItem => engItem.State.Equals("IN_WORK")).Select(engItem => new Tuple<string, string>(engItem.Id, engItem.Cestamp)).ToArray();
+
+            IEngItemBulkUpdateItem[] bulkUpdates = new IEngItemBulkUpdateItem[engItemIdArray.Length];
+
+            for (int i = 0; i < engItemIdArray.Length; i++)
+            {
+               bulkUpdates[i] = new EngItemBulkUpdateItem();
+               bulkUpdates[i].Id = engItemIdArray[i].Item1;
+               bulkUpdates[i].Cestamp = engItemIdArray[i].Item2;
+               bulkUpdates[i].Description = _description_update;
+            }
+
+            (IEnumerable<IEngItemCommonMask> returnSetWithDefaultMask, IList<string> errIdList) = await engItemService.BulkUpdate<IEngItemCommonMask>(bulkUpdates);
+
+            Assert.That(returnSetWithDefaultMask, Is.All.Matches<IEngItemCommonMask>(engItem => engItem.Description.Equals(_description_update)));
          }
          catch (HttpResponseException _ex)
          {
@@ -387,30 +471,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkUpdate_IEngItemCommonMask()
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IEngItemBulkUpdateItem[] request = new EngItemBulkUpdateItem[] { };
-
-         try
-         {
-            (IEnumerable<IEngItemCommonMask> ret, IList<string> errorIdList) = await engItemService.BulkUpdate<IEngItemCommonMask>(request);
-
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
-      [TestCase()]
-      public async Task Create_IEngItemDefaultMask()
+      [TestCase("New Engineering item created from Web Service")]
+      public async Task Create_IEngItemDefaultMask(string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -418,17 +480,22 @@ namespace NUnitTestProject
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
-         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+         newEngItem.Attributes.Title = _title;
 
          ICreateEngItem request = new CreateEngItem();
-         request.Items = new List<INewEngItem>();
-         request.Items.Add(newEngItem);
+         request.Items = [newEngItem];
 
          try
          {
             IEnumerable<IEngItemDefaultMask> ret = await engItemService.Create<IEngItemDefaultMask>(request);
 
             Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Count(), 1);
+
+            foreach (IEngItemDefaultMask item in ret)
+            {
+               Assert.AreEqual(item.Title, _title);
+            }
          }
          catch (HttpResponseException _ex)
          {
@@ -437,16 +504,16 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IEngItemConfigMask()
+      [TestCase("New Engineering item created from Web Service")]
+      public async Task Create_IEngItemConfigMask(string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
-         
+
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
-         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+         newEngItem.Attributes.Title = _title;
 
          ICreateEngItem request = new CreateEngItem();
          request.Items = new List<INewEngItem>();
@@ -461,6 +528,7 @@ namespace NUnitTestProject
             foreach (IEngItemConfigMask engItem in ret)
             {
                Assert.IsNotNull(engItem.ConfigurationContext);
+               Assert.AreEqual(engItem.Title, _title);
             }
          }
          catch (HttpResponseException _ex)
@@ -470,8 +538,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IEngItemDetailsMask()
+      [TestCase("New Engineering item created from Web Service")]
+      public async Task Create_IEngItemDetailsMask(string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -479,7 +547,7 @@ namespace NUnitTestProject
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
-         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+         newEngItem.Attributes.Title = _title;
 
          ICreateEngItem request = new CreateEngItem();
          request.Items = new List<INewEngItem>();
@@ -494,6 +562,8 @@ namespace NUnitTestProject
             {
                Assert.IsNotNull(engItem.EnterpriseAttributes);
                Assert.IsNotNull(engItem.EnterpriseReference);
+
+               Assert.AreEqual(engItem.Title, _title);
             }
          }
          catch (HttpResponseException _ex)
@@ -503,8 +573,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IEngItemCommonMask()
+      [TestCase("New Engineering item created from Web Service")]
+      public async Task Create_IEngItemCommonMask(string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -512,7 +582,7 @@ namespace NUnitTestProject
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
-         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
+         newEngItem.Attributes.Title = _title;
 
          ICreateEngItem request = new CreateEngItem();
          request.Items = new List<INewEngItem>();
@@ -523,10 +593,12 @@ namespace NUnitTestProject
             IEnumerable<IEngItemCommonMask> ret = await engItemService.Create<IEngItemCommonMask>(request);
 
             Assert.IsNotNull(ret);
+            Assert.AreEqual(ret.Count(), 1);
 
             foreach (IEngItemCommonMask engItem in ret)
             {
                Assert.IsNotNull(engItem.Usage);
+               Assert.AreEqual(engItem.Title, _title);
             }
          }
          catch (HttpResponseException _ex)
@@ -536,8 +608,8 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task Create_IEngItemDetailsMask_WithEnterpriseReference()
+      [TestCase("New Engineering item created from Web Service", "AAA27:128")]
+      public async Task Create_IEngItemDetailsMask_WithEnterpriseReference(string _title, string _partnumber)
       {
          IPassportAuthentication passport = await Authenticate();
 
@@ -547,8 +619,8 @@ namespace NUnitTestProject
          newEngItem.Attributes = new NewEngItemAttributes();
          newEngItem.Attributes.EnterpriseReference = new EnterpriseItemNumber();
 
-         newEngItem.Attributes.Title = "New Engineering item created from Web Service";
-         newEngItem.Attributes.EnterpriseReference.PartNumber = "AAA27:000001";
+         newEngItem.Attributes.Title = _title;
+         newEngItem.Attributes.EnterpriseReference.PartNumber = _partnumber;
 
          ICreateEngItem request = new CreateEngItem();
          request.Items = new List<INewEngItem>();
@@ -563,6 +635,9 @@ namespace NUnitTestProject
             {
                Assert.IsNotNull(engItem.EnterpriseAttributes);
                Assert.IsNotNull(engItem.EnterpriseReference);
+
+               Assert.AreEqual(engItem.Title, _title);
+               Assert.AreEqual(engItem.EnterpriseReference.PartNumber, _partnumber);
             }
          }
          catch (HttpResponseException _ex)
@@ -572,20 +647,32 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task Expand(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task Expand(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IExpand request = new Expand();
-
          try
          {
-            IExpandResponse ret = await engItemService.Expand(engItemId, request);
+            SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-            Assert.IsNotNull(ret);
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+            foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+            {
+               Expand expand = new Expand
+               {
+                  ExpandDepth = -1,
+                  WithPath = true,
+                  TypeFilterBo = ["VPMReference", "VPMRepReference"],
+                  TypeFilterRel = ["VPMInstance", "VPMRepInstance"]
+               };
+
+               IEnumerable<object> ret = await engItemService.Expand(engItem.Id, expand);
+               Assert.IsNotNull(ret);
+            }
          }
          catch (HttpResponseException _ex)
          {

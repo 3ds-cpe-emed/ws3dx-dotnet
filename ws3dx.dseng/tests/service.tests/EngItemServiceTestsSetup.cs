@@ -14,6 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.tests.service.tests;
@@ -22,6 +23,11 @@ namespace NUnitTestProject
 {
    public class EngItemServiceTestsSetup : PassportAuthenticationTestSetup
    {
+      public async Task<EngItemService> GetAuthenticatedEngineeringServiceAsync()
+      {
+         return ServiceFactoryCreate(await Authenticate());
+      }
+
       public EngItemService ServiceFactoryCreate(IPassportAuthentication _passport)
       {
          return new EngItemService(GetServiceUrl(), _passport)

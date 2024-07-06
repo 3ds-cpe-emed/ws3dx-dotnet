@@ -15,9 +15,12 @@
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using ws3dx.serialization.attribute;
+using ws3dx.shared.data.impl;
 
 namespace ws3dx.shared.data
 {
+   [ConcreteInterfaceImpConverter(typeof(RelatedId))]
    public interface IRelatedId : ITypedUriId
    {
       IList<ITypedUriId> ReferencedObject { get; set; }

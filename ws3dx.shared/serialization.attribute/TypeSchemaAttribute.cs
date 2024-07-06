@@ -22,7 +22,7 @@ namespace ws3dx.serialization.attribute
    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
    public class TypeSchemaAttribute : Attribute
    {
-      public string PropertyTypeName  { get; }
+      public string PropertyTypeName { get; }
       public object PropertyTypeValue { get; }
 
       public Type BaseMaskSchemaInterface { get; }

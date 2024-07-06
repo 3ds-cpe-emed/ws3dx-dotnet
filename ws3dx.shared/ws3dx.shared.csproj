@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ws3dx.shared.snk</AssemblyOriginatorKeyFile>
     <PackageLicenseFile>MITlicense.txt</PackageLicenseFile>
@@ -15,10 +15,6 @@
     <AssemblyName>ws3dx.shared</AssemblyName>
     <Version>426.2.0</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.7" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="MITlicense.txt">

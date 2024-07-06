@@ -71,7 +71,7 @@ namespace NUnitTestProject
 
          IEnumerable<IAlternateDetailMask> ret = await engItemService.GetAlternates<IAlternateDetailMask>(engItemId);
 
-            Assert.IsNotNull(ret);
-         }
+         Assert.IsNotNull(ret);
+      }
    }
 }

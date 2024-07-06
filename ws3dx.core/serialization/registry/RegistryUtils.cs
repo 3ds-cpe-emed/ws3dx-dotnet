@@ -40,7 +40,7 @@ namespace ws3dx.core.serialization.registry
             if (!candidateImplClassType.IsClass) continue;
 
             Type[] directlyImplementedInterfaces = GetDirectlyImplementedInterfaces(candidateImplClassType);
-            
+
             foreach (Type candidateImplClassTypeInterfaceType in directlyImplementedInterfaces)
             {
                if (candidateImplClassTypeInterfaceType == _interfaceType)
@@ -85,7 +85,7 @@ namespace ws3dx.core.serialization.registry
                baseType = baseType.BaseType;
             }
          }
-       
+
          //NOTE: allInterfaces now only includes interfaces implemented by the most derived class and
          //interfaces implemented by those(interfaces of the most derived class)
 
@@ -96,7 +96,7 @@ namespace ws3dx.core.serialization.registry
          //public class Top : A{} → We only want to dump interface A so interface B must be removed
 
          HashSet<Type> interfacesToRemoveSet = new HashSet<Type>();
-        
+
          //Considering class A given above allInterfaces contain A and B now
          foreach (var implementedByMostDerivedClass in parsedInterfaces)
          {

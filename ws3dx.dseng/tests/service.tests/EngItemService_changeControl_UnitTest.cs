@@ -14,45 +14,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
-using ws3dx.authentication.data;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
-
-using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_changeControl_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("")]
-      public async Task GetChangeControl(string engItemId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task GetChangeControl(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         IChangeControlStatusMask ret = await engItemService.GetChangeControl(engItemId);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
+
+         IChangeControlStatusMask ret = await engItemService.GetChangeControl(engItem.Id);
 
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("")]
-      public async Task AttachChangeControl(string engItemId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task AttachChangeControl(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         IAddEmpty request = new AddEmpty();
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
 
          try
          {
-            IGenericResponse ret = await engItemService.AttachChangeControl(engItemId, request);
+            IGenericResponse ret = await engItemService.AttachChangeControl(engItem.Id);
 
             Assert.IsNotNull(ret);
 
@@ -64,15 +74,23 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task DetachChangeControl(string engItemId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task DetachChangeControl(string _title, string _rev)
       {
-         EngItemService engItemService = ServiceFactoryCreate(await Authenticate());
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
 
          try
          {
-            IGenericResponse ret = await engItemService.DetachChangeControl(engItemId);
+            IGenericResponse ret = await engItemService.DetachChangeControl(engItem.Id);
 
             Assert.IsNotNull(ret);
 

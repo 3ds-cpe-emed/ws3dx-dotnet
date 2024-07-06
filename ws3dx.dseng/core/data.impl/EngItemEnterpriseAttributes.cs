@@ -15,11 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using ws3dx.dseng.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data.impl
 {
-   public class EngItemEnterpriseAttributes :  Dictionary<string, object>, IEngItemEnterpriseAttributes
+   public class EngItemEnterpriseAttributes : Dictionary<string, object>, IEngItemEnterpriseAttributes
    {
    }
 }

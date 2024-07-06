@@ -14,66 +14,121 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
-using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
+using ws3dx.dseng.data.impl;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_EngRepInstance_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("", "", "")]
-      public async Task GetEngRepInstance_IEngRepInstanceDetailMask(string engItemId, string repInstanceId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task GetEngRepInstance_IEngRepInstanceDetailMask(string _title, string _revision)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngRepInstanceDetailMask ret = await engItemService.GetRepInstance<IEngRepInstanceDetailMask>(engItemId, repInstanceId);
+         SearchByTitleRevision searchByFreeText = new SearchByTitleRevision(_title, _revision);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
+
+         IEnumerable<IEngInstanceDefaultMask> engRepInstances = await engItemService.GetRepInstances<IEngInstanceDefaultMask>(engItem.Id);
+
+         Assert.IsNotNull(engRepInstances);
+         Assert.Greater(engRepInstances.Count(), 0);
+
+         foreach (IEngInstanceDefaultMask engRepInstance in engRepInstances)
+         {
+            IEngRepInstanceDetailMask ret = await engItemService.GetRepInstance<IEngRepInstanceDetailMask>(engItem.Id, engRepInstance.Id);
+            Assert.IsNotNull(ret);
+         }
       }
 
-      [TestCase("", "", "")]
-      public async Task GetEngRepInstance_IEngInstanceDefaultMask(string engItemId, string repInstanceId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task GetEngRepInstance_IEngInstanceDefaultMask(string _title, string _revision)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngInstanceDefaultMask ret = await engItemService.GetRepInstance<IEngInstanceDefaultMask>(engItemId, repInstanceId);
+         SearchByTitleRevision searchByFreeText = new SearchByTitleRevision(_title, _revision);
 
-         Assert.IsNotNull(ret);
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
+
+         IEnumerable<IEngInstanceDefaultMask> engRepInstances = await engItemService.GetRepInstances<IEngInstanceDefaultMask>(engItem.Id);
+
+         Assert.IsNotNull(engRepInstances);
+         Assert.Greater(engRepInstances.Count(), 0);
+
+         foreach (IEngInstanceDefaultMask engRepInstance in engRepInstances)
+         {
+            IEngInstanceDefaultMask ret = await engItemService.GetRepInstance<IEngInstanceDefaultMask>(engItem.Id, engRepInstance.Id);
+            Assert.IsNotNull(ret);
+         }
       }
 
-      [TestCase("", "")]
-      public async Task GetEngRepInstance_IEngRepInstanceDetailMask(string engItemId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task GetEngRepInstances_IEngRepInstanceDetailMask(string _title, string _revision)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEnumerable<IEngRepInstanceDetailMask> ret = await engItemService.GetRepInstances<IEngRepInstanceDetailMask>(engItemId);
+         SearchByTitleRevision searchByFreeText = new SearchByTitleRevision(_title, _revision);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
+
+         IEnumerable<IEngRepInstanceDetailMask> ret = await engItemService.GetRepInstances<IEngRepInstanceDetailMask>(engItem.Id);
 
          Assert.IsNotNull(ret);
+         Assert.IsNotNull(ret.First());
+
       }
 
-      [TestCase("", "")]
-      public async Task GetEngRepInstance_IEngInstanceDefaultMask(string engItemId)
+      [TestCase("AAA27:TEST:0001", "A.1")]
+      public async Task GetEngRepInstances_IEngInstanceDefaultMask(string _title, string _revision)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetRepInstances<IEngInstanceDefaultMask>(engItemId);
+         SearchByTitleRevision searchByFreeText = new SearchByTitleRevision(_title, _revision);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchByFreeText);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEngItemDefaultMask engItem = engItemSearchResult.First();
+
+         IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetRepInstances<IEngInstanceDefaultMask>(engItem.Id);
 
          Assert.IsNotNull(ret);
+         Assert.IsNotNull(ret.First());
+
       }
 
       [TestCase("", "")]

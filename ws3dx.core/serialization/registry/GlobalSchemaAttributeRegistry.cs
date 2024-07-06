@@ -22,9 +22,9 @@ namespace ws3dx.core.serialization.registry
 {
    internal static class GlobalSchemaAttributeRegistry
    {
-      private static IDictionary<Guid, IList<Type>> m_glbInterfaceImplClasses = new Dictionary<Guid, IList<Type>>();
+      //private static IDictionary<Guid, IList<Type>> m_glbInterfaceImplClasses = new Dictionary<Guid, IList<Type>>();
 
-      public static TypeSchemaRegistry TypeSchemaRegistry { get ; private set; }
+      //public static TypeSchemaRegistry TypeSchemaRegistry { get ; private set; }
       public static MaskSchemaRegistry MaskSchemaRegistry { get; private set; }
 
       public static bool IsInitialized { get; private set; } = false;
@@ -34,78 +34,76 @@ namespace ws3dx.core.serialization.registry
          IList<Assembly> assemblies = GetAllRelevantAssemblies();
 
          MaskSchemaRegistry = new MaskSchemaRegistry();
-         MaskSchemaRegistry.Parse(assemblies, ref m_glbInterfaceImplClasses);
+         //MaskSchemaRegistry.Parse(assemblies, ref m_glbInterfaceImplClasses);
+         MaskSchemaRegistry.Parse(assemblies);
 
-         TypeSchemaRegistry = new TypeSchemaRegistry();
-         TypeSchemaRegistry.Parse(assemblies, ref m_glbInterfaceImplClasses);
-
-         Parse(assemblies, ref m_glbInterfaceImplClasses);
+         //Parse(assemblies, ref m_glbInterfaceImplClasses);
 
          IsInitialized = true;
       }
 
-      private static void  Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
-      {
-         IDictionary<Guid, Type> interfaceTypeList = new Dictionary<Guid, Type>();
-         IList<Type> classTypeList = new List<Type>();
-         //IDictionary<Guid, IList<Type>> __contextClassImpTypeListByInterfaceType = new Dictionary<Guid, IList<Type>>();
+      //private static void  Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
+      //{
+      //   IDictionary<Guid, Type> interfaceTypeList = new Dictionary<Guid, Type>();
+      //   IList<Type> classTypeList = new List<Type>();
+      //   //IDictionary<Guid, IList<Type>> __contextClassImpTypeListByInterfaceType = new Dictionary<Guid, IList<Type>>();
 
-         #region adding well known collection generic type definitions
-         // IList -> List
-         if (!_itfImplClassDict.ContainsKey(typeof(IList<>).GUID))
-         {
-            _itfImplClassDict.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
-         }
+      //   #region adding well known collection generic type definitions
+      //   // IList -> List
+      //   if (!_itfImplClassDict.ContainsKey(typeof(IList<>).GUID))
+      //   {
+      //      _itfImplClassDict.Add(typeof(IList<>).GUID, new List<Type>() { typeof(List<>) });
+      //   }
 
-         // IDictionary -> Dictionary
-         if (!_itfImplClassDict.ContainsKey(typeof(IDictionary<,>).GUID)) 
-         {
-            _itfImplClassDict.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
-         }
+      //   // IDictionary -> Dictionary
+      //   if (!_itfImplClassDict.ContainsKey(typeof(IDictionary<,>).GUID)) 
+      //   {
+      //      _itfImplClassDict.Add(typeof(IDictionary<,>).GUID, new List<Type>() { typeof(Dictionary<,>) });
+      //   }
 
-         #endregion
+      //   #endregion
 
-         foreach (Assembly assembly in _assemblies)
-         {
-            if (assembly.IsDynamic) continue;
+      //   foreach (Assembly assembly in _assemblies)
+      //   {
+      //      if (assembly.IsDynamic) continue;
 
-            foreach (Type exportedType in assembly.GetExportedTypes())
-            {
-               if (exportedType.IsClass)
-               {
-                  classTypeList.Add(exportedType);
-               }
-               else
-               {
-                  if (exportedType.IsInterface)
-                  {
-                     interfaceTypeList.Add(exportedType.GUID, exportedType);
-                  }
-               }
-            }
-         }
+      //      foreach (Type exportedType in assembly.GetExportedTypes())
+      //      {
+      //         if (exportedType.IsClass)
+      //         {
+      //            classTypeList.Add(exportedType);
+      //         }
+      //         else
+      //         {
+      //            if (exportedType.IsInterface)
+      //            {
+      //               interfaceTypeList.Add(exportedType.GUID, exportedType);
+      //            }
+      //         }
+      //      }
+      //   }
 
-         foreach (Type classType in classTypeList)
-         {
-            foreach (Type classInterfaceType in RegistryUtils.GetDirectlyImplementedInterfaces(classType))
-            {
-               if (interfaceTypeList.ContainsKey(classInterfaceType.GUID))
-               {
-                  Guid classInterfaceTypeGuid = classInterfaceType.GUID;
+      //   foreach (Type classType in classTypeList)
+      //   {
+      //      foreach (Type classInterfaceType in RegistryUtils.GetDirectlyImplementedInterfaces(classType))
+      //      {
+      //         if (interfaceTypeList.ContainsKey(classInterfaceType.GUID))
+      //         {
+      //            Guid classInterfaceTypeGuid = classInterfaceType.GUID;
 
-                  if (!_itfImplClassDict.ContainsKey(classInterfaceTypeGuid))
-                  {
-                     _itfImplClassDict.Add(classInterfaceTypeGuid, new List<Type>());
-                  }
+      //            if (!_itfImplClassDict.ContainsKey(classInterfaceTypeGuid))
+      //            {
+      //               _itfImplClassDict.Add(classInterfaceTypeGuid, new List<Type>());
+      //            }
 
-                  if (!_itfImplClassDict[classInterfaceTypeGuid].Contains(classType))
-                  {
-                     _itfImplClassDict[classInterfaceTypeGuid].Add(classType);
-                  }
-               }
-            }
-         }
-      }
+      //            if (!_itfImplClassDict[classInterfaceTypeGuid].Contains(classType))
+      //            {
+      //               _itfImplClassDict[classInterfaceTypeGuid].Add(classType);
+      //            }
+      //         }
+      //      }
+      //   }
+      //}
 
       private static IList<Assembly> GetAllRelevantAssemblies()
       {
@@ -138,27 +136,27 @@ namespace ws3dx.core.serialization.registry
          return __relevantAssemblies;
       }
 
-      public static Type GetDefaultImplementationClass(Type _interfaceMaskDef)
-      {
-         if (!_interfaceMaskDef.IsInterface) throw new Exception("GetDefaultImplementationClass expects a type interface");
+      //public static Type GetDefaultImplementationClass(Type _interfaceMaskDef)
+      //{
+      //   if (!_interfaceMaskDef.IsInterface) throw new Exception("GetDefaultImplementationClass expects a type interface");
 
-         if (!IsInitialized) {
-            Initialize();
-         }
+      //   if (!IsInitialized) {
+      //      Initialize();
+      //   }
 
-         Type interfaceDef = _interfaceMaskDef;
+      //   Type interfaceDef = _interfaceMaskDef;
 
-         if ((_interfaceMaskDef.IsGenericType) && (!_interfaceMaskDef.IsGenericTypeDefinition))
-         {
-            interfaceDef = _interfaceMaskDef.GetGenericTypeDefinition();
-         }
+      //   if ((_interfaceMaskDef.IsGenericType) && (!_interfaceMaskDef.IsGenericTypeDefinition))
+      //   {
+      //      interfaceDef = _interfaceMaskDef.GetGenericTypeDefinition();
+      //   }
 
-         if (m_glbInterfaceImplClasses.TryGetValue(interfaceDef.GUID, out IList<Type> implClassList))
-         {
-            return implClassList.Count > 0 ?  implClassList[0] : null;
-         }
+      //   if (m_glbInterfaceImplClasses.TryGetValue(interfaceDef.GUID, out IList<Type> implClassList))
+      //   {
+      //      return implClassList.Count > 0 ?  implClassList[0] : null;
+      //   }
 
-         return null;
-      }
+      //   return null;
+      //}
    }
 }

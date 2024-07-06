@@ -22,6 +22,15 @@ namespace NUnitTestProject
 {
    public class InvokeServiceTestsSetup : PassportAuthenticationTestSetup
    {
+      public EngItemService ServiceEngItemFactoryCreate(IPassportAuthentication _passport)
+      {
+         return new EngItemService(GetServiceUrl(), _passport)
+         {
+            Tenant = GetTenant(),
+            SecurityContext = GetDefaultSecurityContext()
+         };
+      }
+
       public InvokeService ServiceFactoryCreate(IPassportAuthentication _passport)
       {
          return new InvokeService(GetServiceUrl(), _passport)

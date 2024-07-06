@@ -15,10 +15,9 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data.impl
 {
    public class ChangeControlStatusMask : IChangeControlStatusMask
    {

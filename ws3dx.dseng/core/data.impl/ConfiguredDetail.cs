@@ -15,10 +15,11 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
+using ws3dx.data.collection.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data.dscfg;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data.impl
 {
    public class ConfiguredDetail : IConfiguredDetail
    {
@@ -27,6 +28,7 @@ namespace ws3dx.dseng.core.data.impl
       public IList<string> EnabledCriteria { get; set; }
 
       [JsonPropertyName("configurationCtxt")]
+      [PropertyCollectionConverter(typeof(ItemSet<>))]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IConfigurationContext> ConfigurationCtxt { get; set; }
    }

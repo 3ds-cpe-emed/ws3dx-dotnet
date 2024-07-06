@@ -15,9 +15,12 @@
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using ws3dx.data.impl;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.data
 {
+   [ConcreteInterfaceImpConverter(typeof(ExtendedAttributes))]
    public interface IExtendedAttributes : IDictionary<string, object>
    {
    }

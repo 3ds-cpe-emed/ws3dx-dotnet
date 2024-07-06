@@ -1,4 +1,3 @@
-
 # WS3DX .NET
 The WS3DX .NET repository contains a collection of C# client SDKs to access Dassault Systèmes 3DEXPERIENCE web services.
 
@@ -21,48 +20,22 @@ With a few exceptions a ws3dx solution normally contains 5 projects. As a genera
 ## 3DEXPERIENCE Web Services coverage
 The current (initial) set of C# client web services SDKs provided is detailed in the table below. This table will be expanded as time and opportunity allows to incorporate other families.
 
-The main priority is to support the 3DEXPERIENCE Cloud Web Services. Support for specific 3DEXPERIENCE OnPremise Web Services is second priority. Please note however that Cloud and OnPremise web services are - for the most part - the same.
+The priority is to support the 3DEXPERIENCE Cloud Web Services. Support for specific 3DEXPERIENCE OnPremise Web Services is second priority. Please note however that Cloud and OnPremise web services are - for the most part - the same.
 
 | 3DEXPERIENCE WS | VS Solution | Versions |
 |----------|-----------------|--------|
-|[Advanced-Filter Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAAdvancedFilteringWS/dsadvfilter_v1.htm)|[ws3dx.dsadvfilter](./ws3dx.dsadvfilter)| 2023x FD01/02/03 |
-|[Bookmark REST Services 1.1.1](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAABookmarkWS/BookmarkAPI1_v1.htm)|[ws3dx.dsbks](./ws3dx.dsbks)| 2023x FD01/02/03/04 |
-|[CAD Collaboration Web Services 1.5.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAXCADWS/dsxcad_v1.htm)|[ws3dx.dsxcad](./ws3dx.dsxcad)| 2023x FD01/02/03/04 |
-|[Issue Web Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAChangeWS/dslc_change_issue_v1.htm)|[ws3dx.dsiss](./ws3dx.dsiss)| 2023x FD01/02/03/04 |
-|[Derived Outputs Web Services 1.2.1](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADerivedOutputsWS/dsdo_v1.htm)|[ws3dx.dsdo](./ws3dx.dsdo)| 2023x FD01/03/04 |
-|[Document REST Services 1.1.5](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADocumentWS/dsdoc_v1.htm)|[ws3dx.document](./ws3dx.document)| 2023x FD01/02/03/04 |
-|[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2023x FD01/02/03/04 2024x GA/FD01 |
-|[IP Classification Web Services 1.1.2](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAClassificationWS/dslib_v1.htm)|[ws3dx.dslib](./ws3dx.dslib)| 2023x FD01/03 |
-|[Collaborative Lifecycle Web Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAALifecycleWS/dslc_lifecycle_v1.htm)|[ws3dx.dslc](./ws3dx.dslc)| 2023x FD01/03/04 |
-|[Manufacturing Item Web Services 1.13.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufItemWS/dsmfg_v1.htm)|[ws3dx.dsmfg](./ws3dx.dsmfg)| 2023x FD01/02/03/04 2024x FD01|
-|[Manufacturing Process Web Services 1.11.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufProcessWS/dsprcs_v1.htm)|[ws3dx.dsprcs](./ws3dx.dsprcs)| 2023x FD01/03/04 |
-|[dssrc: Manufacturer Equivalent Items corpus 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufacturerEqItemWS/dssrc_mei_v1.htm)|[ws3dx.dssrc](./ws3dx.dssrc)| 2023x FD01/02/03/04 |
-|[Portfolio Web Services 1.9.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAPortfolioWS/dspfl_v1.htm)|[ws3dx.dspfl](./ws3dx.dspfl)| 2023x FD01/03 |
-|[Project Rest Services 1.2.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsproject_v1.2.htm)|[ws3dx.project.project](./ws3dx.project/project)| 2023x FD01/03/04 |
-|[Task Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dstask_v1.htm)|[ws3dx.project.task](./ws3dx.project/task)| 2023x FD01/03/04 |
-|[Program Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsprogram_v1.htm)|[ws3dx.project.program](./ws3dx.project/program)| 2023x FD01/03/04 |
-|[Risk Management Rest Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAProjectManagementWSTechArticles/dsrisk_v1.1.htm)|[ws3dx.project.risk](./ws3dx.project/risk)|  2023x FD01/03/04 |
-|[Raw Material Public Web Services 1.1.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAARawMaterialWS/dsrm_v1.htm)|[ws3dx.dsrm](./ws3dx.dsrm)| 2023x FD01/03 |
-|[Requirement Web Services 1.0.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAARequirementWS/dsreq_v1.htm)|[ws3dx.dsreq](./ws3dx.dsreq)| 2023x FD01/03/04 |
-|[Resource Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAResourceWS/dsrsc_v1.htm)|[ws3dx.dsrsc](./ws3dx.dsrsc)| 2023x FD01/02/03 |
+|[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2024x GA/FD02 |
 
 Note access to the 3DEXPERIENCE web service public documentation requires a 3DEXPERIENCE ID.
 
 ## Getting Started
-In order to compile the source code you need to have Visual Studio 2019 and .NET Core 3.1 available. Other Visual Studio versions have not been tried and are currently not supported.
+In order to compile the source code you need to have Visual Studio 2022 and .NET 8.0 SDK. Other Visual Studio versions have not been tried.
 
 - Clone the repository to a local folder
 
 - Select the solution file you are interested based on the 3DEXPERIENCE web services coverage  list below.
 
 The following Nuget packages are required but should be downloaded and installed automatically for you. 
-
-For the core and data libraries:
- 
-| Nuget package | Version |
-|----------|-----------------|
-|System.Net.Http.Json|6.0.0|
-|System.Text.Json|6.0.7|
 
 For the Unit Tests:
 
@@ -172,6 +145,9 @@ Some of the planned next activities.
 This project is a spin-off and learning experience result of the first SDK project here:
 
 - [3DXWS Dotnet Core SDK](https://github.com/3ds-cpe-emed/3dxws-dotnet-core-sdk) in the future while still active, this project will be discontinued and archived in the future.
+
+## Notes / History
+The current branch dev/net8/ is a major refactoring of the ws3dx project upgrading to .NET 8 and taking advantage of the provided standard serialization and, to the extent possible, minimize some of the custom serial/deserialization patterns.
 
 ## License
 The [MIT license](https://opensource.org/license/mit/) applies to all of the artifacts produced and maintained in this repository.

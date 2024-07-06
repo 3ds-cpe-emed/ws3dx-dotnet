@@ -14,22 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
-using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.shared.data;
-using ws3dx.core.exception;
 using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
    public class EngItemService_EnterpriseReference_UnitTests : EngItemServiceTestsSetup
    {
-      private const string PART_NUMBER_TEST = "AAA27:0000002";
-
       [TestCase("3784C760967A00006409AA5B000160E9")]
       public async Task GetEnterpriseItemNumber(string engItemId)
       {
@@ -42,7 +37,31 @@ namespace NUnitTestProject
          Assert.IsNotNull(ret);
       }
 
-      [TestCase("3784C760967A00006409AA5B000160E9", PART_NUMBER_TEST)]
+      [TestCase("3784C760967A00006409AA5B000160E9", "AAA27:2000001")]
+      public async Task UpdateEnterpriseItemNumber(string engItemId, string enterpriseItemNumber)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         IEnterpriseItemNumber request = new EnterpriseItemNumber();
+         request.PartNumber = enterpriseItemNumber;
+
+         try
+         {
+            IEnterpriseItemNumberMask ret = await engItemService.UpdateEnterpriseItemNumber(engItemId, request);
+
+            Assert.IsNotNull(ret);
+
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("4D0376286BCC3600666C0DC800018113", "AAA27:1000001")]
       public async Task AttachEnterpriseItemNumber(string engItemId, string enterpriseItemNumber)
       {
          IPassportAuthentication passport = await Authenticate();

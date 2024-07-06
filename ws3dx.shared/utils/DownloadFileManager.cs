@@ -81,7 +81,7 @@ namespace ws3dx.utils
       /// <param name="_downloadFolder"></param>
       public static async Task<string> Download(string _downloadUrl, string _downloadFilename = null, string _downloadFolder = null)
       {
-         
+
          string downloadFile = GetDownloadFilePath(_downloadFolder, _downloadFilename);
 
          using (var fileWriter = File.OpenWrite(downloadFile))
@@ -111,7 +111,7 @@ namespace ws3dx.utils
       /// <param name="_downloadFilename"></param>
       /// <param name="_downloadFolder"></param>
       /// <returns></returns>
-      public static async Task<string> DownloadWithTicket (string _downloadTicketUrl, string _downloadTicket, string _downloadFilename = null, string _downloadFolder = null)
+      public static async Task<string> DownloadWithTicket(string _downloadTicketUrl, string _downloadTicket, string _downloadFilename = null, string _downloadFolder = null)
       {
          string downloadFile = GetDownloadFilePath(_downloadFolder, _downloadFilename);
 

@@ -16,13 +16,13 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using ws3dx.shared.data.collection;
 
 namespace ws3dx.data.collection.impl
 {
    public class ItemSet<T> : IItemSet<T>
    {
       [JsonPropertyName("totalItems")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public long TotalItems { get; set; }
 
       [JsonPropertyName("member")]

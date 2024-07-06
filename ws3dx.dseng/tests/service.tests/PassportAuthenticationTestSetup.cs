@@ -17,9 +17,8 @@
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
-
-using ws3dx.authentication.data.impl.passport;
 using ws3dx.authentication.data;
+using ws3dx.authentication.data.impl.passport;
 using ws3dx.core.data.impl;
 using ws3dx.core.redirection;
 

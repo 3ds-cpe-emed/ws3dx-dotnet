@@ -17,9 +17,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
+using ws3dx.dseng.data.impl;
 using ws3dx.shared.data;
 
 namespace NUnitTestProject

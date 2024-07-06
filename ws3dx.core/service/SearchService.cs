@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.exception;
 using ws3dx.core.serialization;
+using ws3dx.data.collection.impl;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
@@ -99,7 +100,7 @@ namespace ws3dx.core.service
          if (HasMask)
          {
             string maskValueFromType = MaskNameUtils.GetMaskNameFromType(typeof(T), false);
-            
+
             if (maskValueFromType != null)
             {
                queryParams.Add(GetMaskParamName(), maskValueFromType);
@@ -121,7 +122,7 @@ namespace ws3dx.core.service
 
          string responseContent = await response.Content.ReadAsStringAsync();
 
-         return DeserializeCollection<T>(responseContent, _wrappingCollectionJsonPropertyName);
+         return DeserializeItems<ItemSet<T>, T>(responseContent);
       }
 
       #endregion

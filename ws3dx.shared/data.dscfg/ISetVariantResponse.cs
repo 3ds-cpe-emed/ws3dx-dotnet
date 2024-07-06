@@ -14,6 +14,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using ws3dx.shared.data.primitive;
+
 namespace ws3dx.shared.data.dscfg
 {
    public interface ISetVariantResponse

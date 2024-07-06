@@ -14,6 +14,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using ws3dx.shared.data.primitive;
+using ws3dx.shared.data.primitives;
+
 namespace ws3dx.shared.data
 {
    public interface ITypedElement : IPhysicalId, IType, IModificationDates, IName, IConcurrentEngineering, IDescription

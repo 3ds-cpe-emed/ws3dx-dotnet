@@ -21,6 +21,7 @@ using ws3dx.core.service;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
 using ws3dx.shared.data.dscfg;
+using ws3dx.shared.data.primitive;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
@@ -95,9 +96,9 @@ namespace ws3dx.dseng.core.service
       /// <param name="top">
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> GetInstances<T>(string engItemId, int skip = 0, int top = 100 )
+      public async Task<IEnumerable<T>> GetInstances<T>(string engItemId, int skip = 0, int top = 100, bool withConfiguredInstances = true)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
@@ -107,6 +108,11 @@ namespace ws3dx.dseng.core.service
             { "$skip", skip.ToString()},
             { "$top", top.ToString()}
          };
+
+         if (withConfiguredInstances)
+         {
+            queryParams.Add("$fields", "dsmvcfg:attribute.hasConfiguredInstance");
+         }
 
          return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
@@ -134,7 +140,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddInstance<T>(string engItemId, ICreateEngInstances request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance";
 
@@ -166,9 +172,9 @@ namespace ws3dx.dseng.core.service
       /// dseng:EngInstance object ID
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<T> GetInstance<T>(string engItemId, string instanceId)
+      public async Task<T> GetInstance<T>(string engItemId, string instanceId, bool withConfiguredInstances = true)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
@@ -176,6 +182,11 @@ namespace ws3dx.dseng.core.service
          {
             { "$mva", "true" }
          };
+
+         if (withConfiguredInstances)
+         {
+            queryParams.Add("$fields", "dsmvcfg:attribute.hasConfiguredInstance");
+         }
 
          return await GetIndividualFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
       }
@@ -236,7 +247,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> UpdateInstance<T>(string engItemId, string instanceId, IEngInstancePatch request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngInstanceFilterableMask), typeof(IEngInstancePositionMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}";
 
@@ -277,7 +288,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> ReplaceInstance<T>(string engItemId, string instanceId, IEngInstanceReplace request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngInstanceFilterableMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngInstanceFilterableMask), typeof(IEngInstanceDetailsMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngInstance/{instanceId}/replace";
 
@@ -308,7 +319,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetRepInstances<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
 
@@ -340,7 +351,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddRepInstance<T>(string engItemId, ICreateEngRepInstances request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance";
 
@@ -373,7 +384,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> GetRepInstance<T>(string engItemId, string instanceId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}";
 
@@ -437,7 +448,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> UpdateRepInstance<T>(string engItemId, string instanceId, IEngRepInstancePatch request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}";
 
@@ -475,7 +486,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> ReplaceRepInstance<T>(string engItemId, string instanceId, IEngRepInstanceReplace request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngRepInstanceDetailMask), typeof(IEngInstanceDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:EngRepInstance/{instanceId}/replace";
 
@@ -507,11 +518,11 @@ namespace ws3dx.dseng.core.service
       /// <param name="request">
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<IExpandResponse> Expand(string engItemId, IExpand request)
+      public async Task<IList<object>> Expand(string engItemId, IExpand request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/expand";
 
-         return await PostIndividualNoMask<IExpandResponse, IExpand>(resourceURI, request);
+         return await PostCollectionNoMaskFromResponseMemberProperty<object, IExpand>(resourceURI, request);
       }
 
       ///---------------------------------------------------------------------------------------------
@@ -531,7 +542,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> Create<T>(ICreateEngItem request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem";
 
@@ -561,7 +572,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> Get<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
@@ -619,7 +630,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> Update<T>(string engItemId, IEngItemPatch request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}";
 
@@ -652,7 +663,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngItemDefaultMask), typeof(IEngItemDetailsMask), typeof(IEngItemCommonMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkfetch";
 
@@ -682,7 +693,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkUpdate<T>(IEngItemBulkUpdateItem[] request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IEngItemCommonMask), typeof(IEngItemDetailsMask), typeof(IEngItemConfigMask), typeof(IEngItemDefaultMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/bulkupdate";
 
@@ -732,7 +743,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetAlternates<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IAlternateMask), typeof(IAlternateDetailMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
@@ -759,7 +770,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternates request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IAlternateMask), typeof(IAlternateDetailMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
@@ -789,7 +800,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesInstance request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IAlternateMask), typeof(IAlternateDetailMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
@@ -819,7 +830,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> AddAlternate<T>(string engItemId, IAddAlternatesParent request, string changeAuthoringContext = null)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IAlternateMask), typeof(IAlternateDetailMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate";
 
@@ -848,7 +859,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> GetAlternate<T>(string engItemId, string alternateId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IAlternateMask), typeof(IAlternateDetailMask) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IAlternateMask), typeof(IAlternateDetailMask)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dseng:Alternate/{alternateId}";
 
@@ -995,11 +1006,11 @@ namespace ws3dx.dseng.core.service
       /// <param name="request">
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> AttachChangeControl(string engItemId, IAddEmpty request)
+      public async Task<IGenericResponse> AttachChangeControl(string engItemId)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dslc:changeControl";
 
-         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
+         return await PostIndividual<IGenericResponse>(resourceURI);
       }
 
       ///---------------------------------------------------------------------------------------------
@@ -1217,7 +1228,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<IEnumerable<T>> GetConfiguration<T>(string engItemId)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IConfiguredDetail), typeof(IConfiguredBasics)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
 
@@ -1241,7 +1252,7 @@ namespace ws3dx.dseng.core.service
       ///---------------------------------------------------------------------------------------------
       public async Task<T> UpdateConfiguration<T>(string engItemId, IConfiguredPatch request)
       {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IConfiguredDetail), typeof(IConfiguredBasics) });
+         GenericParameterConstraintUtils.CheckConstraints(typeof(T), [typeof(IConfiguredDetail), typeof(IConfiguredBasics)]);
 
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/{engItemId}/dscfg:Configured";
 

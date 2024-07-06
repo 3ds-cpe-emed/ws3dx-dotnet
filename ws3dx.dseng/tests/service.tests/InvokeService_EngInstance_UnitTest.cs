@@ -14,26 +14,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
-using ws3dx.dseng.core.service;
-using ws3dx.shared.data;
 using ws3dx.core.exception;
+using ws3dx.dseng.core.service;
+using ws3dx.dseng.data;
+using ws3dx.shared.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class InvokeService_EngInstance_UnitTests : InvokeServiceTestsSetup
    {
-      [TestCase()]
-      public async Task DetachInstances()
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task DetachInstances(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
+         EngItemService engineeringService = ServiceEngItemFactoryCreate(passport);
          InvokeService invokeService = ServiceFactoryCreate(passport);
 
-         string[] request = new string[] {};
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engineeringService.Search<IEngItemDefaultMask>(searchCriteria);
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         IEnumerable<IEngInstanceDefaultMask> retInstances = await engineeringService.GetInstances<IEngInstanceDefaultMask>(engItemSearchResult.First().Id, 0, 10);
+         Assert.IsNotNull(retInstances);
+         Assert.IsNotNull(retInstances.First());
+
+         string[] request = new string[] { retInstances.First().Id };
 
          try
          {

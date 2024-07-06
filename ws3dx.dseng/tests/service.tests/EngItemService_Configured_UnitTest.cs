@@ -14,57 +14,99 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
-using ws3dx.authentication.data;
+using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
 using ws3dx.shared.data;
-using ws3dx.core.exception;
+using ws3dx.shared.data.dscfg;
 using ws3dx.shared.data.impl;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_Configured_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredDetail(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetConfiguration_IConfiguredDetail(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEnumerable<IConfiguredDetail> ret = await engItemService.GetConfiguration<IConfiguredDetail>(engItemId);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         Assert.IsNotNull(ret);
-      }
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
 
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredBasics(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEnumerable<IConfiguredBasics> ret = await engItemService.GetConfiguration<IConfiguredBasics>(engItemId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AttachConfiguration(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
 
          try
          {
-            IEnumerable<ITypedUriIdentifier> ret = await engItemService.AttachConfiguration(engItemId, request);
+            IEnumerable<IConfiguredDetail> ret = await engItemService.GetConfiguration<IConfiguredDetail>(engItemSearchResult.First().Id);
 
             Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException ex)
+         {
+            Assert.Fail(await ex.GetErrorMessage());
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetConfiguration_IConfiguredBasics(string _title, string _rev)
+      {
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         try
+         {
+            IEnumerable<IConfiguredBasics> ret = await engItemService.GetConfiguration<IConfiguredBasics>(engItemSearchResult.First().Id);
+         }
+         catch (HttpResponseException ex)
+         {
+            Assert.Fail(await ex.GetErrorMessage());
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1", "Model", "4D0376286BCC3600666C101E000950CC", "/resources/v1/modeler/dspfl/dspfl:Model/4D0376286BCC3600666C101E000950CC")]
+      public async Task AttachConfiguration(string _title, string _rev, string _cfgType, string _cfgId, string _cfgRelPath)
+      {
+
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
+
+         try
+         {
+            ITypedUriIdentifier cfg = new TypedUriIdentifier
+            {
+               Type = _cfgType,
+               Identifier = _cfgId,
+               RelativePath = _cfgRelPath,
+               Source = engItemService.EnoviaServiceURL
+            };
+
+            ITypedUriIdentifier[] cfgRequest = [cfg];
+
+            IEnumerable<ITypedUriIdentifier> attachConfigurationReturn = await engItemService.AttachConfiguration(engItemSearchResult.First().Id, cfgRequest);
+
+            Assert.IsNotNull(attachConfigurationReturn);
          }
          catch (HttpResponseException _ex)
          {
@@ -73,18 +115,44 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("")]
-      public async Task DetachConfiguration(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task DetachConfiguration(string _title, string _rev)
       {
-         IPassportAuthentication passport = await Authenticate();
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         Assert.IsNotNull(engItemSearchResult);
+         Assert.Greater(engItemSearchResult.Count(), 0);
+         Assert.IsNotNull(engItemSearchResult.First());
 
          try
          {
-            IEnumerable<ITypedUriIdentifier> ret = await engItemService.DetachConfiguration(engItemId, request);
+            IEnumerable<IConfiguredDetail> ret = await engItemService.GetConfiguration<IConfiguredDetail>(engItemSearchResult.First().Id);
+
+            Assert.IsNotNull(ret);
+            Assert.Greater(ret.Count(), 0);
+            Assert.IsNotNull(ret.First());
+
+            Assert.IsNotNull(ret.First().ConfigurationCtxt);
+            Assert.Greater(ret.First().ConfigurationCtxt.Count(), 0);
+            Assert.IsNotNull(ret.First().ConfigurationCtxt.First());
+
+            IConfigurationContext configurationContext = ret.First().ConfigurationCtxt.First();
+
+            TypedUriIdentifier configurationObject = new TypedUriIdentifier
+            {
+               Type = configurationContext.Type,
+               Identifier = configurationContext.Identifier,
+               RelativePath = configurationContext.RelativePath,
+               Source = engItemService.EnoviaServiceURL
+            };
+
+            ITypedUriIdentifier[] request = [configurationObject];
+
+            IEnumerable<ITypedUriIdentifier> detachConfigurationReturn = await engItemService.DetachConfiguration(engItemSearchResult.First().Id, request);
 
             Assert.IsNotNull(ret);
          }

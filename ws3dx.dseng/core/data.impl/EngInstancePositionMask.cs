@@ -14,10 +14,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data.impl
 {
    public class EngInstancePositionMask : IEngInstancePositionMask
    {

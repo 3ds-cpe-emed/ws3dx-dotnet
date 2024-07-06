@@ -14,11 +14,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------------------------------------------------------------
 
-using ws3dx.data.impl;
-
 namespace ws3dx.utils.search
 {
-   public abstract class SearchQuery : SerializableJsonObject
+   public abstract class SearchQuery
    {
       public abstract string GetSearchString();
    }

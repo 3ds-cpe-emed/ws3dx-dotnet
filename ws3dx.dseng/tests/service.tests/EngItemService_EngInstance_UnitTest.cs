@@ -14,263 +14,531 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using ws3dx.authentication.data;
 using ws3dx.core.exception;
-using ws3dx.dseng.core.data.impl;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
+using ws3dx.dseng.data.impl;
+using ws3dx.shared.data;
+using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
    public class EngItemService_EngInstance_UnitTests : EngItemServiceTestsSetup
    {
-      [TestCase("", "", "")]
-      public async Task GetInstance_IEngInstanceFilterableMask(string engItemId, string instanceId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstance_IEngInstanceFilterableMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngInstanceFilterableMask ret = await engItemService.GetInstance<IEngInstanceFilterableMask>(engItemId, instanceId);
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         Assert.IsNotNull(ret);
-      }
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
 
-      [TestCase("", "", "")]
-      public async Task GetInstance_IEngInstancePositionMask(string engItemId, string instanceId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEngInstancePositionMask ret = await engItemService.GetInstance<IEngInstancePositionMask>(engItemId, instanceId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "", "")]
-      public async Task GetInstance_IEngInstanceDefaultMask(string engItemId, string instanceId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEngInstanceDefaultMask ret = await engItemService.GetInstance<IEngInstanceDefaultMask>(engItemId, instanceId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "", "")]
-      public async Task GetInstance_IEngInstanceDetailsMask(string engItemId, string instanceId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEngInstanceDetailsMask ret = await engItemService.GetInstance<IEngInstanceDetailsMask>(engItemId, instanceId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetInstances_IEngInstanceFilterableMask(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IEnumerable<IEngInstanceFilterableMask> ret = await engItemService.GetInstances<IEngInstanceFilterableMask>(engItemId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetInstances_IEngInstancePositionMask(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IEnumerable<IEngInstancePositionMask> ret = await engItemService.GetInstances<IEngInstancePositionMask>(engItemId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetInstances_IEngInstanceDefaultMask(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItemId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetInstances_IEngInstanceDetailsMask(string engItemId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-         IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItemId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task ReplaceInstance_IEngInstanceFilterableMask(string engItemId, string instanceId)
-      {
-         IPassportAuthentication passport = await Authenticate();
-
-         EngItemService engItemService = ServiceFactoryCreate(passport);
-
-         IEngInstanceReplace request = new EngInstanceReplace();
-
-         try
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceFilterableMask> ret = await engItemService.ReplaceInstance<IEngInstanceFilterableMask>(engItemId, instanceId, request);
+            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+            Assert.IsNotNull(ret);
 
+            foreach (IEngInstanceDefaultMask engInstance in ret)
+            {
+               IEngInstanceFilterableMask engInstanceFilterableMask = await engItemService.GetInstance<IEngInstanceFilterableMask>(engItem.Id, engInstance.Id);
+
+               Assert.IsNotNull(engInstanceFilterableMask);
+
+               Assert.AreEqual(engInstance.Id, engInstanceFilterableMask.Id);
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstance_IEngInstancePositionMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+            Assert.IsNotNull(ret);
+
+            foreach (IEngInstanceDefaultMask engInstance in ret)
+            {
+               IEngInstancePositionMask engInstancePositionMask = await engItemService.GetInstance<IEngInstancePositionMask>(engItem.Id, engInstance.Id);
+
+               Assert.IsNotNull(engInstancePositionMask);
+
+               Assert.AreEqual(engInstance.Id, engInstancePositionMask.Id);
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstance_IEngInstanceDefaultMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+            Assert.IsNotNull(ret);
+
+            foreach (IEngInstanceDefaultMask engInstance in ret)
+            {
+               IEngInstanceDefaultMask engInstanceDefaultMask = await engItemService.GetInstance<IEngInstanceDefaultMask>(engItem.Id, engInstance.Id);
+
+               Assert.IsNotNull(engInstanceDefaultMask);
+
+               Assert.AreEqual(engInstance.Id, engInstanceDefaultMask.Id);
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstance_IEngInstanceDetailsMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 10);
+            Assert.IsNotNull(ret);
+
+            foreach (IEngInstanceDefaultMask engInstance in ret)
+            {
+               IEngInstanceDetailsMask engInstanceDetailMask = await engItemService.GetInstance<IEngInstanceDetailsMask>(engItem.Id, engInstance.Id);
+
+               Assert.IsNotNull(engInstanceDetailMask);
+
+               Assert.AreEqual(engInstance.Id, engInstanceDetailMask.Id);
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstances_IEngInstanceFilterableMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceFilterableMask> ret = await engItemService.GetInstances<IEngInstanceFilterableMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
          }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
       }
 
-      [TestCase("", "")]
-      public async Task ReplaceInstance_IEngInstanceDefaultMask(string engItemId, string instanceId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstances_IEngInstancePositionMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngInstanceReplace request = new EngInstanceReplace();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.ReplaceInstance<IEngInstanceDefaultMask>(engItemId, instanceId, request);
-
+            IEnumerable<IEngInstancePositionMask> ret = await engItemService.GetInstances<IEngInstancePositionMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
          }
       }
 
-      [TestCase("", "")]
-      public async Task ReplaceInstance_IEngInstanceDetailsMask(string engItemId, string instanceId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstances_IEngInstanceDefaultMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         IEngInstanceReplace request = new EngInstanceReplace();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.ReplaceInstance<IEngInstanceDetailsMask>(engItemId, instanceId, request);
-
+            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.GetInstances<IEngInstanceDefaultMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
          }
       }
 
-      [TestCase("")]
-      public async Task AddInstance_IEngInstanceFilterableMask(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task GetInstances_IEngInstanceDetailsMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         ICreateEngInstances request = new CreateEngInstances();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceFilterableMask> ret = await engItemService.AddInstance<IEngInstanceFilterableMask>(engItemId, request);
-
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
          }
       }
 
-      [TestCase("")]
-      public async Task AddInstance_IEngInstancePositionMask(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task ReplaceInstance_IEngInstanceFilterableMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         ICreateEngInstances request = new CreateEngInstances();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstancePositionMask> ret = await engItemService.AddInstance<IEngInstancePositionMask>(engItemId, request);
-
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
+
+            //there should be at least two otherwise the test cannot be performed
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+
+            if (distincEngInstanceRef.Count() < 2)
+            {
+               throw new Exception("Need at least two distinct instance references to run this test");
+            }
+
+            Assert.IsNotNull(distincEngInstanceRef.First());
+            Assert.IsNotNull(distincEngInstanceRef.ElementAt(1));
+
+            IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
+
+            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+
+            EngInstanceReplace newEngInstance = new EngInstanceReplace();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new EngInstanceReplaceAttributes();
+            newEngInstance.Attributes.Name = "instance replacement";
+            newEngInstance.Attributes.Description = "replaced from the web services";
+
+            try
+            {
+               IEnumerable<IEngInstanceFilterableMask> retReplacement = await engItemService.ReplaceInstance<IEngInstanceFilterableMask>(engItem.Id, engInstanceIdToBeReplaced.Id, newEngInstance);
+
+               Assert.IsNotNull(retReplacement);
+               Assert.IsNotNull(retReplacement.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
          }
       }
 
-      [TestCase("")]
-      public async Task AddInstance_IEngInstanceDefaultMask(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task ReplaceInstance_IEngInstanceDefaultMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         ICreateEngInstances request = new CreateEngInstances();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceDefaultMask> ret = await engItemService.AddInstance<IEngInstanceDefaultMask>(engItemId, request);
-
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
+
+            //there should be at least two otherwise the test cannot be performed
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+
+            if (distincEngInstanceRef.Count() < 2)
+            {
+               throw new Exception("Need at least two distinct instance references to run this test");
+            }
+
+            Assert.IsNotNull(distincEngInstanceRef.First());
+            Assert.IsNotNull(distincEngInstanceRef.ElementAt(1));
+
+            IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
+
+            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+
+            EngInstanceReplace newEngInstance = new EngInstanceReplace();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new EngInstanceReplaceAttributes();
+            newEngInstance.Attributes.Name = "instance replacement";
+            newEngInstance.Attributes.Description = "replaced from the web services";
+
+            try
+            {
+               IEnumerable<IEngInstanceDefaultMask> retReplacement = await engItemService.ReplaceInstance<IEngInstanceDefaultMask>(engItem.Id, engInstanceIdToBeReplaced.Id, newEngInstance);
+
+               Assert.IsNotNull(retReplacement);
+               Assert.IsNotNull(retReplacement.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
          }
       }
 
-      [TestCase("")]
-      public async Task AddInstance_IEngInstanceDetailsMask(string engItemId)
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task ReplaceInstance_IEngInstanceDetailsMask(string _title, string _rev)
       {
          IPassportAuthentication passport = await Authenticate();
 
          EngItemService engItemService = ServiceFactoryCreate(passport);
 
-         ICreateEngInstances request = new CreateEngInstances();
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
 
-         try
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.AddInstance<IEngInstanceDetailsMask>(engItemId, request);
-
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 100);
             Assert.IsNotNull(ret);
+
+            //there should be at least two otherwise the test cannot be performed
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+
+            if (distincEngInstanceRef.Count() < 2)
+            {
+               throw new Exception("Need at least two distinct instance references to run this test");
+            }
+
+            Assert.IsNotNull(distincEngInstanceRef.First());
+            Assert.IsNotNull(distincEngInstanceRef.ElementAt(1));
+
+            IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
+
+            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+
+            EngInstanceReplace newEngInstance = new EngInstanceReplace();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new EngInstanceReplaceAttributes();
+            newEngInstance.Attributes.Name = "instance replacement";
+            newEngInstance.Attributes.Description = "replaced from the web services";
+
+            try
+            {
+               IEnumerable<IEngInstanceDetailsMask> retReplacement = await engItemService.ReplaceInstance<IEngInstanceDetailsMask>(engItem.Id, engInstanceIdToBeReplaced.Id, newEngInstance);
+
+               Assert.IsNotNull(retReplacement);
+               Assert.IsNotNull(retReplacement.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
          }
-         catch (HttpResponseException _ex)
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task AddInstance_IEngInstanceFilterableMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
          {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 1);
+            Assert.IsNotNull(ret);
+            Assert.IsNotNull(ret.First());
+
+            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+
+            NewEngInstance newEngInstance = new NewEngInstance();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new NewEngInstanceAttributes();
+            newEngInstance.Attributes.Name = "instance";
+            newEngInstance.Attributes.Description = "created from the web services";
+
+            CreateEngInstances request = new CreateEngInstances();
+            request.Instances = [newEngInstance];
+
+            try
+            {
+               IEnumerable<IEngInstanceFilterableMask> retAddInstance = await engItemService.AddInstance<IEngInstanceFilterableMask>(engItem.Id, request);
+               Assert.IsNotNull(ret);
+               Assert.IsNotNull(ret.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task AddInstance_IEngInstancePositionMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 1);
+            Assert.IsNotNull(ret);
+            Assert.IsNotNull(ret.First());
+
+            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+
+            NewEngInstance newEngInstance = new NewEngInstance();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new NewEngInstanceAttributes();
+            newEngInstance.Attributes.Name = "instance";
+            newEngInstance.Attributes.Description = "created from the web services";
+
+            CreateEngInstances request = new CreateEngInstances();
+            request.Instances = [newEngInstance];
+
+            try
+            {
+               IEnumerable<IEngInstancePositionMask> retAddInstance = await engItemService.AddInstance<IEngInstancePositionMask>(engItem.Id, request);
+               Assert.IsNotNull(ret);
+               Assert.IsNotNull(ret.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task AddInstance_IEngInstanceDefaultMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 1);
+            Assert.IsNotNull(ret);
+            Assert.IsNotNull(ret.First());
+
+            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+
+            NewEngInstance newEngInstance = new NewEngInstance();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new NewEngInstanceAttributes();
+            newEngInstance.Attributes.Name = "instance";
+            newEngInstance.Attributes.Description = "created from the web services";
+
+            CreateEngInstances request = new CreateEngInstances();
+            request.Instances = [newEngInstance];
+
+            try
+            {
+               IEnumerable<IEngInstanceDefaultMask> retAddInstance = await engItemService.AddInstance<IEngInstanceDefaultMask>(engItem.Id, request);
+               Assert.IsNotNull(ret);
+               Assert.IsNotNull(ret.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
+         }
+      }
+
+      [TestCase("AAA27 Engineering Configuration Item", "A.1")]
+      public async Task AddInstance_IEngInstanceDetailsMask(string _title, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         SearchByTitleRevision searchCriteria = new SearchByTitleRevision(_title, _rev);
+
+         IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+         foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+         {
+            IEnumerable<IEngInstanceDetailsMask> ret = await engItemService.GetInstances<IEngInstanceDetailsMask>(engItem.Id, 0, 1);
+            Assert.IsNotNull(ret);
+            Assert.IsNotNull(ret.First());
+
+            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+
+            NewEngInstance newEngInstance = new NewEngInstance();
+            newEngInstance.ReferencedObject = newEngItemRefIdentifier;
+            newEngInstance.Attributes = new NewEngInstanceAttributes();
+            newEngInstance.Attributes.Name = "instance";
+            newEngInstance.Attributes.Description = "created from the web services";
+
+            CreateEngInstances request = new CreateEngInstances();
+            request.Instances = [newEngInstance];
+
+            try
+            {
+               IEnumerable<IEngInstanceDetailsMask> retAddInstance = await engItemService.AddInstance<IEngInstanceDetailsMask>(engItem.Id, request);
+               Assert.IsNotNull(ret);
+               Assert.IsNotNull(ret.First());
+            }
+            catch (HttpResponseException ex)
+            {
+               Assert.Fail(await ex.GetErrorMessage());
+            }
          }
       }
    }

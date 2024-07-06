@@ -19,13 +19,16 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
-
 using ws3dx.authentication.data;
 using ws3dx.core.data.impl;
 using ws3dx.core.exception;
 using ws3dx.core.serialization;
+using ws3dx.data.collection.impl;
 using ws3dx.serialization.attribute;
+using ws3dx.shared.data.collection;
+using ws3dx.shared.data.collection.impl;
 
 namespace ws3dx.core.service
 {
@@ -99,7 +102,25 @@ namespace ws3dx.core.service
          get { return m_clientHandler; }
       }
 
-      public string EnoviaServiceURL { get { return string.Format("{0}{1}", m_enoviaHost.ToString(), m_enoviaService); } }
+      public string EnoviaServiceURL
+      {
+         get
+         {
+
+            string enoviaHostString = m_enoviaHost.ToString();
+            string enoviaService = m_enoviaService;
+
+            if (enoviaHostString.EndsWith('/') && enoviaService.StartsWith('/'))
+            {
+               while (enoviaService.StartsWith('/') && enoviaService.Length > 0)
+               {
+                  enoviaService = enoviaService.Substring(1);
+               }
+            }
+
+            return string.Format("{0}{1}", enoviaHostString, enoviaService);
+         }
+      }
 
       public IPassportAuthentication Authentication { get { return m_authentication; } }
 
@@ -239,12 +260,10 @@ namespace ws3dx.core.service
       {
          dynamic __output;
 
-         System.Diagnostics.Debug.WriteLine($"Deserialize<{typeof(T).Name}>");
-         System.Diagnostics.Debug.WriteLine(_responseContent);
-
          try
          {
-            __output = MaskDeserializationHandler.Deserialize<T>(_responseContent);
+            __output = JsonSerializer.Deserialize<T>(_responseContent);
+
          }
          catch (Exception _ex)
          {
@@ -255,18 +274,14 @@ namespace ws3dx.core.service
          return __output;
       }
 
-      protected IList<T> DeserializeCollection<T>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
-      {
-         return DeserializeCollection<T, T>(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
-      }
-
-      protected IList<S> DeserializeCollection<T,S>(string _json, string _wrapperCollectionJsonPropertyName, bool _ignoreIfPropertyNotFound = false)
+      protected IList<S> DeserializeItems<T, S>(string _json, bool _ignoreIfPropertyNotFound = false) where T : IItems<S>
       {
          IList<S> __output = null;
 
          try
          {
-            __output = MaskDeserializationHandler.DeserializeCollection<T, S>(_json, _wrapperCollectionJsonPropertyName, _ignoreIfPropertyNotFound);
+            T output = Deserialize<T>(_json);
+            __output = output.Items;
          }
          catch (Exception _ex)
          {
@@ -327,17 +342,17 @@ namespace ws3dx.core.service
 
       protected async Task<T> GetIndividualFromResponseDataProperty<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         return await GetIndividualFromResponseArrayProperty<T>(_requestUri, "data", queryParams, headerParams);
+         return await GetIndividualFromResponseArrayProperty<T, DataSet<T>>(_requestUri, queryParams, headerParams);
       }
 
       protected async Task<T> GetIndividualFromResponseMemberProperty<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         return await GetIndividualFromResponseArrayProperty<T>(_requestUri, "member", queryParams, headerParams);
+         return await GetIndividualFromResponseArrayProperty<T, ItemSet<T>>(_requestUri, queryParams, headerParams);
       }
 
-      protected async Task<T> GetIndividualFromResponseArrayProperty<T>(string _requestUri, string _wrappingCollectionArrayPropertyName, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
+      protected async Task<T> GetIndividualFromResponseArrayProperty<T, I>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where I : IItems<T>
       {
-         IList<T> returnSet = await GetCollectionFromResponseArrayProperty<T>(_requestUri, _wrappingCollectionArrayPropertyName, queryParams, headerParams);
+         IList<T> returnSet = await GetCollectionFromResponseArrayProperty<T, I>(_requestUri, queryParams, headerParams);
 
          if ((returnSet == null) || (returnSet.Count == 0)) return default;
 
@@ -346,24 +361,24 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> GetCollectionFromResponseMemberProperty<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         return await GetCollectionFromResponseArrayProperty<T>(_requestUri, "member", queryParams, headerParams);
+         return await GetCollectionFromResponseArrayProperty<T, ItemSet<T>>(_requestUri, queryParams, headerParams);
       }
 
       protected async Task<IList<T>> GetCollectionFromResponseResultsProperty<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         return await GetCollectionFromResponseArrayProperty<T>(_requestUri, "results", queryParams, headerParams);
+         return await GetCollectionFromResponseArrayProperty<T, ResultsSet<T>>(_requestUri, queryParams, headerParams);
       }
 
       protected async Task<IList<T>> GetCollectionFromResponseDataProperty<T>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
       {
-         return await GetCollectionFromResponseArrayProperty<T>(_requestUri, "data", queryParams, headerParams);
+         return await GetCollectionFromResponseArrayProperty<T, DataSet<T>>(_requestUri, queryParams, headerParams);
       }
 
-      protected async Task<IList<T>> GetCollectionFromResponseArrayProperty<T>(string _requestUri, string _wrappingCollectionArrayPropertyName, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
+      protected async Task<IList<T>> GetCollectionFromResponseArrayProperty<T, I>(string _requestUri, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where I : IItems<T>
       {
          string responseContent = await Get<T>(_requestUri, queryParams, headerParams);
 
-         return DeserializeCollection<T>(responseContent, _wrappingCollectionArrayPropertyName);
+         return DeserializeItems<I, T>(responseContent);
       }
       #endregion
 
@@ -378,14 +393,14 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> PostCollectionNoMaskFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionNoMaskFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PostCollectionNoMaskFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
-      protected async Task<IList<T>> PostCollectionNoMaskFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<IList<T>> PostCollectionNoMaskFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await PostNoMask(_requestUri, _payload, queryParams, headerParams);
 
-         return DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         return DeserializeItems<I, T>(responseContent);
       }
 
       private async Task<string> PostNoMask(string _requestUri, object _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null)
@@ -428,8 +443,9 @@ namespace ws3dx.core.service
          if (HasMask)
          {
             string maskValueFromType = MaskNameUtils.GetMaskNameFromType(typeof(T), false);
-            
-            if (maskValueFromType != null) {
+
+            if (maskValueFromType != null)
+            {
                requestQueryParams.Add(GetMaskParamName(), maskValueFromType);
             }
          }
@@ -473,19 +489,19 @@ namespace ws3dx.core.service
 
       protected async Task<T> PostIndividualFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostIndividualFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PostIndividualFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<T> PostIndividualFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostIndividualFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PostIndividualFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
-      protected async Task<T> PostIndividualFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<T> PostIndividualFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Post<T>(_requestUri, _payload, queryParams, headerParams);
 
-         IList<T> returnSet = DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         IList<T> returnSet = DeserializeItems<I, T>(responseContent);
 
          if ((returnSet == null) || (returnSet.Count == 0)) return default;
 
@@ -501,45 +517,34 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> PostCollectionFromResponseResourcesProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionFromResponseCollectionProperty<T, P>(_requestUri, "resources", _payload, queryParams, headerParams);
+         return await PostCollectionFromResponseCollectionProperty<T, P, ResourcesSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<IList<T>> PostCollectionFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PostCollectionFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<IList<T>> PostCollectionFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PostCollectionFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<IList<T>> PostCollectionFromResponseResultsProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PostCollectionFromResponseCollectionProperty<T, P>(_requestUri, "results", _payload, queryParams, headerParams);
+         return await PostCollectionFromResponseCollectionProperty<T, P, ResultsSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
-      protected async Task<IList<T>> PostCollectionFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<IList<T>> PostCollectionFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Post<T>(_requestUri, _payload, queryParams, headerParams);
 
-         return DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
-      }
-      protected async Task<IList<O>> PostCollectionFromResponseMemberProperty<I, O, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
-      {
-         return await PostCollectionFromResponseCollectionProperty<I, O, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return DeserializeItems<I, T>(responseContent);
       }
 
-      protected async Task<IList<O>> PostCollectionFromResponseCollectionProperty<I, O, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
-      {
-         string responseContent = await Post<I>(_requestUri, _payload, queryParams, headerParams);
-
-         return DeserializeCollection<I,O>(responseContent, _responseCollectionPropertyName);
-      }
-      
       protected async Task<(IList<T>, IList<string>)> PostBulkCollection<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
          string responseContent = await Post<T>(_requestUri, _payload, queryParams, headerParams);
 
-         IList<T>  memberList = DeserializeCollection<T>(responseContent, "member");
+         IList<T> memberList = DeserializeItems<ItemSet<T>, T>(responseContent);
 
-         IList<string> nonMemberList = DeserializeCollection<string>(responseContent, "nonmembers", true);
+         IList<string> nonMemberList = DeserializeItems<NonMemberItemSet<string>, string>(responseContent, true);
 
          return (memberList, nonMemberList);
       }
@@ -581,23 +586,23 @@ namespace ws3dx.core.service
 
       protected async Task<T> PatchIndividualFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchIndividualFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PatchIndividualFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<T> PatchIndividualFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchIndividualFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PatchIndividualFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<T> PatchIndividualFromResponseResultsProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchIndividualFromResponseCollectionProperty<T, P>(_requestUri, "results", _payload, queryParams, headerParams);
+         return await PatchIndividualFromResponseCollectionProperty<T, P, ResultsSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
-      protected async Task<T> PatchIndividualFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<T> PatchIndividualFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Patch(_requestUri, _payload, queryParams, headerParams);
 
-         IList<T> returnSet = DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         IList<T> returnSet = DeserializeItems<I, T>(responseContent);
 
          if ((returnSet == null) || (returnSet.Count == 0)) return default;
 
@@ -606,21 +611,21 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> PatchCollectionFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchCollectionFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PatchCollectionFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<IList<T>> PatchCollectionFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchCollectionFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PatchCollectionFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
       protected async Task<IList<T>> PatchCollectionFromResponseResultsProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PatchCollectionFromResponseCollectionProperty<T, P>(_requestUri, "results", _payload, queryParams, headerParams);
+         return await PatchCollectionFromResponseCollectionProperty<T, P, ResultsSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
-      protected async Task<IList<T>> PatchCollectionFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<IList<T>> PatchCollectionFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Patch(_requestUri, _payload, queryParams, headerParams);
 
-         return DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         return DeserializeItems<I, T>(responseContent);
       }
       #endregion
 
@@ -659,24 +664,24 @@ namespace ws3dx.core.service
       }
       protected async Task<T> PutIndividualFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutIndividualFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PutIndividualFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<T> PutIndividualFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutIndividualFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PutIndividualFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<T> PutIndividualFromResponseResultsProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutIndividualFromResponseCollectionProperty<T, P>(_requestUri, "results", _payload, queryParams, headerParams);
+         return await PutIndividualFromResponseCollectionProperty<T, P, ResultsSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
-      protected async Task<T> PutIndividualFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<T> PutIndividualFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Put(_requestUri, _payload, queryParams, headerParams);
 
-         IList<T> returnSet = DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         IList<T> returnSet = DeserializeItems<I, T>(responseContent);
 
          if ((returnSet == null) || (returnSet.Count == 0)) return default;
 
@@ -685,24 +690,24 @@ namespace ws3dx.core.service
 
       protected async Task<IList<T>> PutCollectionFromResponseDataProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutCollectionFromResponseCollectionProperty<T, P>(_requestUri, "data", _payload, queryParams, headerParams);
+         return await PutCollectionFromResponseCollectionProperty<T, P, DataSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<IList<T>> PutCollectionFromResponseResultsProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutCollectionFromResponseCollectionProperty<T, P>(_requestUri, "results", _payload, queryParams, headerParams);
+         return await PutCollectionFromResponseCollectionProperty<T, P, ResultsSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
       protected async Task<IList<T>> PutCollectionFromResponseMemberProperty<T, P>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
       {
-         return await PutCollectionFromResponseCollectionProperty<T, P>(_requestUri, "member", _payload, queryParams, headerParams);
+         return await PutCollectionFromResponseCollectionProperty<T, P, ItemSet<T>>(_requestUri, _payload, queryParams, headerParams);
       }
 
-      protected async Task<IList<T>> PutCollectionFromResponseCollectionProperty<T, P>(string _requestUri, string _responseCollectionPropertyName, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class
+      protected async Task<IList<T>> PutCollectionFromResponseCollectionProperty<T, P, I>(string _requestUri, P _payload = null, IDictionary<string, string> queryParams = null, IDictionary<string, string> headerParams = null) where P : class where I : IItems<T>
       {
          string responseContent = await Put(_requestUri, _payload, queryParams, headerParams);
 
-         return DeserializeCollection<T>(responseContent, _responseCollectionPropertyName);
+         return DeserializeItems<I, T>(responseContent);
       }
       #endregion
 

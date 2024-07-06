@@ -70,7 +70,7 @@ namespace ws3dx.core.serialization
             attributes = (MaskSchemaAttribute[])type.GetCustomAttributes(typeof(MaskSchemaAttribute), true);
          }
 
-         if ((attributes == null) || (attributes.Length == 0)) 
+         if ((attributes == null) || (attributes.Length == 0))
          {
             if (_raiseExceptionIfMissing)
             {

@@ -14,8 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using ws3dx.serialization.attribute;
+using ws3dx.shared.data.impl;
+using ws3dx.shared.data.primitive;
+
 namespace ws3dx.shared.data
 {
+   [ConcreteInterfaceImpConverter(typeof(TypedUriId))]
    public interface ITypedUriId : ITypedUri, IPhysicalId
    {
    }

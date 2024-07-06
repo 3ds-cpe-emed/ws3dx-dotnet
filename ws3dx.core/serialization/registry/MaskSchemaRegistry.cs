@@ -28,7 +28,8 @@ namespace ws3dx.core.serialization.registry
 
       IDictionary<string, IList<MaskSchemaInterfaceInfo>> m_masksSchemaInterfaceInfoByMaskName = new Dictionary<string, IList<MaskSchemaInterfaceInfo>>();
 
-      public void Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
+      //public void Parse(IList<Assembly> _assemblies, ref IDictionary<Guid, IList<Type>> _itfImplClassDict)
+      public void Parse(IList<Assembly> _assemblies)
       {
          foreach (Assembly assembly in _assemblies)
          {
@@ -69,21 +70,21 @@ namespace ws3dx.core.serialization.registry
             }
          }
 
-         foreach (string maskKey in m_masksSchemaInterfaceInfoByMaskName.Keys)
-         {
-            foreach (MaskSchemaInterfaceInfo maskSchemaInterfaceInfo in m_masksSchemaInterfaceInfoByMaskName[maskKey])
-            {
-               if (!_itfImplClassDict.ContainsKey(maskSchemaInterfaceInfo.MaskInterface.GUID))
-               {
-                  _itfImplClassDict.Add(maskSchemaInterfaceInfo.MaskInterface.GUID, new List<Type>());
-               }
+         //foreach (string maskKey in m_masksSchemaInterfaceInfoByMaskName.Keys)
+         //{
+         //   foreach (MaskSchemaInterfaceInfo maskSchemaInterfaceInfo in m_masksSchemaInterfaceInfoByMaskName[maskKey])
+         //   {
+         //      if (!_itfImplClassDict.ContainsKey(maskSchemaInterfaceInfo.MaskInterface.GUID))
+         //      {
+         //         _itfImplClassDict.Add(maskSchemaInterfaceInfo.MaskInterface.GUID, new List<Type>());
+         //      }
 
-               foreach (Type implClassType in maskSchemaInterfaceInfo.MaskImplClassList)
-               {
-                  _itfImplClassDict[maskSchemaInterfaceInfo.MaskInterface.GUID].Add(implClassType);
-               }
-            }
-         }
+         //      foreach (Type implClassType in maskSchemaInterfaceInfo.MaskImplClassList)
+         //      {
+         //         _itfImplClassDict[maskSchemaInterfaceInfo.MaskInterface.GUID].Add(implClassType);
+         //      }
+         //   }
+         //}
       }
    }
 }

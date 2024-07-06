@@ -14,9 +14,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dseng.data;
 
-namespace ws3dx.dseng.core.data.impl
+namespace ws3dx.dseng.data.impl
 {
    public class FilterableDetailMask : IFilterableDetailMask
    {
@@ -29,6 +28,6 @@ namespace ws3dx.dseng.core.data.impl
       //------------------------------------------------------------------------------------------------
       [JsonPropertyName("effectivityContent")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
+      public object EffectivityContent { get; set; }
    }
 }
