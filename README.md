@@ -24,7 +24,7 @@ The priority is to support the 3DEXPERIENCE Cloud Web Services. Support for spec
 
 | 3DEXPERIENCE WS | VS Solution | Versions |
 |----------|-----------------|--------|
-|[Engineering Web Services 1.3.0](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2024x GA/FD02 |
+|[Engineering Web Services](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAEngineeringWS/dseng_v1.htm)|[ws3dx.dseng](./ws3dx.dseng)| 2024x FD02 (1.3.0) 2024x GA/FD03 (1.4.0) |
 
 Note access to the 3DEXPERIENCE web service public documentation requires a 3DEXPERIENCE ID.
 
