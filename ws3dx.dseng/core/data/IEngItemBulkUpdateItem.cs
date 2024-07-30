@@ -20,62 +20,62 @@ using ws3dx.shared.data.extension;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(EngItemBulkUpdateItem))]
-   public interface IEngItemBulkUpdateItem
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: {ID}
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(EngItemBulkUpdateItem))]
+    public interface IEngItemBulkUpdateItem
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: {ID}
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsManufacturable { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Entity physical id
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: Entity physical id
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
 
-      public IChangeControl ChangeControl { get; set; }
+        public IChangeControl ChangeControl { get; set; }
 
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+        public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
+        public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      public IConfigured Configured { get; set; }
+        public IConfigured Configured { get; set; }
 
-      public ICustomerAttributes CustomerAttributes { get; set; }
-   }
+        public ICustomerAttributes CustomerAttributes { get; set; }
+    }
 }

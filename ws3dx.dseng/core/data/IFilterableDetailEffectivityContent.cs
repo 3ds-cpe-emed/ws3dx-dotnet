@@ -13,20 +13,21 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dseng.data.impl;
 
 using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   //------------------------------------------------------------------------------------------------
-   // <summary>
-   //
-   // 
-   //
-   // </summary>
-   //------------------------------------------------------------------------------------------------
+    ///------------------------------------------------------------------------------------------------
+    /// <summary>
+    ///
+    /// 
+    ///
+    /// </summary>
+    ///------------------------------------------------------------------------------------------------
    [ConcreteInterfaceImpConverter(typeof(object))]
-   public interface IFilterableDetailEffectivityContent
-   {
-   }
+    public interface IFilterableDetailEffectivityContent
+    {
+    }
 }

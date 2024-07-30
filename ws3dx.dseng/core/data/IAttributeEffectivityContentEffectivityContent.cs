@@ -19,15 +19,15 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   //------------------------------------------------------------------------------------------------
-   // <summary>
-   //
-   // 
-   //
-   // </summary>
-   //------------------------------------------------------------------------------------------------
-   [ConcreteInterfaceImpConverter(typeof(AttributeEffectivityContentEffectivityContent))]
-   public interface IAttributeEffectivityContentEffectivityContent
-   {
-   }
+    //------------------------------------------------------------------------------------------------
+    // <summary>
+    //
+    // 
+    //
+    // </summary>
+    //------------------------------------------------------------------------------------------------
+    [ConcreteInterfaceImpConverter(typeof(AttributeEffectivityContentEffectivityContent))]
+    public interface IAttributeEffectivityContentEffectivityContent
+    {
+    }
 }

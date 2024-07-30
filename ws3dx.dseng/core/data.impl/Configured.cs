@@ -17,17 +17,10 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class Configured : IConfigured
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: ["ModelVersion","Variant"]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("enabledCriteria")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string EnabledCriteria { get; set; }
-   }
+    public class Configured : IConfigured
+    {
+        [JsonPropertyName("enabledCriteria")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string EnabledCriteria { get; set; }
+    }
 }

@@ -19,11 +19,11 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngRepInstance))]
-   public interface INewEngRepInstance
-   {
-      public ITypedUriIdentifier ReferencedObject { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(NewEngRepInstance))]
+    public interface INewEngRepInstance
+    {
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
-      public INewEngRepInstanceAttributes Attributes { get; set; }
-   }
+        public INewEngRepInstanceAttributes Attributes { get; set; }
+    }
 }

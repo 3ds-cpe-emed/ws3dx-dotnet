@@ -17,36 +17,22 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class NewEngInstanceAttributes : INewEngInstanceAttributes
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class NewEngInstanceAttributes : INewEngInstanceAttributes
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Description { get; set; }
 
-      [JsonPropertyName("dscfg:Filterable")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFilterable Filterable { get; set; }
+        [JsonPropertyName("dscfg:Filterable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IFilterable Filterable { get; set; }
 
-      [JsonPropertyName("dseng:position")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPosition Position { get; set; }
-   }
+        [JsonPropertyName("dseng:position")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IPosition Position { get; set; }
+    }
 }

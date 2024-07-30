@@ -17,28 +17,14 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class EngRepInstanceReplaceAttributes : IEngRepInstanceReplaceAttributes
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class EngRepInstanceReplaceAttributes : IEngRepInstanceReplaceAttributes
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
-   }
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Description { get; set; }
+    }
 }

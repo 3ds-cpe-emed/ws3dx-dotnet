@@ -19,115 +19,115 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(Position))]
-   public interface IPosition
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A11 { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(Position))]
+    public interface IPosition
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A11 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A12 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A12 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A13 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A13 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A21 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A21 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A22 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A22 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A23 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A23 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A31 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A31 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A32 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A32 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: rotation matrix coefficient Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double A33 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// rotation matrix coefficient Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double A33 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector X in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double U1 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// translation vector X in mm Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double U1 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Y in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double U2 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// translation vector Y in mm Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double U2 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: translation vector Z in mm Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double U3 { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// translation vector Z in mm Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double U3 { get; set; }
+    }
 }

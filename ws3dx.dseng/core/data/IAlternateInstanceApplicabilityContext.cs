@@ -19,16 +19,16 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(AlternateInstanceApplicabilityContext))]
-   public interface IAlternateInstanceApplicabilityContext
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Instance { get; set; }
-   }
+	[ConcreteInterfaceImpConverter(typeof(AlternateInstanceApplicabilityContext))]
+	public interface IAlternateInstanceApplicabilityContext
+	{
+		///----------------------------------------------------------------
+		/// <summary>
+		///		
+        /// Example: EE562168015FFCF14F940A513C63AA77
+		///
+		/// </summary>
+		///----------------------------------------------------------------
+		public string Instance { get; set; }
+	}
 }

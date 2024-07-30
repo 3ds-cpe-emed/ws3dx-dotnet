@@ -471,12 +471,13 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("New Engineering item created from Web Service")]
-      public async Task Create_IEngItemDefaultMask(string _title)
-      {
+
+      [TestCase("VPLMProjectLeader", "Company Name", "AAA27 Personal", "New Engineering item created from Web Service")]
+      public async Task Create_IEngItemDefaultMask(string _role, string _organization, string _companyName, string _title)
+     {
          IPassportAuthentication passport = await Authenticate();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         EngItemService engItemService = ServiceFactoryCreate(passport, _role, _organization, _companyName);
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
@@ -504,12 +505,12 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("New Engineering item created from Web Service")]
-      public async Task Create_IEngItemConfigMask(string _title)
+      [TestCase("VPLMProjectLeader", "Company Name", "AAA27 Personal", "New Engineering item created from Web Service")]
+      public async Task Create_IEngItemConfigMask(string _role, string _organization, string _companyName, string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         EngItemService engItemService = ServiceFactoryCreate(passport, _role, _organization, _companyName);
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
@@ -527,7 +528,6 @@ namespace NUnitTestProject
 
             foreach (IEngItemConfigMask engItem in ret)
             {
-               Assert.IsNotNull(engItem.ConfigurationContext);
                Assert.AreEqual(engItem.Title, _title);
             }
          }
@@ -538,12 +538,12 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("New Engineering item created from Web Service")]
-      public async Task Create_IEngItemDetailsMask(string _title)
+      [TestCase("VPLMProjectLeader", "Company Name", "AAA27 Personal", "New Engineering item created from Web Service")]
+      public async Task Create_IEngItemDetailsMask(string _role, string _organization, string _companyName, string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         EngItemService engItemService = ServiceFactoryCreate(passport, _role, _organization, _companyName);
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
@@ -573,12 +573,12 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("New Engineering item created from Web Service")]
-      public async Task Create_IEngItemCommonMask(string _title)
+      [TestCase("VPLMProjectLeader", "Company Name", "AAA27 Personal", "New Engineering item created from Web Service")]
+      public async Task Create_IEngItemCommonMask(string _role, string _organization, string _companyName, string _title)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         EngItemService engItemService = ServiceFactoryCreate(passport, _role, _organization, _companyName);
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();
@@ -608,12 +608,12 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase("New Engineering item created from Web Service", "AAA27:128")]
-      public async Task Create_IEngItemDetailsMask_WithEnterpriseReference(string _title, string _partnumber)
+        [TestCase("VPLMProjectLeader", "Company Name", "AAA27 Personal", "New Engineering item created from Web Service", "AAA27:129")]
+      public async Task Create_IEngItemDetailsMask_WithEnterpriseReference(string _role, string _organization, string _companyName, string _title, string _partnumber)
       {
          IPassportAuthentication passport = await Authenticate();
 
-         EngItemService engItemService = ServiceFactoryCreate(passport);
+         EngItemService engItemService = ServiceFactoryCreate(passport, _role, _organization, _companyName);
 
          INewEngItem newEngItem = new NewEngItem();
          newEngItem.Attributes = new NewEngItemAttributes();

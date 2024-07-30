@@ -14,39 +14,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using ws3dx.authentication.data;
+using ws3dx.dseng.service;
+using ws3dx.dseng.tests.service.tests;
 
-namespace ws3dx.dseng.data
+namespace NUnitTestProject
 {
-    [ConcreteInterfaceImpConverter(typeof(EngRepInstancePatch))]
-    public interface IEngRepInstancePatch
+    public class DeformedServiceTestsSetup : PassportAuthenticationTestSetup
     {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My name
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My description
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Description { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: Entity physical id
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Cestamp { get; set; }
+        public DeformedService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new DeformedService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
     }
 }

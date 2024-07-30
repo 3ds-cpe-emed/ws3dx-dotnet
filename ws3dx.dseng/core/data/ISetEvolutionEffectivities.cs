@@ -19,21 +19,21 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(SetEvolutionEffectivities))]
-   public interface ISetEvolutionEffectivities
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The evolution effectivity expression in XML format. Example: <?xml version="1.0" 
-      // encoding="UTF-8"?><CfgEffectivityExpression xmlns="urn:com:dassault_systemes:config" 
-      // xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:config 
-      // CfgEffectivityExpression.xsd"><Expression><Context HolderType="Model" HolderName="Aircraft"><TreeSeries 
-      // Type = "ProductState" Name = "Aircraft"><Tree><Root Name = "Aircraft" Revision = 
-      // "A"/></Tree></TreeSeries></Context></Expression></CfgEffectivityExpression>
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string EvolutionContent { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(SetEvolutionEffectivities))]
+    public interface ISetEvolutionEffectivities
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The evolution effectivity expression in XML format. Example: <?xml version="1.0" 
+        /// encoding="UTF-8"?><CfgEffectivityExpression xmlns="urn:com:dassault_systemes:config" 
+        /// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:config 
+        /// CfgEffectivityExpression.xsd"><Expression><Context HolderType="Model" HolderName="Aircraft"><TreeSeries 
+        /// Type = "ProductState" Name = "Aircraft"><Tree><Root Name = "Aircraft" Revision = 
+        /// "A"/></Tree></TreeSeries></Context></Expression></CfgEffectivityExpression>
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string EvolutionContent { get; set; }
+    }
 }

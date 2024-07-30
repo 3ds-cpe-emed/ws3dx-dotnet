@@ -17,18 +17,10 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class SetConfiguredInstance : ISetConfiguredInstance
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: This is an mandatory attribute in input json. Value of this attribute will be physical 
-      // id of a configuration filter. Example: F6AF82561E5700005EB271EE0003C500
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("filterIdentifier")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string FilterIdentifier { get; set; }
-   }
+    public class SetConfiguredInstance : ISetConfiguredInstance
+    {
+        [JsonPropertyName("filterIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string FilterIdentifier { get; set; }
+    }
 }

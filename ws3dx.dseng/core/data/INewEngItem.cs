@@ -19,18 +19,18 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngItem))]
-   public interface INewEngItem
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: VPMReference
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(NewEngItem))]
+    public interface INewEngItem
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: VPMReference
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      public INewEngItemAttributes Attributes { get; set; }
-   }
+        public INewEngItemAttributes Attributes { get; set; }
+    }
 }

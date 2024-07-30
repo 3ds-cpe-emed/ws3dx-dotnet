@@ -19,16 +19,16 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(ConfiguredPatch))]
-   public interface IConfiguredPatch
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: ["ModelVersion","Variant"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> EnabledCriteria { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(ConfiguredPatch))]
+    public interface IConfiguredPatch
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: ["ModelVersion","Variant"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> EnabledCriteria { get; set; }
+    }
 }

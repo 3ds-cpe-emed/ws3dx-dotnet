@@ -18,17 +18,10 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class ConfiguredPatch : IConfiguredPatch
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: ["ModelVersion","Variant"]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("enabledCriteria")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> EnabledCriteria { get; set; }
-   }
+    public class ConfiguredPatch : IConfiguredPatch
+    {
+        [JsonPropertyName("enabledCriteria")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> EnabledCriteria { get; set; }
+    }
 }

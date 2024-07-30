@@ -19,75 +19,75 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(EngInstancePositionMask))]
-   [MaskSchema("dsmveng:EngInstanceMask.Position")]
-   public interface IEngInstancePositionMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(EngInstancePositionMask))]
+    [MaskSchema("dsmveng:EngInstanceMask.Position")]
+    public interface IEngInstancePositionMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: My Type
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic type value Example: My Type
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance name Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance name Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance description vlaue Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance description vlaue Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      public ITypedUriIdentifier ReferencedObject { get; set; }
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
-      public IPosition Position { get; set; }
+        public IPosition Position { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

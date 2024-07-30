@@ -19,17 +19,17 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(SetConfiguredInstance))]
-   public interface ISetConfiguredInstance
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: This is an mandatory attribute in input json. Value of this attribute will be physical 
-      // id of a configuration filter. Example: F6AF82561E5700005EB271EE0003C500
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string FilterIdentifier { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(SetConfiguredInstance))]
+    public interface ISetConfiguredInstance
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// This is an mandatory attribute in input json. Value of this attribute will be physical id of a 
+        /// configuration filter. Example: F6AF82561E5700005EB271EE0003C500
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string FilterIdentifier { get; set; }
+    }
 }

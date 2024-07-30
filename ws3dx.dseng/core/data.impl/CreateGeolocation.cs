@@ -17,72 +17,30 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class CreateGeolocation : ICreateGeolocation
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Coordinates reference system ID Example: epsg::2000
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("crsId")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string CrsId { get; set; }
+    public class CreateGeolocation : ICreateGeolocation
+    {
+        [JsonPropertyName("crsId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string CrsId { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Coordinate of first axis (in metre) Example: 12345.56
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis1")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis1 { get; set; }
+        [JsonPropertyName("axis1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis1 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Coordinate of second axis (in metre) Example: 56789.2
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis2")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis2 { get; set; }
+        [JsonPropertyName("axis2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis2 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Coordinate of third axis (in metre) Example: 125.0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis3")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis3 { get; set; }
+        [JsonPropertyName("axis3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis3 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Azimuth (in radian) Example: 12.45
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("azimuth")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Azimuth { get; set; }
+        [JsonPropertyName("azimuth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Azimuth { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Define if geolocation on item is active or not Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("active")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? Active { get; set; }
-   }
+        [JsonPropertyName("active")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Active { get; set; }
+    }
 }

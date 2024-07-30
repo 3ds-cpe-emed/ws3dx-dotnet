@@ -17,83 +17,34 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class GeolocationMask : IGeolocationMask
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: epsg::2000
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("crsId")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string CrsId { get; set; }
+    public class GeolocationMask : IGeolocationMask
+    {
+        [JsonPropertyName("crsId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string CrsId { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 12.45
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("azimuth")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Azimuth { get; set; }
+        [JsonPropertyName("azimuth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Azimuth { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("activate")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Activate { get; set; }
+        [JsonPropertyName("activate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Activate { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 12345.56
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis1")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis1 { get; set; }
+        [JsonPropertyName("axis1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis1 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 56789.2
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis2")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis2 { get; set; }
+        [JsonPropertyName("axis2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis2 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 125.0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis3")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis3 { get; set; }
+        [JsonPropertyName("axis3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis3 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cestamp")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cestamp { get; set; }
-   }
+        [JsonPropertyName("cestamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Cestamp { get; set; }
+    }
 }

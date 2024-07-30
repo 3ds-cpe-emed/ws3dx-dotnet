@@ -19,38 +19,38 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(EngInstancePatch))]
-   public interface IEngInstancePatch
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(EngInstancePatch))]
+    public interface IEngInstancePatch
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Entity physical id
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: Entity physical id
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
 
-      public IFilterable Filterable { get; set; }
+        public IFilterable Filterable { get; set; }
 
-      public IPosition Position { get; set; }
-   }
+        public IPosition Position { get; set; }
+    }
 }

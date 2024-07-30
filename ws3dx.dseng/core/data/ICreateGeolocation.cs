@@ -19,61 +19,61 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(CreateGeolocation))]
-   public interface ICreateGeolocation
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Coordinates reference system ID Example: epsg::2000
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string CrsId { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(CreateGeolocation))]
+    public interface ICreateGeolocation
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Coordinates reference system ID Example: epsg::2000
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string CrsId { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Coordinate of first axis (in metre) Example: 12345.56
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? Axis1 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Coordinate of first axis (in metre) Example: 12345.56
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? Axis1 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Coordinate of second axis (in metre) Example: 56789.2
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? Axis2 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Coordinate of second axis (in metre) Example: 56789.2
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? Axis2 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Coordinate of third axis (in metre) Example: 125.0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? Axis3 { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Coordinate of third axis (in metre) Example: 125
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? Axis3 { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Azimuth (in radian) Example: 12.45
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? Azimuth { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Azimuth (in radian) Example: 12.45
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? Azimuth { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Define if geolocation on item is active or not Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? Active { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Define if geolocation on item is active or not Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? Active { get; set; }
+    }
 }

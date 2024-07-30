@@ -17,17 +17,10 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class AlternateInstanceApplicabilityContext : IAlternateInstanceApplicabilityContext
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: EE562168015FFCF14F940A513C63AA77
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("instance")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Instance { get; set; }
-   }
+    public class AlternateInstanceApplicabilityContext : IAlternateInstanceApplicabilityContext
+    {
+        [JsonPropertyName("instance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Instance { get; set; }
+    }
 }

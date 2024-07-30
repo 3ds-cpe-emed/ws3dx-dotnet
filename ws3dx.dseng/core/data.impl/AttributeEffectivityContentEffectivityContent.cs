@@ -15,14 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 namespace ws3dx.dseng.data.impl
 {
-   //------------------------------------------------------------------------------------------------
-   // <summary>
-   //
-   // Description: Get the effectivity expression on instance.
-   //
-   // </summary>
-   //------------------------------------------------------------------------------------------------
-   public class AttributeEffectivityContentEffectivityContent : IAttributeEffectivityContentEffectivityContent
-   {
-   }
+    public class AttributeEffectivityContentEffectivityContent : IAttributeEffectivityContentEffectivityContent
+    {
+    }
 }

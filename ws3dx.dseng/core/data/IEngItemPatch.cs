@@ -20,62 +20,62 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(EngItemPatch))]
-   public interface IEngItemPatch
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(EngItemPatch))]
+    public interface IEngItemPatch
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My Version Comments
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string VersionComment { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My Version Comments
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string VersionComment { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsManufacturable { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Entity physical id
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: Entity physical id
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
 
-      public IChangeControl ChangeControl { get; set; }
+        public IChangeControl ChangeControl { get; set; }
 
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+        public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+        public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      public IConfigured Configured { get; set; }
+        public IConfigured Configured { get; set; }
 
-      public ICustomerAttributes CustomerAttributes { get; set; }
-   }
+        public ICustomerAttributes CustomerAttributes { get; set; }
+    }
 }

@@ -17,72 +17,30 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class GeolocationPatch : IGeolocationPatch
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 12.45
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("azimuth")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Azimuth { get; set; }
+    public class GeolocationPatch : IGeolocationPatch
+    {
+        [JsonPropertyName("azimuth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Azimuth { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("activate")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? Activate { get; set; }
+        [JsonPropertyName("activate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Activate { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 12345.56
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis1")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis1 { get; set; }
+        [JsonPropertyName("axis1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis1 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 56789.2
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis2")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis2 { get; set; }
+        [JsonPropertyName("axis2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis2 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 125.0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("axis3")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? Axis3 { get; set; }
+        [JsonPropertyName("axis3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? Axis3 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: Timestamp id
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cestamp")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cestamp { get; set; }
-   }
+        [JsonPropertyName("cestamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Cestamp { get; set; }
+    }
 }

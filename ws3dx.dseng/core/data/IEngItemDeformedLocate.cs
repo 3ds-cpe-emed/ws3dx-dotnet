@@ -13,40 +13,16 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using System.Collections.Generic;
 using ws3dx.dseng.data.impl;
+using ws3dx.shared.data;
 using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-    [ConcreteInterfaceImpConverter(typeof(EngRepInstancePatch))]
-    public interface IEngRepInstancePatch
+    [ConcreteInterfaceImpConverter(typeof(EngItemDeformedLocate))]
+    public interface IEngItemDeformedLocate
     {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My name
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My description
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Description { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: Entity physical id
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Cestamp { get; set; }
+        public IList<ITypedUriIdentifier> ReferencedObjects { get; set; }
     }
 }

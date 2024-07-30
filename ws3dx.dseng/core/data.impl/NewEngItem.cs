@@ -17,21 +17,14 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class NewEngItem : INewEngItem
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: VPMReference
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+    public class NewEngItem : INewEngItem
+    {
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Type { get; set; }
 
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public INewEngItemAttributes Attributes { get; set; }
-   }
+        [JsonPropertyName("attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public INewEngItemAttributes Attributes { get; set; }
+    }
 }

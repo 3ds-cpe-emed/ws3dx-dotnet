@@ -17,126 +17,42 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class Position : IPosition
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a11")]
+    public class Position : IPosition
+    {
+        [JsonPropertyName("a11")]
       public double A11 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a12")]
+        [JsonPropertyName("a12")]
       public double A12 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a13")]
+        [JsonPropertyName("a13")]
       public double A13 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a21")]
+        [JsonPropertyName("a21")]
       public double A21 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a22")]
+        [JsonPropertyName("a22")]
       public double A22 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a23")]
+        [JsonPropertyName("a23")]
       public double A23 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a31")]
+        [JsonPropertyName("a31")]
       public double A31 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a32")]
+        [JsonPropertyName("a32")]
       public double A32 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: rotation matrix coefficient Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("a33")]
+        [JsonPropertyName("a33")]
       public double A33 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector X in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u1")]
+        [JsonPropertyName("u1")]
       public double U1 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector Y in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u2")]
+        [JsonPropertyName("u2")]
       public double U2 { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: translation vector Z in mm Example: 0
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("u3")]
+        [JsonPropertyName("u3")]
       public double U3 { get; set; }
-   }
+    }
 }

@@ -19,102 +19,102 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(AlternateDetailMask))]
-   [MaskSchema("dsmveng:AlternateMask.Details")]
-   public interface IAlternateDetailMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(AlternateDetailMask))]
+    [MaskSchema("dsmveng:AlternateMask.Details")]
+    public interface IAlternateDetailMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: DBType
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic type value Example: DBType
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: 10/19/2021 10:58:01 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: 10/19/2021 10:58:01 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: 10/19/2021 10:58:01 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object revision value Example: A.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Revision { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object revision value Example: A.1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Revision { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object current state value Example: Proposed
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string State { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object current state value Example: Proposed
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string State { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: DB Owner
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: DB Owner
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
+        public IAlternateApplicabilityContext ApplicabilityContext { get; set; }
 
-      public ITypedUriIdentifier ReferencedObject { get; set; }
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

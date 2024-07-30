@@ -19,25 +19,25 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngRepInstanceAttributes))]
-   public interface INewEngRepInstanceAttributes
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(NewEngRepInstanceAttributes))]
+    public interface INewEngRepInstanceAttributes
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
+    }
 }

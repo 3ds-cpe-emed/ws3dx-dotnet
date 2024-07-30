@@ -13,40 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using NUnit.Framework;
+using System.Threading.Tasks;
+using ws3dx.core.exception;
+using ws3dx.dseng.data;
 using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using ws3dx.dseng.service;
 
-namespace ws3dx.dseng.data
+namespace NUnitTestProject
 {
-    [ConcreteInterfaceImpConverter(typeof(EngRepInstancePatch))]
-    public interface IEngRepInstancePatch
+    public class DeformedService_Deformability_UnitTests : DeformedServiceTestsSetup
     {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My name
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
 
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: My description
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Description { get; set; }
+        [TestCase()]
+        public async Task Locate()
+        {
+            DeformedService deformedService = ServiceFactoryCreate(await Authenticate());
 
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: Entity physical id
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Cestamp { get; set; }
+            IEngItemDeformedLocate request = new EngItemDeformedLocate();
+
+
+            try
+            {
+                IEngItemDeformedLocated ret = await deformedService.Locate(request);
+
+                Assert.IsNotNull(ret);
+
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
     }
 }

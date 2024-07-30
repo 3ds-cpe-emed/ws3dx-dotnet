@@ -16,6 +16,7 @@
 
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
+using ws3dx.core.data.impl;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.tests.service.tests;
 
@@ -36,5 +37,14 @@ namespace NUnitTestProject
             SecurityContext = GetDefaultSecurityContext()
          };
       }
-   }
+
+        public EngItemService ServiceFactoryCreate(IPassportAuthentication _passport, string _role, string _organizationName, string _collabSpace)
+        {
+            return new EngItemService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext =  string.Format("{0}.{1}.{2}", _role, _organizationName, _collabSpace)
+        };
+    }
+    }
 }

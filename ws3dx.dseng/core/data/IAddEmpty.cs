@@ -19,8 +19,8 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(AddEmpty))]
-   public interface IAddEmpty
-   {
-   }
+    [ConcreteInterfaceImpConverter(typeof(AddEmpty))]
+    public interface IAddEmpty
+    {
+    }
 }

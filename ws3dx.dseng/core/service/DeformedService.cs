@@ -13,20 +13,19 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
-using ws3dx.shared.data;
+using ws3dx.dseng.data;
 
 namespace ws3dx.dseng.service
 {
     // SDK Service
-    public class InvokeService : EnoviaBaseService
+    public class DeformedService : EnoviaBaseService
     {
         private const string BASE_RESOURCE = "/resources/v1/modeler/dseng/";
 
-        public InvokeService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        public DeformedService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
         {
         }
 
@@ -37,31 +36,21 @@ namespace ws3dx.dseng.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Detach engineering item instances from an Engineering Item version.
+        /// Gets deformed engineering Item using indexed queries. Only the first 1000 results will be fetched with default response. no option to change the Mask.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
         /// <remarks>
-        /// (POST) invoke/dseng:detachEngInstances
+        /// (POST) dseng:deformed/locate
         /// </remarks>
         ///---------------------------------------------------------------------------------------------
         /// <param name="request">
         /// </param>
-        /// <param name="changeAuthoringContext">
-        /// Work Under Change Action
-        /// </param>
-        /// <param name="configurationAuthoringContext">
-        /// Work Under Evolution. Will be ignored if DS-Change-Authoring-Context is set
-        /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IGenericResponse> DetachInstances(string[] request, string changeAuthoringContext = null, string configurationAuthoringContext = null)
+        public async Task<IEngItemDeformedLocated> Locate(IEngItemDeformedLocate request)
         {
-            string resourceURI = $"{GetBaseResource()}invoke/dseng:detachEngInstances";
+            string resourceURI = $"{GetBaseResource()}dseng:deformed/locate";
 
-            IDictionary<string, string> headerParams = new Dictionary<string, string>();
-            if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
-            if (configurationAuthoringContext != null) { headerParams.Add("DS-Configuration-Authoring-Context", configurationAuthoringContext); }
-
-            return await PostIndividual<IGenericResponse, string[]>(resourceURI, request, headerParams: headerParams);
+            return await PostIndividual<IEngItemDeformedLocated, IEngItemDeformedLocate>(resourceURI, request);
         }
     }
 }

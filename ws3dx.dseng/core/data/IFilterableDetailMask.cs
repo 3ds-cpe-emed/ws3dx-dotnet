@@ -18,17 +18,17 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(FilterableDetailMask))]
-   [MaskSchema("dsmvcfg:FilterableDetails")]
-   public interface IFilterableDetailMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Get the effectivity expression on instance.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public object EffectivityContent { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(FilterableDetailMask))]
+    [MaskSchema("dsmvcfg:FilterableDetails")]
+    public interface IFilterableDetailMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Get the effectivity expression on instance.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public object EffectivityContent { get; set; }
+    }
 }

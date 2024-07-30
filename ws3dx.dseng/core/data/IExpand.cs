@@ -19,56 +19,55 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(Expand))]
-   public interface IExpand
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: -1 for all level, and 1,2,3,.. for specific level Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? ExpandDepth { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(Expand))]
+    public interface IExpand
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// -1 for all level, and 1,2,3,.. for specific level Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? ExpandDepth { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: true/false Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? WithPath { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// true/false Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? WithPath { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Default value: ["VPMReference"], Autorised value: "VPMReference", "VPMRepReference" 
-      // or any public subtypes of VPMReference and VPMRepReference (Drawing for example) Example: 
-      // ["VPMReference","VPMRepReference"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> TypeFilterBo { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Default value: ["VPMReference"], Autorised value: "VPMReference", "VPMRepReference" or any public 
+        /// subtypes of VPMReference and VPMRepReference (Drawing for example) Example: ["VPMReference","VPMRepReference"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> TypeFilterBo { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Default value: ["VPMInstance"], Autorised value: "VPMInstance", "VPMRepInstance" or 
-      // any public subtypes of VPMInstance and VPMRepInstance Example: ["VPMInstance","VPMRepInstance"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> TypeFilterRel { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Default value: ["VPMInstance"], Autorised value: "VPMInstance", "VPMRepInstance" or any public 
+        /// subtypes of VPMInstance and VPMRepInstance Example: ["VPMInstance","VPMRepInstance"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> TypeFilterRel { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: inputType is not proper. Please check the Filter Specification here: Web Services 
-      // and Events | 3DSpace | Advanced Filtering | The Public Filter Specification Example: {...}
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Filter { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// inputType is not proper. Please check the Filter Specification here: Web Services and Events | 
+        /// 3DSpace | Advanced Filtering | The Public Filter Specification Example: {...}
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Filter { get; set; }
+    }
 }

@@ -21,6 +21,7 @@ using ws3dx.authentication.data;
 using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
+using ws3dx.dseng.service;
 using ws3dx.shared.data;
 using ws3dx.utils.search;
 

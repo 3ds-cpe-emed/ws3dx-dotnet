@@ -19,21 +19,21 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(SetVariantEffectivities))]
-   public interface ISetVariantEffectivities
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The variant effectivity expression in XML format. Example: <?xml version="1.0" 
-      // encoding="UTF-8"?><CfgEffectivityExpression xs:schemaLocation = "urn:com:dassault_systemes:config 
-      // CfgEffectivityExpression.xsd" xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance" xmlns = 
-      // "urn:com:dassault_systemes:config"><Expression><Context HolderType = "Model" HolderName = 
-      // "Aircraft"><Feature Type="ConfigFeature" Name="Color"><Feature Type="ConfigFeature" 
-      // Name="Red"/></Feature></Context></Expression></CfgEffectivityExpression>
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string VariantContent { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(SetVariantEffectivities))]
+    public interface ISetVariantEffectivities
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The variant effectivity expression in XML format. Example: <?xml version="1.0" 
+        /// encoding="UTF-8"?><CfgEffectivityExpression xs:schemaLocation = "urn:com:dassault_systemes:config 
+        /// CfgEffectivityExpression.xsd" xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance" xmlns = 
+        /// "urn:com:dassault_systemes:config"><Expression><Context HolderType = "Model" HolderName = 
+        /// "Aircraft"><Feature Type="ConfigFeature" Name="Color"><Feature Type="ConfigFeature" 
+        /// Name="Red"/></Feature></Context></Expression></CfgEffectivityExpression>
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string VariantContent { get; set; }
+    }
 }

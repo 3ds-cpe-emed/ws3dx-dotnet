@@ -19,82 +19,46 @@ using ws3dx.shared.data.extension;
 
 namespace ws3dx.dseng.data.impl
 {
-   public class EngItemBulkUpdateItem : IEngItemBulkUpdateItem
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: {ID}
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+    public class EngItemBulkUpdateItem : IEngItemBulkUpdateItem
+    {
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Id { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Description { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isManufacturable")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? IsManufacturable { get; set; }
+        [JsonPropertyName("isManufacturable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsManufacturable { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: Entity physical id
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cestamp")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cestamp { get; set; }
+        [JsonPropertyName("cestamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Cestamp { get; set; }
 
-      [JsonPropertyName("dslc:changeControl")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IChangeControl ChangeControl { get; set; }
+        [JsonPropertyName("dslc:changeControl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IChangeControl ChangeControl { get; set; }
 
-      [JsonPropertyName("dseng:EnterpriseReference")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+        [JsonPropertyName("dseng:EnterpriseReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      [JsonPropertyName("dseno:EnterpriseAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("dseno:EnterpriseAttributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      [JsonPropertyName("dscfg:Configured")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IConfigured Configured { get; set; }
+        [JsonPropertyName("dscfg:Configured")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IConfigured Configured { get; set; }
 
-      [JsonPropertyName("customerAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICustomerAttributes CustomerAttributes { get; set; }
-
-   }
+        [JsonPropertyName("customerAttributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ICustomerAttributes CustomerAttributes { get; set; }
+    }
 }
