@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dseng", "..\ws3dx.dse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsmfg", "..\ws3dx.dsmfg\core\ws3dx.dsmfg.csproj", "{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsmfg.tests", "..\ws3dx.dsmfg\tests\ws3dx.dsmfg.tests.csproj", "{D8628145-BB1C-4BD9-8138-71A42804D401}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8628145-BB1C-4BD9-8138-71A42804D401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8628145-BB1C-4BD9-8138-71A42804D401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8628145-BB1C-4BD9-8138-71A42804D401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8628145-BB1C-4BD9-8138-71A42804D401}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
