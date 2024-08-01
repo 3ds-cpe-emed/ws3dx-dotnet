@@ -13,25 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ws3dx.dsmfg.data;
+
+using ws3dx.authentication.data;
 using ws3dx.dsmfg.service;
+using ws3dx.dsmfg.tests.service.tests;
 
 namespace NUnitTestProject
 {
-    public class MfgItemService_Filterable_UnitTests : MfgItemServiceTestsSetup
+    public class SubstituteServiceTestsSetup : PassportAuthenticationTestSetup
     {
-        //TODO
-        [TestCase("", "")]
-        public async Task GetInstanceEffectivity(string mfgItemId, string instanceId)
+        public SubstituteService ServiceFactoryCreate(IPassportAuthentication _passport)
         {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IEnumerable<IFilterableDetail> ret = await mfgItemService.GetInstanceEffectivity(mfgItemId, instanceId);
-
-            Assert.IsNotNull(ret);
+            return new SubstituteService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
         }
     }
 }

@@ -26,30 +26,35 @@ namespace NUnitTestProject
 {
     public class MfgItemService_Configured_UnitTests : MfgItemServiceTestsSetup
     {
+        //TODO
         [TestCase("")]
         public async Task GetConfiguration_IConfiguredDetail(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IConfiguredDetail> ret = await mfgItemService.GetConfiguration<IConfiguredDetail>(mfgItemId);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("")]
         public async Task GetConfiguration_IConfiguredBasics(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IConfiguredBasics> ret = await mfgItemService.GetConfiguration<IConfiguredBasics>(mfgItemId);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("")]
         public async Task AttachConfiguration(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-            ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+            ITypedUriIdentifier[] request = [];
 
             try
             {
@@ -64,12 +69,13 @@ namespace NUnitTestProject
             }
         }
 
+        //TODO
         [TestCase("")]
         public async Task DetachConfiguration(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-            ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+            ITypedUriIdentifier[] request = [];
 
             try
             {

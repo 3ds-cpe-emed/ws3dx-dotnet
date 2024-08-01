@@ -38,8 +38,6 @@ namespace NUnitTestProject
 
             IEnumerable<IMfgItemMask> ret = await mfgItemService.Search<IMfgItemMask>(searchByFreeText, skip, top);
 
-
-
             Assert.IsNotNull(ret);
         }
 
@@ -74,7 +72,6 @@ namespace NUnitTestProject
             }
         }
 
-
         [TestCase("AAA27", 0, 10)]
         public async Task Get_IMfgItemDetailMask(string _search, int _skip, int _top)
         {
@@ -95,7 +92,6 @@ namespace NUnitTestProject
                 TestSubType(ret);
             }
         }
-
 
         void TestSubType(IMfgItemDetailMask _mfgItem)
         {
@@ -242,7 +238,6 @@ namespace NUnitTestProject
             throw new System.Exception($"Unhandled type '{_mfgItem.Type}'");
         }
 
-
         [TestCase("AAA27 Manufacturing Configuration Item", "A.1")]
         public async Task Expand(string _title, string _rev)
         {
@@ -323,7 +318,6 @@ namespace NUnitTestProject
                 (returnSetWithDetailMask, errorIdList) = await mfgItemService.BulkFetch<IMfgItemDetailMask>(mfgItemIdArray);
 
                 Assert.IsNotNull(returnSetWithDetailMask);
-
             }
             catch (HttpResponseException _ex)
             {
@@ -352,7 +346,6 @@ namespace NUnitTestProject
                 (returnSetWithMask, errorIdList) = await mfgItemService.BulkFetch<IMfgItemMask>(mfgItemIdArray);
 
                 Assert.IsNotNull(returnSetWithMask);
-
             }
             catch (HttpResponseException _ex)
             {

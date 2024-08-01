@@ -1138,9 +1138,9 @@ namespace ws3dx.dsmfg.service
         /// dsmfg:Origin object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IOriginMask>> GetOrigin(string mfgItemId, string PID)
+        public async Task<IEnumerable<IOriginMask>> GetOrigin(string mfgItemId, string originId)
         {
-            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Origin/{PID}";
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Origin/{originId}";
 
             return await GetCollectionFromResponseMemberProperty<IOriginMask>(resourceURI);
         }
@@ -1194,9 +1194,9 @@ namespace ws3dx.dsmfg.service
         /// dsmfg:Substitute object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<ISubstituteMask>> GetSubstitute(string mfgItemId, string PID)
+        public async Task<IEnumerable<ISubstituteMask>> GetSubstitute(string mfgItemId, string substituteId)
         {
-            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Substitute/{PID}";
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Substitute/{substituteId}";
 
             return await GetCollectionFromResponseMemberProperty<ISubstituteMask>(resourceURI);
         }

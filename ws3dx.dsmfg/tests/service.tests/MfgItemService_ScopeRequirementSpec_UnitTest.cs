@@ -20,20 +20,24 @@ using ws3dx.core.exception;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.impl;
 using ws3dx.dsmfg.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
     public class MfgItemService_ScopeRequirementSpec_UnitTests : MfgItemServiceTestsSetup
     {
+        //TODO
         [TestCase("")]
         public async Task GetScopeRequirementSpecs(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IScopeRequirementSpecMask> ret = await mfgItemService.GetScopeRequirementSpecs(mfgItemId);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("", "")]
         public async Task GetScopeRequirementSpec(string mfgItemId, string requirementId)
         {
@@ -44,6 +48,7 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("")]
         public async Task AddScopeRequirementSpec(string mfgItemId)
         {
@@ -54,6 +59,25 @@ namespace NUnitTestProject
             try
             {
                 IEnumerable<IScopeRequirementSpecMask> ret = await mfgItemService.AddScopeRequirementSpec(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("", "")]
+        public async Task DeleteScopeRequirementSpec(string requirementId, string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DeleteScopeRequirementSpec(requirementId, mfgItemId);
 
                 Assert.IsNotNull(ret);
             }

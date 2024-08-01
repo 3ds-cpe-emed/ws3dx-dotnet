@@ -26,15 +26,29 @@ namespace NUnitTestProject
 {
     public class MfgItemService_changeControl_UnitTests : MfgItemServiceTestsSetup
     {
+        //TODO
+        [TestCase("", "")]
+        public async Task GetInstanceChangeControl(string mfgItemId, string instanceId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IEnumerable<IChangeControlStatusMask> ret = await mfgItemService.GetInstanceChangeControl(mfgItemId, instanceId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        //TODO
         [TestCase("")]
         public async Task GetChangeControl(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IChangeControlStatusMask> ret = await mfgItemService.GetChangeControl(mfgItemId);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("")]
         public async Task AttachChangeControl(string mfgItemId)
         {
@@ -45,6 +59,65 @@ namespace NUnitTestProject
             try
             {
                 IGenericResponse ret = await mfgItemService.AttachChangeControl(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("", "")]
+        public async Task AddInstanceChangeControl(string mfgItemId, string instanceId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.AddInstanceChangeControl(mfgItemId, instanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("", "")]
+        public async Task DeleteInstanceChangeControl(string mfgItemId, string instanceId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DeleteInstanceChangeControl(mfgItemId, instanceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("")]
+        public async Task DetachChangeControl(string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DetachChangeControl(mfgItemId);
 
                 Assert.IsNotNull(ret);
             }

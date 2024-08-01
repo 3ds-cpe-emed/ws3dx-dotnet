@@ -26,55 +26,18 @@ namespace NUnitTestProject
 {
     public class MfgItemService_AssignmentFilter_UnitTests : MfgItemServiceTestsSetup
     {
+        //TODO
         [TestCase("")]
         public async Task GetAssignmentFilters(string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IAssignmentFilterMask> ret = await mfgItemService.GetAssignmentFilters(mfgItemId);
 
             Assert.IsNotNull(ret);
         }
 
-        [TestCase("")]
-        public async Task DetachAssignmentFilterV1(string mfgItemId)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IDetachAssignmentFilterV1 request = new DetachAssignmentFilterV1();
-
-            try
-            {
-                IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
-
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-
-        [TestCase("")]
-        public async Task DetachAssignmentFilter(string mfgItemId)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IDetachAssignmentFilter request = new DetachAssignmentFilter();
-
-            try
-            {
-                IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
-
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-
+        //TODO
         [TestCase("")]
         public async Task AttachAssignmentFilterV1(string mfgItemId)
         {
@@ -95,6 +58,7 @@ namespace NUnitTestProject
             }
         }
 
+        //TODO
         [TestCase("")]
         public async Task AttachAssignmentFilter(string mfgItemId)
         {
@@ -105,6 +69,48 @@ namespace NUnitTestProject
             try
             {
                 IGenericResponse ret = await mfgItemService.AttachAssignmentFilter(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("")]
+        public async Task DetachAssignmentFilterV1(string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IDetachAssignmentFilterV1 request = new DetachAssignmentFilterV1();
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("")]
+        public async Task DetachAssignmentFilter(string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IDetachAssignmentFilter request = new DetachAssignmentFilter();
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DetachAssignmentFilter(mfgItemId, request);
 
                 Assert.IsNotNull(ret);
             }

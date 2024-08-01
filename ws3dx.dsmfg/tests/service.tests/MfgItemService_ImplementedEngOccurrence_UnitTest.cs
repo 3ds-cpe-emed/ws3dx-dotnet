@@ -26,35 +26,18 @@ namespace NUnitTestProject
 {
     public class MfgItemService_ImplementedEngOccurrence_UnitTests : MfgItemServiceTestsSetup
     {
+        //TODO
         [TestCase("", "")]
         public async Task GetInstanceImplementedEngOccurrence(string mfgItemId, string instanceId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IImplementedEngOccurrenceMask> ret = await mfgItemService.GetInstanceImplementedEngOccurrence(mfgItemId, instanceId);
 
             Assert.IsNotNull(ret);
         }
 
-        [TestCase("", "")]
-        public async Task DetachImplementedEngOccurrenceFromInstance(string instanceId, string mfgItemId)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IItemOccurrence request = new ItemOccurrence();
-
-            try
-            {
-                IGenericResponse ret = await mfgItemService.DetachImplementedEngOccurrenceFromInstance(mfgItemId, instanceId, request);
-
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-
+        //TODO
         [TestCase("", "")]
         public async Task AttachImplementedEngOccurrenceToInstance(string instanceId, string mfgItemId)
         {
@@ -65,6 +48,27 @@ namespace NUnitTestProject
             try
             {
                 IGenericResponse ret = await mfgItemService.AttachImplementedEngOccurrenceToInstance(mfgItemId, instanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("", "")]
+        public async Task DetachImplementedEngOccurrenceFromInstance(string instanceId, string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IItemOccurrence request = new ItemOccurrence();
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DetachImplementedEngOccurrenceFromInstance(mfgItemId, instanceId, request);
 
                 Assert.IsNotNull(ret);
             }

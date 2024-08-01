@@ -20,6 +20,7 @@ using ws3dx.core.exception;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.impl;
 using ws3dx.dsmfg.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -45,6 +46,7 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("")]
         public async Task AddAssignedRequirement(string mfgItemId)
         {
@@ -55,6 +57,25 @@ namespace NUnitTestProject
             try
             {
                 IEnumerable<IAssignedRequirementMask> ret = await mfgItemService.AddAssignedRequirement(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
+        [TestCase("", "")]
+        public async Task DeleteAssignedRequirement(string requirementId, string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DeleteAssignedRequirement(requirementId, mfgItemId);
 
                 Assert.IsNotNull(ret);
             }

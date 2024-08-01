@@ -18,57 +18,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
 using ws3dx.dsmfg.data;
-using ws3dx.dsmfg.data.impl;
 using ws3dx.dsmfg.service;
-using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-    public class MfgItemService_Dependency_UnitTests : MfgItemServiceTestsSetup
+    public class MfgResponsibilityService_MfgResponsibility_UnitTests : MfgResponsibilityServiceTestsSetup
     {
         //TODO
-        [TestCase("", "")]
-        public async Task GetInstanceDependency(string mfgItemId, string instanceId)
+        [TestCase()]
+        public async Task Bulkfetch()
         {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+            MfgResponsibilityService mfgResponsibilityService = ServiceFactoryCreate(await Authenticate());
 
-            IEnumerable<IDependencyMask> ret = await mfgItemService.GetInstanceDependency(mfgItemId, instanceId);
-
-            Assert.IsNotNull(ret);
-        }
-
-        //TODO
-        [TestCase("", "")]
-        public async Task DetachDependencyFromInstance(string mfgItemId, string instanceId)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IDetachDependencyPayload request = new DetachDependencyPayload();
+            string[] request = [];
 
             try
             {
-                IGenericResponse ret = await mfgItemService.DetachDependencyFromInstance(mfgItemId, instanceId, request);
-
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-
-        //TODO
-        [TestCase("", "")]
-        public async Task AttachDependencyToInstance(string mfgItemId, string instanceId)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-
-            IAttachDependencyPayload request = new AttachDependencyPayload();
-
-            try
-            {
-                IGenericResponse ret = await mfgItemService.AttachDependencyToInstance(mfgItemId, instanceId, request);
+                IEnumerable<IMfgResponsibilityMask> ret = await mfgResponsibilityService.BulkFetch(request);
 
                 Assert.IsNotNull(ret);
             }

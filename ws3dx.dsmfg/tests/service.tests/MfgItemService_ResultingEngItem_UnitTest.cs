@@ -20,47 +20,78 @@ using ws3dx.core.exception;
 using ws3dx.dsmfg.data;
 using ws3dx.dsmfg.data.impl;
 using ws3dx.dsmfg.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
     public class MfgItemService_ResultingEngItem_UnitTests : MfgItemServiceTestsSetup
     {
-        [TestCase("", 0, 0)]
-        public async Task GetResultingEngItems_IResultingEngItemUtcMask(string mfgItemId, int top, int skip)
-        {
-            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-            IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemUtcMask>(mfgItemId, top, skip);
-
-            Assert.IsNotNull(ret);
-        }
-
+        //TODO
         [TestCase("", 0, 0)]
         public async Task GetResultingEngItems_IResultingEngItemMask(string mfgItemId, int top, int skip)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IResultingEngItemMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemMask>(mfgItemId, top, skip);
 
             Assert.IsNotNull(ret);
         }
 
-        [TestCase("", "")]
-        public async Task GetResultingEngItem_IResultingEngItemUtcMask(string mfgItemId, string engItemId)
+        //TODO
+        [TestCase("", 0, 0)]
+        public async Task GetResultingEngItems_IResultingEngItemUtcMask(string mfgItemId, int top, int skip)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
-            IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItem<IResultingEngItemUtcMask>(mfgItemId, engItemId);
+
+            IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItems<IResultingEngItemUtcMask>(mfgItemId, top, skip);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
         [TestCase("", "")]
         public async Task GetResultingEngItem_IResultingEngItemMask(string mfgItemId, string engItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
             IEnumerable<IResultingEngItemMask> ret = await mfgItemService.GetResultingEngItem<IResultingEngItemMask>(mfgItemId, engItemId);
 
             Assert.IsNotNull(ret);
         }
 
+        //TODO
+        [TestCase("", "")]
+        public async Task GetResultingEngItem_IResultingEngItemUtcMask(string mfgItemId, string engItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            IEnumerable<IResultingEngItemUtcMask> ret = await mfgItemService.GetResultingEngItem<IResultingEngItemUtcMask>(mfgItemId, engItemId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        //TODO
+        [TestCase("")]
+        public async Task AddResultingEngItem_IResultingEngItemMask(string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateResultingEngItems request = new CreateResultingEngItems();
+
+            try
+            {
+                IEnumerable<IResultingEngItemMask> ret = await mfgItemService.AddResultingEngItem<IResultingEngItemMask>(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        //TODO
         [TestCase("")]
         public async Task AddResultingEngItem_IResultingEngItemUtcMask(string mfgItemId)
         {
@@ -81,16 +112,15 @@ namespace NUnitTestProject
             }
         }
 
-        [TestCase("")]
-        public async Task AddResultingEngItem_IResultingEngItemMask(string mfgItemId)
+        //TODO
+        [TestCase("", "")]
+        public async Task DeleteResultingEngItem(string engItemId, string mfgItemId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-            ICreateResultingEngItems request = new CreateResultingEngItems();
-
             try
             {
-                IEnumerable<IResultingEngItemMask> ret = await mfgItemService.AddResultingEngItem<IResultingEngItemMask>(mfgItemId, request);
+                IGenericResponse ret = await mfgItemService.DeleteResultingEngItem(engItemId, mfgItemId);
 
                 Assert.IsNotNull(ret);
             }
