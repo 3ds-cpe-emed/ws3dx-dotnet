@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\core\ws3dx.project.task.core.csproj" />
-    <ProjectReference Include="..\data\ws3dx.project.task.data.csproj" />
+    <ProjectReference Include="..\core\ws3dx.project.task.csproj" />
   </ItemGroup>
 
 </Project>
