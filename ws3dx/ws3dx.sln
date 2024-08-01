@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dseng.tests", "..\ws3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dseng", "..\ws3dx.dseng\core\ws3dx.dseng.csproj", "{26E86448-0648-47CF-AAC6-A60DD3D9E1A7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsmfg", "..\ws3dx.dsmfg\core\ws3dx.dsmfg.csproj", "{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{26E86448-0648-47CF-AAC6-A60DD3D9E1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26E86448-0648-47CF-AAC6-A60DD3D9E1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26E86448-0648-47CF-AAC6-A60DD3D9E1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EB880E5-264E-4FED-A1E9-F50407A6C3B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
