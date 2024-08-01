@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-     <Version>426.3.1</Version>
+     <Version>426.3.0</Version>
      <Title>3DEXPERIENCE Manufacturing Item Web Services .NET Client</Title>
      <Company />
      <Description>3DEXPERIENCE Manufacturing Item Web Services .NET Client</Description>
