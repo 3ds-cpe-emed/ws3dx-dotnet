@@ -14,17 +14,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface IResponseDeliverable
-   {
-      public bool? Success { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ResponseDeliverable))]
+    public interface IResponseDeliverable
+    {
+        public bool? Success { get; set; }
 
-      public int? StatusCode { get; set; }
+        public int? StatusCode { get; set; }
 
-      public ICsrf Csrf { get; set; }
+        public ICsrf Csrf { get; set; }
 
-      public IList<IResponseDeliverableData> Data { get; set; }
-   }
+        public IList<IResponseDeliverableData> Data { get; set; }
+    }
 }

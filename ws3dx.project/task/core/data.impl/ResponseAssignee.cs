@@ -15,26 +15,25 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class ResponseAssignee : IResponseAssignee
-   {
-      [JsonPropertyName("success")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? Success { get; set; }
+    public class ResponseAssignee : IResponseAssignee
+    {
+        [JsonPropertyName("success")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Success { get; set; }
 
-      [JsonPropertyName("statusCode")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? StatusCode { get; set; }
+        [JsonPropertyName("statusCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? StatusCode { get; set; }
 
-      [JsonPropertyName("csrf")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICsrf Csrf { get; set; }
+        [JsonPropertyName("csrf")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ICsrf Csrf { get; set; }
 
-      [JsonPropertyName("data")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IResponseAssigneeData> Data { get; set; }
-   }
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IResponseAssigneeData> Data { get; set; }
+    }
 }

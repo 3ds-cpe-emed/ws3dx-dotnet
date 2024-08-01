@@ -14,46 +14,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class PredecessorsRelelements : IPredecessorsRelelements
-   {
-      [JsonPropertyName("lagTime")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string LagTime { get; set; }
+    public class PredecessorsRelelements : IPredecessorsRelelements
+    {
+        [JsonPropertyName("lagTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string LagTime { get; set; }
 
-      [JsonPropertyName("dependencyType")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string DependencyType { get; set; }
+        [JsonPropertyName("dependencyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string DependencyType { get; set; }
 
-      [JsonPropertyName("lagTimeInputUnit")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string LagTimeInputUnit { get; set; }
+        [JsonPropertyName("lagTimeInputUnit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string LagTimeInputUnit { get; set; }
 
-      [JsonPropertyName("lagTimeInputValue")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string LagTimeInputValue { get; set; }
+        [JsonPropertyName("lagTimeInputValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string LagTimeInputValue { get; set; }
 
-      [JsonPropertyName("From")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string From { get; set; }
+        [JsonPropertyName("From")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string From { get; set; }
 
-      [JsonPropertyName("predTaskSeqNumber")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PredTaskSeqNumber { get; set; }
+        [JsonPropertyName("predTaskSeqNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string PredTaskSeqNumber { get; set; }
 
-      [JsonPropertyName("To")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string To { get; set; }
+        [JsonPropertyName("To")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string To { get; set; }
 
-      [JsonPropertyName("predProjectName")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PredProjectName { get; set; }
+        [JsonPropertyName("predProjectName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string PredProjectName { get; set; }
 
-      [JsonPropertyName("predProjectId")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PredProjectId { get; set; }
-   }
+        [JsonPropertyName("predProjectId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string PredProjectId { get; set; }
+    }
 }

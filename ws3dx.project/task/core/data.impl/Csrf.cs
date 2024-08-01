@@ -14,18 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class Csrf : ICsrf
-   {
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class Csrf : ICsrf
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      [JsonPropertyName("value")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Value { get; set; }
-   }
+        [JsonPropertyName("value")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Value { get; set; }
+    }
 }

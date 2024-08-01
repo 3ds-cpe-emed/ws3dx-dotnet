@@ -13,21 +13,23 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface ITaskContents
-   {
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(TaskContents))]
+    public interface ITaskContents
+    {
+        public string Id { get; set; }
 
-      public string Type { get; set; }
+        public string Type { get; set; }
 
-      public string Identifier { get; set; }
+        public string Identifier { get; set; }
 
-      public string Source { get; set; }
+        public string Source { get; set; }
 
-      public string RelativePath { get; set; }
+        public string RelativePath { get; set; }
 
-      public IContentsDataelements Data { get; set; }
-   }
+        public IContentsDataelements Data { get; set; }
+    }
 }

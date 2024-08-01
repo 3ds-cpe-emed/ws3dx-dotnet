@@ -19,286 +19,339 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.service
+namespace ws3dx.project.task.service
 {
-   // SDK Service
-   public class TaskService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler";
+    // SDK Service
+    public class TaskService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler";
 
-      public TaskService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public TaskService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      protected override string GetMaskParamName() { return null; }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the user assigned/owned tasks.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="showProjectTasks">
+        /// whether to include project tasks
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseTaskData>> GetUserTasks(bool showProjectTasks)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/{taskId}/references
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Get the task references.
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseReferenceData>> GetTaskReferences(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
-
-         return await GetCollectionFromResponseDataProperty<IResponseReferenceData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/{taskId}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Retrive an existing task information.
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IResponseTaskData> GetTask(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
-
-         return await GetIndividualFromResponseDataProperty<IResponseTaskData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/{taskId}/assignees
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Retrieve assignees for an existing task.
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseAssigneeData>> GetTaskAssignees(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
-
-         return await GetCollectionFromResponseDataProperty<IResponseAssigneeData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/{taskId}/scopes
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Retrieve tha tasks context/scope object(s).
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseScopeData>> GetTaskScopes(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
-
-         return await GetCollectionFromResponseDataProperty<IResponseScopeData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/scopeId/{scopeId}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Retrieve tha tasks for a given context/scope object.
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseTaskData>> GetTasksWithScope(string scopeId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/scopeId/{scopeId}";
-
-         return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks/{taskId}/deliverables
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Get the task deliverables.
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseDeliverableData>> GetTaskDeliverables(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
-
-         return await GetCollectionFromResponseDataProperty<IResponseDeliverableData>(resourceURI);
-      }
-
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) /tasks
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Get the user assigned/owned tasks.
-      // <param name="showProjectTasks">
-      // Description: whether to include project tasks
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IList<IResponseTaskData>> GetUserTasks(bool showProjectTasks)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks";
-
-         IDictionary<string, string> queryParams = new Dictionary<string, string>
+            IDictionary<string, string> queryParams = new Dictionary<string, string>
          {
             { "showProjectTasks", showProjectTasks.ToString() }
          };
 
-         return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI, queryParams: queryParams);
-      }
+            return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI, queryParams: queryParams);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks/ids
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Get the user assigned tasks for the specified task objects.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseTaskData>> GetTasks(string _idPayload)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/ids";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Modify existing task(s).
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PUT) /tasks
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="tasks">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseTaskData>> UpdateTasks(ITasks tasks)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PostCollectionFromResponseDataProperty<IResponseTaskData, string>(resourceURI, _idPayload);
-      }
+            return await PutCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks/{taskId}/assignees
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Add new assignees for an existing task.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseAssigneeData>> AddAssigneesToTask(string taskId, IAssignees assignees)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create new task(s).
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="tasks">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseTaskData>> CreateTask(ITasks tasks)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks";
 
-         return await PostCollectionFromResponseDataProperty<IResponseAssigneeData, IAssignees>(resourceURI, assignees);
-      }
+            return await PostCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks/{taskId}/references
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Add new task references.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseReferenceData>> AddReferencesToTask(string taskId, IReferences references)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Retrieve assignees for an existing task.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/{taskId}/assignees
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseAssigneeData>> GetTaskAssignees(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await PostCollectionFromResponseDataProperty<IResponseReferenceData, IReferences>(resourceURI, references);
-      }
+            return await GetCollectionFromResponseDataProperty<IResponseAssigneeData>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks/{taskId}/deliverables
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Add new task deliverables.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseDeliverableData>> AddDeliverablesToTask(string taskId, IDeliverables deliverables)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Add new assignees for an existing task.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks/{taskId}/assignees
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        /// <param name="assignees">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseAssigneeData>> AddAssigneesToTask(string taskId, IAssignees assignees)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/assignees";
 
-         return await PostCollectionFromResponseDataProperty<IResponseDeliverableData, IDeliverables>(resourceURI, deliverables);
-      }
+            return await PostCollectionFromResponseDataProperty<IResponseAssigneeData, IAssignees>(resourceURI, assignees);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks/{taskId}/scopes
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Add specified Scope object(s) to the specific Task object.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseScopeData>> AddScopesToTask(string taskId, IScopes scopes)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the task deliverables.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/{taskId}/deliverables
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseDeliverableData>> GetTaskDeliverables(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await PostCollectionFromResponseDataProperty<IResponseScopeData, IScopes>(resourceURI, scopes);
-      }
+            return await GetCollectionFromResponseDataProperty<IResponseDeliverableData>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) /tasks
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Create new task(s).
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseTaskData>> CreateTask(ITasks tasks)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Add new task deliverables.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks/{taskId}/deliverables
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        /// <param name="deliverables">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseDeliverableData>> AddDeliverablesToTask(string taskId, IDeliverables deliverables)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/deliverables";
 
-         return await PostCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
-      }
+            return await PostCollectionFromResponseDataProperty<IResponseDeliverableData, IDeliverables>(resourceURI, deliverables);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PUT) /tasks/{taskId}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Update an existing task information.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IResponseTaskData> UpdateTask(string taskId, ITasks tasks)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the user assigned tasks for the specified task objects.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks/ids
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// 
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseTaskData>> GetTasks(string _idPayload)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/ids";
 
-         return await PutIndividualFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
-      }
+            return await PostCollectionFromResponseDataProperty<IResponseTaskData, string>(resourceURI, _idPayload);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PUT) /tasks
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Modify existing task(s).
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IResponseTaskData>> UpdateTasks(ITasks tasks)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the task references.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/{taskId}/references
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseReferenceData>> GetTaskReferences(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await PutCollectionFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
-      }
+            return await GetCollectionFromResponseDataProperty<IResponseReferenceData>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) /tasks/{taskId}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Summary: Delete an existing task.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IRESULTS_EMPTY> DeleteTask(string taskId)
-      {
-         string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Add new task references.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks/{taskId}/references
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        /// <param name="references">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseReferenceData>> AddReferencesToTask(string taskId, IReferences references)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/references";
 
-         return await DeleteIndividual<IRESULTS_EMPTY>(resourceURI);
-      }
-   }
+            return await PostCollectionFromResponseDataProperty<IResponseReferenceData, IReferences>(resourceURI, references);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Retrieve tha tasks context/scope object(s).
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/{taskId}/scopes
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseScopeData>> GetTaskScopes(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
+
+            return await GetCollectionFromResponseDataProperty<IResponseScopeData>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Add specified Scope object(s) to the specific Task object.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) /tasks/{taskId}/scopes
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        /// <param name="scopes">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseScopeData>> AddScopesToTask(string taskId, IScopes scopes)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}/scopes";
+
+            return await PostCollectionFromResponseDataProperty<IResponseScopeData, IScopes>(resourceURI, scopes);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Retrieve tha tasks for a given context/scope object.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/scopeId/{scopeId}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="scopeId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<IResponseTaskData>> GetTasksWithScope(string scopeId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/scopeId/{scopeId}";
+
+            return await GetCollectionFromResponseDataProperty<IResponseTaskData>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Retrive an existing task information.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) /tasks/{taskId}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IResponseTaskData> GetTask(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
+
+            return await GetIndividualFromResponseDataProperty<IResponseTaskData>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Update an existing task information.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PUT) /tasks/{taskId}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        /// <param name="tasks">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IResponseTaskData> UpdateTask(string taskId, ITasks tasks)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
+
+            return await PutIndividualFromResponseDataProperty<IResponseTaskData, ITasks>(resourceURI, tasks);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Delete an existing task.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) /tasks/{taskId}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="taskId">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IRESULTS_EMPTY> DeleteTask(string taskId)
+        {
+            string resourceURI = $"{GetBaseResource()}/tasks/{taskId}";
+
+            return await DeleteIndividual<IRESULTS_EMPTY>(resourceURI);
+        }
+    }
 }

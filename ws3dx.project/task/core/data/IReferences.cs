@@ -14,11 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface IReferences
-   {
-      public IList<IReference> Data { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(References))]
+    public interface IReferences
+    {
+        public IList<IReference> Data { get; set; }
+    }
 }

@@ -13,15 +13,17 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface IRESULTS_EMPTY
-   {
-      public bool? Success { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(RESULTS_EMPTY))]
+    public interface IRESULTS_EMPTY
+    {
+        public bool? Success { get; set; }
 
-      public int? StatusCode { get; set; }
+        public int? StatusCode { get; set; }
 
-      public ICsrf Csrf { get; set; }
-   }
+        public ICsrf Csrf { get; set; }
+    }
 }

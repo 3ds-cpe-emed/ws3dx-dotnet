@@ -16,81 +16,82 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using ws3dx.core.exception;
-using ws3dx.project.task.core.data.impl;
-using ws3dx.project.task.core.service;
 using ws3dx.project.task.data;
+using ws3dx.project.task.data.impl;
+using ws3dx.project.task.service;
 using Task = System.Threading.Tasks.Task;
-using WS3DX = ws3dx.project.task.core.data.impl;
+using WS3DX = ws3dx.project.task.data.impl;
+
 
 namespace NUnitTestProject
 {
-   public class TaskService_Task_UnitTests : TaskServiceTestsSetup
-   {
+    public class TaskService_Task_UnitTests : TaskServiceTestsSetup
+    {
+        //TODO
+        [TestCase("")]
+        public async Task GetTaskReferences(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-      [TestCase("")]
-      public async Task GetTaskReferences(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+            IList<IResponseReferenceData> ret = await taskService.GetTaskReferences(taskId);
 
-         IList<IResponseReferenceData> ret = await taskService.GetTaskReferences(taskId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("A0EA6A14EC2400006363763A0004E226")]
-      public async Task GetTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
-
-         IResponseTaskData ret = await taskService.GetTask(taskId);
-
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("A0EA6A14EC2400006363763A0004E226")]
-      public async Task GetTaskAssignees(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        public async Task GetTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-         IList<IResponseAssigneeData> ret = await taskService.GetTaskAssignees(taskId);
+            IResponseTaskData ret = await taskService.GetTask(taskId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
+
+      [TestCase("A0EA6A14EC2400006363763A0004E226")]
+        public async Task GetTaskAssignees(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
+
+            IList<IResponseAssigneeData> ret = await taskService.GetTaskAssignees(taskId);
+
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("795A0F6C3253000061FDA1A70013466B")]
-      public async Task GetTaskScopes(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        public async Task GetTaskScopes(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
          IList<IResponseScopeData> ret = await taskService.GetTaskScopes(taskId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("FDBEB6D4D7020000639849FE0001DE07")]
-      public async Task GetTasksWithScope(string scopeId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        public async Task GetTasksWithScope(string scopeId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
          IList<IResponseTaskData> ret = await taskService.GetTasksWithScope(scopeId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("A0EA6A14EC2400006363763A0004E226")]
-      public async Task GetTaskDeliverables(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        public async Task GetTaskDeliverables(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
          IList<IResponseDeliverableData> ret = await taskService.GetTaskDeliverables(taskId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase(true)]
-      public async Task GetUserTasks(bool showProjectTasks)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        [TestCase(true)]
+        public async Task GetUserTasks(bool showProjectTasks)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
          IList<IResponseTaskData> ret = await taskService.GetUserTasks(showProjectTasks);
 
@@ -100,119 +101,123 @@ namespace NUnitTestProject
             Assert.IsNotNull(taskDetail);
 
             Assert.AreEqual(taskDetail.Id, taskData.Id);
-         }
+        }
       }
 
-      [TestCase()]
-      public async Task GetTasks()
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task GetTasks()
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
          // Comma-separated list of IDs to retrieve.
          const string idPayload = "A0EA6A14EC2400006363763A0004E226";
 
-         try
-         {
+            try
+            {
             IList<IResponseTaskData> ret = await taskService.GetTasks(idPayload);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddAssigneesToTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        //TODO
+        [TestCase("")]
+        public async Task AddAssigneesToTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-         IAssignees assignees = new Assignees();
+            IAssignees assignees = new Assignees();
 
-         try
-         {
+            try
+            {
             IList<IResponseAssigneeData> ret = await taskService.AddAssigneesToTask(taskId, assignees);
 
-            Assert.IsNotNull(ret);
+                Assert.IsNotNull(ret);
 
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddReferencesToTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        //TODO
+        [TestCase("")]
+        public async Task AddReferencesToTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-         IReferences references = new References();
+            IReferences references = new References();
 
-         try
-         {
+            try
+            {
             IList<IResponseReferenceData> ret = await taskService.AddReferencesToTask(taskId, references);
 
-            Assert.IsNotNull(ret);
+                Assert.IsNotNull(ret);
 
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddDeliverablesToTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        //TODO
+        [TestCase("")]
+        public async Task AddDeliverablesToTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-         IDeliverables deliverables = new Deliverables();
+            IDeliverables deliverables = new Deliverables();
 
-         try
-         {
+            try
+            {
             IList<IResponseDeliverableData> ret = await taskService.AddDeliverablesToTask(taskId, deliverables);
 
-            Assert.IsNotNull(ret);
+                Assert.IsNotNull(ret);
 
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddScopesToTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        //TODO
+        [TestCase("")]
+        public async Task AddScopesToTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
-         IScopes scopes = new Scopes();
+            IScopes scopes = new Scopes();
 
-         try
-         {
+            try
+            {
             IList<IResponseScopeData> ret = await taskService.AddScopesToTask(taskId, scopes);
 
-            Assert.IsNotNull(ret);
+                Assert.IsNotNull(ret);
 
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
 
       [TestCase("Task III from ws", "Task IV from ws")]
       public async Task CreateTask(string _task1Title, string _task2Title)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
 
          ITaskData taskData1 = new WS3DX.TaskData();
@@ -227,41 +232,41 @@ namespace NUnitTestProject
          ITask task2 = new WS3DX.Task();
          task2.Data = taskData2;
 
-         ITasks tasks = new Tasks();
+            ITasks tasks = new Tasks();
          tasks.Data = new List<ITask>();
          tasks.Data.Add(task1);
          tasks.Data.Add(task2);
 
-         try
-         {
+            try
+            {
             IList<IResponseTaskData> ret = await taskService.CreateTask(tasks);
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task DeleteTask(string taskId)
-      {
-         TaskService taskService = ServiceFactoryCreate(await Authenticate());
+        //TODO
+        [TestCase("")]
+        public async Task DeleteTask(string taskId)
+        {
+            TaskService taskService = ServiceFactoryCreate(await Authenticate());
 
+            try
+            {
+                IRESULTS_EMPTY ret = await taskService.DeleteTask(taskId);
 
-         try
-         {
-            IRESULTS_EMPTY ret = await taskService.DeleteTask(taskId);
+                Assert.IsNotNull(ret);
 
-            Assert.IsNotNull(ret);
-
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

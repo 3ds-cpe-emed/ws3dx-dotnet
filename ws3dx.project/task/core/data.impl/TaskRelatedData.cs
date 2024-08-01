@@ -15,54 +15,53 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class TaskRelatedData : ITaskRelatedData
-   {
-      [JsonPropertyName("predecessors")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskPredecessor> Predecessors { get; set; }
+    public class TaskRelatedData : ITaskRelatedData
+    {
+        [JsonPropertyName("predecessors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskPredecessor> Predecessors { get; set; }
 
-      [JsonPropertyName("ownerInfo")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskOwner> OwnerInfo { get; set; }
+        [JsonPropertyName("ownerInfo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskOwner> OwnerInfo { get; set; }
 
-      [JsonPropertyName("originatorInfo")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskCreator> OriginatorInfo { get; set; }
+        [JsonPropertyName("originatorInfo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskCreator> OriginatorInfo { get; set; }
 
-      [JsonPropertyName("references")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskReference> References { get; set; }
+        [JsonPropertyName("references")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskReference> References { get; set; }
 
-      [JsonPropertyName("deliverables")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskDeliverables> Deliverables { get; set; }
+        [JsonPropertyName("deliverables")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskDeliverables> Deliverables { get; set; }
 
-      [JsonPropertyName("DPMProject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskDPMProject> DPMProject { get; set; }
+        [JsonPropertyName("DPMProject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskDPMProject> DPMProject { get; set; }
 
-      [JsonPropertyName("route")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskRoute> Route { get; set; }
+        [JsonPropertyName("route")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskRoute> Route { get; set; }
 
-      [JsonPropertyName("scopes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskScope> Scopes { get; set; }
+        [JsonPropertyName("scopes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskScope> Scopes { get; set; }
 
-      [JsonPropertyName("contents")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskContents> Contents { get; set; }
+        [JsonPropertyName("contents")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskContents> Contents { get; set; }
 
-      [JsonPropertyName("assignees")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskAssignee> Assignees { get; set; }
+        [JsonPropertyName("assignees")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskAssignee> Assignees { get; set; }
 
-      [JsonPropertyName("calendar")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITaskCalendar> Calendar { get; set; }
-   }
+        [JsonPropertyName("calendar")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITaskCalendar> Calendar { get; set; }
+    }
 }

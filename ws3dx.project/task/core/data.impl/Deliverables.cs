@@ -15,14 +15,13 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class Deliverables : IDeliverables
-   {
-      [JsonPropertyName("data")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IDeliverable> Data { get; set; }
-   }
+    public class Deliverables : IDeliverables
+    {
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IDeliverable> Data { get; set; }
+    }
 }

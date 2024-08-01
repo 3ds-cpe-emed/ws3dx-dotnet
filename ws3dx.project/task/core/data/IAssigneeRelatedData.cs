@@ -14,11 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface IAssigneeRelatedData
-   {
-      public IList<IAssigneeCalendar> Calendar { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(AssigneeRelatedData))]
+    public interface IAssigneeRelatedData
+    {
+        public IList<IAssigneeCalendar> Calendar { get; set; }
+    }
 }

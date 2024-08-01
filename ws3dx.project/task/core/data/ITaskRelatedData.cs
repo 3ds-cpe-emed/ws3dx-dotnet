@@ -14,31 +14,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface ITaskRelatedData
-   {
-      public IList<ITaskPredecessor> Predecessors { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(TaskRelatedData))]
+    public interface ITaskRelatedData
+    {
+        public IList<ITaskPredecessor> Predecessors { get; set; }
 
-      public IList<ITaskOwner> OwnerInfo { get; set; }
+        public IList<ITaskOwner> OwnerInfo { get; set; }
 
-      public IList<ITaskCreator> OriginatorInfo { get; set; }
+        public IList<ITaskCreator> OriginatorInfo { get; set; }
 
-      public IList<ITaskReference> References { get; set; }
+        public IList<ITaskReference> References { get; set; }
 
-      public IList<ITaskDeliverables> Deliverables { get; set; }
+        public IList<ITaskDeliverables> Deliverables { get; set; }
 
-      public IList<ITaskDPMProject> DPMProject { get; set; }
+        public IList<ITaskDPMProject> DPMProject { get; set; }
 
-      public IList<ITaskRoute> Route { get; set; }
+        public IList<ITaskRoute> Route { get; set; }
 
-      public IList<ITaskScope> Scopes { get; set; }
+        public IList<ITaskScope> Scopes { get; set; }
 
-      public IList<ITaskContents> Contents { get; set; }
+        public IList<ITaskContents> Contents { get; set; }
 
-      public IList<ITaskAssignee> Assignees { get; set; }
+        public IList<ITaskAssignee> Assignees { get; set; }
 
-      public IList<ITaskCalendar> Calendar { get; set; }
-   }
+        public IList<ITaskCalendar> Calendar { get; set; }
+    }
 }

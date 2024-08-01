@@ -15,20 +15,20 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using ws3dx.authentication.data;
-using ws3dx.project.task.core.service;
-using ws3dx.tests.service.tests;
+using ws3dx.dsmfg.tests.service.tests;
+using ws3dx.project.task.service;
 
 namespace NUnitTestProject
 {
-   public class TaskServiceTestsSetup : PassportAuthenticationTestSetup
-   {
-      public TaskService ServiceFactoryCreate(IPassportAuthentication _passport)
-      {
-         return new TaskService(GetServiceUrl(), _passport)
-         {
-            Tenant = GetTenant(),
-            SecurityContext = GetDefaultSecurityContext()
-         };
-      }
-   }
+    public class TaskServiceTestsSetup : PassportAuthenticationTestSetup
+    {
+        public TaskService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new TaskService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
+    }
 }

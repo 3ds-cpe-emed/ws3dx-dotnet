@@ -14,46 +14,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class AssigneeData : IAssigneeData
-   {
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class AssigneeData : IAssigneeData
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      [JsonPropertyName("firstname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Firstname { get; set; }
+        [JsonPropertyName("firstname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Firstname { get; set; }
 
-      [JsonPropertyName("lastname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Lastname { get; set; }
+        [JsonPropertyName("lastname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Lastname { get; set; }
 
-      [JsonPropertyName("Title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+        [JsonPropertyName("Title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      [JsonPropertyName("Id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+        [JsonPropertyName("Id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Id { get; set; }
 
-      [JsonPropertyName("WorkTime")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string WorkTime { get; set; }
+        [JsonPropertyName("WorkTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string WorkTime { get; set; }
 
-      [JsonPropertyName("icon")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Icon { get; set; }
+        [JsonPropertyName("icon")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Icon { get; set; }
 
-      [JsonPropertyName("fullname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Fullname { get; set; }
+        [JsonPropertyName("fullname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Fullname { get; set; }
 
-      [JsonPropertyName("email")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Email { get; set; }
-   }
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Email { get; set; }
+    }
 }

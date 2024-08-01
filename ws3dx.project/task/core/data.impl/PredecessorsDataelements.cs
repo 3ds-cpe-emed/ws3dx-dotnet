@@ -14,18 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class PredecessorsDataelements : IPredecessorsDataelements
-   {
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+    public class PredecessorsDataelements : IPredecessorsDataelements
+    {
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      [JsonPropertyName("PALId")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string PALId { get; set; }
-   }
+        [JsonPropertyName("PALId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string PALId { get; set; }
+    }
 }

@@ -14,22 +14,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class OwnerInfoDataelements : IOwnerInfoDataelements
-   {
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class OwnerInfoDataelements : IOwnerInfoDataelements
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      [JsonPropertyName("firstname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Firstname { get; set; }
+        [JsonPropertyName("firstname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Firstname { get; set; }
 
-      [JsonPropertyName("lastname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Lastname { get; set; }
-   }
+        [JsonPropertyName("lastname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Lastname { get; set; }
+    }
 }

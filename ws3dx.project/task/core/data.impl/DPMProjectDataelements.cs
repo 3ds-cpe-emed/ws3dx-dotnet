@@ -15,70 +15,69 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class DPMProjectDataelements : IDPMProjectDataelements
-   {
-      [JsonPropertyName("name")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Name { get; set; }
+    public class DPMProjectDataelements : IDPMProjectDataelements
+    {
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
-      [JsonPropertyName("revision")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Revision { get; set; }
+        [JsonPropertyName("revision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Revision { get; set; }
 
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      [JsonPropertyName("synopsis")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Synopsis { get; set; }
+        [JsonPropertyName("synopsis")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Synopsis { get; set; }
 
-      [JsonPropertyName("firstname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Firstname { get; set; }
+        [JsonPropertyName("firstname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Firstname { get; set; }
 
-      [JsonPropertyName("lastname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Lastname { get; set; }
+        [JsonPropertyName("lastname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Lastname { get; set; }
 
-      [JsonPropertyName("fullname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Fullname { get; set; }
+        [JsonPropertyName("fullname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Fullname { get; set; }
 
-      [JsonPropertyName("objectId")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ObjectId { get; set; }
+        [JsonPropertyName("objectId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string ObjectId { get; set; }
 
-      [JsonPropertyName("policy")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Policy { get; set; }
+        [JsonPropertyName("policy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Policy { get; set; }
 
-      [JsonPropertyName("stateNLS")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string StateNLS { get; set; }
+        [JsonPropertyName("stateNLS")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string StateNLS { get; set; }
 
-      [JsonPropertyName("typeNLS")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TypeNLS { get; set; }
+        [JsonPropertyName("typeNLS")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string TypeNLS { get; set; }
 
-      [JsonPropertyName("collabSpace")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string CollabSpace { get; set; }
+        [JsonPropertyName("collabSpace")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string CollabSpace { get; set; }
 
-      [JsonPropertyName("ownerFullname")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string OwnerFullname { get; set; }
+        [JsonPropertyName("ownerFullname")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string OwnerFullname { get; set; }
 
-      [JsonPropertyName("hasfiles")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> Hasfiles { get; set; }
+        [JsonPropertyName("hasfiles")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> Hasfiles { get; set; }
 
-      [JsonPropertyName("fileExtension")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> FileExtension { get; set; }
-   }
+        [JsonPropertyName("fileExtension")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> FileExtension { get; set; }
+    }
 }

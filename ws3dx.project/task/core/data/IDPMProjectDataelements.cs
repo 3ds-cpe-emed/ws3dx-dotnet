@@ -14,39 +14,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.project.task.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.project.task.data
 {
-   public interface IDPMProjectDataelements
-   {
-      public string Name { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(DPMProjectDataelements))]
+    public interface IDPMProjectDataelements
+    {
+        public string Name { get; set; }
 
-      public string Revision { get; set; }
+        public string Revision { get; set; }
 
-      public string Title { get; set; }
+        public string Title { get; set; }
 
-      public string Synopsis { get; set; }
+        public string Synopsis { get; set; }
 
-      public string Firstname { get; set; }
+        public string Firstname { get; set; }
 
-      public string Lastname { get; set; }
+        public string Lastname { get; set; }
 
-      public string Fullname { get; set; }
+        public string Fullname { get; set; }
 
-      public string ObjectId { get; set; }
+        public string ObjectId { get; set; }
 
-      public string Policy { get; set; }
+        public string Policy { get; set; }
 
-      public string StateNLS { get; set; }
+        public string StateNLS { get; set; }
 
-      public string TypeNLS { get; set; }
+        public string TypeNLS { get; set; }
 
-      public string CollabSpace { get; set; }
+        public string CollabSpace { get; set; }
 
-      public string OwnerFullname { get; set; }
+        public string OwnerFullname { get; set; }
 
-      public IList<string> Hasfiles { get; set; }
+        public IList<string> Hasfiles { get; set; }
 
-      public IList<string> FileExtension { get; set; }
-   }
+        public IList<string> FileExtension { get; set; }
+    }
 }

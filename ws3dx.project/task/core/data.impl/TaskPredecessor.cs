@@ -14,38 +14,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.project.task.data;
 
-namespace ws3dx.project.task.core.data.impl
+namespace ws3dx.project.task.data.impl
 {
-   public class TaskPredecessor : ITaskPredecessor
-   {
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+    public class TaskPredecessor : ITaskPredecessor
+    {
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Id { get; set; }
 
-      [JsonPropertyName("type")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Type { get; set; }
 
-      [JsonPropertyName("identifier")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Identifier { get; set; }
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Identifier { get; set; }
 
-      [JsonPropertyName("source")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Source { get; set; }
 
-      [JsonPropertyName("relativePath")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
+        [JsonPropertyName("relativePath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string RelativePath { get; set; }
 
-      [JsonPropertyName("dataelements")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPredecessorsDataelements Data { get; set; }
+        [JsonPropertyName("dataelements")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IPredecessorsDataelements Data { get; set; }
 
-      [JsonPropertyName("relelements")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPredecessorsRelelements RelatedElements { get; set; }
-   }
+        [JsonPropertyName("relelements")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IPredecessorsRelelements RelatedElements { get; set; }
+    }
 }
