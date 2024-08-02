@@ -1,17 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33027.164
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9CF5047C-4ECB-4EF2-AEA1-6C827AE37F0C}") = "ws3dx.dsxcad.tests", "tests\ws3dx.dsxcad.tests.csproj", "{B9ED9D91-226F-483A-9384-F444502311D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsxcad.tests", "tests\ws3dx.dsxcad.tests.csproj", "{B9ED9D91-226F-483A-9384-F444502311D7}"
 EndProject
-Project("{9CF5047C-4ECB-4EF2-AEA1-6C827AE37F0C}") = "ws3dx.core", "..\ws3dx.core\ws3dx.core.csproj", "{4F869825-DC05-4B4B-B921-915AC295F7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.core", "..\ws3dx.core\ws3dx.core.csproj", "{4F869825-DC05-4B4B-B921-915AC295F7FB}"
 EndProject
-Project("{9CF5047C-4ECB-4EF2-AEA1-6C827AE37F0C}") = "ws3dx.shared", "..\ws3dx.shared\ws3dx.shared.csproj", "{862953B5-9315-492D-A65A-3A973A33F4CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.shared", "..\ws3dx.shared\ws3dx.shared.csproj", "{862953B5-9315-492D-A65A-3A973A33F4CB}"
 EndProject
-Project("{9CF5047C-4ECB-4EF2-AEA1-6C827AE37F0C}") = "ws3dx.dsxcad.core", "core\ws3dx.dsxcad.core.csproj", "{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}"
-EndProject
-Project("{9CF5047C-4ECB-4EF2-AEA1-6C827AE37F0C}") = "ws3dx.dsxcad.data", "data\ws3dx.dsxcad.data.csproj", "{1FA9C5B7-2ED5-487E-B24D-02262F2B0402}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsxcad.core", "core\ws3dx.dsxcad.core.csproj", "{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FA9C5B7-2ED5-487E-B24D-02262F2B0402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FA9C5B7-2ED5-487E-B24D-02262F2B0402}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FA9C5B7-2ED5-487E-B24D-02262F2B0402}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FA9C5B7-2ED5-487E-B24D-02262F2B0402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
