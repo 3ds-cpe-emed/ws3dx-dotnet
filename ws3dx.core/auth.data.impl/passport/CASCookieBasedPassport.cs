@@ -55,10 +55,10 @@ namespace ws3dx.authentication.data.impl.passport
 
             foreach (Cookie cookie in cookies)
             {
-               if (cookie.Name == CAS_TICKET_NAME)
-               {
-                  return true;
-               }
+                if ((cookie.Name != null) && ((cookie.Name == CAS_TICKET_NAME) || (cookie.Name.StartsWith(CAS_TICKET_NAME))))
+                {
+                    return true;
+                }
             }
 
             //Cloud
@@ -66,10 +66,10 @@ namespace ws3dx.authentication.data.impl.passport
 
             foreach (Cookie cookie in cookies)
             {
-               if (cookie.Name == CAS_TICKET_NAME)
-               {
-                  return true;
-               }
+                if ((cookie.Name != null) && ((cookie.Name == CAS_TICKET_NAME) || (cookie.Name.StartsWith(CAS_TICKET_NAME))))
+                {
+                    return true;
+                }
             }
 
             return false;
