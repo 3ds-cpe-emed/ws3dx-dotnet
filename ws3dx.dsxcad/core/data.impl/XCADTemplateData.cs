@@ -14,32 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class XCADTemplateData : IXCADTemplateData
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: additional cad informatin Example: CATIAV5-6R2022
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("cadinfo")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Cadinfo { get; set; }
+    public class XCADTemplateData : IXCADTemplateData
+    {
+        [JsonPropertyName("cadinfo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Cadinfo { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: persistency type Example: VPMReference
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("persistencytype")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Persistencytype { get; set; }
-   }
+        [JsonPropertyName("persistencytype")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Persistencytype { get; set; }
+    }
 }

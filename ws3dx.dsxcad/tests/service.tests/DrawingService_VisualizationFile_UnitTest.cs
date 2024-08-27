@@ -17,42 +17,42 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class DrawingService_VisualizationFile_UnitTests : DrawingServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetVisualizationFile(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+    public class DrawingService_VisualizationFile_UnitTests : DrawingServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetVisualizationFile(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IVisualizationFileMask> ret = await drawingService.GetVisualizationFile(drawingId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetVisualizationFileDownloadTicket(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await drawingService.GetVisualizationFileDownloadTicket(drawingId, request);
+            IEnumerable<IVisualizationFileMask> ret = await drawingService.GetVisualizationFile(drawingId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task GetVisualizationFileDownloadTicket(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileDownloadTicket ret = await drawingService.GetVisualizationFileDownloadTicket(drawingId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

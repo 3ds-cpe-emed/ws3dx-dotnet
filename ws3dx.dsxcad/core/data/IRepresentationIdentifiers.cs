@@ -17,8 +17,8 @@ using System.Collections.Generic;
 
 namespace ws3dx.dsxcad.data
 {
-   public interface IRepresentationIdentifiers
-   {
-      public IList<IRepresentationIdentifier> Member { get; set; }
-   }
+    public interface IRepresentationIdentifiers
+    {
+        public IList<IRepresentationIdentifier> Member { get; set; }
+    }
 }

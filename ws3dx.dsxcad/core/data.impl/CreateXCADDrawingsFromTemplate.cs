@@ -15,19 +15,18 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class CreateXCADDrawingsFromTemplate : ICreateXCADDrawingsFromTemplate
-   {
-      [JsonPropertyName("createFrom")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier CreateFrom { get; set; }
+    public class CreateXCADDrawingsFromTemplate : ICreateXCADDrawingsFromTemplate
+    {
+        [JsonPropertyName("createFrom")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier CreateFrom { get; set; }
 
-      [JsonPropertyName("items")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<INewXCADDrawingFromTemplate> Items { get; set; }
-   }
+        [JsonPropertyName("items")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<INewXCADDrawingFromTemplate> Items { get; set; }
+    }
 }

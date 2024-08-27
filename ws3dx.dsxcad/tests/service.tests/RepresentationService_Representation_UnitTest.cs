@@ -17,373 +17,373 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 using ws3dx.shared.data;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class RepresentationService_Representation_UnitTests : RepresentationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task Get_IXCADRepresentationMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+    public class RepresentationService_Representation_UnitTests : RepresentationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task Get_IXCADRepresentationMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IXCADRepresentationMask ret = await representationService.Get<IXCADRepresentationMask>(representationId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Get_IXCADRepresentationDetailMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         IXCADRepresentationDetailMask ret = await representationService.Get<IXCADRepresentationDetailMask>(representationId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Get_IXCADRepresentationBasicMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         IXCADRepresentationBasicMask ret = await representationService.Get<IXCADRepresentationBasicMask>(representationId);
-
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADRepresentationMask(string search, int skip, int top)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationMask> ret = await representationService.Search<IXCADRepresentationMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADRepresentationMask(string search)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationMask> ret = await representationService.Search<IXCADRepresentationMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADRepresentationDetailMask(string search, int skip, int top)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Search<IXCADRepresentationDetailMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADRepresentationDetailMask(string search)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Search<IXCADRepresentationDetailMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADRepresentationBasicMask(string search, int skip, int top)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Search<IXCADRepresentationBasicMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADRepresentationBasicMask(string search)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Search<IXCADRepresentationBasicMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Attach_IXCADRepresentationMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         IAttachXCADRepresentation request = new AttachXCADRepresentation();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationMask> ret = await representationService.Attach<IXCADRepresentationMask>(representationId, request);
+            IXCADRepresentationMask ret = await representationService.Get<IXCADRepresentationMask>(representationId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task Attach_IXCADRepresentationDetailMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IXCADRepresentationDetailMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IAttachXCADRepresentation request = new AttachXCADRepresentation();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Attach<IXCADRepresentationDetailMask>(representationId, request);
+            IXCADRepresentationDetailMask ret = await representationService.Get<IXCADRepresentationDetailMask>(representationId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task Attach_IXCADRepresentationBasicMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IXCADRepresentationBasicMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IAttachXCADRepresentation request = new AttachXCADRepresentation();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Attach<IXCADRepresentationBasicMask>(representationId, request);
+            IXCADRepresentationBasicMask ret = await representationService.Get<IXCADRepresentationBasicMask>(representationId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADRepresentationMask(string search, int skip, int top)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-      [TestCase()]
-      public async Task Create_IXCADRepresentationMask()
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         ICreateXCADReferences request = new CreateXCADReferences();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationMask> ret = await representationService.Create<IXCADRepresentationMask>(request);
+            IEnumerable<IXCADRepresentationMask> ret = await representationService.Search<IXCADRepresentationMask>(searchByFreeText, skip, top);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase()]
-      public async Task Create_IXCADRepresentationDetailMask()
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IXCADRepresentationMask(string search)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         ICreateXCADReferences request = new CreateXCADReferences();
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         try
-         {
-            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Create<IXCADRepresentationDetailMask>(request);
+            IEnumerable<IXCADRepresentationMask> ret = await representationService.Search<IXCADRepresentationMask>(searchByFreeText);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADRepresentationDetailMask(string search, int skip, int top)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-      [TestCase()]
-      public async Task Create_IXCADRepresentationBasicMask()
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         ICreateXCADReferences request = new CreateXCADReferences();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Create<IXCADRepresentationBasicMask>(request);
+            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Search<IXCADRepresentationDetailMask>(searchByFreeText, skip, top);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase()]
-      public async Task Locate()
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IXCADRepresentationDetailMask(string search)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         ILocateXCADRepresentations request = new LocateXCADRepresentations();
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         try
-         {
-            IEnumerable<IEnterpriseItemNumberMask> ret = await representationService.Locate(request);
+            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Search<IXCADRepresentationDetailMask>(searchByFreeText);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADRepresentationBasicMask(string search, int skip, int top)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-      [TestCase("")]
-      public async Task Modify_IXCADRepresentationMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
-
-         try
-         {
-            IEnumerable<IXCADRepresentationMask> ret = await representationService.Modify<IXCADRepresentationMask>(representationId, request);
+            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Search<IXCADRepresentationBasicMask>(searchByFreeText, skip, top);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task Modify_IXCADRepresentationDetailMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IXCADRepresentationBasicMask(string search)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         try
-         {
-            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Modify<IXCADRepresentationDetailMask>(representationId, request);
+            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Search<IXCADRepresentationBasicMask>(searchByFreeText);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task Modify_IXCADRepresentationBasicMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Attach_IXCADRepresentationMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
+            IAttachXCADRepresentation request = new AttachXCADRepresentation();
 
-         try
-         {
-            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Modify<IXCADRepresentationBasicMask>(representationId, request);
+            try
+            {
+                IEnumerable<IXCADRepresentationMask> ret = await representationService.Attach<IXCADRepresentationMask>(representationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task Detach_IXCADRepresentationMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Attach_IXCADRepresentationDetailMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IDetachXCADRepresentation request = new DetachXCADRepresentation();
+            IAttachXCADRepresentation request = new AttachXCADRepresentation();
 
-         try
-         {
-            IEnumerable<IXCADRepresentationMask> ret = await representationService.Detach<IXCADRepresentationMask>(representationId, request);
+            try
+            {
+                IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Attach<IXCADRepresentationDetailMask>(representationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task Detach_IXCADRepresentationDetailMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Attach_IXCADRepresentationBasicMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IDetachXCADRepresentation request = new DetachXCADRepresentation();
+            IAttachXCADRepresentation request = new AttachXCADRepresentation();
 
-         try
-         {
-            IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Detach<IXCADRepresentationDetailMask>(representationId, request);
+            try
+            {
+                IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Attach<IXCADRepresentationBasicMask>(representationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task Detach_IXCADRepresentationBasicMask(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task Create_IXCADRepresentationMask()
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IDetachXCADRepresentation request = new DetachXCADRepresentation();
+            ICreateXCADReferences request = new CreateXCADReferences();
 
-         try
-         {
-            IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Detach<IXCADRepresentationBasicMask>(representationId, request);
+            try
+            {
+                IEnumerable<IXCADRepresentationMask> ret = await representationService.Create<IXCADRepresentationMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Create_IXCADRepresentationDetailMask()
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateXCADReferences request = new CreateXCADReferences();
+
+            try
+            {
+                IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Create<IXCADRepresentationDetailMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Create_IXCADRepresentationBasicMask()
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateXCADReferences request = new CreateXCADReferences();
+
+            try
+            {
+                IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Create<IXCADRepresentationBasicMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Locate()
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            ILocateXCADRepresentations request = new LocateXCADRepresentations();
+
+            try
+            {
+                IEnumerable<IEnterpriseItemNumberMask> ret = await representationService.Locate(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Modify_IXCADRepresentationMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
+
+            try
+            {
+                IXCADRepresentationMask ret = await representationService.Modify<IXCADRepresentationMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Modify_IXCADRepresentationDetailMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
+
+            try
+            {
+                IXCADRepresentationDetailMask ret = await representationService.Modify<IXCADRepresentationDetailMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Modify_IXCADRepresentationBasicMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IModifyXCADRepresentationWithFiles request = new ModifyXCADRepresentationWithFiles();
+
+            try
+            {
+                IXCADRepresentationBasicMask ret = await representationService.Modify<IXCADRepresentationBasicMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Detach_IXCADRepresentationMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IDetachXCADRepresentation request = new DetachXCADRepresentation();
+
+            try
+            {
+                IEnumerable<IXCADRepresentationMask> ret = await representationService.Detach<IXCADRepresentationMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Detach_IXCADRepresentationDetailMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IDetachXCADRepresentation request = new DetachXCADRepresentation();
+
+            try
+            {
+                IEnumerable<IXCADRepresentationDetailMask> ret = await representationService.Detach<IXCADRepresentationDetailMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Detach_IXCADRepresentationBasicMask(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IDetachXCADRepresentation request = new DetachXCADRepresentation();
+
+            try
+            {
+                IEnumerable<IXCADRepresentationBasicMask> ret = await representationService.Detach<IXCADRepresentationBasicMask>(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

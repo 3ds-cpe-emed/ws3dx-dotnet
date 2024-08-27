@@ -14,14 +14,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsxcad.data
 {
-   public interface ICreateXCADPartsFromTemplate
-   {
-      public ITypedUriIdentifier CreateFrom { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(CreateXCADPartsFromTemplate))]
+    public interface ICreateXCADPartsFromTemplate
+    {
+        public ITypedUriIdentifier CreateFrom { get; set; }
 
-      public IList<INewXCADPartFromTemplate> Items { get; set; }
-   }
+        public IList<INewXCADPartFromTemplate> Items { get; set; }
+    }
 }

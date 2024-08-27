@@ -17,62 +17,62 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class RepresentationService_AuthoringFile_UnitTests : RepresentationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAuthoringFile(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+    public class RepresentationService_AuthoringFile_UnitTests : RepresentationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAuthoringFile(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAuthoringFileMask> ret = await representationService.GetAuthoringFile(representationId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await representationService.GetAuthoringFileDownloadTicket(representationId, request);
+            IEnumerable<IAuthoringFileMask> ret = await representationService.GetAuthoringFile(representationId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task GetAuthoringFileCheckinTicket(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetAuthoringFileDownloadTicket(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IAddEmpty request = new AddEmpty();
+            IAddEmpty request = new AddEmpty();
 
-         try
-         {
-            IFileCheckinTicket ret = await representationService.GetAuthoringFileCheckinTicket(representationId, request);
+            try
+            {
+                IFileDownloadTicket ret = await representationService.GetAuthoringFileDownloadTicket(representationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task GetAuthoringFileCheckinTicket(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileCheckinTicket ret = await representationService.GetAuthoringFileCheckinTicket(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

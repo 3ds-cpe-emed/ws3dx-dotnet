@@ -13,36 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IPreCheckin
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Number of files to upload to FCS Example: 2
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string FileNumber { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(PreCheckin))]
+    public interface IPreCheckin
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Number of files to upload to FCS Example: 2
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string FileNumber { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Number of ticket needed Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string TicketNumber { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Number of ticket needed Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string TicketNumber { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Type of the object associated to the file Example: dsxcad:Part
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Type of the object associated to the file Example: dsxcad:Part
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
+    }
 }

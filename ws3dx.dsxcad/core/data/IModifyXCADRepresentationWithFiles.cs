@@ -13,38 +13,40 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IModifyXCADRepresentationWithFiles
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ModifyXCADRepresentationWithFiles))]
+    public interface IModifyXCADRepresentationWithFiles
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: B1F3B0568B4500005EBAC3C400156385
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: B1F3B0568B4500005EBAC3C400156385
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
 
-      public IFileData AuthoringFile { get; set; }
-   }
+        public IFileData AuthoringFile { get; set; }
+    }
 }

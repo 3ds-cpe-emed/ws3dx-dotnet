@@ -16,46 +16,46 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class TemplateService_Template_UnitTests : TemplateServiceTestsSetup
-   {
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADTemplateMask(string search, int skip, int top)
-      {
-         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+    public class TemplateService_Template_UnitTests : TemplateServiceTestsSetup
+    {
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADTemplateMask(string search, int skip, int top)
+        {
+            TemplateService templateService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText, skip, top);
+            IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText, skip, top);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("search")]
-      public async Task Search_Full_IXCADTemplateMask(string search)
-      {
-         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IXCADTemplateMask(string search)
+        {
+            TemplateService templateService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText);
+            IEnumerable<IXCADTemplateMask> ret = await templateService.Search<IXCADTemplateMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get(string templateId)
-      {
-         TemplateService templateService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get(string templateId)
+        {
+            TemplateService templateService = ServiceFactoryCreate(await Authenticate());
 
-         IXCADTemplateMask ret = await templateService.Get(templateId);
+            IXCADTemplateMask ret = await templateService.Get(templateId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

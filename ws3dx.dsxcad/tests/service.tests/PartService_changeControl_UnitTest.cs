@@ -17,43 +17,61 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class PartService_changeControl_UnitTests : PartServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetChangeControl(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
+    public class PartService_changeControl_UnitTests : PartServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetChangeControl(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IChangeControlMask> ret = await partService.GetChangeControl(partId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task ChangeControl(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IGenericResponse ret = await partService.ChangeControl(partId, request);
+            IEnumerable<IChangeControlMask> ret = await partService.GetChangeControl(partId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task ChangeControl(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await partService.AttachChangeControl(partId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task DeleteChangeControl(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await partService.DeleteChangeControl(partId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

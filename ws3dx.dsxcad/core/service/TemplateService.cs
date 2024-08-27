@@ -21,76 +21,76 @@ using ws3dx.core.service;
 using ws3dx.dsxcad.data;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsxcad.core.service
+namespace ws3dx.dsxcad.service
 {
-   // SDK Service
-   public class TemplateService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
+    // SDK Service
+    public class TemplateService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
 
-      public TemplateService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public TemplateService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsxcad:Template/search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsxcad:Template/search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(IXCADTemplateMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(IXCADTemplateMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Template/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Template Summary: Gets a CAD Template
-      // <param name="templateId">
-      // Description: dsxcad:Template object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IXCADTemplateMask> Get(string templateId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Template/{templateId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Template
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Template/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="templateId">
+        /// dsxcad:Template object ID
+        /// </param>
+        public async Task<IXCADTemplateMask> Get(string templateId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Template/{templateId}";
 
-         return await GetIndividualFromResponseMemberProperty<IXCADTemplateMask>(resourceURI);
-      }
-   }
+            return await GetIndividualFromResponseMemberProperty<IXCADTemplateMask>(resourceURI);
+        }
+    }
 }

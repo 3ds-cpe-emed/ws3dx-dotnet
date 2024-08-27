@@ -16,21 +16,21 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class FamilyRepresentationService_xCADAttributes_UnitTests : FamilyRepresentationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetXCADAttributes(string familyRepId)
-      {
-         FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
+    public class FamilyRepresentationService_xCADAttributes_UnitTests : FamilyRepresentationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetXCADAttributes(string familyRepId)
+        {
+            FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IXCADAttributesMask> ret = await familyRepresentationService.GetXCADAttributes(familyRepId);
+            IXCADAttributesMask ret = await familyRepresentationService.GetXCADAttributes(familyRepId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

@@ -14,14 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class NewXCADPartFromTemplate : INewXCADPartFromTemplate
-   {
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ICreateXCADPartFromTemplateAttributes Attributes { get; set; }
-   }
+    public class NewXCADPartFromTemplate : INewXCADPartFromTemplate
+    {
+        [JsonPropertyName("attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ICreateXCADPartFromTemplateAttributes Attributes { get; set; }
+    }
 }

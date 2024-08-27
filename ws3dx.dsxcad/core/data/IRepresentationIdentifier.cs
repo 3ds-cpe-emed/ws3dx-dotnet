@@ -17,17 +17,17 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsxcad.data
 {
-   public interface IRepresentationIdentifier
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: 0A57A84A1A..
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Identifier { get; set; }
+    public interface IRepresentationIdentifier
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Entity physical id Example: 0A57A84A1A..
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string Identifier { get; set; }
 
-      public ITypedUriIdentifier Representation { get; set; }
-   }
+        public ITypedUriIdentifier Representation { get; set; }
+    }
 }

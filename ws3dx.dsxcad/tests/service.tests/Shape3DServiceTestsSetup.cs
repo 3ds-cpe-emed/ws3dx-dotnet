@@ -14,17 +14,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
-namespace ws3dx.dsxcad.data
+using ws3dx.authentication.data;
+using ws3dx.dsprcs.tests.service.tests;
+using ws3dx.dsxcad.service;
+
+namespace NUnitTestProject
 {
-   public interface IXCADAttribute
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: CAD Master Example: CATIA V5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cadorigin { get; set; }
-   }
+    public class Shape3DServiceTestsSetup : PassportAuthenticationTestSetup
+    {
+        public Shape3DService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new Shape3DService(GetServiceUrl(), _passport)
+
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
+    }
 }

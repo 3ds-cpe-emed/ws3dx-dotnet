@@ -17,173 +17,173 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class ProductService_Product_UnitTests : ProductServiceTestsSetup
-   {
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADProductMask(string search, int skip, int top)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
+    public class ProductService_Product_UnitTests : ProductServiceTestsSetup
+    {
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADProductMask(string search, int skip, int top)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADProductMask(string search)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADProductDetailMask(string search, int skip, int top)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADProductDetailMask> ret = await productService.Search<IXCADProductDetailMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADProductDetailMask(string search)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADProductDetailMask> ret = await productService.Search<IXCADProductDetailMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IXCADProductEnterpriseDetailMask(string search, int skip, int top)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Search<IXCADProductEnterpriseDetailMask>(searchByFreeText, skip, top);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("search")]
-      public async Task Search_Full_IXCADProductEnterpriseDetailMask(string search)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
-
-         IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Search<IXCADProductEnterpriseDetailMask>(searchByFreeText);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Get_IXCADProductMask(string productId)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         IXCADProductMask ret = await productService.Get<IXCADProductMask>(productId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Get_IXCADProductDetailMask(string productId)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         IXCADProductDetailMask ret = await productService.Get<IXCADProductDetailMask>(productId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task Get_IXCADProductEnterpriseDetailMask(string productId)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         IXCADProductEnterpriseDetailMask ret = await productService.Get<IXCADProductEnterpriseDetailMask>(productId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase()]
-      public async Task Create_IXCADProductMask()
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
-
-         ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
-
-         try
-         {
-            IEnumerable<IXCADProductMask> ret = await productService.Create<IXCADProductMask>(request);
+            IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText, skip, top);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase()]
-      public async Task Create_IXCADProductDetailMask()
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IXCADProductMask(string search)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         try
-         {
-            IEnumerable<IXCADProductDetailMask> ret = await productService.Create<IXCADProductDetailMask>(request);
+            IEnumerable<IXCADProductMask> ret = await productService.Search<IXCADProductMask>(searchByFreeText);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADProductDetailMask(string search, int skip, int top)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-      [TestCase()]
-      public async Task Create_IXCADProductEnterpriseDetailMask()
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
-
-         try
-         {
-            IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Create<IXCADProductEnterpriseDetailMask>(request);
+            IEnumerable<IXCADProductDetailMask> ret = await productService.Search<IXCADProductDetailMask>(searchByFreeText, skip, top);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("search")]
+        public async Task Search_Full_IXCADProductDetailMask(string search)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+            IEnumerable<IXCADProductDetailMask> ret = await productService.Search<IXCADProductDetailMask>(searchByFreeText);
+
+            Assert.IsNotNull(ret);
+        }
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IXCADProductEnterpriseDetailMask(string search, int skip, int top)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+            IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Search<IXCADProductEnterpriseDetailMask>(searchByFreeText, skip, top);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("search")]
+        public async Task Search_Full_IXCADProductEnterpriseDetailMask(string search)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+
+            IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Search<IXCADProductEnterpriseDetailMask>(searchByFreeText);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task Get_IXCADProductMask(string productId)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            IXCADProductMask ret = await productService.Get<IXCADProductMask>(productId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task Get_IXCADProductDetailMask(string productId)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            IXCADProductDetailMask ret = await productService.Get<IXCADProductDetailMask>(productId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task Get_IXCADProductEnterpriseDetailMask(string productId)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            IXCADProductEnterpriseDetailMask ret = await productService.Get<IXCADProductEnterpriseDetailMask>(productId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase()]
+        public async Task Create_IXCADProductMask()
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
+
+            try
+            {
+                IEnumerable<IXCADProductMask> ret = await productService.Create<IXCADProductMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Create_IXCADProductDetailMask()
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
+
+            try
+            {
+                IEnumerable<IXCADProductDetailMask> ret = await productService.Create<IXCADProductDetailMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Create_IXCADProductEnterpriseDetailMask()
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateXCADProductsFromTemplate request = new CreateXCADProductsFromTemplate();
+
+            try
+            {
+                IEnumerable<IXCADProductEnterpriseDetailMask> ret = await productService.Create<IXCADProductEnterpriseDetailMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

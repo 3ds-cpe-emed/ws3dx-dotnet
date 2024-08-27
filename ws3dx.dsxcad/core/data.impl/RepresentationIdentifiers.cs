@@ -15,14 +15,13 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class RepresentationIdentifiers : IRepresentationIdentifiers
-   {
-      [JsonPropertyName("member")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IRepresentationIdentifier> Member { get; set; }
-   }
+    public class RepresentationIdentifiers : IRepresentationIdentifiers
+    {
+        [JsonPropertyName("member")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IRepresentationIdentifier> Member { get; set; }
+    }
 }

@@ -13,13 +13,14 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsxcad.data.impl;
 using ws3dx.serialization.attribute;
-
 namespace ws3dx.dsxcad.data
 {
-   [MaskSchema("dsmvxcad:attribute.xCADAttributes")]
-   public interface IXCADAttributesMask
-   {
-      public IXCADAttribute XCADAttributes { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(XCADAttributesMask))]
+    [MaskSchema("dsmvxcad:attribute.xCADAttributes")]
+    public interface IXCADAttributesMask
+    {
+        public IXCADAttributes XCADAttributes { get; set; }
+    }
 }

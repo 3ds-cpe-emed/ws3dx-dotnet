@@ -17,62 +17,62 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class PartService_AuthoringFile_UnitTests : PartServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAuthoringFile(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
+    public class PartService_AuthoringFile_UnitTests : PartServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAuthoringFile(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAuthoringFileMask> ret = await partService.GetAuthoringFile(partId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await partService.GetAuthoringFileDownloadTicket(partId, request);
+            IEnumerable<IAuthoringFileMask> ret = await partService.GetAuthoringFile(partId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task GetAuthoringFileCheckinTicket(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetAuthoringFileDownloadTicket(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
 
-         IAddEmpty request = new AddEmpty();
+            IAddEmpty request = new AddEmpty();
 
-         try
-         {
-            IFileCheckinTicket ret = await partService.GetAuthoringFileCheckinTicket(partId, request);
+            try
+            {
+                IFileDownloadTicket ret = await partService.GetAuthoringFileDownloadTicket(partId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task GetAuthoringFileCheckinTicket(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileCheckinTicket ret = await partService.GetAuthoringFileCheckinTicket(partId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

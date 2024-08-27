@@ -15,44 +15,21 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class CheckinTicket : ICheckinTicket
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: The URL that should be used to upload Example: xxx
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("ticketURL")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketURL { get; set; }
+    public class CheckinTicket : ICheckinTicket
+    {
+        [JsonPropertyName("ticketURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string TicketURL { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: The parameters that should be used to upload Example: __fcs__jobTicket
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("jobticket")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Jobticket { get; set; }
+        [JsonPropertyName("jobticket")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Jobticket { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: The list of tickets to use for upload to FCS. Each ticket is valid for the number of 
-      // files requested in the payload. Example: [xxx, yyy, ...]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("tickets")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> Tickets { get; set; }
-   }
+        [JsonPropertyName("tickets")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> Tickets { get; set; }
+    }
 }

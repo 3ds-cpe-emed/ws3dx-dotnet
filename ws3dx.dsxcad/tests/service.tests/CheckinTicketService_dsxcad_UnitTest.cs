@@ -16,32 +16,32 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class CheckinTicketService_dsxcad_UnitTests : CheckinTicketServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task Get()
-      {
-         CheckinTicketService checkinTicketService = ServiceFactoryCreate(await Authenticate());
+    public class CheckinTicketService_dsxcad_UnitTests : CheckinTicketServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task Get()
+        {
+            CheckinTicketService checkinTicketService = ServiceFactoryCreate(await Authenticate());
 
-         IPreCheckin request = new PreCheckin();
+            IPreCheckin request = new PreCheckin();
 
-         try
-         {
-            ICheckinTicket ret = await checkinTicketService.Get(request);
+            try
+            {
+                ICheckinTicket ret = await checkinTicketService.Get(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

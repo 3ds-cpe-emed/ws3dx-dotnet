@@ -13,27 +13,29 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IXCADTemplateData
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: additional cad informatin Example: CATIAV5-6R2022
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cadinfo { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(XCADTemplateData))]
+    public interface IXCADTemplateData
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// additional cad informatin Example: CATIAV5-6R2022
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cadinfo { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: persistency type Example: VPMReference
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Persistencytype { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// persistency type Example: VPMReference
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Persistencytype { get; set; }
+    }
 }
