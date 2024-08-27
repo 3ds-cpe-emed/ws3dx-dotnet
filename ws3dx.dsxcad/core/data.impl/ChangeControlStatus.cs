@@ -15,25 +15,17 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class ChangeControlStatus : IChangeControlStatus
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Change Control Status Example: [None, Any, $Id]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("Change Control Status")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Status { get; set; }
+    public class ChangeControlStatus : IChangeControlStatus
+    {
+        [JsonPropertyName("Change Control Status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Status { get; set; }
 
-      [JsonPropertyName("Controlling Changes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IChangeControlControllingChanges> ControllingChanges { get; set; }
-   }
+        [JsonPropertyName("Controlling Changes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IChangeControlControllingChanges> ControllingChanges { get; set; }
+    }
 }

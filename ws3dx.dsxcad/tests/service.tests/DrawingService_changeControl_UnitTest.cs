@@ -17,43 +17,61 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class DrawingService_changeControl_UnitTests : DrawingServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetChangeControl(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+    public class DrawingService_changeControl_UnitTests : DrawingServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetChangeControl(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IChangeControlMask> ret = await drawingService.GetChangeControl(drawingId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task ChangeControl(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IGenericResponse ret = await drawingService.ChangeControl(drawingId, request);
+            IEnumerable<IChangeControlMask> ret = await drawingService.GetChangeControl(drawingId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task ChangeControl(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await drawingService.ChangeControl(drawingId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task DeleteChangeControl(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await drawingService.DeleteChangeControl(drawingId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

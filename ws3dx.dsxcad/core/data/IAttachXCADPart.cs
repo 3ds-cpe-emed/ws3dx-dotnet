@@ -13,54 +13,56 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IAttachXCADPart
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Type of the dependency link between the two object Example: process
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cadlinktype { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(AttachXCADPart))]
+    public interface IAttachXCADPart
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Type of the dependency link between the two object Example: process
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cadlinktype { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical ID Example: B1F3B0568B4500005EBAC3C400156385
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ID { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Entity physical ID Example: B1F3B0568B4500005EBAC3C400156385
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ID { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Source Example: $3DSpace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Source { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Source Example: $3DSpace
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Source { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: 3DBOMype Example: dsxcad:Representation
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// 3DBOMype Example: dsxcad:Representation
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Representation/B1F3B0568...
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Representation/B1F3B0568...
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string RelativePath { get; set; }
+    }
 }

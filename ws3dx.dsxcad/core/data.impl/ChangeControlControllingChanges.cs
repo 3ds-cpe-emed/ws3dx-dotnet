@@ -14,15 +14,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class ChangeControlControllingChanges : IChangeControlControllingChanges
-   {
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ReferencedObject { get; set; }
-   }
+    public class ChangeControlControllingChanges : IChangeControlControllingChanges
+    {
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier ReferencedObject { get; set; }
+    }
 }

@@ -16,42 +16,42 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.service;
+using ws3dx.dsxcad.service;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class PartService_EnterpriseReference_UnitTests : PartServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetEnterpriseItemNumber(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
+    public class PartService_EnterpriseReference_UnitTests : PartServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetEnterpriseItemNumber(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
 
-         IEnterpriseItemNumberMask ret = await partService.GetEnterpriseItemNumber(partId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddEnterpriseItemNumber(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
-
-         IEnterpriseItemNumber request = new EnterpriseItemNumber();
-
-         try
-         {
-            IEnterpriseItemNumberMask ret = await partService.AddEnterpriseItemNumber(partId, request);
+            IEnterpriseItemNumberMask ret = await partService.GetEnterpriseItemNumber(partId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task AddEnterpriseItemNumber(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
+
+            IEnterpriseItemNumber request = new EnterpriseItemNumber();
+
+            try
+            {
+                IEnterpriseItemNumberMask ret = await partService.AddEnterpriseItemNumber(partId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

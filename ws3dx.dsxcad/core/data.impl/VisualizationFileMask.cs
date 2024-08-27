@@ -14,14 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class VisualizationFileMask : IVisualizationFileMask
-   {
-      [JsonPropertyName("dsxcad:VisualizationFile")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IAuthoringFile VisualizationFile { get; set; }
-   }
+    public class VisualizationFileMask : IVisualizationFileMask
+    {
+        [JsonPropertyName("dsxcad:VisualizationFile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IAuthoringFile VisualizationFile { get; set; }
+    }
 }

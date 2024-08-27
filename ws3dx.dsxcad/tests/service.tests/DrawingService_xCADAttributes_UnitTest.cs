@@ -14,23 +14,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class DrawingService_xCADAttributes_UnitTests : DrawingServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetXCADAttributes(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+    public class DrawingService_xCADAttributes_UnitTests : DrawingServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetXCADAttributes(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IXCADAttributesMask> ret = await drawingService.GetXCADAttributes(drawingId);
+            IXCADAttributesMask ret = await drawingService.GetXCADAttributes(drawingId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

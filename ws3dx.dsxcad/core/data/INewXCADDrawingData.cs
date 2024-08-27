@@ -14,35 +14,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsxcad.data.extension;
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface INewXCADDrawingData
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(NewXCADDrawingData))]
+    public interface INewXCADDrawingData
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+        public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      public IXCADAttribute XCADAttributes { get; set; }
+        public IXCADAttributes XCADAttributes { get; set; }
 
-      public IFileData AuthoringFile { get; set; }
+        public IFileData AuthoringFile { get; set; }
 
-      public IFileData VisualizationFile { get; set; }
-   }
+        public IFileData VisualizationFile { get; set; }
+
+        public IRepReferenceEnterpriseAttributes RepReferenceEnterpriseAttributes { get; set; }
+    }
 }

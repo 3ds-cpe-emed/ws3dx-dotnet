@@ -16,42 +16,42 @@
 
 namespace ws3dx.dsxcad.data
 {
-   public interface IFileDownloadTicket
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The URL that should be used to download the file Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string TicketURL { get; set; }
+    public interface IFileDownloadTicket
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The URL that should be used to download the file Example: xxx
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string TicketURL { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The ticket to use for download Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Ticket { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The ticket to use for download Example: xxx
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string Ticket { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The file name of the file to download Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Filename { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The file name of the file to download Example: xxx
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string Filename { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The parameters that should be used to download Example: __fcs__jobTicket
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Jobticket { get; set; }
-   }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The parameters that should be used to download Example: __fcs__jobTicket
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string Jobticket { get; set; }
+    }
 }

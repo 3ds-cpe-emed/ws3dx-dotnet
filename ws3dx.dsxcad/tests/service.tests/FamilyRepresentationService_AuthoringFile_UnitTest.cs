@@ -17,42 +17,42 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class FamilyRepresentationService_AuthoringFile_UnitTests : FamilyRepresentationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAuthoringFile(string familyRepId)
-      {
-         FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
+    public class FamilyRepresentationService_AuthoringFile_UnitTests : FamilyRepresentationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAuthoringFile(string familyRepId)
+        {
+            FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAuthoringFileMask> ret = await familyRepresentationService.GetAuthoringFile(familyRepId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string familyRepId)
-      {
-         FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await familyRepresentationService.GetAuthoringFileDownloadTicket(familyRepId, request);
+            IEnumerable<IAuthoringFileMask> ret = await familyRepresentationService.GetAuthoringFile(familyRepId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task GetAuthoringFileDownloadTicket(string familyRepId)
+        {
+            FamilyRepresentationService familyRepresentationService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileDownloadTicket ret = await familyRepresentationService.GetAuthoringFileDownloadTicket(familyRepId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

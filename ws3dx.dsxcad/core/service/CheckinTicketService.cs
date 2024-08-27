@@ -18,37 +18,39 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.service
+namespace ws3dx.dsxcad.service
 {
-   // SDK Service
-   public class CheckinTicketService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
+    // SDK Service
+    public class CheckinTicketService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
 
-      public CheckinTicketService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public CheckinTicketService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) CheckinTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets an upload ticket for new CAD Specific Data, Part or Drawing Summary: Gets an 
-      // upload ticket for new CAD Specific Data, Part or Drawing
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<ICheckinTicket> Get(IPreCheckin request)
-      {
-         string resourceURI = $"{GetBaseResource()}CheckinTicket";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets an upload ticket for new CAD Specific Data, Part or Drawing
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) CheckinTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<ICheckinTicket> Get(IPreCheckin request)
+        {
+            string resourceURI = $"{GetBaseResource()}CheckinTicket";
 
-         return await PostIndividual<ICheckinTicket, IPreCheckin>(resourceURI, request);
-      }
-   }
+            return await PostIndividual<ICheckinTicket, IPreCheckin>(resourceURI, request);
+        }
+    }
 }

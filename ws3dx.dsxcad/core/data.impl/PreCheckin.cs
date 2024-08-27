@@ -14,43 +14,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class PreCheckin : IPreCheckin
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Number of files to upload to FCS Example: 2
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("FileNumber")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string FileNumber { get; set; }
+    public class PreCheckin : IPreCheckin
+    {
+        [JsonPropertyName("FileNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string FileNumber { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Number of ticket needed Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("TicketNumber")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketNumber { get; set; }
+        [JsonPropertyName("TicketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string TicketNumber { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Type of the object associated to the file Example: dsxcad:Part
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("Type")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
-   }
+        [JsonPropertyName("Type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Type { get; set; }
+    }
 }

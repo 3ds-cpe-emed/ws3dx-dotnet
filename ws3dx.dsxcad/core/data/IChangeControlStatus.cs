@@ -14,20 +14,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IChangeControlStatus
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Change Control Status Example: [None, Any, $Id]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Status { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ChangeControlStatus))]
+    public interface IChangeControlStatus
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Change Control Status Example: [None, Any, $Id]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Status { get; set; }
 
-      public IList<IChangeControlControllingChanges> ControllingChanges { get; set; }
-   }
+        public IList<IChangeControlControllingChanges> ControllingChanges { get; set; }
+    }
 }

@@ -22,116 +22,122 @@ using ws3dx.dsxcad.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsxcad.core.service
+namespace ws3dx.dsxcad.service
 {
-   // SDK Service
-   public class ProductService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
+    // SDK Service
+    public class ProductService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
 
-      public ProductService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public ProductService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsxcad:Product/search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsxcad:Product/search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Product/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Product Summary: Gets a CAD Product
-      // <param name="productId">
-      // Description: dsxcad:Product object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string productId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a download ticket for an existing Assembly authoring file
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Product/{ID}/dsxcad:AuthoringFile/DownloadTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="productId">
+        /// dsxcad:Part object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string productId, IAddEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}";
+            return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+        }
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Product
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Product/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="productId">
+        /// dsxcad:Product object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string productId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) });
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Product/{ID}/dsxcad:AuthoringFile/DownloadTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a download ticket for an existing Assembly authoring file Summary: Gets a download 
-      // ticket for an existing Assembly authoring file
-      // <param name="productId">
-      // Description: dsxcad:Part object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string productId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}/dsxcad:AuthoringFile/DownloadTicket";
+            string resourceURI = $"{GetBaseResource()}dsxcad:Product/{productId}";
 
-         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
-      }
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Product
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Creating a Product from a CAD Template Summary: Creating a Product
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Create<T>(ICreateXCADProductsFromTemplate request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creating a Product from a CAD Template
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Product
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Create<T>(ICreateXCADProductsFromTemplate request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADProductMask), typeof(IXCADProductDetailMask), typeof(IXCADProductEnterpriseDetailMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Product";
+            string resourceURI = $"{GetBaseResource()}dsxcad:Product";
 
-         return await PostCollectionFromResponseMemberProperty<T, ICreateXCADProductsFromTemplate>(resourceURI, request);
-      }
-   }
+            return await PostCollectionFromResponseMemberProperty<T, ICreateXCADProductsFromTemplate>(resourceURI, request);
+        }
+    }
 }

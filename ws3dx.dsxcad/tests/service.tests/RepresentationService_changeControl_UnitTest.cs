@@ -17,43 +17,61 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class RepresentationService_changeControl_UnitTests : RepresentationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetChangeControl(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+    public class RepresentationService_changeControl_UnitTests : RepresentationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetChangeControl(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IChangeControlMask> ret = await representationService.GetChangeControl(representationId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task ChangeControl(string representationId)
-      {
-         RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IGenericResponse ret = await representationService.ChangeControl(representationId, request);
+            IEnumerable<IChangeControlMask> ret = await representationService.GetChangeControl(representationId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task ChangeControl(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await representationService.AttachChangeControl(representationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task DeleteChangeControl(string representationId)
+        {
+            RepresentationService representationService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await representationService.DeleteChangeControl(representationId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

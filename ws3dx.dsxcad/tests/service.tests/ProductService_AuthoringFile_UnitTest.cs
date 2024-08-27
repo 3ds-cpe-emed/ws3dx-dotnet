@@ -16,32 +16,32 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class ProductService_AuthoringFile_UnitTests : ProductServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string productId)
-      {
-         ProductService productService = ServiceFactoryCreate(await Authenticate());
+    public class ProductService_AuthoringFile_UnitTests : ProductServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAuthoringFileDownloadTicket(string productId)
+        {
+            ProductService productService = ServiceFactoryCreate(await Authenticate());
 
-         IAddEmpty request = new AddEmpty();
+            IAddEmpty request = new AddEmpty();
 
-         try
-         {
-            IFileDownloadTicket ret = await productService.GetAuthoringFileDownloadTicket(productId, request);
+            try
+            {
+                IFileDownloadTicket ret = await productService.GetAuthoringFileDownloadTicket(productId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

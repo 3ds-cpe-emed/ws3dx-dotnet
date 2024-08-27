@@ -17,25 +17,25 @@ using ws3dx.shared.data.impl;
 
 namespace ws3dx.dsxcad.core.data.impl
 {
-   public class XCADPartUriId : TypedUriId
-   {
-      private string RELATIVE_PATH = "resource/v1/dsxcad/dsxcad:Part/";
-      private string TYPE = "VPMReference";
+    public class XCADPartUriId : TypedUriId
+    {
+        private string RELATIVE_PATH = "resource/v1/dsxcad/dsxcad:Part/";
+        private string TYPE = "VPMReference";
 
-      public XCADPartUriId(string _id)
-      {
-         Id = _id;
-         Type = TYPE;
-         Source = "$3DSpace";
-         RelativePath = $"{RELATIVE_PATH}{Id}";
-      }
+        public XCADPartUriId(string _id)
+        {
+            Id = _id;
+            Type = TYPE;
+            Source = "$3DSpace";
+            RelativePath = $"{RELATIVE_PATH}{Id}";
+        }
 
-      public XCADPartUriId(string _id, string _source)
-      {
-         Id = _id;
-         Type = TYPE;
-         Source = _source;
-         RelativePath = $"{RELATIVE_PATH}{Id}";
-      }
-   }
+        public XCADPartUriId(string _id, string _source)
+        {
+            Id = _id;
+            Type = TYPE;
+            Source = _source;
+            RelativePath = $"{RELATIVE_PATH}{Id}";
+        }
+    }
 }

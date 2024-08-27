@@ -17,42 +17,42 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class PartService_VisualizationFile_UnitTests : PartServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetVisualizationFile(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
+    public class PartService_VisualizationFile_UnitTests : PartServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetVisualizationFile(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IVisualizationFileMask> ret = await partService.GetVisualizationFile(partId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetVisualizationFileDownloadTicket(string partId)
-      {
-         PartService partService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await partService.GetVisualizationFileDownloadTicket(partId, request);
+            IEnumerable<IVisualizationFileMask> ret = await partService.GetVisualizationFile(partId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task GetVisualizationFileDownloadTicket(string partId)
+        {
+            PartService partService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileDownloadTicket ret = await partService.GetVisualizationFileDownloadTicket(partId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

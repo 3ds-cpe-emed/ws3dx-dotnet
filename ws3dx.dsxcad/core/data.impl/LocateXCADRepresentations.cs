@@ -15,15 +15,14 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class LocateXCADRepresentations : ILocateXCADRepresentations
-   {
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITypedUriId> ReferencedObject { get; set; }
-   }
+    public class LocateXCADRepresentations : ILocateXCADRepresentations
+    {
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITypedUriId> ReferencedObject { get; set; }
+    }
 }

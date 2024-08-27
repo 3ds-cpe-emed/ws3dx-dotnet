@@ -23,154 +23,160 @@ using ws3dx.shared.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsxcad.core.service
+namespace ws3dx.dsxcad.service
 {
-   // SDK Service
-   public class FamilyRepresentationService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
+    // SDK Service
+    public class FamilyRepresentationService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
 
-      public FamilyRepresentationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public FamilyRepresentationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsxcad:FamilyRepresentation/Search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsxcad:FamilyRepresentation/Search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(IXCADFamilyRepMask), typeof(IXCADFamilyRepBasicMask), typeof(IXCADFamilyRepDetailMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(IXCADFamilyRepMask), typeof(IXCADFamilyRepBasicMask), typeof(IXCADFamilyRepDetailMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:FamilyRepresentation/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Family Summary: Gets a Family
-      // <param name="familyRepId">
-      // Description: dsxcad:FamilyRepresentation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string familyRepId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADFamilyRepMask), typeof(IXCADFamilyRepBasicMask), typeof(IXCADFamilyRepDetailMask) });
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a download ticket for an existing family representation authoring file
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:FamilyRepresentation/{ID}/dsxcad:AuthoringFile/DownloadTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="familyRepId">
+        /// dsxcad:FamilyRepresentation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string familyRepId, IAddEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile/DownloadTicket";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
+            return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:FamilyRepresentation/{ID}/dsxcad:xCADAttributes
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Extension of an dsxcad:FamilyRepresentation Summary: Gets a CAD Extension 
-      // of an dsxcad:FamilyRepresentation
-      // <param name="familyRepId">
-      // Description: dsxcad:FamilyRepresentation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IXCADAttributesMask>> GetXCADAttributes(string familyRepId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:xCADAttributes";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Authoring File of an dsxcad:FamilyRepresentation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:FamilyRepresentation/{ID}/dsxcad:AuthoringFile
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="familyRepId">
+        /// dsxcad:FamilyRepresentation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IAuthoringFileMask>> GetAuthoringFile(string familyRepId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile";
 
-         return await GetCollectionFromResponseMemberProperty<IXCADAttributesMask>(resourceURI);
-      }
+            return await GetCollectionFromResponseMemberProperty<IAuthoringFileMask>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:FamilyRepresentation/{ID}/dsxcad:AuthoringFile
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Authoring File of an dsxcad:FamilyRepresentation Summary: Gets a CAD 
-      // Authoring File of an dsxcad:FamilyRepresentation
-      // <param name="familyRepId">
-      // Description: dsxcad:FamilyRepresentation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IAuthoringFileMask>> GetAuthoringFile(string familyRepId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Locate the family from an Engineering Item by completing the dependency link
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:FamilyRepresentation/locate
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IRepresentationIdentifiers> Locate(ITypedUriIdentifier[] request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/locate";
 
-         return await GetCollectionFromResponseMemberProperty<IAuthoringFileMask>(resourceURI);
-      }
+            return await PostIndividual<IRepresentationIdentifiers, ITypedUriIdentifier[]>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:FamilyRepresentation/{ID}/dsxcad:AuthoringFile/DownloadTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a download ticket for an existing family representation authoring file Summary: 
-      // Gets a download ticket for an existing family representation authoring file
-      // <param name="familyRepId">
-      // Description: dsxcad:FamilyRepresentation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string familyRepId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:AuthoringFile/DownloadTicket";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Family
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:FamilyRepresentation/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="familyRepId">
+        /// dsxcad:FamilyRepresentation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string familyRepId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADFamilyRepMask), typeof(IXCADFamilyRepBasicMask), typeof(IXCADFamilyRepDetailMask) });
 
-         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
-      }
+            string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:FamilyRepresentation/locate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Locate the family from an Engineering Item by completing the dependency link Summary: 
-      // Locate the family from an Engineering Item
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IRepresentationIdentifiers> Locate(ITypedUriIdentifier[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/locate";
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
 
-         return await PostIndividual<IRepresentationIdentifiers, ITypedUriIdentifier[]>(resourceURI, request);
-      }
-   }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Extension of an dsxcad:FamilyRepresentation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:FamilyRepresentation/{ID}/dsxcad:xCADAttributes
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="familyRepId">
+        /// dsxcad:FamilyRepresentation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IXCADAttributesMask> GetXCADAttributes(string familyRepId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:FamilyRepresentation/{familyRepId}/dsxcad:xCADAttributes";
+
+            return await GetIndividualFromResponseMemberProperty<IXCADAttributesMask>(resourceURI);
+        }
+    }
 }

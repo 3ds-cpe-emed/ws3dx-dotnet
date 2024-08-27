@@ -23,359 +23,382 @@ using ws3dx.shared.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsxcad.core.service
+namespace ws3dx.dsxcad.service
 {
-   // SDK Service
-   public class RepresentationService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
+    // SDK Service
+    public class RepresentationService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsxcad/";
 
-      public RepresentationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public RepresentationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsxcad:Representation/Search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsxcad:Representation/Search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Representation/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Change Control of a CAD Specific Data Summary: Gets a Change Control of a CAD 
-      // Specific Data
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IChangeControlMask>> GetChangeControl(string representationId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-         return await GetCollectionFromResponseMemberProperty<IChangeControlMask>(resourceURI);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a download ticket for an existing CAD Specific Data authoring file
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/dsxcad:AuthoringFile/DownloadTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string representationId, IAddEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile/DownloadTicket";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Representation/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Specific Data Summary: Gets a CAD Specific Data
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string representationId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+            return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
+        }
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets an upload ticket for an existing CAD Specific Data. This service should be used when files
+        /// needs to be updated. The ticket will be valid to upload the 1 file
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/dsxcad:AuthoringFile/CheckinTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IFileCheckinTicket> GetAuthoringFileCheckinTicket(string representationId, IAddEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile/CheckinTicket";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
+            return await PostIndividual<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Representation/{ID}/dsxcad:xCADAttributes
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets CAD specific attributes of a CAD Specific Data Summary: Gets CAD specific 
-      // attributes of a CAD Specific Data
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IXCADAttributesMask> GetXCADAttributes(string representationId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:xCADAttributes";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Authoring File of an dsxcad:Representation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Representation/{ID}/dsxcad:AuthoringFile
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IAuthoringFileMask>> GetAuthoringFile(string representationId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile";
 
-         return await GetIndividualFromResponseMemberProperty<IXCADAttributesMask>(resourceURI);
-      }
+            return await GetCollectionFromResponseMemberProperty<IAuthoringFileMask>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsxcad:Representation/{ID}/dsxcad:AuthoringFile
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a CAD Authoring File of an dsxcad:Representation Summary: Gets a CAD Authoring 
-      // File of an dsxcad:Representation
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<IAuthoringFileMask>> GetAuthoringFile(string representationId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Detach an object from the CAD Specific Data by deleting the dependency link
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/Detach
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Detach<T>(string representationId, IDetachXCADRepresentation request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-         return await GetCollectionFromResponseMemberProperty<IAuthoringFileMask>(resourceURI);
-      }
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Detach";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/dsxcad:AuthoringFile/DownloadTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a download ticket for an existing CAD Specific Data authoring file Summary: Gets 
-      // a download ticket for an existing CAD Specific Data authoring file
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IFileDownloadTicket> GetAuthoringFileDownloadTicket(string representationId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile/DownloadTicket";
+            return await PostCollectionFromResponseMemberProperty<T, IDetachXCADRepresentation>(resourceURI, request);
+        }
 
-         return await PostIndividual<IFileDownloadTicket, IAddEmpty>(resourceURI, request);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Attach an object to the CAD Specific Data with a dependency link
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/Attach
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Attach<T>(string representationId, IAttachXCADRepresentation request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Activate the Change Control of a CAD Specific Data Summary: Activate the Change Control
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> ChangeControl(string representationId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Attach";
 
-         return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
-      }
+            return await PostCollectionFromResponseMemberProperty<T, IAttachXCADRepresentation>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/Attach
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Attach an object to the CAD Specific Data with a dependency link Summary: Attach an 
-      // object
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Attach<T>(string representationId, IAttachXCADRepresentation request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creating a CAD Specific Data from attribute list
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Create<T>(ICreateXCADReferences request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Attach";
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation";
 
-         return await PostCollectionFromResponseMemberProperty<T, IAttachXCADRepresentation>(resourceURI, request);
-      }
+            return await PostCollectionFromResponseMemberProperty<T, ICreateXCADReferences>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Creating a CAD Specific Data from attribute list Summary: Creating a CAD Specific 
-      // Data
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Create<T>(ICreateXCADReferences request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Representation/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string representationId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation";
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
 
-         return await PostCollectionFromResponseMemberProperty<T, ICreateXCADReferences>(resourceURI, request);
-      }
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/dsxcad:AuthoringFile/CheckinTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets an upload ticket for an existing CAD Specific Data. This service should be used 
-      // when files needs to be updated. The ticket will be valid to upload the 1 file Summary: Gets an 
-      // upload ticket for an existing CAD Specific Data
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IFileCheckinTicket> GetAuthoringFileCheckinTicket(string representationId, IAddEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:AuthoringFile/CheckinTicket";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Delete a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsxcad:Representation/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> Delete(string representationId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
 
-         return await PostIndividual<IFileCheckinTicket, IAddEmpty>(resourceURI, request);
-      }
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/Locate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Locate the CAD Specific Data from an Engineering Item by navigating the dependency 
-      // link Summary: Locate a CAD Specific Data from an Engineering Item
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<IEnterpriseItemNumberMask>> Locate(ILocateXCADRepresentations request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/Locate";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Modifies the CAD Specific Data attributes
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PATCH) dsxcad:Representation/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Modify<T>(string representationId, IModifyXCADRepresentation request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-         return await PostCollectionFromResponseMemberProperty<IEnterpriseItemNumberMask, ILocateXCADRepresentations>(resourceURI, request);
-      }
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/Modify
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Update a CAD Specific Data attributes and files Summary: Update a CAD Specific Data 
-      // attributes and files
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string representationId, IModifyXCADRepresentationWithFiles request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+            return await PatchIndividualFromResponseMemberProperty<T, IModifyXCADRepresentation>(resourceURI, request);
+        }
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Modify";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Update a CAD Specific Data attributes and files
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/Modify
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Modify<T>(string representationId, IModifyXCADRepresentationWithFiles request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
 
-         return await PostCollectionFromResponseMemberProperty<T, IModifyXCADRepresentationWithFiles>(resourceURI, request);
-      }
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Modify";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsxcad:Representation/{ID}/Detach
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Detach an object from the CAD Specific Data by deleting the dependency link Summary: 
-      // Detach an object
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Detach<T>(string representationId, IDetachXCADRepresentation request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+            return await PostIndividualFromResponseMemberProperty<T, IModifyXCADRepresentationWithFiles>(resourceURI, request);
+        }
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/Detach";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Locate the CAD Specific Data from an Engineering Item by navigating the dependency link
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/Locate
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IEnterpriseItemNumberMask>> Locate(ILocateXCADRepresentations request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/Locate";
 
-         return await PostCollectionFromResponseMemberProperty<T, IDetachXCADRepresentation>(resourceURI, request);
-      }
+            return await PostCollectionFromResponseMemberProperty<IEnterpriseItemNumberMask, ILocateXCADRepresentations>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (PATCH) dsxcad:Representation/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Modifies the CAD Specific Data attributes Summary: Modifies the CAD Specific Data 
-      // attributes
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Modify<T>(string representationId, IModifyXCADRepresentation request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IXCADRepresentationMask), typeof(IXCADRepresentationDetailMask), typeof(IXCADRepresentationBasicMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Change Control of a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Representation/{ID}/dslc:changeControl
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IChangeControlMask>> GetChangeControl(string representationId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
 
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
+            return await GetCollectionFromResponseMemberProperty<IChangeControlMask>(resourceURI);
+        }
 
-         return await PatchCollectionFromResponseMemberProperty<T, IModifyXCADRepresentation>(resourceURI, request);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Activate the Change Control of a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsxcad:Representation/{ID}/dslc:changeControl
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> AttachChangeControl(string representationId, IAddEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dsxcad:Representation/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a CAD Specific Data Summary: Delete a CAD Specific Data
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> Delete(string representationId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}";
+            return await PostIndividual<IGenericResponse, IAddEmpty>(resourceURI, request);
+        }
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Delete a Change Control of a a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsxcad:Representation/{ID}/dslc:changeControl
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> DeleteChangeControl(string representationId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dsxcad:Representation/{ID}/dslc:changeControl
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a Change Control of a a CAD Specific Data Summary: Delete a Change Control
-      // <param name="representationId">
-      // Description: dsxcad:Representation object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> DeleteChangeControl(string representationId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dslc:changeControl";
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
-      }
-   }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets CAD specific attributes of a CAD Specific Data
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsxcad:Representation/{ID}/dsxcad:xCADAttributes
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="representationId">
+        /// dsxcad:Representation object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IXCADAttributesMask> GetXCADAttributes(string representationId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsxcad:Representation/{representationId}/dsxcad:xCADAttributes";
+
+            return await GetIndividualFromResponseMemberProperty<IXCADAttributesMask>(resourceURI);
+        }
+    }
 }

@@ -14,42 +14,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 using ws3dx.dsxcad.data.extension;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class CreateXCADProductFromTemplateAttributes : ICreateXCADProductFromTemplateAttributes
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+    public class CreateXCADProductFromTemplateAttributes : ICreateXCADProductFromTemplateAttributes
+    {
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Description { get; set; }
 
-      [JsonPropertyName("dseno:EnterpriseAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+        [JsonPropertyName("dseno:EnterpriseAttributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IEnterpriseAttributes EnterpriseAttributes { get; set; }
 
-      [JsonPropertyName("dseng:EnterpriseReference")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
-   }
+        [JsonPropertyName("dseng:EnterpriseReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IEnterpriseItemNumber EnterpriseReference { get; set; }
+    }
 }

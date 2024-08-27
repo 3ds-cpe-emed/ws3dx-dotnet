@@ -13,134 +13,135 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsxcad.data.impl;
 using ws3dx.serialization.attribute;
-
 namespace ws3dx.dsxcad.data
 {
-   [MaskSchema("dsmvxcad:xCADProductMask.Details")]
-   public interface IXCADProductDetailMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference name Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(XCADProductDetailMask))]
+    [MaskSchema("dsmvxcad:xCADProductMask.Details")]
+    public interface IXCADProductDetailMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Reference name Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference object title value Example: My title
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Reference object title value Example: My title
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference description value Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Reference description value Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: DBType
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Basic type value Example: DBType
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: 10/19/2021 10:58:01 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Basic modified value Example: 10/19/2021 10:58:01 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: 10/19/2021 10:58:01 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object created value Example: 10/19/2021 10:58:01 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object revision value Example: A.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Revision { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object revision value Example: A.1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Revision { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object current state value Example: IN_WORK
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string State { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object current state value Example: IN_WORK
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string State { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: DB Owner
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object owner value Example: DB Owner
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      public IXCADAttribute XCADAttributes { get; set; }
+        public IXCADAttributes XCADAttributes { get; set; }
 
-      public IAuthoringFile AuthoringFile { get; set; }
+        public IAuthoringFile AuthoringFile { get; set; }
 
-      public IXCADProductDetailData RelatedData { get; set; }
+        public IXCADProductDetailData RelatedData { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

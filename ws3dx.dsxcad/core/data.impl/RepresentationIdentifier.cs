@@ -14,26 +14,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class RepresentationIdentifier : IRepresentationIdentifier
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical id Example: 0A57A84A1A..
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("identifier")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Identifier { get; set; }
+    public class RepresentationIdentifier : IRepresentationIdentifier
+    {
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Identifier { get; set; }
 
-      [JsonPropertyName("representation")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier Representation { get; set; }
-   }
+        [JsonPropertyName("representation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier Representation { get; set; }
+    }
 }

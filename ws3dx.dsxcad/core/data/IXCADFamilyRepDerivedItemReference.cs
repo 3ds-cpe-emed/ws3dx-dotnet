@@ -13,54 +13,56 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsxcad.data
 {
-   public interface IXCADFamilyRepDerivedItemReference
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: source Example: $3DSpace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Source { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(XCADFamilyRepDerivedItemReference))]
+    public interface IXCADFamilyRepDerivedItemReference
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// source Example: $3DSpace
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Source { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: 3DBOMType Example: dsxcad:Part
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// 3DBOMType Example: dsxcad:Part
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Part/0A57A84A1A..
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// relativePath Example: /resources/v1/modeler/dsxcad/dsxcad:Part/0A57A84A1A..
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string RelativePath { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Active status of the Item Example: true/false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Active { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Active status of the Item Example: true/false
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Active { get; set; }
+    }
 }

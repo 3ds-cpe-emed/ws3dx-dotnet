@@ -14,32 +14,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsxcad.data.extension;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsxcad.data
 {
-   public interface ICreateXCADPartFromTemplateAttributes
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(CreateXCADPartFromTemplateAttributes))]
+    public interface ICreateXCADPartFromTemplateAttributes
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+        public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
-   }
+        public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+    }
 }

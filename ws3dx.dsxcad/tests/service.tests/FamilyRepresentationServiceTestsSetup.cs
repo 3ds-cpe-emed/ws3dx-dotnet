@@ -15,19 +15,20 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using ws3dx.authentication.data;
-using ws3dx.dsxcad.core.service;
+using ws3dx.dsprcs.tests.service.tests;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class FamilyRepresentationServiceTestsSetup : PassportAuthenticationTestSetup
-   {
-      public FamilyRepresentationService ServiceFactoryCreate(IPassportAuthentication _passport)
-      {
-         return new FamilyRepresentationService(GetServiceUrl(), _passport)
-         {
-            Tenant = GetTenant(),
-            SecurityContext = GetDefaultSecurityContext()
-         };
-      }
-   }
+    public class FamilyRepresentationServiceTestsSetup : PassportAuthenticationTestSetup
+    {
+        public FamilyRepresentationService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new FamilyRepresentationService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
+    }
 }

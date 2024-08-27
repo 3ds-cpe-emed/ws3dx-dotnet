@@ -14,40 +14,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsxcad.data;
 
-namespace ws3dx.dsxcad.core.data.impl
+namespace ws3dx.dsxcad.data.impl
 {
-   public class NewXCADRepresentationData : INewXCADRepresentationData
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My name
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("title")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Title { get; set; }
+    public class NewXCADRepresentationData : INewXCADRepresentationData
+    {
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Title { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My description
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("description")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Description { get; set; }
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Description { get; set; }
 
-      [JsonPropertyName("dsxcad:xCADAttributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IXCADAttribute XCADAttributes { get; set; }
+        [JsonPropertyName("dsxcad:xCADAttributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IXCADAttributes XCADAttributes { get; set; }
 
-      [JsonPropertyName("dsxcad:AuthoringFile")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFileData AuthoringFile { get; set; }
-   }
+        [JsonPropertyName("dsxcad:AuthoringFile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IFileData AuthoringFile { get; set; }
+    }
 }

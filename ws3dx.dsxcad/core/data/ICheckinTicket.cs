@@ -17,34 +17,34 @@ using System.Collections.Generic;
 
 namespace ws3dx.dsxcad.data
 {
-   public interface ICheckinTicket
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The URL that should be used to upload Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string TicketURL { get; set; }
+    public interface ICheckinTicket
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The URL that should be used to upload Example: xxx
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string TicketURL { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The parameters that should be used to upload Example: __fcs__jobTicket
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Jobticket { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The parameters that should be used to upload Example: __fcs__jobTicket
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string Jobticket { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The list of tickets to use for upload to FCS. Each ticket is valid for the number of 
-      // files requested in the payload. Example: [xxx, yyy, ...]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> Tickets { get; set; }
-   }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The list of tickets to use for upload to FCS. Each ticket is valid for the number of 
+        // files requested in the payload. Example: [xxx, yyy, ...]
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public IList<string> Tickets { get; set; }
+    }
 }

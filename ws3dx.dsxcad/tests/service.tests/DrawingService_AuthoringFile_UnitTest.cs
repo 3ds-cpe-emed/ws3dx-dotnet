@@ -17,62 +17,62 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsxcad.core.data.impl;
-using ws3dx.dsxcad.core.service;
 using ws3dx.dsxcad.data;
+using ws3dx.dsxcad.data.impl;
+using ws3dx.dsxcad.service;
 
 namespace NUnitTestProject
 {
-   public class DrawingService_AuthoringFile_UnitTests : DrawingServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAuthoringFile(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+    public class DrawingService_AuthoringFile_UnitTests : DrawingServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAuthoringFile(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAuthoringFileMask> ret = await drawingService.GetAuthoringFile(drawingId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetAuthoringFileDownloadTicket(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IFileDownloadTicket ret = await drawingService.GetAuthoringFileDownloadTicket(drawingId, request);
+            IEnumerable<IAuthoringFileMask> ret = await drawingService.GetAuthoringFile(drawingId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task GetAuthoringFileCheckinTicket(string drawingId)
-      {
-         DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetAuthoringFileDownloadTicket(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
 
-         IAddEmpty request = new AddEmpty();
+            IAddEmpty request = new AddEmpty();
 
-         try
-         {
-            IFileCheckinTicket ret = await drawingService.GetAuthoringFileCheckinTicket(drawingId, request);
+            try
+            {
+                IFileDownloadTicket ret = await drawingService.GetAuthoringFileDownloadTicket(drawingId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task GetAuthoringFileCheckinTicket(string drawingId)
+        {
+            DrawingService drawingService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IFileCheckinTicket ret = await drawingService.GetAuthoringFileCheckinTicket(drawingId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }
