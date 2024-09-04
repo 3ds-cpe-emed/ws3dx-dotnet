@@ -13,29 +13,31 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IItemSpecificationAttributes
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object usage value Example: Add
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Usage { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ItemspecificationAttributes))]
+    public interface IItemSpecificationAttributes
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object usage value Example: Add
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Usage { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object overlap value Example: false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? Overlap { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object overlap value Example: false
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? Overlap { get; set; }
 
-      public IMagnitudeValueAuth SendAheadQuantity { get; set; }
-   }
+        public IMagnitudeValueAuth SendAheadQuantity { get; set; }
+    }
 }

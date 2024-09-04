@@ -13,36 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IMagnitudeValue
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: object magnitude value. Example: MASS
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Magnitude { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MagnitudeValue))]
+    public interface IMagnitudeValue
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// object magnitude value. Example: MASS
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Magnitude { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: object value. Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? Value { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// object value. Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? Value { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: object unit value. Example: kg
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Unit { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// object unit value. Example: kg
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Unit { get; set; }
+    }
 }

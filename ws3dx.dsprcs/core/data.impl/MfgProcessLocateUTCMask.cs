@@ -15,70 +15,41 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class MfgProcessLocateUTCMask : IMfgProcessLocateUTCMask
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("source")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Source { get; set; }
+    public class MfgProcessLocateUTCMask : IMfgProcessLocateUTCMask
+    {
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Source { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: type Example: DELLmiWorkPlanSystemReference
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("type")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Type { get; set; }
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Type { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Entity physical id of dsprcs:MfgProcess Example: MfgProcessRefID1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("identifier")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Identifier { get; set; }
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Identifier { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: relativePath Example: /resources/v1/modeler/dsprcs/dsprcs:MfgProcess/MfgProcessRefID1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("relativePath")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RelativePath { get; set; }
+        [JsonPropertyName("relativePath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string RelativePath { get; set; }
 
-      [JsonPropertyName("dsprcs:MfgProcessInstance")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
+        [JsonPropertyName("dsprcs:MfgProcessInstance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
 
-      [JsonPropertyName("dsrsc:ScopeLink")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("dsrsc:ScopeLink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public IList<IScopeLink> ScopeLink { get; set; }
 
-      [JsonPropertyName("dsprcs:PrimaryCapableResource")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }
+        [JsonPropertyName("dsprcs:PrimaryCapableResource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }
 
-      [JsonPropertyName("dsprcs:ItemSpecification")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IItemSpecificationsUTC> ItemSpecification { get; set; }
-   }
+        [JsonPropertyName("dsprcs:ItemSpecification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IItemSpecificationsUTC> ItemSpecification { get; set; }
+    }
 }

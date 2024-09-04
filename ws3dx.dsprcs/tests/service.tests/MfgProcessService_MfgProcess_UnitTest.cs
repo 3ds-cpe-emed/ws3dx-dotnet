@@ -19,51 +19,52 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
 using ws3dx.dsmfg;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.core.data.impl;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_MfgProcess_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task Get_IMfgProcessMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_MfgProcess_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task Get_IMfgProcessMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IMfgProcessMask ret = await mfgProcessService.Get<IMfgProcessMask>(mfgProcessId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IMfgProcessDetailMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IMfgProcessDetailMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IMfgProcessDetailMask ret = await mfgProcessService.Get<IMfgProcessDetailMask>(mfgProcessId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IMfgProcessStructureModelViewIndexMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IMfgProcessStructureModelViewIndexMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IMfgProcessStructureModelViewIndexMask ret = await mfgProcessService.Get<IMfgProcessStructureModelViewIndexMask>(mfgProcessId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("process", 0, 50)]
-      public async Task Search_Paged_IMfgProcessMask(string search, int skip, int top)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Paged_IMfgProcessMask(string search, int skip, int top)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
@@ -87,20 +88,20 @@ namespace NUnitTestProject
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
-      }
+        }
 
       [TestCase("process")]
-      public async Task Search_Full_IMfgProcessMask(string search)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Full_IMfgProcessMask(string search)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
             IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Search<IMfgProcessMask>(searchByFreeText);
             Assert.IsNotNull(ret);
-         }
+        }
          catch (HttpResponseException _ex)
          {
             string errorMessage = await _ex.GetErrorMessage();
@@ -108,110 +109,110 @@ namespace NUnitTestProject
          }
       }
 
-      [TestCase()]
-      public async Task BulkFetch_IMfgProcessMask()
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task BulkFetch_IMfgProcessMask()
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgProcessMask>, IList<string>) ret = await mfgProcessService.BulkFetch<IMfgProcessMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase()]
-      public async Task BulkFetch_IMfgProcessDetailMask()
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task BulkFetch_IMfgProcessDetailMask()
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgProcessDetailMask>, IList<string>) ret = await mfgProcessService.BulkFetch<IMfgProcessDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase()]
+        [TestCase()]
       public async Task Locate(int top, int skip)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ILocateMfgProcessRequest request = new LocateMfgProcessRequest();
+            ILocateMfgProcessRequest request = new LocateMfgProcessRequest();
 
-         try
-         {
-            IEnumerable<IMfgProcessLocateUTCMask> ret = await mfgProcessService.Locate(top, skip, request);
+            try
+            {
+                IEnumerable<IMfgProcessLocateUTCMask> ret = await mfgProcessService.Locate(top, skip, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddExpand_IMfgProcessExpandMaskV1(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AddExpand_IMfgProcessExpandMaskV1(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1();
+            IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1();
 
-         try
-         {
+            try
+            {
             IEnumerable<JsonElement> ret = (IEnumerable<JsonElement>)await mfgProcessService.Expand<IMfgProcessExpandMaskV1>(mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
       [TestCase("B70C12CD21081900655CE3A10013D4DB")]
-      public async Task AddExpand_IMfgProcessExpandMaskDetailV1(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        public async Task AddExpand_IMfgProcessExpandMaskDetailV1(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1();
+            IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1();
 
-         try
-         {
+            try
+            {
             IEnumerable<JsonElement> ret = (IEnumerable<JsonElement>)await mfgProcessService.Expand<IMfgProcessExpandMaskDetailV1>(mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
       [TestCase("B70C12CD21081900655CE3A10013D4DB")]
       public async Task Expand_IMfgProcessExpandMaskDetailV1(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IMfgProcessExpandRequestPayloadV1 request = new MfgProcessExpandRequestPayloadV1()
          {
@@ -246,43 +247,42 @@ namespace NUnitTestProject
          request.Items = new List<INewMfgProcess>() { process };
 
 
-         try
-         {
-            IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Create<IMfgProcessMask>(request);
+            try
+            {
+                IEnumerable<IMfgProcessMask> ret = await mfgProcessService.Create<IMfgProcessMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
       [TestCase(MFGResourceNames.WORKPLAN_TYPE, "AAA27 Workplan Process Name")]
       public async Task Create_IMfgProcessDetailMask(string _processType, string _processName)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          INewMfgProcess process = new NewMfgProcess();
          process.Attributes = new MfgProcess();
          process.Attributes.Type = _processType;
          process.Attributes.Title = _processName;
 
-         ICreateMfgProcess request = new CreateMfgProcess();
+            ICreateMfgProcess request = new CreateMfgProcess();
          request.Items = new List<INewMfgProcess>() { process };
 
-         try
-         {
-            IEnumerable<IMfgProcessDetailMask> ret = await mfgProcessService.Create<IMfgProcessDetailMask>(request);
+            try
+            {
+                IEnumerable<IMfgProcessDetailMask> ret = await mfgProcessService.Create<IMfgProcessDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

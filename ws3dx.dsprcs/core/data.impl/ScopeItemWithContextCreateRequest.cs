@@ -15,14 +15,13 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class ScopeItemWithContextCreateRequest : IScopeItemWithContextCreateRequest
-   {
-      [JsonPropertyName("items")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<INewScopeItemWithContext> Items { get; set; }
-   }
+    public class ScopeItemWithContextCreateRequest : IScopeItemWithContextCreateRequest
+    {
+        [JsonPropertyName("items")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<INewScopeItemWithContext> Items { get; set; }
+    }
 }

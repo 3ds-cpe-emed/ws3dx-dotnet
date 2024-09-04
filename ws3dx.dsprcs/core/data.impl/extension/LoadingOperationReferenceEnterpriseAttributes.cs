@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class LoadingOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ILoadingOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class LoadingOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ILoadingOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

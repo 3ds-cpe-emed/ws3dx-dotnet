@@ -16,8 +16,8 @@
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewMfgOperation
-   {
-      public IMfgOperationRequest Attributes { get; set; }
-   }
+    public interface INewMfgOperation
+    {
+        public IMfgOperationRequest Attributes { get; set; }
+    }
 }

@@ -14,11 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface ICreateMfgOperationInstancesRefObject
-   {
-      public IList<ICreateMfgOperationInstancesRefObjectInstances> Instances { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(CreateMfgOperationInstancesRefObject))]
+    public interface ICreateMfgOperationInstancesRefObject
+    {
+        public IList<ICreateMfgOperationInstancesRefObjectInstances> Instances { get; set; }
+    }
 }

@@ -21,28 +21,28 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class NewPreAssignedWorkCenter : INewPreAssignedWorkCenter
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Reference to the preassigned work center.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("resource")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier Resource { get; set; }
+    public class NewPreAssignedWorkCenter : INewPreAssignedWorkCenter
+    {
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Reference to the preassigned work center.
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("resource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier Resource { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Occurrence path for the related process operation.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("operationOcc")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
-   }
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Occurrence path for the related process operation.
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("operationOcc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+    }
 }

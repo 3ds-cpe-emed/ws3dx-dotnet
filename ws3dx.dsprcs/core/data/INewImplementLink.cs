@@ -15,39 +15,40 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using ws3dx.dsmfg.data;
+using ws3dx.dsprcs.data.impl;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewImplementLink
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Pass true for Scope link creation. Example: false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsScope { get; set; }
+    public interface INewImplementLink
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Pass true for Scope link creation. Example: false
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public bool? IsScope { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation instance.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Occurrence path for the related process operation instance.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related manufacturing item instance that the operation is 
-      // acting upon.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Occurrence path for the related manufacturing item instance that the operation is 
+        // acting upon.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
 
-      public IItemSpecificationAttributes Attributes { get; set; }
-   }
+        public IItemSpecificationAttributes Attributes { get; set; }
+    }
 }

@@ -17,20 +17,20 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class InstructionService_Instruction_UnitTests : InstructionServiceTestsSetup
-   {
+    public class InstructionService_Instruction_UnitTests : InstructionServiceTestsSetup
+    {
       [TestCase("instruction", 0, 50)]
-      public async Task Search_Paged_IInstructionMask(string search, int skip, int top)
-      {
-         InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Paged_IInstructionMask(string search, int skip, int top)
+        {
+            InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
@@ -54,38 +54,38 @@ namespace NUnitTestProject
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
-      }
+        }
 
-      [TestCase("search")]
-      public async Task Search_Full_IInstructionMask(string search)
-      {
-         InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IInstructionMask(string search)
+        {
+            InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IInstructionMask> ret = await instructionService.Search<IInstructionMask>(searchByFreeText);
+            IEnumerable<IInstructionMask> ret = await instructionService.Search<IInstructionMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IInstructionMask(string instructionId)
-      {
-         InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IInstructionMask(string instructionId)
+        {
+            InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
 
          IInstructionMask ret = await instructionService.Get<IInstructionMask>(instructionId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IInstructionDetailMask(string instructionId)
-      {
-         InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IInstructionDetailMask(string instructionId)
+        {
+            InstructionService instructionService = ServiceFactoryCreate(await Authenticate());
 
          IInstructionDetailMask ret = await instructionService.Get<IInstructionDetailMask>(instructionId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

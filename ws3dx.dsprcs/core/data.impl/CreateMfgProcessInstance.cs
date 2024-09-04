@@ -15,14 +15,13 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class CreateMfgProcessInstance : ICreateMfgProcessInstance
-   {
-      [JsonPropertyName("instances")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<INewMfgProcessInstance> Instances { get; set; }
-   }
+    public class CreateMfgProcessInstance : ICreateMfgProcessInstance
+    {
+        [JsonPropertyName("instances")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<INewMfgProcessInstance> Instances { get; set; }
+    }
 }

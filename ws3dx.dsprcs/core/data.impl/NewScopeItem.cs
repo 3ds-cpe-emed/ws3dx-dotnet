@@ -19,28 +19,28 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class NewScopeItem : INewScopeItem
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Pass true for Scope link creation. Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isScope")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? IsScope { get; set; }
+    public class NewScopeItem : INewScopeItem
+    {
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Pass true for Scope link creation. Example: true
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("isScope")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsScope { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Reference to the scope manufacturing item.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("itemRef")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ItemReference { get; set; }
-   }
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Reference to the scope manufacturing item.
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("itemRef")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier ItemReference { get; set; }
+    }
 }

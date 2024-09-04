@@ -14,32 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class SecondaryCapableResourceAttributes : ISecondaryCapableResourceAttributes
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 10.5
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("rscTimeConst")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? RscTimeConst { get; set; }
+    public class SecondaryCapableResourceAttributes : ISecondaryCapableResourceAttributes
+    {
+        [JsonPropertyName("rscTimeConst")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? RscTimeConst { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 20.5
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("rscTimePerQtyToProducedPerTime")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public double? RscTimePerQtyToProducedPerTime { get; set; }
-   }
+        [JsonPropertyName("rscTimePerQtyToProducedPerTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? RscTimePerQtyToProducedPerTime { get; set; }
+    }
 }

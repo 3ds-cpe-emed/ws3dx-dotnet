@@ -17,98 +17,105 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_Filterable_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetInstanceEffectivity(string mfgOperationId, string mfgOperationInstanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_Filterable_UnitTests : MfgOperationServiceTestsSetup
+    {
 
-         IEnumerable<IFilterableDetail> ret = await mfgOperationService.GetInstanceEffectivity(mfgOperationId, mfgOperationInstanceId);
+        [TestCase("", "")]
+        public async Task GetInstanceEffectivity(string mfgOperationId, string mfgOperationInstanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task SetInstanceEvolutionEffectivity(string mfgOperationId, string mfgOperationInstanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
-
-         ISetEvolutionEffectivities request = new SetEvolutionEffectivities();
-
-         try
-         {
-            IUnitaryEvolutionEffectivity ret = await mfgOperationService.SetInstanceEvolutionEffectivity(mfgOperationId, mfgOperationInstanceId, request);
+            IEnumerable<IFilterableDetail> ret = await mfgOperationService.GetInstanceEffectivity(mfgOperationId, mfgOperationInstanceId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("", "")]
-      public async Task UnsetInstanceVariantEffectivity(string mfgOperationId, string mfgOperationInstanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task UnsetMfgOperationInstanceEvolutionEffectivity(string mfgOperationId, string mfgOperationInstanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         try
-         {
-            IUnitaryVariantEffectivity ret = await mfgOperationService.UnsetInstanceVariantEffectivity(mfgOperationId, mfgOperationInstanceId);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            try
+            {
+                IUnitaryEvolutionEffectivity ret = await mfgOperationService.UnsetMfgOperationInstanceEvolutionEffectivity(mfgOperationId, mfgOperationInstanceId);
 
-      [TestCase("", "")]
-      public async Task SetInstanceVariantEffectivity(string mfgOperationId, string mfgOperationInstanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+                Assert.IsNotNull(ret);
 
-         ISetVariantEffectivities request = new SetVariantEffectivities();
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-         try
-         {
-            IUnitaryVariantEffectivity ret = await mfgOperationService.SetInstanceVariantEffectivity(mfgOperationId, mfgOperationInstanceId, request);
+        [TestCase("", "")]
+        public async Task SetMfgOperationInstanceEvolutionEffectivity(string mfgOperationId, string mfgOperationInstanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+            ISetEvolutionEffectivities request = new SetEvolutionEffectivities();
 
-      [TestCase("", "")]
-      public async Task UnsetInstanceEvolutionEffectivity(string mfgOperationId, string mfgOperationInstanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+            try
+            {
+                IUnitaryEvolutionEffectivity ret = await mfgOperationService.SetMfgOperationInstanceEvolutionEffectivity(mfgOperationId, mfgOperationInstanceId, request);
 
-         try
-         {
-            IUnitaryEvolutionEffectivity ret = await mfgOperationService.UnsetInstanceEvolutionEffectivity(mfgOperationId, mfgOperationInstanceId);
+                Assert.IsNotNull(ret);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task SetMfgOperationInstanceVariantEffectivity(string mfgOperationId, string mfgOperationInstanceId, string changeAuthoringContext = null)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            ISetVariantEffectivities request = new SetVariantEffectivities();
+
+            try
+            {
+                IUnitaryVariantEffectivity ret = await mfgOperationService.SetMfgOperationInstanceVariantEffectivity(mfgOperationId, mfgOperationInstanceId, request, changeAuthoringContext );
+
+                Assert.IsNotNull(ret);
+
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task UnsetMfgOperationInstanceVariantEffectivity(string mfgOperationId, string mfgOperationInstanceId, string changeAuthoringContext = null)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+
+            try
+            {
+                IUnitaryVariantEffectivity ret = await mfgOperationService.UnsetMfgOperationInstanceVariantEffectivity(mfgOperationId, mfgOperationInstanceId, changeAuthoringContext);
+
+                Assert.IsNotNull(ret);
+
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

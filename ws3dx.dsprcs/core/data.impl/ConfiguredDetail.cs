@@ -15,19 +15,18 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 using ws3dx.shared.data.dscfg;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class ConfiguredDetail : IConfiguredDetail
-   {
-      [JsonPropertyName("enabledCriteria")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> EnabledCriteria { get; set; }
+    public class ConfiguredDetail : IConfiguredDetail
+    {
+        [JsonPropertyName("enabledCriteria")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> EnabledCriteria { get; set; }
 
-      [JsonPropertyName("configurationCtxt")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IConfigurationContext> ConfigurationCtxt { get; set; }
-   }
+        [JsonPropertyName("configurationCtxt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IConfigurationContext> ConfigurationCtxt { get; set; }
+    }
 }

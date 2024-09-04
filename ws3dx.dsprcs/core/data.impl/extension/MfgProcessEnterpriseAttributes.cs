@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class MfgProcessEnterpriseAttributes : Dictionary<string, object>, IMfgProcessEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class MfgProcessEnterpriseAttributes : Dictionary<string, object>, IMfgProcessEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

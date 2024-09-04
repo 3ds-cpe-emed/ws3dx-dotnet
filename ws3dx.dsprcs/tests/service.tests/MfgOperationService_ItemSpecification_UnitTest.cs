@@ -17,52 +17,52 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_ItemSpecification_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetItemSpecification(string mfgOperationId, string itemSpecificationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_ItemSpecification_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetItemSpecification(string mfgOperationId, string itemSpecificationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IItemSpecificationMask ret = await mfgOperationService.GetItemSpecification(mfgOperationId, itemSpecificationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", 0, 0)]
-      public async Task GetItemSpecification(string mfgOperationId, int top, int skip)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", 0, 0)]
+        public async Task GetItemSpecification(string mfgOperationId, int top, int skip)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IEnumerable<IItemSpecificationMask> ret = await mfgOperationService.GetItemSpecifications(mfgOperationId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddItemSpecification(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
-
-         IImplementLinkCreateRequest request = new ImplementLinkCreateRequest();
-
-         try
-         {
-            IEnumerable<IItemSpecificationMask> ret = await mfgOperationService.AttachItemSpecification(mfgOperationId, request);
-
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task AddItemSpecification(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            IImplementLinkCreateRequest request = new ImplementLinkCreateRequest();
+
+            try
+            {
+                IEnumerable<IItemSpecificationMask> ret = await mfgOperationService.AddItemSpecification(mfgOperationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

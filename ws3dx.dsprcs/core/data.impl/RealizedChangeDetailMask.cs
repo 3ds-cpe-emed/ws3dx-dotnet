@@ -17,25 +17,17 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.shared.data;
-using IRealizedChangeDetailMask = ws3dx.dsprcs.data.IRealizedChangeDetailMask;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class RealizedChangeDetailMask : IRealizedChangeDetailMask
-   {
-      [JsonPropertyName("changeAction")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier ChangeAction { get; set; }
+    public class RealizedChangeDetailMask : IRealizedChangeDetailMask
+    {
+        [JsonPropertyName("changeAction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier ChangeAction { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: List of where realized changes.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("objectReferences")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IRealizedChange> ObjectReferences { get; set; }
-   }
+        [JsonPropertyName("objectReferences")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IRealizedChange> ObjectReferences { get; set; }
+    }
 }

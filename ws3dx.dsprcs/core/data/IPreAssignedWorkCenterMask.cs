@@ -15,48 +15,49 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using ws3dx.dsmfg.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:PreAssignedWorkCenterMask.Default")]
-   public interface IPreAssignedWorkCenterMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(PreAssignedWorkCenterMask))]
+    [MaskSchema("dsprcs:PreAssignedWorkCenterMask.Default")]
+    public interface IPreAssignedWorkCenterMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the preassigned work center.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier Resource { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference to the preassigned work center.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public ITypedUriIdentifier Resource { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related process operation.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

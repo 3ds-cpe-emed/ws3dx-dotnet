@@ -21,39 +21,41 @@ using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 using ws3dx.shared.utils;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class MfgProcessInstanceService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class MfgProcessInstanceService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public MfgProcessInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public MfgProcessInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:MfgProcessInstance/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple Manufacturing Process Instance which are Indexed. Summary: Gets multiple 
-      // Manufacturing Process Instance which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessInstanceMask), typeof(IMfgProcessInstanceDetailMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple Manufacturing Process Instance which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgProcessInstance/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgProcessInstanceMask), typeof(IMfgProcessInstanceDetailMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcessInstance/bulkfetch";
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcessInstance/bulkfetch";
 
          return await PostBulkCollection<T, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

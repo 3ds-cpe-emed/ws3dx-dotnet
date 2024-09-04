@@ -14,26 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class SetEvolutionEffectivities : ISetEvolutionEffectivities
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: The evolution effectivity expression in XML format. Example: <?xml version="1.0" 
-      // encoding="UTF-8"?><CfgEffectivityExpression xmlns="urn:com:dassault_systemes:config" 
-      // xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:config 
-      // CfgEffectivityExpression.xsd"><Expression><Context HolderType="Model" HolderName="Aircraft"><TreeSeries 
-      // Type = "ProductState" Name = "Aircraft"><Tree><Root Name = "Aircraft" Revision = 
-      // "A"/></Tree></TreeSeries></Context></Expression></CfgEffectivityExpression>
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("evolutionContent")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string EvolutionContent { get; set; }
-   }
+    public class SetEvolutionEffectivities : ISetEvolutionEffectivities
+    {
+        [JsonPropertyName("evolutionContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string EvolutionContent { get; set; }
+    }
 }

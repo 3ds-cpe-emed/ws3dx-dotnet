@@ -18,10 +18,10 @@ using ws3dx.dsprcs.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class NewMfgProcess : INewMfgProcess
-   {
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IMfgProcess Attributes { get; set; }
-   }
+    public class NewMfgProcess : INewMfgProcess
+    {
+        [JsonPropertyName("attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IMfgProcess Attributes { get; set; }
+    }
 }

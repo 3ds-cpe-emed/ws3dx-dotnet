@@ -14,40 +14,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   public interface ILocateMfgProcessRequest
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: List of Manufacturing Process objectReferences and number of entries passed is limited 
-      // to 10.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ITypedUriIdentifier> ObjectReferences { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(LocateMfgProcessRequest))]
+    public interface ILocateMfgProcessRequest
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// List of Manufacturing Process objectReferences and number of entries passed is limited to 10.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<ITypedUriIdentifier> ObjectReferences { get; set; }
 
-      public ISearchCriteria SearchCriteria { get; set; }
+        public ISearchCriteria SearchCriteria { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: specify requested type Example: ["dsprcs:MfgProcessInstance","dsrsc:ScopeLink"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> NavigateTo { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// specify requested type Example: ["dsprcs:MfgProcessInstance","dsrsc:ScopeLink"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> NavigateTo { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: specify requested type Example: ["dsprcs:PrimaryCapableResource","dsprcs:ItemSpecification"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> NavigateFrom { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// specify requested type Example: ["dsprcs:PrimaryCapableResource","dsprcs:ItemSpecification"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> NavigateFrom { get; set; }
+    }
 }

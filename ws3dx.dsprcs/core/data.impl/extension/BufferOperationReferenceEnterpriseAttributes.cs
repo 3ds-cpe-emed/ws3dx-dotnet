@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class BufferOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IBufferOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class BufferOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IBufferOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

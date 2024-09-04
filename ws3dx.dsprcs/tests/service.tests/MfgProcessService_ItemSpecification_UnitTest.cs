@@ -16,31 +16,31 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_ItemSpecification_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", 0, 0)]
-      public async Task GetItemSpecifications(string mfgProcessId, int top, int skip)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_ItemSpecification_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", 0, 0)]
+        public async Task GetItemSpecifications(string mfgProcessId, int top, int skip)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IItemSpecificationMask> ret = await mfgProcessService.GetItemSpecifications(mfgProcessId, top, skip);
+            IEnumerable<IItemSpecificationMask> ret = await mfgProcessService.GetItemSpecifications(mfgProcessId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetItemSpecification(string mfgProcessId, string itemSpecificationId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetItemSpecification(string mfgProcessId, string itemSpecificationId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IItemSpecificationMask ret = await mfgProcessService.GetItemSpecification(mfgProcessId, itemSpecificationId);
+            IItemSpecificationMask ret = await mfgProcessService.GetItemSpecification(mfgProcessId, itemSpecificationId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

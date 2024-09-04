@@ -13,14 +13,16 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   public interface INewMfgProcessInstance
-   {
-      public ITypedUriIdentifier ReferencedObject { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(NewMfgProcessInstance))]
+    public interface INewMfgProcessInstance
+    {
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
-      public INewMfgProcessInstanceData Attributes { get; set; }
-   }
+        public INewMfgProcessInstanceData Attributes { get; set; }
+    }
 }

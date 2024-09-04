@@ -16,47 +16,47 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcesService_Filterable_UnitTests : MfgProcesServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task UnsetInstanceVariantEffectivity(string mfgProcesId, string instanceId)
-      {
-         MfgProcesService mfgProcesService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcesService_Filterable_UnitTests : MfgProcesServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task UnsetMfgProcessInstanceVariantEffectivity(string mfgProcesId, string instanceId, string changeAuthoringContext = null)
+        {
+            MfgProcesService mfgProcesService = ServiceFactoryCreate(await Authenticate());
 
-         try
-         {
-            IUnitaryVariantEffectivity ret = await mfgProcesService.UnsetInstanceVariantEffectivity(mfgProcesId, instanceId);
+            try
+            {
+                IUnitaryVariantEffectivity ret = await mfgProcesService.UnsetMfgProcessInstanceVariantEffectivity(mfgProcesId, instanceId, changeAuthoringContext);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("", "")]
-      public async Task UnsetMfgOperationInstanceVariantEffectivity(string mfgProcesId, string mfgOperationInstanceId)
-      {
-         MfgProcesService mfgProcesService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task UnsetMfgOperationInstanceVariantEffectivity(string mfgProcesId, string mfgOperationInstanceId, string changeAuthoringContext = null)
+        {
+            MfgProcesService mfgProcesService = ServiceFactoryCreate(await Authenticate());
 
-         try
-         {
-            IUnitaryVariantEffectivity ret = await mfgProcesService.UnsetMfgOperationInstanceVariantEffectivity(mfgProcesId, mfgOperationInstanceId);
+            try
+            {
+                IUnitaryVariantEffectivity ret = await mfgProcesService.UnsetMfgOperationInstanceVariantEffectivity(mfgProcesId, mfgOperationInstanceId, changeAuthoringContext);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

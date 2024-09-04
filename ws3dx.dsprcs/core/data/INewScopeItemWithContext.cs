@@ -17,33 +17,33 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewScopeItemWithContext
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Pass true for Scope link creation. Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsScope { get; set; }
+    public interface INewScopeItemWithContext
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Pass true for Scope link creation. Example: true
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public bool? IsScope { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the scope manufacturing item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ItemReference { get; set; }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Reference to the scope manufacturing item.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public ITypedUriIdentifier ItemReference { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The manufacturing item instance that act as the context for the scope item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ScopeContext { get; set; }
-   }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: The manufacturing item instance that act as the context for the scope item.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public ITypedUriIdentifier ScopeContext { get; set; }
+    }
 }

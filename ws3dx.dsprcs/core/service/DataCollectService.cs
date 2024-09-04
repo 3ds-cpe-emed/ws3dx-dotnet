@@ -22,78 +22,79 @@ using ws3dx.dsprcs.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class DataCollectService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class DataCollectService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public DataCollectService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public DataCollectService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsprcs:DataCollect/search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsprcs:DataCollect/search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(IDataCollectMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(IDataCollectMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsprcs:DataCollect/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Work instruction DataCollect reference. Summary: Gets a Work instruction 
-      // DataCollect reference.
-      // <param name="dataCollectId">
-      // Description: dsprcs:DataCollect object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string dataCollectId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectMask), typeof(IDataCollectDetailMask) });
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-         string resourceURI = $"{GetBaseResource()}dsprcs:DataCollect/{dataCollectId}";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Work instruction DataCollect reference.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsprcs:DataCollect/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="dataCollectId">
+        /// dsprcs:DataCollect object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string dataCollectId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectMask), typeof(IDataCollectDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:DataCollect/{dataCollectId}";
 
          return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
-   }
+        }
+    }
 }

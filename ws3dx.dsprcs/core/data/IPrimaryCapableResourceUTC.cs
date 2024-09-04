@@ -13,111 +13,113 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   public interface IPrimaryCapableResourceUTC
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(PrimaryCapableResourceUTC))]
+    public interface IPrimaryCapableResourceUTC
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value in utc Example: 2022-01-31T09:48:10Z
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value in utc Example: 2022-01-31T09:48:10Z
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value in utc Example: 2022-01-31T09:48:10Z
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value in utc Example: 2022-01-31T09:48:10Z
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Resource quantity real value Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? ResourcesQuantity { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Resource quantity real value Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ResourcesQuantity { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Boolean value whether is preferred Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsPreferred { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Boolean value whether is preferred Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsPreferred { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Boolean value whether is manually scheduled Example: false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? ManuallyScheduled { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Boolean value whether is manually scheduled Example: false
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? ManuallyScheduled { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Priority integer value Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? Priority { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Priority integer value Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? Priority { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Tool changeover time real value Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? ToolChangeoverTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Tool changeover time real value Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ToolChangeoverTime { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Boolean value whether is reserved from first step Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsReservedFromFirstStep { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Boolean value whether is reserved from first step Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsReservedFromFirstStep { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Capable resource group index integer value Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? CapableRscGroupIndex { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Capable resource group index integer value Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? CapableRscGroupIndex { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Estimated time real value Example: 0
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? EstimatedTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Estimated time real value Example: 0
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? EstimatedTime { get; set; }
 
-      public ITypedUriIdentifier Resource { get; set; }
-   }
+        public ITypedUriIdentifier Resource { get; set; }
+    }
 }

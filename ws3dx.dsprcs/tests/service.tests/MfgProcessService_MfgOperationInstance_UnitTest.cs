@@ -17,62 +17,62 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_MfgOperationInstance_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetMfgOperationInstance(string mfgProcessId, string mfgOperationInstanceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_MfgOperationInstance_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetMfgOperationInstance(string mfgProcessId, string mfgOperationInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IMfgOperationInstanceMask ret = await mfgProcessService.GetMfgOperationInstance(mfgProcessId, mfgOperationInstanceId);
 
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddMfgOperationInstance_IMfgOperationInstanceMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
-
-         try
-         {
-            IEnumerable<IMfgOperationInstanceMask> ret = await mfgProcessService.AddMfgOperationInstance<IMfgOperationInstanceMask>(mfgProcessId, request);
-
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task AddMfgOperationInstance_IMfgOperationInstanceDetailMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AddMfgOperationInstance_IMfgOperationInstanceMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
+            ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
 
-         try
-         {
-            IEnumerable<IMfgOperationInstanceDetailMask> ret = await mfgProcessService.AddMfgOperationInstance<IMfgOperationInstanceDetailMask>(mfgProcessId, request);
+            try
+            {
+                IEnumerable<IMfgOperationInstanceMask> ret = await mfgProcessService.AddMfgOperationInstance<IMfgOperationInstanceMask>(mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task AddMfgOperationInstance_IMfgOperationInstanceDetailMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateMfgOperationInstancesRefObject request = new CreateMfgOperationInstancesRefObject();
+
+            try
+            {
+                IEnumerable<IMfgOperationInstanceDetailMask> ret = await mfgProcessService.AddMfgOperationInstance<IMfgOperationInstanceDetailMask>(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

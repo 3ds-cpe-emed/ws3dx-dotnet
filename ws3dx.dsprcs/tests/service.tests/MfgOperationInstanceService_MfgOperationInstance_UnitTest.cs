@@ -17,51 +17,51 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationInstanceService_MfgOperationInstance_UnitTests : MfgOperationInstanceServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task BulkFetch_IMfgOperationInstanceMask()
-      {
-         MfgOperationInstanceService mfgOperationInstanceService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationInstanceService_MfgOperationInstance_UnitTests : MfgOperationInstanceServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task BulkFetch_IMfgOperationInstanceMask()
+        {
+            MfgOperationInstanceService mfgOperationInstanceService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgOperationInstanceMask>, IList<string>) ret = await mfgOperationInstanceService.BulkFetch<IMfgOperationInstanceMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase()]
-      public async Task BulkFetch_IMfgOperationInstanceDetailMask()
-      {
-         MfgOperationInstanceService mfgOperationInstanceService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task BulkFetch_IMfgOperationInstanceDetailMask()
+        {
+            MfgOperationInstanceService mfgOperationInstanceService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgOperationInstanceDetailMask>, IList<string>) ret = await mfgOperationInstanceService.BulkFetch<IMfgOperationInstanceDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

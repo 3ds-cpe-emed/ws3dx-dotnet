@@ -19,38 +19,37 @@ using ws3dx.core.service;
 using ws3dx.dsmfg.data;
 using IRealizedChangeDetailMask = ws3dx.dsprcs.data.IRealizedChangeDetailMask;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class InvokeService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class InvokeService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public InvokeService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public InvokeService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) invoke/dsprcs:getRealizedChanges
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Retrieve Manufacturing Process realized changes with its realized activity in the 
-      // change. Summary: Retrieve Manufacturing Process realized changes with its realized activity in 
-      // the change.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Retrieve Manufacturing Process realized changes with its realized activity in the change.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) invoke/dsprcs:getRealizedChanges
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
       public async Task<IRealizedChangeDetailMask> GetRealizedChanges(IRealizedChangeRequest request)
-      {
-         string resourceURI = $"{GetBaseResource()}invoke/dsprcs:getRealizedChanges";
+        {
+            string resourceURI = $"{GetBaseResource()}invoke/dsprcs:getRealizedChanges";
 
          return await PostIndividual<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

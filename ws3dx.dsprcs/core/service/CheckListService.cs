@@ -22,121 +22,122 @@ using ws3dx.dsprcs.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class CheckListService : SearchService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class CheckListService : SearchService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public CheckListService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public CheckListService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      #region SearchService overrides
-      protected override string GetSearchResource()
-      {
-         return $"{GetBaseResource()}dsprcs:CheckList/search";
-      }
+        #region SearchService overrides
+        protected override string GetSearchResource()
+        {
+            return $"{GetBaseResource()}dsprcs:CheckList/search";
+        }
 
-      protected override IEnumerable<Type> SearchConstraintTypes()
-      {
-         return new List<Type>() { typeof(ICheckListMask) };
-      }
+        protected override IEnumerable<Type> SearchConstraintTypes()
+        {
+            return new List<Type>() { typeof(ICheckListMask) };
+        }
 
-      protected override string GetSearchSkipParamName()
-      {
-         return "$skip";
-      }
+        protected override string GetSearchSkipParamName()
+        {
+            return "$skip";
+        }
 
-      protected override string GetSearchTopParamName()
-      {
-         return "$top";
-      }
+        protected override string GetSearchTopParamName()
+        {
+            return "$top";
+        }
 
-      protected override string GetSearchCriteriaParamName()
-      {
-         return "$searchStr";
-      }
+        protected override string GetSearchCriteriaParamName()
+        {
+            return "$searchStr";
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
-      {
-         return await SearchCollection<T>("member", searchQuery);
-      }
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery)
+        {
+            return await SearchCollection<T>("member", searchQuery);
+        }
 
-      public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
-      {
-         return await SearchCollection<T>("member", searchQuery, _skip, _top);
-      }
-      #endregion
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsprcs:CheckList/{ID}/dsprcs:DataCollectRow
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets all Work instruction DataCollectRow details assigned to a CheckList. Summary: 
-      // Gets all Work instruction DataCollectRow details assigned to a CheckList.
-      // <param name="ID">
-      // Description: dsprcs:CheckList object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<IEnumerable<ICheckListRowMask>> GetDataCollectRows(string ID)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}/dsprcs:DataCollectRow";
+        public async Task<IList<T>> Search<T>(SearchQuery searchQuery, long _skip, long _top)
+        {
+            return await SearchCollection<T>("member", searchQuery, _skip, _top);
+        }
+        #endregion
 
-         return await GetCollectionFromResponseMemberProperty<ICheckListRowMask>(resourceURI);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Work instruction CheckList reference details.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsprcs:CheckList/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="ID">
+        /// dsprcs:CheckList object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string ID)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(ICheckListMask), typeof(ICheckListDetailMask) });
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsprcs:CheckList/{PID}/dsprcs:DataCollectRow/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Work instruction DataCollectRow details assigned to a CheckList. Summary: Gets 
-      // a Work instruction DataCollectRow details assigned to a CheckList.
-      // <param name="checkListId">
-      // Description: dsprcs:CheckList object ID
-      // </param>
-      // <param name="dataCollectRowId">
-      // Description: dsprcs:DataCollectRow object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<ICheckListRowMask> GetDataCollectRow(string checkListId, string dataCollectRowId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{checkListId}/dsprcs:DataCollectRow/{dataCollectRowId}";
+            string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}";
 
-         return await GetIndividualFromResponseMemberProperty<ICheckListRowMask>(resourceURI);
-      }
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsprcs:CheckList/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Work instruction CheckList reference details. Summary: Gets a Work instruction 
-      // CheckList reference details.
-      // <param name="ID">
-      // Description: dsprcs:CheckList object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string ID)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(ICheckListMask), typeof(ICheckListDetailMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets all Work instruction DataCollectRow details assigned to a CheckList.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsprcs:CheckList/{ID}/dsprcs:DataCollectRow
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="ID">
+        /// dsprcs:CheckList object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<ICheckListRowMask>> GetDataCollectRows(string ID)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}/dsprcs:DataCollectRow";
 
-         string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{ID}";
+            return await GetCollectionFromResponseMemberProperty<ICheckListRowMask>(resourceURI);
+        }
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
-   }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Work instruction DataCollectRow details assigned to a CheckList.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsprcs:CheckList/{PID}/dsprcs:DataCollectRow/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="checkListId">
+        /// dsprcs:CheckList object ID
+        /// </param>
+        /// <param name="dataCollectRowId">
+        /// dsprcs:DataCollectRow object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<ICheckListRowMask> GetDataCollectRow(string checkListId, string dataCollectRowId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:CheckList/{checkListId}/dsprcs:DataCollectRow/{dataCollectRowId}";
+
+            return await GetIndividualFromResponseMemberProperty<ICheckListRowMask>(resourceURI);
+        }
+    }
 }

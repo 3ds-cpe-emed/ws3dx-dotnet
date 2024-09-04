@@ -19,37 +19,57 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class ItemSpecificationService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class ItemSpecificationService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public ItemSpecificationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public ItemSpecificationService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:ItemSpecification/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple dsprcs:ItemSpecification connections which are Indexed. Summary: Gets 
-      // multiple dsprcs:ItemSpecification connections which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple dsprcs:ItemSpecification connections which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:ItemSpecification/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
       public async Task<(IList<IItemSpecificationMask>, IList<string>)> BulkFetch(string[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:ItemSpecification/bulkfetch";
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:ItemSpecification/bulkfetch";
 
          return await PostBulkCollection<IItemSpecificationMask, string[]>(resourceURI, request);
-      }
-   }
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Locates multiple dsprcs:ItemSpecification connections, which are indexed, based on the input 
+        /// Process or Operation or MBOM objects
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:ItemSpecification/locate
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IItemspecificationLocateMaskResponse>> Locate(ILocateRequest request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:ItemSpecification/locate";
+
+            return await PostCollectionFromResponseMemberProperty<IItemspecificationLocateMaskResponse, ILocateRequest>(resourceURI, request);
+        }
+    }
 }

@@ -14,76 +14,78 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IItemSpecification
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ItemSpecification))]
+    public interface IItemSpecification
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: DB Type Example: MfgProductionPlanning
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// DB Type Example: MfgProductionPlanning
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Indication of whether this is item act as scope or not. If false, then means this is 
-      // implement link. Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsScope { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Indication of whether this is item act as scope or not. If false, then means this is implement 
+        /// link. Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsScope { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation instance. Example: 
-      // ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> OperationOccurrence { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related process operation instance. Example: 
+        /// ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> OperationOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related manufacturing item instance that the operation is 
-      // acting upon. Example: ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> ItemOccurrence { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related manufacturing item instance that the operation is acting upon. 
+        /// Example: ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> ItemOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the scope manufacturing item. Example: 9FF50FB000005EAC607D42FF0001E9F2
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ItemReference { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference to the scope manufacturing item. Example: 9FF50FB000005EAC607D42FF0001E9F2
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ItemReference { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The manufacturing item instance that act as the context for the scope item. Example: 
-      // 9FF50FB000005EAC607D42FF0001E9F2
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ScopeContext { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The manufacturing item instance that act as the context for the scope item. Example: 
+        /// 9FF50FB000005EAC607D42FF0001E9F2
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ScopeContext { get; set; }
+    }
 }

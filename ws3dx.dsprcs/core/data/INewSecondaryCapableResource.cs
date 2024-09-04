@@ -17,12 +17,12 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewSecondaryCapableResource
-   {
-      public ITypedUriIdentifier Resource { get; set; }
+    public interface INewSecondaryCapableResource
+    {
+        public ITypedUriIdentifier Resource { get; set; }
 
-      public ITypedUriIdentifier DependsOn { get; set; }
+        public ITypedUriIdentifier DependsOn { get; set; }
 
-      public ISecondaryCapableResourceAttributes Attributes { get; set; }
-   }
+        public ISecondaryCapableResourceAttributes Attributes { get; set; }
+    }
 }

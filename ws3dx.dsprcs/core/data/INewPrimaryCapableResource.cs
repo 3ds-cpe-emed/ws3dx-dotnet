@@ -17,17 +17,17 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewPrimaryCapableResource
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Referenced object of resource.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier Resource { get; set; }
+    public interface INewPrimaryCapableResource
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Referenced object of resource.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public ITypedUriIdentifier Resource { get; set; }
 
-      public IPrimaryCapableResourceAttributes Attributes { get; set; }
-   }
+        public IPrimaryCapableResourceAttributes Attributes { get; set; }
+    }
 }

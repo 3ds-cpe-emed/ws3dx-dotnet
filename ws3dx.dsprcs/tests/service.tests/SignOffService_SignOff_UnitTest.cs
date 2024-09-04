@@ -17,40 +17,40 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class SignOffService_SignOff_UnitTests : SignOffServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task Get_ISignOffMask(string signOffId)
-      {
-         SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
+    public class SignOffService_SignOff_UnitTests : SignOffServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task Get_ISignOffMask(string signOffId)
+        {
+            SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
 
          ISignOffMask ret = await signOffService.Get<ISignOffMask>(signOffId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_ISignOffDetailMask(string signOffId)
-      {
-         SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_ISignOffDetailMask(string signOffId)
+        {
+            SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
 
          ISignOffDetailMask ret = await signOffService.Get<ISignOffDetailMask>(signOffId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("sign", 0, 50)]
-      public async Task Search_Paged_ISignOffMask(string search, int skip, int top)
-      {
-         SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Paged_ISignOffMask(string search, int skip, int top)
+        {
+            SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
@@ -68,7 +68,7 @@ namespace NUnitTestProject
 
                if (i > 20) return;
             }
-         }
+        }
          catch (HttpResponseException _ex)
          {
             string errorMessage = await _ex.GetErrorMessage();
@@ -77,22 +77,22 @@ namespace NUnitTestProject
       }
 
       [TestCase("sign")]
-      public async Task Search_Full_ISignOffMask(string search)
-      {
-         SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Full_ISignOffMask(string search)
+        {
+            SignOffService signOffService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
             IEnumerable<ISignOffMask> ret = await signOffService.Search<ISignOffMask>(searchByFreeText);
             Assert.IsNotNull(ret);
-         }
+        }
          catch (HttpResponseException _ex)
          {
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
       }
-   }
+    }
 }

@@ -14,13 +14,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsmvcfg:ConfiguredBasics")]
-   public interface IConfiguredBasics
-   {
-      public IList<string> EnabledCriteria { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(ConfiguredBasics))]
+    [MaskSchema("dsmvcfg:ConfiguredBasics")]
+    public interface IConfiguredBasics
+    {
+        public IList<string> EnabledCriteria { get; set; }
+    }
 }

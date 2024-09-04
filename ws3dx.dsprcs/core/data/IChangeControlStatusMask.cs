@@ -14,23 +14,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsmvlc:ChangeControlMask.Status")]
-   public interface IChangeControlStatusMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: [NONE, ANY, ID OR MANY]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ChangeControlStatus { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ChangeControlStatusMask))]
+    [MaskSchema("dsmvlc:ChangeControlMask.Status")]
+    public interface IChangeControlStatusMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: [NONE, ANY, ID OR MANY]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ChangeControlStatus { get; set; }
 
-      public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
-   }
+        public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
+    }
 }

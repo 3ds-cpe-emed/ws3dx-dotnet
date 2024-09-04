@@ -13,28 +13,30 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IMfgProcessExpandRequestPayloadV1
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Number of levels to be expanded. By default only first level is expanded. If -1 then 
-      // expands all levels Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? ExpandDepth { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MfgProcessExpandRequestPayloadV1))]
+    public interface IMfgProcessExpandRequestPayloadV1
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Number of levels to be expanded. By default only first level is expanded. If -1 then expands all 
+        /// levels Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? ExpandDepth { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: If set return the occurence path of its children Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? WithPath { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// If set return the occurence path of its children Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? WithPath { get; set; }
+    }
 }

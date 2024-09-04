@@ -17,31 +17,31 @@ using NUnit.Framework;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
 using ws3dx.dsmfg.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class InvokeService_MfgProcess_UnitTests : InvokeServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task GetRealizedChanges()
-      {
-         InvokeService invokeService = ServiceFactoryCreate(await Authenticate());
+    public class InvokeService_MfgProcess_UnitTests : InvokeServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task GetRealizedChanges()
+        {
+            InvokeService invokeService = ServiceFactoryCreate(await Authenticate());
 
          ws3dx.dsmfg.data.IRealizedChangeRequest request = new RealizedChangeRequest();
 
-         try
-         {
-            IRealizedChangeDetailMask ret = await invokeService.GetRealizedChanges(request);
+            try
+            {
+                IRealizedChangeDetailMask ret = await invokeService.GetRealizedChanges(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

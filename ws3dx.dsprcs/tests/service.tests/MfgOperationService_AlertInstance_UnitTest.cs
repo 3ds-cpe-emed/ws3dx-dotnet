@@ -16,51 +16,51 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_AlertInstance_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAlertInstances_IAlertInstanceMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_AlertInstance_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAlertInstances_IAlertInstanceMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAlertInstanceMask> ret = await mfgOperationService.GetAlertInstances<IAlertInstanceMask>(mfgOperationId);
+            IEnumerable<IAlertInstanceMask> ret = await mfgOperationService.GetAlertInstances<IAlertInstanceMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetAlertInstances_IAlertInstanceDetailMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetAlertInstances_IAlertInstanceDetailMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAlertInstanceDetailMask> ret = await mfgOperationService.GetAlertInstances<IAlertInstanceDetailMask>(mfgOperationId);
+            IEnumerable<IAlertInstanceDetailMask> ret = await mfgOperationService.GetAlertInstances<IAlertInstanceDetailMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetAlertInstance_IAlertInstanceMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetAlertInstance_IAlertInstanceMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IAlertInstanceMask ret = await mfgOperationService.GetAlertInstance<IAlertInstanceMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetAlertInstance_IAlertInstanceDetailMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetAlertInstance_IAlertInstanceDetailMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IAlertInstanceDetailMask ret = await mfgOperationService.GetAlertInstance<IAlertInstanceDetailMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

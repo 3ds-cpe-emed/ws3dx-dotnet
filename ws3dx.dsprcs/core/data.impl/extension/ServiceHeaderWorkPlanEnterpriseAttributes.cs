@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class ServiceHeaderWorkPlanEnterpriseAttributes : Dictionary<string, object>, IServiceHeaderWorkPlanEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class ServiceHeaderWorkPlanEnterpriseAttributes : Dictionary<string, object>, IServiceHeaderWorkPlanEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

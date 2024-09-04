@@ -14,26 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class SetVariantEffectivities : ISetVariantEffectivities
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: The variant effectivity expression in XML format. Example: <?xml version="1.0" 
-      // encoding="UTF-8"?><CfgEffectivityExpression xs:schemaLocation = "urn:com:dassault_systemes:config 
-      // CfgEffectivityExpression.xsd" xmlns:xs = "http://www.w3.org/2001/XMLSchema-instance" xmlns = 
-      // "urn:com:dassault_systemes:config"><Expression><Context HolderType = "Model" HolderName = 
-      // "Aircraft"><Feature Type="ConfigFeature" Name="Color"><Feature Type="ConfigFeature" 
-      // Name="Red"/></Feature></Context></Expression></CfgEffectivityExpression>
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("variantContent")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string VariantContent { get; set; }
-   }
+    public class SetVariantEffectivities : ISetVariantEffectivities
+    {
+        [JsonPropertyName("variantContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string VariantContent { get; set; }
+    }
 }

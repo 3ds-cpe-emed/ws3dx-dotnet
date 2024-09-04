@@ -13,70 +13,71 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:SecondaryCapableResourceMask.Default")]
-   public interface ISecondaryCapableResourceMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(SecondaryCapableResourceMask))]
+    [MaskSchema("dsprcs:SecondaryCapableResourceMask.Default")]
+    public interface ISecondaryCapableResourceMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Resource time const real value Example: 10.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimeConst { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Resource time const real value Example: 10.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimeConst { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Resource time per quantity to produced per time real value Example: 20.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimePerQtyToProducedPerTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Resource time per quantity to produced per time real value Example: 20.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimePerQtyToProducedPerTime { get; set; }
 
-      public ITypedUriIdentifier Resource { get; set; }
+        public ITypedUriIdentifier Resource { get; set; }
 
-      public ITypedUriIdentifier DependsOn { get; set; }
+        public ITypedUriIdentifier DependsOn { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

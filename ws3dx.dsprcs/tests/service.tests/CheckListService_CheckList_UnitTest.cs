@@ -17,60 +17,60 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class CheckListService_CheckList_UnitTests : CheckListServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetDataCollectRows(string iD)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+    public class CheckListService_CheckList_UnitTests : CheckListServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetDataCollectRows(string iD)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<ICheckListRowMask> ret = await checkListService.GetDataCollectRows(iD);
+            IEnumerable<ICheckListRowMask> ret = await checkListService.GetDataCollectRows(iD);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetDataCollectRow(string checkListId, string dataCollectRowId)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetDataCollectRow(string checkListId, string dataCollectRowId)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         ICheckListRowMask ret = await checkListService.GetDataCollectRow(checkListId, dataCollectRowId);
+            ICheckListRowMask ret = await checkListService.GetDataCollectRow(checkListId, dataCollectRowId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_ICheckListMask(string iD)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_ICheckListMask(string iD)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         ICheckListMask ret = await checkListService.Get<ICheckListMask>(iD);
+            ICheckListMask ret = await checkListService.Get<ICheckListMask>(iD);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_ICheckListDetailMask(string iD)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_ICheckListDetailMask(string iD)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         ICheckListDetailMask ret = await checkListService.Get<ICheckListDetailMask>(iD);
+            ICheckListDetailMask ret = await checkListService.Get<ICheckListDetailMask>(iD);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("check", 0, 50)]
-      public async Task Search_Paged_ICheckListMask(string search, int skip, int top)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Paged_ICheckListMask(string search, int skip, int top)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
@@ -94,18 +94,18 @@ namespace NUnitTestProject
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
-      }
+        }
 
-      [TestCase("search")]
-      public async Task Search_Full_ICheckListMask(string search)
-      {
-         CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_ICheckListMask(string search)
+        {
+            CheckListService checkListService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<ICheckListMask> ret = await checkListService.Search<ICheckListMask>(searchByFreeText);
+            IEnumerable<ICheckListMask> ret = await checkListService.Search<ICheckListMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

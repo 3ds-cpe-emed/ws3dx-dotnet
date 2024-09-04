@@ -17,60 +17,60 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class DataCollectPlanService_DataCollectPlan_UnitTests : DataCollectPlanServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetDataCollectRows(string dataCollectPlanId)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+    public class DataCollectPlanService_DataCollectPlan_UnitTests : DataCollectPlanServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetDataCollectRows(string dataCollectPlanId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IDataCollectRowMask> ret = await dataCollectPlanService.GetDataCollectRows(dataCollectPlanId);
+            IEnumerable<IDataCollectRowMask> ret = await dataCollectPlanService.GetDataCollectRows(dataCollectPlanId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetDataCollectRow(string dataCollectPlanId, string dataCollectRowId)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetDataCollectRow(string dataCollectPlanId, string dataCollectRowId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
          IDataCollectRowMask ret = await dataCollectPlanService.GetDataCollectRow(dataCollectPlanId, dataCollectRowId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IDataCollectPlanMask(string dataCollectPlanId)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IDataCollectPlanMask(string dataCollectPlanId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
          IDataCollectPlanMask ret = await dataCollectPlanService.Get<IDataCollectPlanMask>(dataCollectPlanId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IDataCollectPlanDetailMask(string dataCollectPlanId)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IDataCollectPlanDetailMask(string dataCollectPlanId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
          IDataCollectPlanDetailMask ret = await dataCollectPlanService.Get<IDataCollectPlanDetailMask>(dataCollectPlanId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
       [TestCase("plan", 0, 50)]
-      public async Task Search_Paged_IDataCollectPlanMask(string search, int skip, int top)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+        public async Task Search_Paged_IDataCollectPlanMask(string search, int skip, int top)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
          try
          {
@@ -94,18 +94,18 @@ namespace NUnitTestProject
             string errorMessage = await _ex.GetErrorMessage();
             Assert.Fail(errorMessage);
          }
-      }
+        }
 
-      [TestCase("search")]
-      public async Task Search_Full_IDataCollectPlanMask(string search)
-      {
-         DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IDataCollectPlanMask(string search)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText);
+            IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

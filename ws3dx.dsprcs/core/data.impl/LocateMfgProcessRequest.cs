@@ -15,49 +15,26 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class LocateMfgProcessRequest : ILocateMfgProcessRequest
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: List of Manufacturing Process objectReferences and number of entries passed is limited 
-      // to 10.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("objectReferences")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITypedUriIdentifier> ObjectReferences { get; set; }
+    public class LocateMfgProcessRequest : ILocateMfgProcessRequest
+    {
+        [JsonPropertyName("objectReferences")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITypedUriIdentifier> ObjectReferences { get; set; }
 
-      [JsonPropertyName("searchCriteria")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ISearchCriteria SearchCriteria { get; set; }
+        [JsonPropertyName("searchCriteria")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ISearchCriteria SearchCriteria { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: specify requested type Example: ["dsprcs:MfgProcessInstance","dsrsc:ScopeLink"]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("navigateTo")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> NavigateTo { get; set; }
+        [JsonPropertyName("navigateTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> NavigateTo { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: specify requested type Example: ["dsprcs:PrimaryCapableResource","dsprcs:ItemSpecification"]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("navigateFrom")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<string> NavigateFrom { get; set; }
-   }
+        [JsonPropertyName("navigateFrom")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<string> NavigateFrom { get; set; }
+    }
 }

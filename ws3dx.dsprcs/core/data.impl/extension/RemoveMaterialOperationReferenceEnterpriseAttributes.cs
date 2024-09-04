@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class RemoveMaterialOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IRemoveMaterialOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class RemoveMaterialOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IRemoveMaterialOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

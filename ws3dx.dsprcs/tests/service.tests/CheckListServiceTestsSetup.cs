@@ -15,19 +15,20 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using ws3dx.authentication.data;
-using ws3dx.dsprcs.core.service;
+using ws3dx.dsprcs.service;
+using ws3dx.dsprcs.tests.service.tests;
 
 namespace NUnitTestProject
 {
-   public class CheckListServiceTestsSetup : PassportAuthenticationTestSetup
-   {
-      public CheckListService ServiceFactoryCreate(IPassportAuthentication _passport)
-      {
-         return new CheckListService(GetServiceUrl(), _passport)
-         {
-            Tenant = GetTenant(),
-            SecurityContext = GetDefaultSecurityContext()
-         };
-      }
-   }
+    public class CheckListServiceTestsSetup : PassportAuthenticationTestSetup
+    {
+        public CheckListService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new CheckListService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
+    }
 }

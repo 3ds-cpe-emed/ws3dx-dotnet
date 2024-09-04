@@ -16,51 +16,51 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_InstructionInstance_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetInstructionInstance_IInstructionInstanceMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_InstructionInstance_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetInstructionInstance_IInstructionInstanceMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IInstructionInstanceMask ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetInstructionInstance_IInstructionInstanceDetailMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetInstructionInstance_IInstructionInstanceDetailMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IInstructionInstanceDetailMask ret = await mfgOperationService.GetInstructionInstance<IInstructionInstanceDetailMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetInstructionInstances_IInstructionInstanceMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetInstructionInstances_IInstructionInstanceMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IInstructionInstanceMask> ret = await mfgOperationService.GetInstructionInstances<IInstructionInstanceMask>(mfgOperationId);
+            IEnumerable<IInstructionInstanceMask> ret = await mfgOperationService.GetInstructionInstances<IInstructionInstanceMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetInstructionInstances_IInstructionInstanceDetailMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetInstructionInstances_IInstructionInstanceDetailMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IInstructionInstanceDetailMask> ret = await mfgOperationService.GetInstructionInstances<IInstructionInstanceDetailMask>(mfgOperationId);
+            IEnumerable<IInstructionInstanceDetailMask> ret = await mfgOperationService.GetInstructionInstances<IInstructionInstanceDetailMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

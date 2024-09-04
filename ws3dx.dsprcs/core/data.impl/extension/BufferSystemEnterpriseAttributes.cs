@@ -17,8 +17,8 @@ using System.Collections.Generic;
 
 namespace ws3dx.dsprcs.data.extension
 {
-   public class BufferSystemEnterpriseAttributes : Dictionary<string, object>, IBufferSystemEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class BufferSystemEnterpriseAttributes : Dictionary<string, object>, IBufferSystemEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

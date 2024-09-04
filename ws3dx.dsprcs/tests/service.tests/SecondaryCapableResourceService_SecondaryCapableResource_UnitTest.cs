@@ -17,31 +17,31 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class SecondaryCapableResourceService_SecondaryCapableResource_UnitTests : SecondaryCapableResourceServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task BulkFetch()
-      {
-         SecondaryCapableResourceService secondaryCapableResourceService = ServiceFactoryCreate(await Authenticate());
+    public class SecondaryCapableResourceService_SecondaryCapableResource_UnitTests : SecondaryCapableResourceServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task BulkFetch()
+        {
+            SecondaryCapableResourceService secondaryCapableResourceService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<ISecondaryCapableResourceMask>, IList<string>) ret = await secondaryCapableResourceService.BulkFetch(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

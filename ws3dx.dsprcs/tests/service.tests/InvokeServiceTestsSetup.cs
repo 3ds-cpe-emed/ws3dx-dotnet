@@ -15,19 +15,20 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 
 using ws3dx.authentication.data;
-using ws3dx.dsprcs.core.service;
+using ws3dx.dsprcs.service;
+using ws3dx.dsprcs.tests.service.tests;
 
 namespace NUnitTestProject
 {
-   public class InvokeServiceTestsSetup : PassportAuthenticationTestSetup
-   {
-      public InvokeService ServiceFactoryCreate(IPassportAuthentication _passport)
-      {
-         return new InvokeService(GetServiceUrl(), _passport)
-         {
-            Tenant = GetTenant(),
-            SecurityContext = GetDefaultSecurityContext()
-         };
-      }
-   }
+    public class InvokeServiceTestsSetup : PassportAuthenticationTestSetup
+    {
+        public InvokeService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new InvokeService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
+    }
 }

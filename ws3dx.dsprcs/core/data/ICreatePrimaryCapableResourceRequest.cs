@@ -14,11 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface ICreatePrimaryCapableResourceRequest
-   {
+    [ConcreteInterfaceImpConverter(typeof(CreatePrimaryCapableResourceRequest))]
+    public interface ICreatePrimaryCapableResourceRequest
+    {
       public IList<INewPrimaryCapableResource> Items { get; set; }
-   }
+    }
 }

@@ -13,97 +13,99 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
-{     //------------------------------------------------------------------------------------------------
-      // <summary>
-      //
-      // 
-      //
-      // </summary>
-      //------------------------------------------------------------------------------------------------
+{
+    ///------------------------------------------------------------------------------------------------
+    /// <summary>
+    ///
+    /// 
+    ///
+    /// </summary>
+    ///------------------------------------------------------------------------------------------------
+    [ConcreteInterfaceImpConverter(typeof(SearchCriteria))]
+    public interface ISearchCriteria
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object title value Example: My title
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-   public interface ISearchCriteria
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object title value Example: My title
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object type value Example: My type
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object type value Example: My type
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object name value Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object name value Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object description value Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object description value Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object revision value Example: My revision
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Revision { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object revision value Example: My revision
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Revision { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object state value Example: My state
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string State { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object state value Example: My state
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string State { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: My owner
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: My owner
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: My organization
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: My organization
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
-
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: My collabspace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: My collabspace
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
+    }
 }

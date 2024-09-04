@@ -17,52 +17,71 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_PrimaryCapableResource_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetPrimaryCapableResource(string mfgProcessId, string primaryResourceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_PrimaryCapableResource_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetPrimaryCapableResource(string mfgProcessId, string primaryResourceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
          IPrimaryCapableResourceMask ret = await mfgProcessService.GetPrimaryCapableResource(mfgProcessId, primaryResourceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", 0, 0)]
-      public async Task GetPrimaryCapableResources(string mfgProcessId, int top, int skip)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", 0, 0)]
+        public async Task GetPrimaryCapableResources(string mfgProcessId, int top, int skip)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IPrimaryCapableResourceMask> ret = await mfgProcessService.GetPrimaryCapableResources(mfgProcessId, top, skip);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AttachPrimaryCapableResource(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         ICreatePrimaryCapableResourceRequest request = new CreatePrimaryCapableResourceRequest();
-
-         try
-         {
-            IEnumerable<IPrimaryCapableResourceMask> ret = await mfgProcessService.AttachPrimaryCapableResource(mfgProcessId, request);
+            IEnumerable<IPrimaryCapableResourceMask> ret = await mfgProcessService.GetPrimaryCapableResources(mfgProcessId, top, skip);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task AddPrimaryCapableResource(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ICreatePrimaryCapableResourceRequest request = new CreatePrimaryCapableResourceRequest();
+
+            try
+            {
+                IEnumerable<IPrimaryCapableResourceMask> ret = await mfgProcessService.AddPrimaryCapableResource(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemovePrimaryCapableResource(string mfgProcessId, string primaryResourceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.RemovePrimaryCapableResource(mfgProcessId, primaryResourceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

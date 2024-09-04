@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class SinkSystemEnterpriseAttributes : Dictionary<string, object>, ISinkSystemEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class SinkSystemEnterpriseAttributes : Dictionary<string, object>, ISinkSystemEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

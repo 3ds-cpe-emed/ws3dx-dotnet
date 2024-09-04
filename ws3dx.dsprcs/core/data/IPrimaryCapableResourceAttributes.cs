@@ -13,81 +13,83 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IPrimaryCapableResourceAttributes
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 10.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? ResourcesQuantity { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(PrimaryCapableResourceAttributes))]
+    public interface IPrimaryCapableResourceAttributes
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 10.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ResourcesQuantity { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsPreferred { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsPreferred { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? Priority { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? Priority { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? ManuallyScheduled { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? ManuallyScheduled { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 20.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? ToolChangeoverTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 20.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ToolChangeoverTime { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsReservedFromFirstStep { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsReservedFromFirstStep { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? CapableRscGroupIndex { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? CapableRscGroupIndex { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 20.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? EstimatedTime { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 20.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? EstimatedTime { get; set; }
+    }
 }

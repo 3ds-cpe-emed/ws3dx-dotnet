@@ -13,73 +13,86 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class MfgProcesService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class MfgProcesService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public MfgProcesService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public MfgProcesService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:MfgProces/{PID}/dsprcs:MfgProcessInstance/{ID}/dscfg:Filterable/unset/variant
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to unset the variant effectivities. If unsetVariant service is executed under 
-      // Work Under (Change Action) then it may lead to a new evolution of existing relationship. Summary: 
-      // Service to unset the variant effectivities
-      // <param name="mfgProcesId">
-      // Description: dsprcs:MfgProcess object ID
-      // </param>
-      // <param name="instanceId">
-      // Description: dsprcs:MfgProcessInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IUnitaryVariantEffectivity> UnsetInstanceVariantEffectivity(string mfgProcesId, string instanceId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgProcessInstance/{instanceId}/dscfg:Filterable/unset/variant";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Service to unset the variant effectivities. If unsetVariant service is executed under Work Under 
+        /// (Change Action) then it may lead to a new evolution of existing relationship.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgProces/{PID}/dsprcs:MfgProcessInstance/{ID}/dscfg:Filterable/unset/variant
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgProcesId">
+        /// dsprcs:MfgProcess object ID
+        /// </param>
+        /// <param name="instanceId">
+        /// dsprcs:MfgProcessInstance object ID
+        /// </param>
+        /// <param name="changeAuthoringContext">
+        /// Change Action physical id Ex: pid:DB4F8256517400005EEC5A6E000FEBBC
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IUnitaryVariantEffectivity> UnsetMfgProcessInstanceVariantEffectivity(string mfgProcesId, string instanceId, string changeAuthoringContext = null)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgProcessInstance/{instanceId}/dscfg:Filterable/unset/variant";
 
-         return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI);
-      }
+            IDictionary<string, string> headerParams = new Dictionary<string, string>();
+            if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:MfgProces/{PID}/dsprcs:MfgOperationInstance/{ID}/dscfg:Filterable/unset/variant
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Service to unset the variant effectivities. If unsetVariant service is executed under 
-      // Work Under (Change Action) then it may lead to a new evolution of existing relationship. Summary: 
-      // Service to unset the variant effectivities
-      // <param name="mfgProcesId">
-      // Description: dsprcs:MfgProcess object ID
-      // </param>
-      // <param name="mfgOperationInstanceId">
-      // Description: dsprcs:MfgProcessInstance object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IUnitaryVariantEffectivity> UnsetMfgOperationInstanceVariantEffectivity(string mfgProcesId, string mfgOperationInstanceId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}/dscfg:Filterable/unset/variant";
+            return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI, headerParams: headerParams);
+        }
 
-         return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI);
-      }
-   }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Service to unset the variant effectivities. If unsetVariant service is executed under Work Under 
+        /// (Change Action) then it may lead to a new evolution of existing relationship.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgProces/{PID}/dsprcs:MfgOperationInstance/{ID}/dscfg:Filterable/unset/variant
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgProcesId">
+        /// dsprcs:MfgProcess object ID
+        /// </param>
+        /// <param name="mfgOperationInstanceId">
+        /// dsprcs:MfgProcessInstance object ID
+        /// </param>
+        /// <param name="changeAuthoringContext">
+        /// Change Action physical id Ex: pid:DB4F8256517400005EEC5A6E000FEBBC
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IUnitaryVariantEffectivity> UnsetMfgOperationInstanceVariantEffectivity(string mfgProcesId, string mfgOperationInstanceId, string changeAuthoringContext = null)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgProces/{mfgProcesId}/dsprcs:MfgOperationInstance/{mfgOperationInstanceId}/dscfg:Filterable/unset/variant";
+
+            IDictionary<string, string> headerParams = new Dictionary<string, string>();
+            if (changeAuthoringContext != null) { headerParams.Add("DS-Change-Authoring-Context", changeAuthoringContext); }
+
+            return await PostIndividual<IUnitaryVariantEffectivity>(resourceURI, headerParams: headerParams);
+        }
+    }
 }

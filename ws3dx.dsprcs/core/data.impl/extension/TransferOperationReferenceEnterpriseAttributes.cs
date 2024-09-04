@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class TransferOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ITransferOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class TransferOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ITransferOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

@@ -19,37 +19,39 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class PrimaryCapableResourceService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class PrimaryCapableResourceService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public PrimaryCapableResourceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public PrimaryCapableResourceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:PrimaryCapableResource/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple dsprcs:PrimaryCapableResource connections which are Indexed. Summary: 
-      // Gets multiple dsprcs:PrimaryCapableResource connections which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<IPrimaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:PrimaryCapableResource/bulkfetch";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple dsprcs:PrimaryCapableResource connections which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:PrimaryCapableResource/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<(IList<IPrimaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:PrimaryCapableResource/bulkfetch";
 
          return await PostBulkCollection<IPrimaryCapableResourceMask, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

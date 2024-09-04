@@ -19,18 +19,18 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class NewSecondaryCapableResource : INewSecondaryCapableResource
-   {
-      [JsonPropertyName("resource")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier Resource { get; set; }
+    public class NewSecondaryCapableResource : INewSecondaryCapableResource
+    {
+        [JsonPropertyName("resource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier Resource { get; set; }
 
-      [JsonPropertyName("dependsOn")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriIdentifier DependsOn { get; set; }
+        [JsonPropertyName("dependsOn")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriIdentifier DependsOn { get; set; }
 
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ISecondaryCapableResourceAttributes Attributes { get; set; }
-   }
+        [JsonPropertyName("attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ISecondaryCapableResourceAttributes Attributes { get; set; }
+    }
 }

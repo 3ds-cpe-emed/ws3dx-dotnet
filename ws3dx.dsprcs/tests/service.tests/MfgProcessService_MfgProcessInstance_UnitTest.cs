@@ -17,112 +17,112 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_MfgProcessInstance_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetInstance_IMfgProcessInstanceMask(string mfgProcessId, string mfgProcessInstanceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_MfgProcessInstance_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetInstance_IMfgProcessInstanceMask(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IMfgProcessInstanceMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceMask>(mfgProcessId, mfgProcessInstanceId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetInstance_IMfgProcessInstanceDetailMask(string mfgProcessId, string mfgProcessInstanceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         IMfgProcessInstanceDetailMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task AddInstanceReplace_IMfgProcessInstanceMask(string mfgProcessId, string mfgProcessInstanceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         IMfgProcessInstanceReplace request = new MfgProcessInstanceReplace();
-
-         try
-         {
-            IMfgProcessInstanceMask ret = await mfgProcessService.ReplaceInstance<IMfgProcessInstanceMask>(mfgProcessId, mfgProcessInstanceId, request);
+            IMfgProcessInstanceMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceMask>(mfgProcessId, mfgProcessInstanceId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("", "")]
-      public async Task AddInstanceReplace_IMfgProcessInstanceDetailMask(string mfgProcessId, string mfgProcessInstanceId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetInstance_IMfgProcessInstanceDetailMask(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IMfgProcessInstanceReplace request = new MfgProcessInstanceReplace();
-
-         try
-         {
-            IMfgProcessInstanceDetailMask ret = await mfgProcessService.ReplaceInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId, request);
+            IMfgProcessInstanceDetailMask ret = await mfgProcessService.GetInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task AddInstance_IMfgProcessInstanceMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AddMfgProcessInstance_IMfgProcessInstanceMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ICreateMfgProcessInstance request = new CreateMfgProcessInstance();
+            ICreateMfgProcessInstance request = new CreateMfgProcessInstance();
 
-         try
-         {
-            IEnumerable<IMfgProcessInstanceMask> ret = await mfgProcessService.AddInstance<IMfgProcessInstanceMask>(mfgProcessId, request);
+            try
+            {
+                IEnumerable<IMfgProcessInstanceMask> ret = await mfgProcessService.AddMfgProcessInstance<IMfgProcessInstanceMask>( mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task AddInstance_IMfgProcessInstanceDetailMask(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AddMfgProcessInstance_IMfgProcessInstanceDetailMask(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ICreateMfgProcessInstance request = new CreateMfgProcessInstance();
+            ICreateMfgProcessInstance request = new CreateMfgProcessInstance();
 
-         try
-         {
-            IEnumerable<IMfgProcessInstanceDetailMask> ret = await mfgProcessService.AddInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, request);
+            try
+            {
+                IEnumerable<IMfgProcessInstanceDetailMask> ret = await mfgProcessService.AddMfgProcessInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task ReplaceMfgProcessInstance_IMfgProcessInstanceMask(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IMfgProcessInstanceReplace request = new MfgProcessInstanceReplace();
+
+            try
+            {
+                IEnumerable<IMfgProcessInstanceMask> ret = await mfgProcessService.ReplaceMfgProcessInstance<IMfgProcessInstanceMask>( mfgProcessId, mfgProcessInstanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task ReplaceMfgProcessInstance_IMfgProcessInstanceDetailMask(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IMfgProcessInstanceReplace request = new MfgProcessInstanceReplace();
+
+            try
+            {
+                IEnumerable<IMfgProcessInstanceDetailMask> ret = await mfgProcessService.ReplaceMfgProcessInstance<IMfgProcessInstanceDetailMask>(mfgProcessId, mfgProcessInstanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

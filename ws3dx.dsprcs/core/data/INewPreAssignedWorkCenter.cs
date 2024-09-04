@@ -19,24 +19,24 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewPreAssignedWorkCenter
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the preassigned work center.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier Resource { get; set; }
+    public interface INewPreAssignedWorkCenter
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Reference to the preassigned work center.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public ITypedUriIdentifier Resource { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
-   }
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Description: Occurrence path for the related process operation.
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+    }
 }

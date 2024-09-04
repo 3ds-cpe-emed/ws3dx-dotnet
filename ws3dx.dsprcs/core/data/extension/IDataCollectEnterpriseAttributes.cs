@@ -17,8 +17,8 @@ using System.Collections.Generic;
 
 namespace ws3dx.dsprcs.data.extension
 {
-   public interface IDataCollectEnterpriseAttributes : IDictionary<string, object>
-   {
-      //Specific Enterprise Attributes
-   }
+    public interface IDataCollectEnterpriseAttributes : IDictionary<string, object>
+    {
+        //Specific Enterprise Attributes
+    }
 }

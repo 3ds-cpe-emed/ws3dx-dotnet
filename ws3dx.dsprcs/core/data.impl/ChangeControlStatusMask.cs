@@ -15,26 +15,18 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class ChangeControlStatusMask : IChangeControlStatusMask
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: [NONE, ANY, ID OR MANY]
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("Change Control Status")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string ChangeControlStatus { get; set; }
+    public class ChangeControlStatusMask : IChangeControlStatusMask
+    {
+        [JsonPropertyName("Change Control Status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string ChangeControlStatus { get; set; }
 
-      [JsonPropertyName("Controlling Changes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
-   }
+        [JsonPropertyName("Controlling Changes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITypedUriIdentifier> ControllingChanges { get; set; }
+    }
 }

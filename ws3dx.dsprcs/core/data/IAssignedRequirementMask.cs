@@ -13,113 +13,114 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:AssignedRequirementMask.Default")]
-   public interface IAssignedRequirementMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(AssignedRequirementMask))]
+    [MaskSchema("dsprcs:AssignedRequirementMask.Default")]
+    public interface IAssignedRequirementMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object type value Example: PLMReqSpecifyHowToCnx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object type value Example: PLMReqSpecifyHowToCnx
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: John Doe
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: John Doe
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object Usage value Example: Some value
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Usage { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object Usage value Example: Some value
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Usage { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object isIgnored value. Example: false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsIgnored { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object isIgnored value. Example: false
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsIgnored { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: contextualReqInfo value Example: Object contextualReqInfo value
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string ContextualReqInfo { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// contextualReqInfo value Example: Object contextualReqInfo value
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ContextualReqInfo { get; set; }
 
-      public ITypedUriIdentifier Requirement { get; set; }
+        public ITypedUriIdentifier Requirement { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

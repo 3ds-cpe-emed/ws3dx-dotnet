@@ -15,97 +15,97 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using ws3dx.dsmfg.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:ItemSpecificationMask.Default")]
-   public interface IItemSpecificationMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ItemSpecificationMask))]
+    [MaskSchema("dsprcs:ItemSpecificationMask.Default")]
+    public interface IItemSpecificationMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Indication of whether this is item act as scope or not. If false, then means this is 
-      // implement link. Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsScope { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Indication of whether this is item act as scope or not. If false, then means this is implement 
+        /// link. Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsScope { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation instance.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related process operation instance.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related manufacturing item instance that the operation is 
-      // acting upon.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related manufacturing item instance that the operation is acting upon.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the scope manufacturing item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ItemReference { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference to the scope manufacturing item.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public ITypedUriIdentifier ItemReference { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The manufacturing item instance that act as the context for the scope item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ScopeContext { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The manufacturing item instance that act as the context for the scope item.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public ITypedUriIdentifier ScopeContext { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object usage value Example: Add
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Usage { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object usage value Example: Add
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Usage { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object overlap value Example: false
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? Overlap { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object overlap value Example: false
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? Overlap { get; set; }
 
-      public ws3dx.dsprcs.data.IMagnitudeValue SendAheadQuantity { get; set; }
+        public IMagnitudeValue SendAheadQuantity { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

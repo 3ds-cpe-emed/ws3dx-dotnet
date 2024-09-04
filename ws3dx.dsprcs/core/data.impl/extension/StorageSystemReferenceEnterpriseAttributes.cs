@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class StorageSystemReferenceEnterpriseAttributes : Dictionary<string, object>, IStorageSystemReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class StorageSystemReferenceEnterpriseAttributes : Dictionary<string, object>, IStorageSystemReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

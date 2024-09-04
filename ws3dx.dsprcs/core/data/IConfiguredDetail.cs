@@ -14,16 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data.dscfg;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsmvcfg:ConfiguredDetails")]
-   public interface IConfiguredDetail
-   {
-      public IList<string> EnabledCriteria { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ConfiguredDetail))]
+    [MaskSchema("dsmvcfg:ConfiguredDetails")]
+    public interface IConfiguredDetail
+    {
+        public IList<string> EnabledCriteria { get; set; }
 
-      public IList<IConfigurationContext> ConfigurationCtxt { get; set; }
-   }
+        public IList<IConfigurationContext> ConfigurationCtxt { get; set; }
+    }
 }

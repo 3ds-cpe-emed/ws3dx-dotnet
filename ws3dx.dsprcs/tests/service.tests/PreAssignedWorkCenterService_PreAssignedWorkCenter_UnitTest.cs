@@ -17,31 +17,31 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class PreAssignedWorkCenterService_PreAssignedWorkCenter_UnitTests : PreAssignedWorkCenterServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task BulkFetch()
-      {
-         PreAssignedWorkCenterService preAssignedWorkCenterService = ServiceFactoryCreate(await Authenticate());
+    public class PreAssignedWorkCenterService_PreAssignedWorkCenter_UnitTests : PreAssignedWorkCenterServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task BulkFetch()
+        {
+            PreAssignedWorkCenterService preAssignedWorkCenterService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IPreAssignedWorkCenterMask>, IList<string>) ret = await preAssignedWorkCenterService.BulkFetch(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

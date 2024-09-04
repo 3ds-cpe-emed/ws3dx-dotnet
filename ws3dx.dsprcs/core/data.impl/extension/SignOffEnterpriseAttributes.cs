@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class SignOffEnterpriseAttributes : Dictionary<string, object>, ISignOffEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class SignOffEnterpriseAttributes : Dictionary<string, object>, ISignOffEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

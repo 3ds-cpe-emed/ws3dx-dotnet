@@ -13,22 +13,24 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IUnitaryEvolutionEffectivity
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: F6AF82561E5700005EB271EE0003C500
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(UnitaryEvolutionEffectivity))]
+    public interface IUnitaryEvolutionEffectivity
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: F6AF82561E5700005EB271EE0003C500
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      public string ErrorCode { get; set; }
+        public string ErrorCode { get; set; }
 
-      public string ErrorMessage { get; set; }
-   }
+        public string ErrorMessage { get; set; }
+    }
 }

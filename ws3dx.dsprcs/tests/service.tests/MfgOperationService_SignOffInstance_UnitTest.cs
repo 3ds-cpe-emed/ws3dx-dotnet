@@ -16,51 +16,51 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_SignOffInstance_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetSignOffInstance_ISignOffInstanceMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_SignOffInstance_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetSignOffInstance_ISignOffInstanceMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          ISignOffInstanceMask ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetSignOffInstance_ISignOffInstanceDetailMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetSignOffInstance_ISignOffInstanceDetailMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          ISignOffInstanceDetailMask ret = await mfgOperationService.GetSignOffInstance<ISignOffInstanceDetailMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetSignOffInstances_ISignOffInstanceMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetSignOffInstances_ISignOffInstanceMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<ISignOffInstanceMask> ret = await mfgOperationService.GetSignOffInstances<ISignOffInstanceMask>(mfgOperationId);
+            IEnumerable<ISignOffInstanceMask> ret = await mfgOperationService.GetSignOffInstances<ISignOffInstanceMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetSignOffInstances_ISignOffInstanceDetailMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetSignOffInstances_ISignOffInstanceDetailMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<ISignOffInstanceDetailMask> ret = await mfgOperationService.GetSignOffInstances<ISignOffInstanceDetailMask>(mfgOperationId);
+            IEnumerable<ISignOffInstanceDetailMask> ret = await mfgOperationService.GetSignOffInstances<ISignOffInstanceDetailMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

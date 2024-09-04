@@ -14,46 +14,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IPreAssignedWorkcenter
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(PreAssignedWorkcenter))]
+    public interface IPreAssignedWorkcenter
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: DB Type Example: AllocatedResourceLink
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// DB Type Example: AllocatedResourceLink
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the preassigned work center. Example: 9FF50FB00000775C607A98F600013E5E
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Resource { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference to the preassigned work center. Example: 9FF50FB00000775C607A98F600013E5E
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Resource { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Occurrence path for the related process operation. Example: 
-      // ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public IList<string> OperationOccurrence { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Occurrence path for the related process operation. Example: ["9FF50FB000005EAC607D42FF0001E9F2","EE562168015FFCF14F940A513C63AA77"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public IList<string> OperationOccurrence { get; set; }
+    }
 }

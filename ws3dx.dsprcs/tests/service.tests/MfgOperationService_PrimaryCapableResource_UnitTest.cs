@@ -17,52 +17,73 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_PrimaryCapableResource_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetPrimaryCapableResource(string mfgOperationId, string primaryResourceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_PrimaryCapableResource_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetPrimaryCapableResource(string mfgOperationId, string primaryResourceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IPrimaryCapableResourceMask ret = await mfgOperationService.GetPrimaryCapableResource(mfgOperationId, primaryResourceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", 0, 0)]
-      public async Task GetPrimaryCapableResources(string mfgOperationId, int top, int skip)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", 0, 0)]
+        public async Task GetPrimaryCapableResources(string mfgOperationId, int top, int skip)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IPrimaryCapableResourceMask> ret = await mfgOperationService.GetPrimaryCapableResources(mfgOperationId, top, skip);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddPrimaryCapableResource(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
-
-         ICreatePrimaryCapableResourceRequest request = new CreatePrimaryCapableResourceRequest();
-
-         try
-         {
-            IEnumerable<IPrimaryCapableResourceMask> ret = await mfgOperationService.AttachPrimaryCapableResource(mfgOperationId, request);
+            IEnumerable<IPrimaryCapableResourceMask> ret = await mfgOperationService.GetPrimaryCapableResources(mfgOperationId, top, skip);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task AddPrimaryCapableResource(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreatePrimaryCapableResourceRequest request = new CreatePrimaryCapableResourceRequest();
+
+            try
+            {
+                IEnumerable<IPrimaryCapableResourceMask> ret = await mfgOperationService.AddPrimaryCapableResource(mfgOperationId, request);
+
+                Assert.IsNotNull(ret);
+
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemovePrimaryCapableResource(string mfgOperationId, string primaryResourceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+
+            try
+            {
+                IGenericResponse ret = await mfgOperationService.RemovePrimaryCapableResource(mfgOperationId, primaryResourceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

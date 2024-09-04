@@ -15,23 +15,24 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using ws3dx.dsmfg.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:RealizedChangeDetailsMask.Default")]
-   public interface IRealizedChangeDetailMask
-   {
+    [ConcreteInterfaceImpConverter(typeof(RealizedChangeDetailMask))]
+    [MaskSchema("dsprcs:RealizedChangeDetailsMask.Default")]
+    public interface IRealizedChangeDetailMask
+    {
       public ITypedUriIdentifier ChangeAction { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: List of where realized changes.
-      //
-      // </summary>
-      //----------------------------------------------------------------
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// List of where realized changes.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
       public IList<IRealizedChange> ObjectReferences { get; set; }
-   }
+    }
 }

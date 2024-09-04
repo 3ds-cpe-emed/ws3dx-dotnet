@@ -13,18 +13,20 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IConfiguredPatch
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: ["ModelVersion","Variant","ManufacturingPlan","Unit","ContextualDate"]
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string EnabledCriteria { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(ConfiguredPatch))]
+    public interface IConfiguredPatch
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: ["ModelVersion","Variant","ManufacturingPlan","Unit","ContextualDate"]
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string EnabledCriteria { get; set; }
+    }
 }

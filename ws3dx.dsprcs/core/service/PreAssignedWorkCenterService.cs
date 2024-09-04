@@ -19,37 +19,39 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class PreAssignedWorkCenterService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class PreAssignedWorkCenterService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public PreAssignedWorkCenterService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public PreAssignedWorkCenterService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:PreAssignedWorkCenter/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple dsprcs:PreAssignedWorkCenter connections which are Indexed. Summary: 
-      // Gets multiple dsprcs:PreAssignedWorkCenter connections which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<IPreAssignedWorkCenterMask>, IList<string>)> BulkFetch(string[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:PreAssignedWorkCenter/bulkfetch";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple dsprcs:PreAssignedWorkCenter connections which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:PreAssignedWorkCenter/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<(IList<IPreAssignedWorkCenterMask>, IList<string>)> BulkFetch(string[] request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:PreAssignedWorkCenter/bulkfetch";
 
          return await PostBulkCollection<IPreAssignedWorkCenterMask, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

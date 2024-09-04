@@ -14,19 +14,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 using ws3dx.shared.data.primitive;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class UnitaryVariantEffectivity : IUnitaryVariantEffectivity
-   {
-      [JsonPropertyName("added")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IPhysicalId Added { get; set; }
+    public class UnitaryVariantEffectivity : IUnitaryVariantEffectivity
+    {
+        [JsonPropertyName("added")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IPhysicalId Added { get; set; }
 
-      [JsonPropertyName("updated")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IUnitaryVariantEffectivityUpdated Updated { get; set; }
-   }
+        [JsonPropertyName("updated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IUnitaryVariantEffectivityUpdated Updated { get; set; }
+    }
 }

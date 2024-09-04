@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class CurveOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ICurveOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class CurveOperationReferenceEnterpriseAttributes : Dictionary<string, object>, ICurveOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

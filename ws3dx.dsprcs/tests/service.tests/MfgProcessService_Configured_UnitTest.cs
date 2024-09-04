@@ -17,73 +17,73 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_Configured_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredDetail(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_Configured_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetConfiguration_IConfiguredDetail(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IConfiguredDetail> ret = await mfgProcessService.GetConfiguration<IConfiguredDetail>(mfgProcessId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredBasics(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         IEnumerable<IConfiguredBasics> ret = await mfgProcessService.GetConfiguration<IConfiguredBasics>(mfgProcessId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AttachConfiguration(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            ITypedUriIdentifierResources ret = await mfgProcessService.AttachConfiguration(mfgProcessId, request);
+            IEnumerable<IConfiguredDetail> ret = await mfgProcessService.GetConfiguration<IConfiguredDetail>(mfgProcessId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task DetachConfiguration(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetConfiguration_IConfiguredBasics(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
-
-         try
-         {
-            ITypedUriIdentifierResources ret = await mfgProcessService.DetachConfiguration(mfgProcessId, request);
+            IEnumerable<IConfiguredBasics> ret = await mfgProcessService.GetConfiguration<IConfiguredBasics>(mfgProcessId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("")]
+        public async Task AttachConfiguration(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+            try
+            {
+                ITypedUriIdentifierResources ret = await mfgProcessService.AttachConfiguration(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task DetachConfiguration(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
+
+            try
+            {
+                ITypedUriIdentifierResources ret = await mfgProcessService.DetachConfiguration(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

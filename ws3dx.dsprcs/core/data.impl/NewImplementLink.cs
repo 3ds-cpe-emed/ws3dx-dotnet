@@ -17,47 +17,48 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ws3dx.dsmfg.data;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 
 namespace ws3dx.dsprcs.core.data.impl
 {
-   public class NewImplementLink : INewImplementLink
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Pass true for Scope link creation. Example: false
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("isScope")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? IsScope { get; set; }
+    public class NewImplementLink : INewImplementLink
+    {
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Pass true for Scope link creation. Example: false
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("isScope")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsScope { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Occurrence path for the related process operation instance.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("operationOcc")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Occurrence path for the related process operation instance.
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("operationOcc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ISpecifiedOccurrence> OperationOccurrence { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Occurrence path for the related manufacturing item instance that the operation is 
-      // acting upon.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("itemOcc")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Description: Occurrence path for the related manufacturing item instance that the operation is 
+        // acting upon.
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("itemOcc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ISpecifiedOccurrence> ItemOccurrence { get; set; }
 
-      [JsonPropertyName("attributes")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IItemSpecificationAttributes Attributes { get; set; }
-   }
+        [JsonPropertyName("attributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IItemSpecificationAttributes Attributes { get; set; }
+    }
 }

@@ -16,31 +16,31 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_TimeConstraint_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetTimeConstraint(string mfgProcessId, string timeConstraintId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_TimeConstraint_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetTimeConstraint(string mfgProcessId, string timeConstraintId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ITimeConstraintMask ret = await mfgProcessService.GetTimeConstraint(mfgProcessId, timeConstraintId);
+            ITimeConstraintMask ret = await mfgProcessService.GetTimeConstraint(mfgProcessId, timeConstraintId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", 0, 0)]
-      public async Task GetTimeConstraints(string mfgProcessId, int top, int skip)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", 0, 0)]
+        public async Task GetTimeConstraints(string mfgProcessId, int top, int skip)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<ITimeConstraintMask> ret = await mfgProcessService.GetTimeConstraints(mfgProcessId, top, skip);
+            IEnumerable<ITimeConstraintMask> ret = await mfgProcessService.GetTimeConstraints(mfgProcessId, top, skip);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

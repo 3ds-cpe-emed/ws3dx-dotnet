@@ -17,63 +17,63 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_AssetContext_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetAssetContext(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_AssetContext_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetAssetContext(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IAssetContextMask> ret = await mfgProcessService.GetAssetContext(mfgProcessId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddAssetContextAttach(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         ITypedUriIdentifier request = new TypedUriIdentifier();
-
-         try
-         {
-            IGenericResponse ret = await mfgProcessService.AttachAssetContext(mfgProcessId, request);
+            IEnumerable<IAssetContextMask> ret = await mfgProcessService.GetAssetContext(mfgProcessId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+        }
 
-      [TestCase("")]
-      public async Task AddAssetContextDetach(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AttachAssetContext(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         ITypedUriIdentifier request = new TypedUriIdentifier();
+            ITypedUriIdentifier request = new TypedUriIdentifier();
 
-         try
-         {
-            IGenericResponse ret = await mfgProcessService.DetachAssetContext(mfgProcessId, request);
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.AttachAssetContext(mfgProcessId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task DetachAssetContext(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ITypedUriIdentifier request = new TypedUriIdentifier();
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.DetachAssetContext(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

@@ -21,39 +21,38 @@ using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 using ws3dx.shared.utils;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class MfgOperationInstanceService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class MfgOperationInstanceService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public MfgOperationInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public MfgOperationInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:MfgOperationInstance/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple Manufacturing Operation Instances which are Indexed. Summary: Gets 
-      // multiple Manufacturing Operation Instances which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple Manufacturing Operation Instances which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgOperationInstance/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
       public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgOperationInstanceMask), typeof(IMfgOperationInstanceDetailMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperationInstance/bulkfetch";
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperationInstance/bulkfetch";
 
          return await PostBulkCollection<T, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

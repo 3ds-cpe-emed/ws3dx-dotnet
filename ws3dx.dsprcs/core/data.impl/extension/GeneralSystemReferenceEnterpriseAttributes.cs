@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class GeneralSystemReferenceEnterpriseAttributes : Dictionary<string, object>, IGeneralSystemReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class GeneralSystemReferenceEnterpriseAttributes : Dictionary<string, object>, IGeneralSystemReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

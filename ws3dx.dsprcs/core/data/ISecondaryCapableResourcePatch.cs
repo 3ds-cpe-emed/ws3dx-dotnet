@@ -13,36 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface ISecondaryCapableResourcePatch
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 10.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimeConst { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(SecondaryCapableResourcePatch))]
+    public interface ISecondaryCapableResourcePatch
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 10.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimeConst { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 20.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimePerQtyToProducedPerTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 20.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimePerQtyToProducedPerTime { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Object cestamp value
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: Object cestamp value
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+    }
 }

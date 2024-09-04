@@ -17,43 +17,156 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
+using ws3dx.dsprcs.service;
 using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_changeControl_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetChangeControl(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_changeControl_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetMfgOperationInstanceChangeControl(string mfgProcessId, string mfgOperationInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IChangeControlStatusMask> ret = await mfgProcessService.GetChangeControl(mfgProcessId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AttachChangeControl(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         IAddEmpty request = new AddEmpty();
-
-         try
-         {
-            IGenericResponse ret = await mfgProcessService.AttachChangeControl(mfgProcessId, request);
+            IChangeControlStatusMask ret = await mfgProcessService.GetMfgOperationInstanceChangeControl(mfgProcessId, mfgOperationInstanceId);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("", "")]
+        public async Task GetInstanceChangeControl(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IChangeControlStatusMask ret = await mfgProcessService.GetInstanceChangeControl(mfgProcessId, mfgProcessInstanceId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task GetChangeControl(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IEnumerable<IChangeControlStatusMask> ret = await mfgProcessService.GetChangeControl(mfgProcessId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("", "")]
+        public async Task AddMfgOperationInstanceChangeControl(string mfgProcessId, string mfgOperationInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.AddMfgOperationInstanceChangeControl(mfgProcessId, mfgOperationInstanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task AddMfgProcessInstanceChangeControl(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.AddMfgProcessInstanceChangeControl(mfgProcessId, mfgProcessInstanceId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task AddChangeControl(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IAddEmpty request = new AddEmpty();
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.AddChangeControl(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemoveMfgOperationInstanceChangeControl(string mfgProcessId, string mfgOperationInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.RemoveMfgOperationInstanceChangeControl(mfgProcessId, mfgOperationInstanceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemoveMfgProcessInstanceChangeControl(string mfgProcessId, string mfgProcessInstanceId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.RemoveMfgProcessInstanceChangeControl(mfgProcessId, mfgProcessInstanceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task RemoveChangeControl(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.RemoveChangeControl(mfgProcessId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

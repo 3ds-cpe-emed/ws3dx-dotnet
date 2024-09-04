@@ -19,37 +19,36 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class TimeConstraintService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class TimeConstraintService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public TimeConstraintService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public TimeConstraintService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:TimeConstraint/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple dsprcs:TimeConstraint connections which are Indexed. Summary: Gets 
-      // multiple dsprcs:TimeConstraint connections which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<ITimeConstraintMask>, IList<string>)> BulkFetch(string[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:TimeConstraint/bulkfetch";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple dsprcs:TimeConstraint connections which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:TimeConstraint/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<(IList<ITimeConstraintMask>, IList<string>)> BulkFetch(string[] request)  
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:TimeConstraint/bulkfetch";
 
          return await PostBulkCollection<ITimeConstraintMask, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

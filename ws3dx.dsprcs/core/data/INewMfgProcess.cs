@@ -16,8 +16,8 @@
 
 namespace ws3dx.dsprcs.data
 {
-   public interface INewMfgProcess
-   {
-      public IMfgProcess Attributes { get; set; }
-   }
+    public interface INewMfgProcess
+    {
+        public IMfgProcess Attributes { get; set; }
+    }
 }

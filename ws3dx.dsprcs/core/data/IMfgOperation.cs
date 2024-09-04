@@ -14,105 +14,107 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface IMfgOperation
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MfgOperation))]
+    public interface IMfgOperation
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: My Type
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic type value Example: My Type
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance name Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance name Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance description vlaue Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance description vlaue Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: My User
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: My User
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string EstimatedTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string EstimatedTime { get; set; }
 
-      public IList<IPrimaryCapableResource> PrimaryCapableResource { get; set; }
+        public IList<IPrimaryCapableResource> PrimaryCapableResource { get; set; }
 
-      public IList<ISecondaryCapableResource> SecondaryCapableResource { get; set; }
+        public IList<ISecondaryCapableResource> SecondaryCapableResource { get; set; }
 
-      public IList<ITimeConstraint> TimeConstraint { get; set; }
-   }
+        public IList<ITimeConstraint> TimeConstraint { get; set; }
+    }
 }

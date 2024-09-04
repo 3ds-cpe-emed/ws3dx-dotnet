@@ -14,150 +14,151 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:MfgProcessMask.Structure.ModelView.Index")]
-   public interface IMfgProcessStructureModelViewIndexMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference name Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MfgProcessStructureModelViewIndexMask))]
+    [MaskSchema("dsprcs:MfgProcessMask.Structure.ModelView.Index")]
+    public interface IMfgProcessStructureModelViewIndexMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference name Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference object title value Example: My title
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference object title value Example: My title
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference description value Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference description value Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: My Type
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic type value Example: My Type
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object revision value Example: A.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Revision { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object revision value Example: A.1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Revision { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object current state value Example: In Work
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string State { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object current state value Example: In Work
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string State { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: John Doe
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: John Doe
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object sequencingMode value Example: Advanced
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string SequencingMode { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object sequencingMode value Example: Advanced
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string SequencingMode { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Cestamp { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
 
-      public IList<ITimeConstraint> TimeConstraint { get; set; }
+        public IList<ITimeConstraint> TimeConstraint { get; set; }
 
-      public IList<IItemSpecification> ItemSpecification { get; set; }
+        public IList<IItemSpecification> ItemSpecification { get; set; }
 
-      public IList<IPreAssignedWorkcenter> PreAssignedWorkcenter { get; set; }
+        public IList<IPreAssignedWorkcenter> PreAssignedWorkcenter { get; set; }
 
-      public IList<IMfgOperationInstance> MfgOperationInstance { get; set; }
+        public IList<IMfgOperationInstance> MfgOperationInstance { get; set; }
 
-      public ITypedUriIdentifier AssetContext { get; set; }
+        public ITypedUriIdentifier AssetContext { get; set; }
 
-      public IList<IMfgOperation> MfgOperation { get; set; }
-   }
+        public IList<IMfgOperation> MfgOperation { get; set; }
+    }
 }

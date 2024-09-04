@@ -16,56 +16,56 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
 {
-   public class AlertService_Alert_UnitTests : AlertServiceTestsSetup
-   {
-      [TestCase("search", 0, 50)]
-      public async Task Search_Paged_IAlertMask(string search, int skip, int top)
-      {
-         AlertService alertService = ServiceFactoryCreate(await Authenticate());
+    public class AlertService_Alert_UnitTests : AlertServiceTestsSetup
+    {
+        [TestCase("search", 0, 50)]
+        public async Task Search_Paged_IAlertMask(string search, int skip, int top)
+        {
+            AlertService alertService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText, skip, top);
+            IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText, skip, top);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("search")]
-      public async Task Search_Full_IAlertMask(string search)
-      {
-         AlertService alertService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("search")]
+        public async Task Search_Full_IAlertMask(string search)
+        {
+            AlertService alertService = ServiceFactoryCreate(await Authenticate());
 
-         SearchByFreeText searchByFreeText = new SearchByFreeText(search);
+            SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText);
+            IEnumerable<IAlertMask> ret = await alertService.Search<IAlertMask>(searchByFreeText);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IAlertMask(string alertId)
-      {
-         AlertService alertService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IAlertMask(string alertId)
+        {
+            AlertService alertService = ServiceFactoryCreate(await Authenticate());
 
-         IAlertMask ret = await alertService.Get<IAlertMask>(alertId);
+            IAlertMask ret = await alertService.Get<IAlertMask>(alertId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task Get_IAlertDetailMask(string alertId)
-      {
-         AlertService alertService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task Get_IAlertDetailMask(string alertId)
+        {
+            AlertService alertService = ServiceFactoryCreate(await Authenticate());
 
-         IAlertDetailMask ret = await alertService.Get<IAlertDetailMask>(alertId);
+            IAlertDetailMask ret = await alertService.Get<IAlertDetailMask>(alertId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

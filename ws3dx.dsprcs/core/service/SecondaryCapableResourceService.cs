@@ -19,37 +19,39 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.service
+namespace ws3dx.dsprcs.service
 {
-   // SDK Service
-   public class SecondaryCapableResourceService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
+    // SDK Service
+    public class SecondaryCapableResourceService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsprcs/";
 
-      public SecondaryCapableResourceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public SecondaryCapableResourceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsprcs:SecondaryCapableResource/bulkfetch
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets multiple dsprcs:SecondaryCapableResource connections which are Indexed. Summary: 
-      // Gets multiple dsprcs:SecondaryCapableResource connections which are Indexed.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<(IList<ISecondaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsprcs:SecondaryCapableResource/bulkfetch";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets multiple dsprcs:SecondaryCapableResource connections which are Indexed.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:SecondaryCapableResource/bulkfetch
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<(IList<ISecondaryCapableResourceMask>, IList<string>)> BulkFetch(string[] request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:SecondaryCapableResource/bulkfetch";
 
          return await PostBulkCollection<ISecondaryCapableResourceMask, string[]>(resourceURI, request);
-      }
-   }
+        }
+    }
 }

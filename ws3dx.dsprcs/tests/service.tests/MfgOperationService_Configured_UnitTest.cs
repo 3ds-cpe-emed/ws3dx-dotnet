@@ -17,73 +17,73 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_Configured_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredDetail(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_Configured_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetConfiguration_IConfiguredDetail(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IConfiguredDetail> ret = await mfgOperationService.GetConfiguration<IConfiguredDetail>(mfgOperationId);
+            IEnumerable<IConfiguredDetail> ret = await mfgOperationService.GetConfiguration<IConfiguredDetail>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetConfiguration_IConfiguredBasics(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetConfiguration_IConfiguredBasics(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IConfiguredBasics> ret = await mfgOperationService.GetConfiguration<IConfiguredBasics>(mfgOperationId);
+            IEnumerable<IConfiguredBasics> ret = await mfgOperationService.GetConfiguration<IConfiguredBasics>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task AttachConfiguration(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task AttachConfiguration(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            ITypedUriIdentifierResources ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
+            try
+            {
+                ITypedUriIdentifierResources ret = await mfgOperationService.AttachConfiguration(mfgOperationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase("")]
-      public async Task DetachConfiguration(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task DetachConfiguration(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          ITypedUriIdentifier[] request = new TypedUriIdentifier[] { };
 
-         try
-         {
-            ITypedUriIdentifierResources ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
+            try
+            {
+                ITypedUriIdentifierResources ret = await mfgOperationService.DetachConfiguration(mfgOperationId, request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

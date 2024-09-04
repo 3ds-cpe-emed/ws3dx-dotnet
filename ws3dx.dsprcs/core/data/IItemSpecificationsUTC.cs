@@ -13,38 +13,40 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   public interface IItemSpecificationsUTC
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(ItemSpecificationsUTC))]
+    public interface IItemSpecificationsUTC
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// ID of the connection object Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Indication of whether this is item act as scope or not. If false, then means this is 
-      // implement link. Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? IsScope { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Indication of whether this is item act as scope or not. If false, then means this is implement 
+        /// link. Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? IsScope { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference to the scope manufacturing item.
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public ITypedUriIdentifier ItemReference { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference to the scope manufacturing item.
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public ITypedUriIdentifier ItemReference { get; set; }
+    }
 }

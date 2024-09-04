@@ -13,72 +13,74 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsprcs.data
 {
-   public interface ISecondaryCapableResource
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(SecondaryCapableResource))]
+    public interface ISecondaryCapableResource
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic modified value Example: Dec 15, 2017 11:17 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value Example: Dec 11, 2017 12:53 PM
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value Example: Dec 11, 2017 12:53 PM
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Resource time const real value Example: 10.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimeConst { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Resource time const real value Example: 10.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimeConst { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Resource time per quantity to produced per time real value Example: 20.5
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public double? RscTimePerQtyToProducedPerTime { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Resource time per quantity to produced per time real value Example: 20.5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? RscTimePerQtyToProducedPerTime { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Referenced object of resource Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Resource { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Referenced object of resource Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Resource { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Referenced object of primary capable resource Example: EE562168015FFCF14F940A513C63AA77
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string DependsOn { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Referenced object of primary capable resource Example: EE562168015FFCF14F940A513C63AA77
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string DependsOn { get; set; }
+    }
 }

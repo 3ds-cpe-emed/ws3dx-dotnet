@@ -19,8 +19,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.core.data.impl.extension
 {
-   public class CustomerAttributes : Dictionary<string, object>, ICustomerAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class CustomerAttributes : Dictionary<string, object>, ICustomerAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

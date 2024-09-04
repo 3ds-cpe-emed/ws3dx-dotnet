@@ -17,52 +17,52 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.data.impl;
-using ws3dx.dsprcs.core.service;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessService_PreAssignedWorkCenter_UnitTests : MfgProcessServiceTestsSetup
-   {
-      [TestCase("", 0, 0)]
-      public async Task GetPreAssignedWorkCenters(string mfgProcessId, int top, int skip)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessService_PreAssignedWorkCenter_UnitTests : MfgProcessServiceTestsSetup
+    {
+        [TestCase("", 0, 0)]
+        public async Task GetPreAssignedWorkCenters(string mfgProcessId, int top, int skip)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IPreAssignedWorkCenterMask> ret = await mfgProcessService.GetPreAssignedWorkCenters(mfgProcessId, top, skip);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("", "")]
-      public async Task GetPreAssignedWorkCenter(string mfgProcessId, string workCenterId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         IPreAssignedWorkCenterMask ret = await mfgProcessService.GetPreAssignedWorkCenter(mfgProcessId, workCenterId);
-
-         Assert.IsNotNull(ret);
-      }
-
-      [TestCase("")]
-      public async Task AddPreAssignedWorkCenter(string mfgProcessId)
-      {
-         MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
-
-         ICreatePreAssignedWorkCenterRequest request = new CreatePreAssignedWorkCenterRequest();
-
-         try
-         {
-            IEnumerable<IPreAssignedWorkCenterMask> ret = await mfgProcessService.AttachPreAssignedWorkCenter(mfgProcessId, request);
+            IEnumerable<IPreAssignedWorkCenterMask> ret = await mfgProcessService.GetPreAssignedWorkCenters(mfgProcessId, top, skip);
 
             Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+        }
+
+        [TestCase("", "")]
+        public async Task GetPreAssignedWorkCenter(string mfgProcessId, string workCenterId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            IPreAssignedWorkCenterMask ret = await mfgProcessService.GetPreAssignedWorkCenter(mfgProcessId, workCenterId);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task AddPreAssignedWorkCenter(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ICreatePreAssignedWorkCenterRequest request = new CreatePreAssignedWorkCenterRequest();
+
+            try
+            {
+                IEnumerable<IPreAssignedWorkCenterMask> ret = await mfgProcessService.AddPreAssignedWorkCenter(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }

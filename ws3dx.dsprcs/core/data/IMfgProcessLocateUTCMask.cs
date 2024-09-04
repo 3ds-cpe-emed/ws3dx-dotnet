@@ -14,55 +14,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.serialization.attribute;
-
 namespace ws3dx.dsprcs.data
 {
-   [MaskSchema("dsprcs:MfgProcess.LocateMask.utc")]
-   public interface IMfgProcessLocateUTCMask
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Source { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MfgProcessLocateUTCMask))]
+    [MaskSchema("dsprcs:MfgProcess.LocateMask.utc")]
+    public interface IMfgProcessLocateUTCMask
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// source Example: https://server_name.dsone.3ds.com:443/3DSpace
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Source { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: type Example: DELLmiWorkPlanSystemReference
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// type Example: DELLmiWorkPlanSystemReference
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id of dsprcs:MfgProcess Example: MfgProcessRefID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Identifier { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id of dsprcs:MfgProcess Example: MfgProcessRefID1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Identifier { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsprcs/dsprcs:MfgProcess/MfgProcessRefID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// relativePath Example: /resources/v1/modeler/dsprcs/dsprcs:MfgProcess/MfgProcessRefID1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string RelativePath { get; set; }
 
-      public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
+        public IList<IMfgProcessInstancesUTC> MfgProcessInstance { get; set; }
 
       public IList<IScopeLink> ScopeLink { get; set; }
 
-      public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }
+        public IList<IPrimaryCapableResourceUTC> PrimaryCapableResource { get; set; }
 
-      public IList<IItemSpecificationsUTC> ItemSpecification { get; set; }
-   }
+        public IList<IItemSpecificationsUTC> ItemSpecification { get; set; }
+    }
 }

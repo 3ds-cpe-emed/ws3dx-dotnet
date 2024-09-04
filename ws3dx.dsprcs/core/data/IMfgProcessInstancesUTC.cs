@@ -13,129 +13,131 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsprcs.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsprcs.data
 {
-   public interface IMfgProcessInstancesUTC
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Entity physical id of the dsprcs:MfgProcessInstance' Example: MfgProcessInstanceID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Identifier { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(MfgProcessInstancesUTC))]
+    public interface IMfgProcessInstancesUTC
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Entity physical id of the dsprcs:MfgProcessInstance' Example: MfgProcessInstanceID1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Identifier { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: source Example: https://server_name.dsone.3ds.com:443/3DSpace
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Source { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// source Example: https://server_name.dsone.3ds.com:443/3DSpace
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Source { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: relativePath Example: /resources/v1/modeler/dsmfg/dsprcs:MfgProcess/MfgProcessParentID/dsprcs:MfgProcessInstance/MfgProcessInstanceID1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RelativePath { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// relativePath Example: /resources/v1/modeler/dsmfg/dsprcs:MfgProcess/MfgProcessParentID/dsprcs:MfgProcessInstance/MfgProcessInstanceID1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string RelativePath { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Basic type value Example: DELLmiWorkPlanSystemInstance
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Type { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Basic type value Example: DELLmiWorkPlanSystemInstance
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Type { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Reference object title value Example: My title
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Reference object title value Example: My title
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance name Example: My name
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance name Example: My name
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Instance description vlaue Example: My description
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Description { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance description vlaue Example: My description
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Description { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object owner value Example: John Doe
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Owner { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object owner value Example: John Doe
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Owner { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object organization value Example: MyCompany
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Organization { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object organization value Example: MyCompany
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Organization { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object collabspace value Example: Default
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Collabspace { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object collabspace value Example: Default
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Collabspace { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object created value in utc Example: 2022-01-31T09:48:10Z
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Created { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object created value in utc Example: 2022-01-31T09:48:10Z
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Created { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Object modified value in utc Example: 2022-01-31T09:48:10Z
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Modified { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object modified value in utc Example: 2022-01-31T09:48:10Z
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Modified { get; set; }
 
-      public ITypedUriIdentifier ParentObject { get; set; }
+        public ITypedUriIdentifier ParentObject { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: Number of instances Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? TotalItems { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Number of instances Example: 1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? TotalItems { get; set; }
+    }
 }

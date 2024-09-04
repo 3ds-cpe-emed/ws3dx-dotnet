@@ -16,51 +16,51 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_DataCollectPlanInstance_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("")]
-      public async Task GetDataCollectPlanInstances_IDataCollectPlanInstanceMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_DataCollectPlanInstance_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("")]
+        public async Task GetDataCollectPlanInstances_IDataCollectPlanInstanceMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IDataCollectPlanInstanceMask> ret = await mfgOperationService.GetDataCollectPlanInstances<IDataCollectPlanInstanceMask>(mfgOperationId);
+            IEnumerable<IDataCollectPlanInstanceMask> ret = await mfgOperationService.GetDataCollectPlanInstances<IDataCollectPlanInstanceMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetDataCollectPlanInstances_IDataCollectPlanInstanceDetailMask(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetDataCollectPlanInstances_IDataCollectPlanInstanceDetailMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IDataCollectPlanInstanceDetailMask> ret = await mfgOperationService.GetDataCollectPlanInstances<IDataCollectPlanInstanceDetailMask>(mfgOperationId);
+            IEnumerable<IDataCollectPlanInstanceDetailMask> ret = await mfgOperationService.GetDataCollectPlanInstances<IDataCollectPlanInstanceDetailMask>(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetDataCollectPlanInstance_IDataCollectPlanInstanceMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetDataCollectPlanInstance_IDataCollectPlanInstanceMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IDataCollectPlanInstanceMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("", "")]
-      public async Task GetDataCollectPlanInstance_IDataCollectPlanInstanceDetailMask(string mfgOperationId, string instanceId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("", "")]
+        public async Task GetDataCollectPlanInstance_IDataCollectPlanInstanceDetailMask(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IDataCollectPlanInstanceDetailMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, instanceId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

@@ -18,8 +18,8 @@ using ws3dx.dsprcs.data.extension;
 
 namespace ws3dx.dsprcs.data.impl.extension
 {
-   public class InterruptOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IInterruptOperationReferenceEnterpriseAttributes
-   {
-      //Specific Enterprise Attributes
-   }
+    public class InterruptOperationReferenceEnterpriseAttributes : Dictionary<string, object>, IInterruptOperationReferenceEnterpriseAttributes
+    {
+        //Specific Enterprise Attributes
+    }
 }

@@ -16,31 +16,31 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgOperationService_ScopeRequirementSpec_UnitTests : MfgOperationServiceTestsSetup
-   {
-      [TestCase("", "")]
-      public async Task GetScopeRequirementSpec(string mfgOperationId, string pID)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+    public class MfgOperationService_ScopeRequirementSpec_UnitTests : MfgOperationServiceTestsSetup
+    {
+        [TestCase("", "")]
+        public async Task GetScopeRequirementSpec(string mfgOperationId, string pID)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
          IScopeRequirementSpecMask ret = await mfgOperationService.GetScopeRequirementSpec(mfgOperationId, pID);
 
-         Assert.IsNotNull(ret);
-      }
+            Assert.IsNotNull(ret);
+        }
 
-      [TestCase("")]
-      public async Task GetScopeRequirementSpecs(string mfgOperationId)
-      {
-         MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+        [TestCase("")]
+        public async Task GetScopeRequirementSpecs(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IEnumerable<IScopeRequirementSpecMask> ret = await mfgOperationService.GetScopeRequirementSpecs(mfgOperationId);
+            IEnumerable<IScopeRequirementSpecMask> ret = await mfgOperationService.GetScopeRequirementSpecs(mfgOperationId);
 
-         Assert.IsNotNull(ret);
-      }
-   }
+            Assert.IsNotNull(ret);
+        }
+    }
 }

@@ -14,21 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsprcs.data;
 
-namespace ws3dx.dsprcs.core.data.impl
+namespace ws3dx.dsprcs.data.impl
 {
-   public class FilterableDetail : IFilterableDetail
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Description: Get the effectivity expression on instance.
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("effectivityContent")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
-   }
+    public class FilterableDetail : IFilterableDetail
+    {
+        [JsonPropertyName("effectivityContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
+    }
 }

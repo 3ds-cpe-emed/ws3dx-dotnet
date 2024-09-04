@@ -17,51 +17,51 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
-using ws3dx.dsprcs.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
 {
-   public class MfgProcessInstanceService_MfgProcessInstance_UnitTests : MfgProcessInstanceServiceTestsSetup
-   {
-      [TestCase()]
-      public async Task BulkFetch_IMfgProcessInstanceMask()
-      {
-         MfgProcessInstanceService mfgProcessInstanceService = ServiceFactoryCreate(await Authenticate());
+    public class MfgProcessInstanceService_MfgProcessInstance_UnitTests : MfgProcessInstanceServiceTestsSetup
+    {
+        [TestCase()]
+        public async Task BulkFetch_IMfgProcessInstanceMask()
+        {
+            MfgProcessInstanceService mfgProcessInstanceService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgProcessInstanceMask>, IList<string>) ret = await mfgProcessInstanceService.BulkFetch<IMfgProcessInstanceMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
 
-      [TestCase()]
-      public async Task BulkFetch_IMfgProcessInstanceDetailMask()
-      {
-         MfgProcessInstanceService mfgProcessInstanceService = ServiceFactoryCreate(await Authenticate());
+        [TestCase()]
+        public async Task BulkFetch_IMfgProcessInstanceDetailMask()
+        {
+            MfgProcessInstanceService mfgProcessInstanceService = ServiceFactoryCreate(await Authenticate());
 
-         string[] request = new string[] { };
+            string[] request = new string[] { };
 
-         try
-         {
+            try
+            {
             (IList<IMfgProcessInstanceDetailMask>, IList<string>) ret = await mfgProcessInstanceService.BulkFetch<IMfgProcessInstanceDetailMask>(request);
 
-            Assert.IsNotNull(ret);
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
-      }
-   }
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+    }
 }
