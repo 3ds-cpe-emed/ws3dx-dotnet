@@ -10,10 +10,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Product>3DEXPERIENCE Web Services Client SDK for Dotnet Core</Product>
-    <RepositoryUrl>https://github.com/3ds-cpe-emed/ds-cpemed-ws3dx-dotnet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyName>ws3dx.shared</AssemblyName>
-    <Version>426.2.0</Version>
+    <Version>426.3.1</Version>
+    <PackageTags>3DEXPERIENCE</PackageTags>
+    <PackageReleaseNotes>SearchByNameRevision extended behaviour</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>

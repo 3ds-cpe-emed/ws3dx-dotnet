@@ -16,20 +16,32 @@
 
 namespace ws3dx.utils.search
 {
-   public class SearchByNameRevision : SearchQuery
-   {
-      private string m_nameCriteria;
-      private string m_revisionCriteria;
+    public class SearchByNameRevision : SearchQuery
+    {
+        private readonly string m_nameCriteria     = null;
+        private readonly string m_revisionCriteria = null;
 
-      public SearchByNameRevision(string _nameCriteria, string _revisionCriteria)
-      {
-         m_nameCriteria = _nameCriteria;
-         m_revisionCriteria = _revisionCriteria;
-      }
+        public SearchByNameRevision(string _nameCriteria, string _revisionCriteria)
+        {
+            m_nameCriteria     = _nameCriteria;
+            m_revisionCriteria = _revisionCriteria;
+        }
 
-      public override string GetSearchString()
-      {
-         return string.Format("name:{0} AND revision:{1}", m_nameCriteria, m_revisionCriteria);
-      }
-   }
+        public SearchByNameRevision(string _nameCriteria)
+        {
+            m_nameCriteria = _nameCriteria;
+        }
+
+        public override string GetSearchString()
+        {
+            if (string.IsNullOrWhiteSpace(m_revisionCriteria) || (m_revisionCriteria.Trim() == "*"))
+            {
+                return string.Format("name:{0}", m_nameCriteria);
+            }
+            else
+            {
+                return string.Format("name:{0} AND revision:{1}", m_nameCriteria, m_revisionCriteria);
+            }
+        }
+    }
 }
