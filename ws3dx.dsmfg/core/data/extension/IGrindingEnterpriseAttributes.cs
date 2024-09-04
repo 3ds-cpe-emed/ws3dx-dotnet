@@ -14,9 +14,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsmfg.data.impl.extension;
+using ws3dx.serialization.attribute;
 
 namespace ws3dx.dsmfg.data.extension
 {
+    [ConcreteInterfaceImpConverter(typeof(GrindingEnterpriseAttributes))]
     public interface IGrindingEnterpriseAttributes : IDictionary<string, object>
     {
         //Specific Enterprise Attributes

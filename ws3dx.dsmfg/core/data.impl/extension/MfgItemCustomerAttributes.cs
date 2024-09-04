@@ -19,7 +19,7 @@ using ws3dx.dsmfg.data.extension;
 
 namespace ws3dx.dsmfg.data.impl.extension
 {
-    public class MfgCustomerAttributes : Dictionary<string, object>, IMfgItemCustomerAttributes
+    public class MfgItemCustomerAttributes : Dictionary<string, object>, IMfgItemCustomerAttributes
     {
     }
 }
