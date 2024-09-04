@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+     <TargetFramework>net8.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+     <Version>426.3.0</Version>
+     <Title>3DEXPERIENCE Manufacturing Process Web Services .NET Client</Title>
+     <Description>3DEXPERIENCE Manufacturing Process Web Services .NET Client</Description>
+     <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
+     <PackageTags>3DEXPERIENCE DELMIA</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ws3dx.core\ws3dx.core.csproj" />
+    <ProjectReference Include="..\..\ws3dx.dsmfg\core\ws3dx.dsmfg.csproj" />
+  </ItemGroup>
+
+ 
+
+</Project>
