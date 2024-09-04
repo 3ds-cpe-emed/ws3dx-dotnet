@@ -3,7 +3,11 @@
   <PropertyGroup>
      <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-     <Version>425.4.1</Version>
+     <Version>426.3.0</Version>
+     <Title>3DEXPERIENCE Manufacturing Process Web Services .NET Client</Title>
+     <Description>3DEXPERIENCE Manufacturing Process Web Services .NET Client</Description>
+     <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
+     <PackageTags>3DEXPERIENCE DELMIA</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
