@@ -14,12 +14,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ws3dx.dsmfg.data.impl
 {
     public class ItemOccurrence : IItemOccurrence
     {
+        [JsonPropertyName("specifiedOccurrence")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<ISpecifiedOccurrence> SpecifiedOccurrence { get; set; }
-
     }
 }
