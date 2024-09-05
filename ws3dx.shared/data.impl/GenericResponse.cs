@@ -14,26 +14,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 
+using System.Text.Json.Serialization;
+
 namespace ws3dx.shared.data.impl
 {
    public class GenericResponse : IGenericResponse
    {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 400
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      public int Status { get; set; }
+        ///------------------------------------------------------------------------------------------------
+        ///<summary>
+        ///
+        /// Example: 400
+        ///
+        ///<summary>
+        ///------------------------------------------------------------------------------------------------
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int Status { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: My message
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      public string Message { get; set; }
+        ///------------------------------------------------------------------------------------------------
+        ///<summary>
+        ///
+        /// Example: My message
+        ///
+        ///<summary>
+        ///------------------------------------------------------------------------------------------------
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Message { get; set; }
    }
 }
