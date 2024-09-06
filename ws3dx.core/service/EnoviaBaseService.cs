@@ -271,7 +271,7 @@ namespace ws3dx.core.service
             throw;
          }
 
-         return __output;
+         return (T) __output;
       }
 
       protected IList<S> DeserializeItems<T, S>(string _json, bool _ignoreIfPropertyNotFound = false) where T : IItems<S>
