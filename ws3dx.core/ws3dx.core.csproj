@@ -2,20 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>426.2.0</Version>
+    <Version>426.3.1</Version>
     <Description>Core/base module</Description>    
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Forced cast during deserialize</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ws3dx.core.snk</AssemblyOriginatorKeyFile>
-    <RepositoryUrl>https://github.com/3ds-cpe-emed/ds-cpemed-ws3dx-dotnet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
     <PackageLicenseFile>MITlicense.txt</PackageLicenseFile>
     <Product>3DEXPERIENCE Web Services Client SDK for Dotnet Core</Product>
     <RepositoryType>git</RepositoryType>
      <Nullable>disable</Nullable>
+     <PackageTags>3DEXPERIENCE</PackageTags>
   </PropertyGroup>
 
    <ItemGroup>

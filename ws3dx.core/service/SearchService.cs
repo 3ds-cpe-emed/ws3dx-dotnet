@@ -53,7 +53,7 @@ namespace ws3dx.core.service
         protected bool IsSearchSkipParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchSkipParamName()); } }
         protected bool IsSearchTopParamNameEmpty { get { return string.IsNullOrEmpty(GetSearchTopParamName()); } }
 
-        protected async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchString)
+        public async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchString)
         {
             GenericParameterConstraintUtils.CheckConstraints(typeof(T), SearchConstraintTypes());
 
@@ -89,7 +89,7 @@ namespace ws3dx.core.service
             return __output;
         }
 
-        protected async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchQuery, long _skip = 0, long _top = 100)
+        public async Task<IList<T>> SearchCollection<T>(string _wrappingCollectionJsonPropertyName, SearchQuery _searchQuery, long _skip = 0, long _top = 100)
         {
             System.Diagnostics.Debug.WriteLine($"SearchCollection<{typeof(T).Name}>");
 
