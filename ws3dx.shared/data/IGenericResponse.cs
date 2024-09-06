@@ -29,7 +29,7 @@ namespace ws3dx.shared.data
       //
       // </summary>
       //----------------------------------------------------------------
-      public int Status { get; set; }
+      public int? Status { get; set; }
 
       //----------------------------------------------------------------
       // <summary>

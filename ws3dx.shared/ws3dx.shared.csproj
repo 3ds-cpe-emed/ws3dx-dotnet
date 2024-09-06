@@ -13,9 +13,9 @@
     <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyName>ws3dx.shared</AssemblyName>
-    <Version>426.3.2</Version>
+    <Version>426.3.3</Version>
     <PackageTags>3DEXPERIENCE</PackageTags>
-    <PackageReleaseNotes>added json property names to GenericResponse</PackageReleaseNotes>
+    <PackageReleaseNotes>GenericResponse status property  set to nullable</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

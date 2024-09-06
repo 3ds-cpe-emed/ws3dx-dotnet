@@ -29,7 +29,7 @@ namespace ws3dx.shared.data.impl
         ///------------------------------------------------------------------------------------------------
         [JsonPropertyName("status")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public int Status { get; set; }
+        public int? Status { get; set; }
 
         ///------------------------------------------------------------------------------------------------
         ///<summary>
