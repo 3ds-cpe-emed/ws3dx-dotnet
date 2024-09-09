@@ -460,18 +460,21 @@ namespace ws3dx.dsmfg.service
         /// Represents the number of items to skip (to be used along with $top query parameter)
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<T>> GetResultingEngItems<T>(string mfgItemId, int top, int skip)
+        public async Task<IEnumerable<T>> GetResultingEngItems<T>(string mfgItemId, int? top = null, int? skip = null)
         {
             GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResultingEngItemMask), typeof(IResultingEngItemUtcMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:ResultingEngItem";
 
-            IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
-                { "$top", top.ToString() },
+            IDictionary<string, string> queryParams = new Dictionary<string, string>();
 
-                { "$skip", skip.ToString() }
-            };
+            if (top != null) {
+                queryParams.Add("$top", top.ToString());
+            }
+
+            if (skip != null) {
+                queryParams.Add("$skip", skip.ToString());
+            }
 
             return await GetCollectionFromResponseMemberProperty<T>(resourceURI, queryParams: queryParams);
         }
