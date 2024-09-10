@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ws3dx.dseng\core\ws3dx.dseng.csproj" />
+    <ProjectReference Include="..\..\ws3dx.dsmfg\core\ws3dx.dsmfg.csproj" />
+    <ProjectReference Include="..\core\ws3dx.core.ui.win.csproj" />
+  </ItemGroup>
+
+</Project>
