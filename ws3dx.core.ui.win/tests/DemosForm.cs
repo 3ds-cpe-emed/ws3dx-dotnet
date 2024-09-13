@@ -75,7 +75,7 @@ namespace ws3dx.core.ui.win.tests
             searchByNameRevisionForm.ShowDialog(this);
 
             if (searchByNameRevisionForm.SelectedItem == null) return;
-            
+
             IMfgItemMask selectedMfgItem = searchByNameRevisionForm.SelectedItem;
 
             MessageBox.Show(selectedMfgItem.Title, "Info", MessageBoxButtons.OK);
@@ -91,9 +91,9 @@ namespace ws3dx.core.ui.win.tests
 
             if (searchByNameRevisionForm.SelectedItem == null) return;
 
-            IMfgItemMask selectedMfgItem = searchByNameRevisionForm.SelectedItem;
+            IEngItemDefaultMask selectedEngItem = searchByNameRevisionForm.SelectedItem;
 
-            MessageBox.Show(selectedMfgItem.Title, "Info", MessageBoxButtons.OK);
+            MessageBox.Show(selectedEngItem.Title, "Info", MessageBoxButtons.OK);
         }
     }
 }
