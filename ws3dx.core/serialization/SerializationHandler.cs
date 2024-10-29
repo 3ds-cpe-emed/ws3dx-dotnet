@@ -219,6 +219,12 @@ namespace ws3dx.core.serialization
          using MemoryStream memStream = new MemoryStream();
          using Utf8JsonWriter writer = new Utf8JsonWriter(memStream, m_options);
 
+
+        if (_serializationCtx == SerializationContext.PATCH_DEFAULT)
+        {
+                return JsonSerializer.Serialize(_object); ;    
+        }
+
          if (_object == null)
          {
             SerializationUtils.SerializeEmptyObject(writer);

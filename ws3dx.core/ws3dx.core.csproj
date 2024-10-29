@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>426.3.2</Version>
+    <Version>426.3.3</Version>
     <Description>Core/base module</Description>    
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>extended SecurityContext behaviour with role display name</PackageReleaseNotes>
+    <PackageReleaseNotes>Added default Serialization with PATCH_DEFAULT</PackageReleaseNotes>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ws3dx.core.snk</AssemblyOriginatorKeyFile>
     <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>

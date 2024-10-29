@@ -555,7 +555,7 @@ namespace ws3dx.core.service
       {
          if (_requestUri == null) throw new ArgumentNullException("_requestUri is missing");
 
-         string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.PATCH);
+         string serializedPayload = SerializationHandler.Serialize(_payload, SerializationContext.PATCH_DEFAULT);
 
          //Send the Request
          HttpResponseMessage response = await PatchAsync(_requestUri, _body: serializedPayload, _queryParameters: queryParams, _headers: headerParams);

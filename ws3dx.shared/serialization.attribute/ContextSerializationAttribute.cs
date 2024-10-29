@@ -23,7 +23,8 @@ namespace ws3dx.serialization.attribute
       ANY,
       CREATE,
       PATCH,
-      DELETE
+      DELETE,
+      PATCH_DEFAULT
    }
 
    /// <summary>
