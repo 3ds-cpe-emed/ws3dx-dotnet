@@ -42,7 +42,9 @@ namespace ws3dx.dsmfg.data.impl
     [PolyJsonConverter.SubType(typeof(Machine), "Machine")]
     [PolyJsonConverter.SubType(typeof(Transform), "Transform")]
     [PolyJsonConverter.SubType(typeof(Unfasten), "Unfasten")]
-
+    [PolyJsonConverter.SubType(typeof(ContinuousManufacturedMaterial), "ProcessContinuousMaterial")]
+    [PolyJsonConverter.SubType(typeof(ContinuousProvidedMaterial), "ProcessContinuousProvide")]
+    
     public class MfgItemDetailMask : MfgItemMask, IMfgItemDetailMask
     {
         [JsonPropertyName("outsourced")]
