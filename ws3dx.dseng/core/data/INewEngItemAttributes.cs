@@ -61,7 +61,7 @@ namespace ws3dx.dseng.data
 
       public IEnterpriseItemNumber EnterpriseReference { get; set; }
 
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
    }

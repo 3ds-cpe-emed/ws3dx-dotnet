@@ -15,79 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dseng.data.impl;
 using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
     [ConcreteInterfaceImpConverter(typeof(EngInstanceDetailsMask))]
     [MaskSchema("dsmveng:EngInstanceMask.Details")]
-    public interface IEngInstanceDetailsMask
-    {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Id { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Basic type value Example: My Type
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Type { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Basic modified value Example: Dec 15, 2017 11:17 PM
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Modified { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Object created value Example: Dec 11, 2017 12:53 PM
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Created { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Instance name Example: My name
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Instance description vlaue Example: My description
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Description { get; set; }
-
-        public ITypedUriId ReferencedObject { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Cestamp { get; set; }
-
-        public string HasConfiguredInstance { get; set; }
-    }
+    public interface IEngInstanceDetailsMask : IEngInstanceDetailMask;
 }

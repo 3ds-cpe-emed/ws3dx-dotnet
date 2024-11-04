@@ -71,7 +71,7 @@ namespace ws3dx.dseng.data.impl
 
       [JsonPropertyName("dseno:EnterpriseAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEnterpriseAttributes EnterpriseAttributes { get; set; }
+      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
 
       [JsonPropertyName("customerAttributes")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

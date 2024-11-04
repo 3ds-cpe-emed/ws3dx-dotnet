@@ -47,13 +47,17 @@ namespace ws3dx.dseng.data.impl
 
         [JsonPropertyName("referencedObject")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public ITypedUriId ReferencedObject { get; set; }
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
         [JsonPropertyName("cestamp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Cestamp { get; set; }
 
-      [JsonPropertyName("hasConfiguredInstance")]
-      public string HasConfiguredInstance { get; set; }
+        [JsonPropertyName("hasConfiguredInstance")]
+        public string HasConfiguredInstance { get; set; }
+
+        [JsonPropertyName("dsxcad:findNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string FindNumber { get; set; }
     }
 }

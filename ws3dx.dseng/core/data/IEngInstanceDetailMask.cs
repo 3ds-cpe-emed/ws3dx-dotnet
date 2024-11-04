@@ -15,64 +15,95 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dseng.data.impl;
 using ws3dx.serialization.attribute;
+using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data
 {
-    [ConcreteInterfaceImpConverter(typeof(CreateGeolocation))]
-    public interface ICreateGeolocation
+    [ConcreteInterfaceImpConverter(typeof(EngInstanceDetailMask))]
+    [MaskSchema("dsmveng:EngInstanceMask.Details")]
+    public interface IEngInstanceDetailMask
     {
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Coordinates reference system ID Example: epsg::2000
+        /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public string CrsId { get; set; }
+        public string Id { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Coordinate of first axis (in metre) Example: 12345.56
+        /// Basic type value Example: My Type
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public double? Axis1 { get; set; }
+        public string Type { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Coordinate of second axis (in metre) Example: 56789.2
+        /// Basic modified value Example: Dec 15, 2017 11:17 PM
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public double? Axis2 { get; set; }
+        public string Modified { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Coordinate of third axis (in metre) Example: 125
+        /// Object created value Example: Dec 11, 2017 12:53 PM
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public double? Axis3 { get; set; }
+        public string Created { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Azimuth (in radian) Example: 12.45
+        /// Instance name Example: My name
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public double? Azimuth { get; set; }
+        public string Name { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Define if geolocation on item is active or not Example: true
+        /// Instance description vlaue Example: My description
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public bool? Active { get; set; }
+        public string Description { get; set; }
+
+        public ITypedUriIdentifier ReferencedObject { get; set; }
+
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Instance find number value Example: 5
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string FindNumber { get; set; }
+
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Cestamp { get; set; }
+
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// dsmvcfg:attribute.hasConfiguredInstance
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string HasConfiguredInstance { get; set; }
     }
 }

@@ -14,51 +14,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dseng.data.extension;
 using ws3dx.shared.data;
 
 namespace ws3dx.dseng.data.impl
 {
-    public class EngItemPatch : IEngItemPatch
+    public class EngInstanceDetailMask : IEngInstanceDetailMask
     {
-        [JsonPropertyName("title")]
+        [JsonPropertyName("id")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string Title { get; set; }
+        public string Id { get; set; }
+
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Type { get; set; }
+
+        [JsonPropertyName("modified")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Modified { get; set; }
+
+        [JsonPropertyName("created")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Created { get; set; }
+
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Name { get; set; }
 
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Description { get; set; }
 
-        [JsonPropertyName("versionComment")]
+        [JsonPropertyName("referencedObject")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string VersionComment { get; set; }
+        public ITypedUriIdentifier ReferencedObject { get; set; }
 
-        [JsonPropertyName("isManufacturable")]
+        [JsonPropertyName("dsxcad:findNumber")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? IsManufacturable { get; set; }
+        public string FindNumber { get; set; }
 
         [JsonPropertyName("cestamp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Cestamp { get; set; }
 
-        [JsonPropertyName("dslc:changeControl")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IChangeControl ChangeControl { get; set; }
-
-        [JsonPropertyName("dseng:EnterpriseReference")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IEnterpriseItemNumber EnterpriseReference { get; set; }
-
-        [JsonPropertyName("dseno:EnterpriseAttributes")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
-
-        [JsonPropertyName("dscfg:Configured")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IConfigured Configured { get; set; }
-
-        [JsonPropertyName("customerAttributes")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public ICustomerAttributes CustomerAttributes { get; set; }
+        [JsonPropertyName("hasConfiguredInstance")]
+        public string HasConfiguredInstance { get; set; }
     }
 }

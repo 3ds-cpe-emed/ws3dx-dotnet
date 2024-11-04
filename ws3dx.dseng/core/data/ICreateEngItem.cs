@@ -19,10 +19,9 @@ using ws3dx.serialization.attribute;
 
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(CreateEngItem))]
-
-   public interface ICreateEngItem
-   {
-      public IList<INewEngItem> Items { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(CreateEngItem))]
+    public interface ICreateEngItem
+    {
+        public IList<INewEngItem> Items { get; set; }
+    }
 }

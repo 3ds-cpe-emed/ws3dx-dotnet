@@ -36,7 +36,8 @@ namespace ws3dx.dseng.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Gets deformed engineering Item using indexed queries. Only the first 1000 results will be fetched with default response. no option to change the Mask.
+        /// Gets deformed engineering Item using indexed queries. Only the first 1000 results will be fetched 
+        /// with default response. no option to change the Mask.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
         /// <remarks>
