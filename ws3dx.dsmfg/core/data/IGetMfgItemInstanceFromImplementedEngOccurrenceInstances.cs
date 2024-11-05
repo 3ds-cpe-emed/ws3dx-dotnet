@@ -127,6 +127,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string Collabspace { get; set; }
-
     }
 }

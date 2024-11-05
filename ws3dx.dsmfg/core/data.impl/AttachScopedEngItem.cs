@@ -38,6 +38,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("syncEIN")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? SyncEIN { get; set; }
-
     }
 }

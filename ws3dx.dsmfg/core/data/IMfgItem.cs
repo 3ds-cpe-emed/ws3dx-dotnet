@@ -218,6 +218,5 @@ namespace ws3dx.dsmfg.data
         public IMfgItemEnterpriseAttributes MfgEnterpriseAttributes { get; set; }
 
         public ICustomerAttributes CustomerAttributes { get; set; }
-
     }
 }

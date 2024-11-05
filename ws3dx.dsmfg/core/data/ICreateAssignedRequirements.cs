@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface ICreateAssignedRequirements
     {
         public IList<ICreateAssignedRequirement> Items { get; set; }
-
     }
 }

@@ -29,6 +29,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
-
     }
 }

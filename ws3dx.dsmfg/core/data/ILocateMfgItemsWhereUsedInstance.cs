@@ -112,6 +112,5 @@ namespace ws3dx.dsmfg.data
         public string Collabspace { get; set; }
 
         public ITypedUriIdentifier ParentObject { get; set; }
-
     }
 }

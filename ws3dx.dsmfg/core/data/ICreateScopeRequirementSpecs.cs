@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface ICreateScopeRequirementSpecs
     {
         public IList<ICreateScopeRequirementSpec> Items { get; set; }
-
     }
 }

@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("objectReferences")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<IMfgItemReconnectRequestPayloadResultingEngItemRef> ObjectReferences { get; set; }
-
     }
 }

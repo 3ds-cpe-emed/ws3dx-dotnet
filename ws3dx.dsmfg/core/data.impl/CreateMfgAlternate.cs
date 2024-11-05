@@ -13,21 +13,15 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsmfg.data.impl;
-using ws3dx.serialization.attribute;
-namespace ws3dx.dsmfg.data
-{
-    [ConcreteInterfaceImpConverter(typeof(MfgItemInstancePatchCustomerAttributesDBcustomAttributesGroup))]
-    public interface IMfgItemInstancePatchCustomerAttributesDBcustomAttributesGroup
-    {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///
-        /// Attribute DB Value Example: Attribute DB Value
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string MyDBAttr3 { get; set; }
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
+namespace ws3dx.dsmfg.data.impl
+{
+    public class CreateMfgAlternate : ICreateMfgAlternate
+    {
+        [JsonPropertyName("items")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ICreateMfgAlternateItem> Items { get; set; }
     }
 }

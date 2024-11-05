@@ -24,6 +24,5 @@ namespace ws3dx.dsmfg.data
         public ITypedUriIdentifier ReferencedObject { get; set; }
 
         public IResultingEngItem Attributes { get; set; }
-
     }
 }

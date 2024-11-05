@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface IDetachDependencyPayloadItem
     {
         public ITypedUriIdentifier InstanceObject { get; set; }
-
     }
 }

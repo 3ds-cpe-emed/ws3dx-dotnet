@@ -42,6 +42,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("relationType")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string RelationType { get; set; }
-
     }
 }

@@ -23,7 +23,6 @@ namespace NUnitTestProject
 {
     public class MfgItemService_MfgResponsibility_UnitTests : MfgItemServiceTestsSetup
     {
-        //TODO
         [TestCase("", 0, 0)]
         public async Task GetMfgResponsibility(string mfgItemId, int top, int skip)
         {
@@ -36,11 +35,11 @@ namespace NUnitTestProject
 
         //TODO
         [TestCase("", "")]
-        public async Task GetMfgResponsibility(string mfgItemId, string pID)
+        public async Task GetMfgResponsibility(string mfgItemId, string mfgResponsibilityId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-            IEnumerable<IMfgResponsibilityMask> ret = await mfgItemService.GetMfgResponsibility(mfgItemId, pID);
+            IEnumerable<IMfgResponsibilityMask> ret = await mfgItemService.GetMfgResponsibility(mfgItemId, mfgResponsibilityId);
 
             Assert.IsNotNull(ret);
         }

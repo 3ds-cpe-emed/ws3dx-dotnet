@@ -74,6 +74,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("created")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Created { get; set; }
-
     }
 }

@@ -43,6 +43,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public IList<string> NavigateTo { get; set; }
-
     }
 }

@@ -27,6 +27,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("Controlling Changes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<IChangeControlStatusControllingChanges> ControllingChanges { get; set; }
-
     }
 }

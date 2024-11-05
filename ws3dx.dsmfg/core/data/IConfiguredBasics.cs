@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data
     public interface IConfiguredBasics
     {
         public IList<string> EnabledCriteria { get; set; }
-
     }
 }

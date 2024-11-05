@@ -73,6 +73,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string RelationType { get; set; }
-
     }
 }

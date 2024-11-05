@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("dsmfg:AssignmentFilter")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ILocateAssignmentFilterResponseAssignmentFilter AssignmentFilter { get; set; }
-
     }
 }

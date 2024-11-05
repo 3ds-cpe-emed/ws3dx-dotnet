@@ -57,6 +57,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string Type { get; set; }
-
     }
 }

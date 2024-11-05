@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data
     public interface ILocateMfgItems
     {
         public IList<ITypedUriIdentifier> MfgItems { get; set; }
-
     }
 }

@@ -24,6 +24,5 @@ namespace ws3dx.dsmfg.data
         public ITypedUriIdentifier Requirement { get; set; }
 
         public ICreateAssignedRequirementAttributes Attributes { get; set; }
-
     }
 }

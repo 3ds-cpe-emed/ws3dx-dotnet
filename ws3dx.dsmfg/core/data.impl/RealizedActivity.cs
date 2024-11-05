@@ -32,6 +32,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("operation")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<string> Operation { get; set; }
-
     }
 }

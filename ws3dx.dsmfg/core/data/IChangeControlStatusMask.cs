@@ -32,6 +32,5 @@ namespace ws3dx.dsmfg.data
         public string ChangeControlStatus { get; set; }
 
         public IList<IChangeControlStatusControllingChanges> ControllingChanges { get; set; }
-
     }
 }

@@ -119,6 +119,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string Cestamp { get; set; }
-
     }
 }

@@ -115,6 +115,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public ITypedUriIdentifier ProductConfiguration { get; set; }
-
     }
 }

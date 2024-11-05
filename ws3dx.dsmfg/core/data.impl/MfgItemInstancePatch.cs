@@ -14,6 +14,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
+using ws3dx.shared.data.extension;
 
 namespace ws3dx.dsmfg.data.impl
 {
@@ -35,9 +36,12 @@ namespace ws3dx.dsmfg.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IMagnitudeValueInput Quantity { get; set; }
 
+        [JsonPropertyName("contQuantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? ContQuantity { get; set; }
+
         [JsonPropertyName("customerAttributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IMfgItemInstancePatchCustomerAttributes CustomerAttributes { get; set; }
-
+        public ICustomerAttributes CustomerAttributes { get; set; }
     }
 }

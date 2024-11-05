@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("instances")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<ICreateMfgInstancesRefInstance> Instances { get; set; }
-
     }
 }

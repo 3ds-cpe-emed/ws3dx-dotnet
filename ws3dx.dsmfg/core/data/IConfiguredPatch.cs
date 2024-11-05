@@ -28,6 +28,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string EnabledCriteria { get; set; }
-
     }
 }

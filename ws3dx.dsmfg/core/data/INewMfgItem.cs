@@ -21,6 +21,5 @@ namespace ws3dx.dsmfg.data
     public interface INewMfgItem
     {
         public IMfgItem Attributes { get; set; }
-
     }
 }

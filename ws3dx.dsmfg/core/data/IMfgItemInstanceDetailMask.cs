@@ -142,6 +142,13 @@ namespace ws3dx.dsmfg.data
         public string UseCase { get; set; }
 
         public ITypedUriIdentifier ReferencedObject { get; set; }
+        /// <summary>
+        ///
+        /// Object contQuantity value Example: 0.25
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ContQuantity { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
@@ -151,6 +158,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string Cestamp { get; set; }
-
     }
 }

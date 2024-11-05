@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface ICreateMfgInstancesRef
     {
         public IList<ICreateMfgInstancesRefInstance> Instances { get; set; }
-
     }
 }

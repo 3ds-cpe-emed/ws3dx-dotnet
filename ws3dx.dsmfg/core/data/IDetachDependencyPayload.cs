@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface IDetachDependencyPayload
     {
         public IList<IDetachDependencyPayloadItem> Items { get; set; }
-
     }
 }

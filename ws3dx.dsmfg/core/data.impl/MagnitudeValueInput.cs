@@ -30,6 +30,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("inputUnit")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string InputUnit { get; set; }
-
     }
 }

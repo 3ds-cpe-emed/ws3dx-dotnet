@@ -39,6 +39,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("dsmfg:MfgItemInstance")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<IMfgItemInstance> MfgItemInstance { get; set; }
-
     }
 }

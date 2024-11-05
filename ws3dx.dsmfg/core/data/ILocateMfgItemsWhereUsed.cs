@@ -40,6 +40,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public int? TotalItems { get; set; }
-
     }
 }

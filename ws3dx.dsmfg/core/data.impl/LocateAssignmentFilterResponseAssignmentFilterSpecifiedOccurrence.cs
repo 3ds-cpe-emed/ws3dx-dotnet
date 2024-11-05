@@ -38,6 +38,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("type")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Type { get; set; }
-
     }
 }

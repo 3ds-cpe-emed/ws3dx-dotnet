@@ -76,6 +76,10 @@ namespace ws3dx.dsmfg.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string UseCase { get; set; }
 
+        [JsonPropertyName("contQuantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? ContQuantity { get; set; }
+
         [JsonPropertyName("referencedObject")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ITypedUriIdentifier ReferencedObject { get; set; }
@@ -83,6 +87,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("cestamp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Cestamp { get; set; }
-
     }
 }

@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface IItemOccurrence
     {
         public IList<ISpecifiedOccurrence> SpecifiedOccurrence { get; set; }
-
     }
 }

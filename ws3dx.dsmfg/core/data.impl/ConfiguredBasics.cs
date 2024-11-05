@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("enabledCriteria")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<string> EnabledCriteria { get; set; }
-
     }
 }

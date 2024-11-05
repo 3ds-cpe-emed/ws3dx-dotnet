@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data
     public interface IDependencyMask
     {
         public IList<IDependencyDependencies> Dependencies { get; set; }
-
     }
 }

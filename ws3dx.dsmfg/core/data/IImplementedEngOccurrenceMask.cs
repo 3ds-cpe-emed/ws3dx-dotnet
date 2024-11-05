@@ -32,6 +32,5 @@ namespace ws3dx.dsmfg.data
         public string Id { get; set; }
 
         public IList<ISpecifiedOccurrence> SpecifiedOccurrence { get; set; }
-
     }
 }

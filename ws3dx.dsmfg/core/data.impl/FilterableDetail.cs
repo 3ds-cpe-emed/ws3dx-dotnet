@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("effectivityContent")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IFilterableDetailEffectivityContent EffectivityContent { get; set; }
-
     }
 }

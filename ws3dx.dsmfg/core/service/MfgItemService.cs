@@ -91,7 +91,7 @@ namespace ws3dx.dsmfg.service
         ///---------------------------------------------------------------------------------------------
         public async Task<T> Get<T>(string mfgItemId)
         {
-            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMask), typeof(IMfgItemDetailMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
@@ -135,7 +135,7 @@ namespace ws3dx.dsmfg.service
         ///---------------------------------------------------------------------------------------------
         public async Task<IEnumerable<T>> Update<T>(string mfgItemId, IMfgItemPatch request)
         {
-            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMask), typeof(IMfgItemDetailMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}";
 
@@ -158,7 +158,7 @@ namespace ws3dx.dsmfg.service
         ///---------------------------------------------------------------------------------------------
         public async Task<IEnumerable<T>> Create<T>(ICreateMfgItems request)
         {
-            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMask), typeof(IMfgItemDetailMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem";
 
@@ -242,6 +242,7 @@ namespace ws3dx.dsmfg.service
             IDictionary<string, string> queryParams = new Dictionary<string, string>
             {
                 { "$top", top.ToString() },
+
                 { "$skip", skip.ToString() }
             };
 
@@ -290,7 +291,7 @@ namespace ws3dx.dsmfg.service
         ///---------------------------------------------------------------------------------------------
         public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
         {
-            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemDetailMask), typeof(IMfgItemMask) });
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemMask), typeof(IMfgItemDetailMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/bulkfetch";
 
@@ -826,7 +827,7 @@ namespace ws3dx.dsmfg.service
 
             return await PostIndividual<IGenericResponse, IItemOccurrence>(resourceURI, request);
         }
-
+    
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Service to detach implemented Engineering Item Occurrence from an single Manufacturing Item instance.
@@ -1137,7 +1138,7 @@ namespace ws3dx.dsmfg.service
         /// <param name="mfgItemId">
         /// dsmfg:MfgItem object ID
         /// </param>
-        /// <param name="PID">
+        /// <param name="originId">
         /// dsmfg:Origin object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
@@ -1193,7 +1194,7 @@ namespace ws3dx.dsmfg.service
         /// <param name="mfgItemId">
         /// dsmfg:MfgItem object ID
         /// </param>
-        /// <param name="PID">
+        /// <param name="substituteId">
         /// dsmfg:Substitute object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
@@ -1249,13 +1250,13 @@ namespace ws3dx.dsmfg.service
         /// <param name="mfgItemId">
         /// dsmfg:MfgItem object ID
         /// </param>
-        /// <param name="PID">
+        /// <param name="mfgResponsibilityId">
         /// dsmfg:MfgResponsibility object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IMfgResponsibilityMask>> GetMfgResponsibility(string mfgItemId, string PID)
+        public async Task<IEnumerable<IMfgResponsibilityMask>> GetMfgResponsibility(string mfgItemId, string mfgResponsibilityId)
         {
-            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgResponsibility/{PID}";
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgResponsibility/{mfgResponsibilityId}";
 
             return await GetCollectionFromResponseMemberProperty<IMfgResponsibilityMask>(resourceURI);
         }
@@ -1295,6 +1296,29 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Create Manufacturing Alternate Process link. Only 1 item could be created per call 'on cloud'.
+        /// Only 10 items could be created per call 'on premise'.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsmfg:MfgItem/{ID}/dsmfg:Alternate
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgItemId">
+        /// dsmfg:MfgItem object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IAlternateMask>> AddAlternate(string mfgItemId, ICreateMfgAlternate request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Alternate";
+
+            return await PostCollectionFromResponseMemberProperty<IAlternateMask, ICreateMfgAlternate>(resourceURI, request);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Gets specific Alternate Item link
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1305,15 +1329,38 @@ namespace ws3dx.dsmfg.service
         /// <param name="mfgItemId">
         /// dsmfg:MfgItem object ID
         /// </param>
-        /// <param name="PID">
+        /// <param name="alternateId">
         /// dsmfg:Alternate object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IAlternateMask>> GetAlternate(string mfgItemId, string PID)
+        public async Task<IEnumerable<IAlternateMask>> GetAlternate(string mfgItemId, string alternateId)
         {
-            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Alternate/{PID}";
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Alternate/{alternateId}";
 
             return await GetCollectionFromResponseMemberProperty<IAlternateMask>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Deletes specific Alternate Item link
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsmfg:MfgItem/{ID}/dsmfg:Alternate/{PID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgItemId">
+        /// dsmfg:MfgItem object ID
+        /// </param>
+        /// <param name="alternateId">
+        /// dsmfg:Alternate object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> DeleteAlternate(string mfgItemId, string alternateId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Alternate/{alternateId}";
+
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
         }
 
         ///---------------------------------------------------------------------------------------------

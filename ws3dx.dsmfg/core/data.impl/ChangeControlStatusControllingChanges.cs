@@ -30,6 +30,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("identifier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Identifier { get; set; }
-
     }
 }

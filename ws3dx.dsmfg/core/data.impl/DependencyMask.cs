@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("dependencies")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<IDependencyDependencies> Dependencies { get; set; }
-
     }
 }

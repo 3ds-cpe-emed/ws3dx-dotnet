@@ -28,6 +28,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("realizedActivities")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<IRealizedActivity> RealizedActivities { get; set; }
-
     }
 }

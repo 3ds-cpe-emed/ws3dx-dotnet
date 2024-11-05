@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("attributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IMfgItem Attributes { get; set; }
-
     }
 }

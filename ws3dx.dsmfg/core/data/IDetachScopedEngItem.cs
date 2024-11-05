@@ -65,6 +65,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public bool? SyncEIN { get; set; }
-
     }
 }

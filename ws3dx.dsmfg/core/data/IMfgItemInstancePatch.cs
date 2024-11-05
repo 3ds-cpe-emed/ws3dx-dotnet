@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using ws3dx.dsmfg.data.impl;
 using ws3dx.serialization.attribute;
+using ws3dx.shared.data.extension;
 namespace ws3dx.dsmfg.data
 {
     [ConcreteInterfaceImpConverter(typeof(MfgItemInstancePatch))]
@@ -49,7 +50,15 @@ namespace ws3dx.dsmfg.data
 
         public IMagnitudeValueInput Quantity { get; set; }
 
-        public IMfgItemInstancePatchCustomerAttributes CustomerAttributes { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///
+        /// Object contQuantity value Example: 0.25
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public double? ContQuantity { get; set; }
 
+        public ICustomerAttributes CustomerAttributes { get; set; }
     }
 }

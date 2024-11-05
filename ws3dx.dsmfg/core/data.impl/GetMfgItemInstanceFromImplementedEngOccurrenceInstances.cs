@@ -66,6 +66,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("collabspace")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Collabspace { get; set; }
-
     }
 }

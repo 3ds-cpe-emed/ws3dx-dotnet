@@ -58,6 +58,5 @@ namespace ws3dx.dsmfg.data
         public string RelativePath { get; set; }
 
         public IList<IMfgItemInstance> MfgItemInstance { get; set; }
-
     }
 }

@@ -23,6 +23,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("dsmfg:CreateAssemblyEnterpriseAttributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ICreateAssemblyEnterpriseAttributes EnterpriseAttributes { get; set; }
-
     }
 }

@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface IAttachAssignmentFilterV1
     {
         public IList<IItemOccurrence> AssignmentFilters { get; set; }
-
     }
 }

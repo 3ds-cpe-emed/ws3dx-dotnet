@@ -31,6 +31,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("totalItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? TotalItems { get; set; }
-
     }
 }

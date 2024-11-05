@@ -28,11 +28,11 @@ namespace ws3dx.dsmfg.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Usage { get; set; }
 
-        [JsonPropertyName("Computed")]
+        [JsonPropertyName("computed")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public bool? Computed { get; set; }
 
-        [JsonPropertyName("resultingEngItem")]
+        [JsonPropertyName("ResultingEngItem")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ITypedUriIdentifier ResultingEngItem { get; set; }
 
@@ -40,7 +40,7 @@ namespace ws3dx.dsmfg.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Modified { get; set; }
 
-        [JsonPropertyName("Created")]
+        [JsonPropertyName("created")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Created { get; set; }
 
@@ -56,9 +56,8 @@ namespace ws3dx.dsmfg.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Organization { get; set; }
 
-        [JsonPropertyName("Collabspace")]
+        [JsonPropertyName("collabspace")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Collabspace { get; set; }
-
     }
 }

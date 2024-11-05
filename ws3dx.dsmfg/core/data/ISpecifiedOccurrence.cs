@@ -24,6 +24,5 @@ namespace ws3dx.dsmfg.data
         public int? InstancePosition { get; set; }
 
         public ITypedUriIdentifier InstanceObject { get; set; }
-
     }
 }

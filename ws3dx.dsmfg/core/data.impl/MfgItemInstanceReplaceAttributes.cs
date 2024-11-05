@@ -26,6 +26,5 @@ namespace ws3dx.dsmfg.data.impl
         [JsonPropertyName("description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Description { get; set; }
-
     }
 }

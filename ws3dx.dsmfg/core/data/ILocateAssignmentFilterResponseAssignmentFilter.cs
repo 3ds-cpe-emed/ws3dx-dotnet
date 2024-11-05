@@ -31,6 +31,5 @@ namespace ws3dx.dsmfg.data
         public IList<ILocateAssignmentFilterResponseAssignmentFilterSpecifiedOccurrence> SpecifiedOccurrence { get; set; }
 
         public IList<IMfgItemResponse> MfgItem { get; set; }
-
     }
 }

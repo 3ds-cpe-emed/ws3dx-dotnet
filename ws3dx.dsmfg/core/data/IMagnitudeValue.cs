@@ -47,6 +47,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public string Unit { get; set; }
-
     }
 }

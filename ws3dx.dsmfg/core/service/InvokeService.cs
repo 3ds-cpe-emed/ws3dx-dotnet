@@ -36,7 +36,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Get scoped and resulting manufacturing item references from Engineering Item

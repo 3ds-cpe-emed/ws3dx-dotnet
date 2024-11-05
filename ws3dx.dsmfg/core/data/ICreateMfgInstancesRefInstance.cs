@@ -24,6 +24,5 @@ namespace ws3dx.dsmfg.data
         public IUriIdentifier ReferencedObject { get; set; }
 
         public IMfgInstance Attributes { get; set; }
-
     }
 }

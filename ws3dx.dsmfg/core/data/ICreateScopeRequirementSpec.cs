@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface ICreateScopeRequirementSpec
     {
         public ITypedUriIdentifier Requirement { get; set; }
-
     }
 }

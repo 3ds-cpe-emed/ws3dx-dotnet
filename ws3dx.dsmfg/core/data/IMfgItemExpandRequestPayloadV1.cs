@@ -38,6 +38,5 @@ namespace ws3dx.dsmfg.data
         /// </summary>
         ///----------------------------------------------------------------
         public bool? WithPath { get; set; }
-
     }
 }

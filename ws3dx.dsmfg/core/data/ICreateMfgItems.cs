@@ -22,6 +22,5 @@ namespace ws3dx.dsmfg.data
     public interface ICreateMfgItems
     {
         public IList<INewMfgItem> Items { get; set; }
-
     }
 }

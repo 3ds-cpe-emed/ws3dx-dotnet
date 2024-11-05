@@ -16,8 +16,11 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ws3dx.core.exception;
 using ws3dx.dsmfg.data;
+using ws3dx.dsmfg.data.impl;
 using ws3dx.dsmfg.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -25,11 +28,11 @@ namespace NUnitTestProject
     {
         //TODO
         [TestCase("", "")]
-        public async Task GetAlternate(string mfgItemId, string pID)
+        public async Task GetAlternate(string mfgItemId, string alternateId)
         {
             MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
 
-            IEnumerable<IAlternateMask> ret = await mfgItemService.GetAlternate(mfgItemId, pID);
+            IEnumerable<IAlternateMask> ret = await mfgItemService.GetAlternate(mfgItemId, alternateId);
 
             Assert.IsNotNull(ret);
         }
@@ -43,6 +46,44 @@ namespace NUnitTestProject
             IEnumerable<IAlternateMask> ret = await mfgItemService.GetAlternate(mfgItemId, top, skip);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task AddAlternate(string mfgItemId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateMfgAlternate request = new CreateMfgAlternate();
+
+            try
+            {
+                IEnumerable<IAlternateMask> ret = await mfgItemService.AddAlternate(mfgItemId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task DeleteAlternate(string mfgItemId, string alternateId)
+        {
+            MfgItemService mfgItemService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgItemService.DeleteAlternate(mfgItemId, alternateId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }
