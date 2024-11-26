@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-     <Version>427.0.1</Version>
+     <Version>427.0.2</Version>
      <Title>3DEXPERIENCE Engineering Web Services .NET Client</Title>
      <Description>3DEXPERIENCE Engineering Web Services .NET Client</Description>
      <PackageProjectUrl></PackageProjectUrl>
      <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
      <PackageTags>3DEXPERIENCE</PackageTags>
-     <PackageReleaseNotes>added: dseng locate response handlers</PackageReleaseNotes>
+     <PackageReleaseNotes>fix: enabledCriteria returns a single value string when there is only one configuration criteria and an array if more than one.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
