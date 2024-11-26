@@ -228,7 +228,7 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
 
             //there should be at least two otherwise the test cannot be performed
-            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Identifier);
 
             if (distincEngInstanceRef.Count() < 2)
             {
@@ -240,9 +240,9 @@ namespace NUnitTestProject
 
             IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
 
-            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+            ITypedUriIdentifier newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Identifier, engItemService.EnoviaServiceURL);
 
             EngInstanceReplace newEngInstance = new EngInstanceReplace();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -281,7 +281,7 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
 
             //there should be at least two otherwise the test cannot be performed
-            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Identifier);
 
             if (distincEngInstanceRef.Count() < 2)
             {
@@ -293,9 +293,9 @@ namespace NUnitTestProject
 
             IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
 
-            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+            ITypedUriIdentifier newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Identifier, engItemService.EnoviaServiceURL);
 
             EngInstanceReplace newEngInstance = new EngInstanceReplace();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -334,7 +334,7 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
 
             //there should be at least two otherwise the test cannot be performed
-            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Id);
+            IEnumerable<IEngInstanceDetailsMask> distincEngInstanceRef = ret.DistinctBy(engInstance => engInstance.ReferencedObject.Identifier);
 
             if (distincEngInstanceRef.Count() < 2)
             {
@@ -346,9 +346,9 @@ namespace NUnitTestProject
 
             IEngInstanceDetailsMask engInstanceIdToBeReplaced = distincEngInstanceRef.First();
 
-            ITypedUriId newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
+            ITypedUriIdentifier newEngItemInstanceRef = distincEngInstanceRef.ElementAt(1).ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(newEngItemInstanceRef.Identifier, engItemService.EnoviaServiceURL);
 
             EngInstanceReplace newEngInstance = new EngInstanceReplace();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -387,9 +387,9 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
             Assert.IsNotNull(ret.First());
 
-            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+            ITypedUriIdentifier engItemRefId = ret.First().ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Identifier, engItemService.EnoviaServiceURL);
 
             NewEngInstance newEngInstance = new NewEngInstance();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -430,9 +430,9 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
             Assert.IsNotNull(ret.First());
 
-            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+            ITypedUriIdentifier engItemRefId = ret.First().ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Identifier, engItemService.EnoviaServiceURL);
 
             NewEngInstance newEngInstance = new NewEngInstance();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -473,9 +473,9 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
             Assert.IsNotNull(ret.First());
 
-            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+            ITypedUriIdentifier engItemRefId = ret.First().ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Identifier, engItemService.EnoviaServiceURL);
 
             NewEngInstance newEngInstance = new NewEngInstance();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;
@@ -516,9 +516,9 @@ namespace NUnitTestProject
             Assert.IsNotNull(ret);
             Assert.IsNotNull(ret.First());
 
-            ITypedUriId engItemRefId = ret.First().ReferencedObject;
+            ITypedUriIdentifier engItemRefId = ret.First().ReferencedObject;
 
-            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Id, engItemService.EnoviaServiceURL);
+            ITypedUriIdentifier newEngItemRefIdentifier = new EngItemUriIdentitier(engItemRefId.Identifier, engItemService.EnoviaServiceURL);
 
             NewEngInstance newEngInstance = new NewEngInstance();
             newEngInstance.ReferencedObject = newEngItemRefIdentifier;

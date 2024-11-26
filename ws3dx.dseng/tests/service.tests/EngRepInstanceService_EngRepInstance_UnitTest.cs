@@ -13,25 +13,35 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.dseng.service;
+using ws3dx.core.exception;
+using ws3dx.dseng.data;
 
-namespace ws3dx.dseng.data
+namespace NUnitTestProject
 {
-   [ConcreteInterfaceImpConverter(typeof(ResponseUnsetVariantEffectivityUpdated))]
-   public interface IResponseUnsetVariantEffectivityUpdated
+   public class EngRepInstanceService_EngRepInstance_UnitTests : EngRepInstanceServiceTestsSetup
    {
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: F6AF82561E5700005EB271EE0003C500
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public string Id { get; set; }
+      [TestCase()]
+      public async Task RepInstanceBulkfetch()
+      {
+         EngRepInstanceService engRepInstanceService = ServiceFactoryCreate(await Authenticate());
 
-      public string ErrorCode { get; set; }
+         string[] request = new string[] { };
 
-      public string ErrorMessage { get; set; }
+         try
+         {
+            (IList<IEngInstanceDefaultMask>, IList<string>) ret = await engRepInstanceService.RepInstanceBulkfetch(request);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
    }
 }

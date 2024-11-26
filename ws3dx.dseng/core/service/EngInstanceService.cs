@@ -13,19 +13,21 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dseng.data;
+using ws3dx.shared.utils;
 
 namespace ws3dx.dseng.service
 {
    // SDK Service
-   public class DeformedService : EnoviaBaseService
+   public class EngInstanceService : EnoviaBaseService
    {
       private const string BASE_RESOURCE = "/resources/v1/modeler/dseng/";
 
-      public DeformedService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+      public EngInstanceService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
       {
       }
 
@@ -36,23 +38,30 @@ namespace ws3dx.dseng.service
 
       ///---------------------------------------------------------------------------------------------
       /// <summary>
-      /// Navigate from deformable to deformed 
-      /// Gets deformed engineering Item using indexed queries. Only the first 1000 results will be fetched 
-      /// with default response. no option to change the Mask.
+      /// Gets attributes for multiple Engineering Items Instances without root Id 
+      /// Get multiple Engineering Instances which are Indexed. API Works only for Indexed Data.The customer 
+      /// attributes are returned only with default sixw mapping ds6wg:TypeName.AttributeName and it is 
+      /// not supported if the sixw predicate is changed Maximum of 1000 items can be passed to fetch the 
+      /// information. Note: any attribute that has empty values will not be returned
       /// </summary>
       ///---------------------------------------------------------------------------------------------
       /// <remarks>
-      /// (POST) dseng:deformed/locate
+      /// (POST) dseng:EngInstance/bulkfetch
       /// </remarks>
       ///---------------------------------------------------------------------------------------------
       /// <param name="request">
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<IEngItemDeformedLocated> Locate(IEngItemDeformedLocate request)
+      public async Task<(IList<IEngInstanceDefaultMask>, IList<string>)> InstanceBulkfetch(string[] request)
       {
-         string resourceURI = $"{GetBaseResource()}dseng:deformed/locate";
+         string resourceURI = $"{GetBaseResource()}dseng:EngInstance/bulkfetch";
 
-            return await PostIndividual<IEngItemDeformedLocated, IEngItemDeformedLocate>(resourceURI, request);
+         IDictionary<string, string> queryParams = new Dictionary<string, string>
+         {
+            { "$mva", "true" }
+         };
+
+         return await PostBulkCollection<IEngInstanceDefaultMask, string[]>(resourceURI, request, queryParams: queryParams);
       }
    }
 }

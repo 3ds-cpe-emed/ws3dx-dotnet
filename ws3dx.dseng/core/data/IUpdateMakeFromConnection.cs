@@ -13,56 +13,41 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dseng.data.extension;
+using System.Collections.Generic;
 using ws3dx.dseng.data.impl;
 using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
-
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngItemAttributes))]
-   public interface INewEngItemAttributes
+   [ConcreteInterfaceImpConverter(typeof(UpdateMakeFromConnection))]
+   public interface IUpdateMakeFromConnection
    {
       ///----------------------------------------------------------------
       /// <summary>
       ///		
-      /// Example: My name
+      /// connection cestamp Example: BB5C825601490400665EDD2B000000C0
       ///
       /// </summary>
       ///----------------------------------------------------------------
-      public string Title { get; set; }
+      public string Cestamp { get; set; }
 
       ///----------------------------------------------------------------
       /// <summary>
       ///		
-      /// Example: true
+      /// As required flag Example: true
       ///
       /// </summary>
       ///----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
+      public string AsRequired { get; set; }
 
       ///----------------------------------------------------------------
       /// <summary>
       ///		
-      /// Example: My description
+      /// Reference name Example: Reference-update
       ///
       /// </summary>
       ///----------------------------------------------------------------
-      public string Description { get; set; }
+      public string ReferenceName { get; set; }
 
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: My Version Comments
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public string VersionComment { get; set; }
-
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
-
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
-
-      public ICustomerAttributes CustomerAttributes { get; set; }
+      public IList<IQuantity> Quantity { get; set; }
    }
 }

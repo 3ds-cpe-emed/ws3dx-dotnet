@@ -13,25 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using System.Text.Json.Serialization;
 
-namespace ws3dx.dseng.data
+namespace ws3dx.dseng.data.impl
 {
-   [ConcreteInterfaceImpConverter(typeof(ResponseUnsetVariantEffectivityUpdated))]
-   public interface IResponseUnsetVariantEffectivityUpdated
+   public class Quantity : IQuantity
    {
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: F6AF82561E5700005EB271EE0003C500
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public string Id { get; set; }
+      [JsonPropertyName("inputUnit")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string InputUnit { get; set; }
 
-      public string ErrorCode { get; set; }
+      [JsonPropertyName("magnitude")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Magnitude { get; set; }
 
-      public string ErrorMessage { get; set; }
+      [JsonPropertyName("value")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Value { get; set; }
    }
 }

@@ -13,25 +13,27 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace ws3dx.dseng.data
+namespace ws3dx.dseng.data.impl
 {
-   [ConcreteInterfaceImpConverter(typeof(ResponseUnsetVariantEffectivityUpdated))]
-   public interface IResponseUnsetVariantEffectivityUpdated
+   public class UpdateMakeFromConnection : IUpdateMakeFromConnection
    {
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: F6AF82561E5700005EB271EE0003C500
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public string Id { get; set; }
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
 
-      public string ErrorCode { get; set; }
+      [JsonPropertyName("asRequired")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string AsRequired { get; set; }
 
-      public string ErrorMessage { get; set; }
+      [JsonPropertyName("referenceName")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string ReferenceName { get; set; }
+
+      [JsonPropertyName("quantity")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IList<IQuantity> Quantity { get; set; }
    }
 }

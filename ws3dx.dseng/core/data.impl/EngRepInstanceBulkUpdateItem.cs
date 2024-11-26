@@ -13,56 +13,35 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using System.Text.Json.Serialization;
 using ws3dx.dseng.data.extension;
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
 
-namespace ws3dx.dseng.data
+namespace ws3dx.dseng.data.impl
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngItemAttributes))]
-   public interface INewEngItemAttributes
+   public class EngRepInstanceBulkUpdateItem : IEngRepInstanceBulkUpdateItem
    {
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: My name
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Id { get; set; }
+
+      [JsonPropertyName("title")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Title { get; set; }
 
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: true
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
-
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: My description
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
+      [JsonPropertyName("description")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Description { get; set; }
 
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: My Version Comments
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public string VersionComment { get; set; }
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
 
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+      [JsonPropertyName("dscfg:Filterable")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IFilterable Filterable { get; set; }
 
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
-
+      [JsonPropertyName("customerAttributes")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public ICustomerAttributes CustomerAttributes { get; set; }
    }
 }

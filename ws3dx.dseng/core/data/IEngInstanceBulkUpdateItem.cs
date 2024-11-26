@@ -16,13 +16,20 @@
 using ws3dx.dseng.data.extension;
 using ws3dx.dseng.data.impl;
 using ws3dx.serialization.attribute;
-using ws3dx.shared.data;
-
 namespace ws3dx.dseng.data
 {
-   [ConcreteInterfaceImpConverter(typeof(NewEngItemAttributes))]
-   public interface INewEngItemAttributes
+   [ConcreteInterfaceImpConverter(typeof(EngInstanceBulkUpdateItem))]
+   public interface IEngInstanceBulkUpdateItem
    {
+      ///----------------------------------------------------------------
+      /// <summary>
+      ///		
+      /// Example: {ID}
+      ///
+      /// </summary>
+      ///----------------------------------------------------------------
+      public string Id { get; set; }
+
       ///----------------------------------------------------------------
       /// <summary>
       ///		
@@ -31,15 +38,6 @@ namespace ws3dx.dseng.data
       /// </summary>
       ///----------------------------------------------------------------
       public string Title { get; set; }
-
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: true
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
-      public bool? IsManufacturable { get; set; }
 
       ///----------------------------------------------------------------
       /// <summary>
@@ -53,15 +51,15 @@ namespace ws3dx.dseng.data
       ///----------------------------------------------------------------
       /// <summary>
       ///		
-      /// Example: My Version Comments
+      /// Example: Entity physical id
       ///
       /// </summary>
       ///----------------------------------------------------------------
-      public string VersionComment { get; set; }
+      public string Cestamp { get; set; }
 
-      public IEnterpriseItemNumber EnterpriseReference { get; set; }
+      public IFilterable Filterable { get; set; }
 
-      public IEngItemEnterpriseAttributes EnterpriseAttributes { get; set; }
+      public IPosition Position { get; set; }
 
       public ICustomerAttributes CustomerAttributes { get; set; }
    }

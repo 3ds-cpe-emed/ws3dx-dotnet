@@ -13,25 +13,43 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dseng.data.impl;
-using ws3dx.serialization.attribute;
+using System.Text.Json.Serialization;
+using ws3dx.shared.data;
 
-namespace ws3dx.dseng.data
+namespace ws3dx.dseng.data.impl
 {
-   [ConcreteInterfaceImpConverter(typeof(ResponseUnsetVariantEffectivityUpdated))]
-   public interface IResponseUnsetVariantEffectivityUpdated
+   public class MakeFrom : IMakeFrom
    {
-      ///----------------------------------------------------------------
-      /// <summary>
-      ///		
-      /// Example: F6AF82561E5700005EB271EE0003C500
-      ///
-      /// </summary>
-      ///----------------------------------------------------------------
+      [JsonPropertyName("quantity")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public IQuantity Quantity { get; set; }
+
+      [JsonPropertyName("treeOrder")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string TreeOrder { get; set; }
+
+      [JsonPropertyName("resource")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public ITypedUriIdentifier Resource { get; set; }
+
+      [JsonPropertyName("isComputed")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? IsComputed { get; set; }
+
+      [JsonPropertyName("id")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public string Id { get; set; }
 
-      public string ErrorCode { get; set; }
+      [JsonPropertyName("asRequired")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public bool? AsRequired { get; set; }
 
-      public string ErrorMessage { get; set; }
+      [JsonPropertyName("cestamp")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string Cestamp { get; set; }
+
+      [JsonPropertyName("referenceName")]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      public string ReferenceName { get; set; }
    }
 }
