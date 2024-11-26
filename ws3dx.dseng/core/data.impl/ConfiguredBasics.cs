@@ -15,13 +15,20 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using ws3dx.shared.serialization;
 
 namespace ws3dx.dseng.data.impl
 {
    public class ConfiguredBasics : IConfiguredBasics
    {
+      // FlexStringCollectionDeserializer is required because,
+      // even if the schema defines this as being an array of strings, 
+      // if the enabledCriteria contains only one string, then it only the string is returned.
+      // i.e. returned =>  "enabledCriteria" : "Variant", expected =>  "enabledCriteria" : ["Variant"]
+      // This to me is an implementation error - need to open SR.
       [JsonPropertyName("enabledCriteria")]
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      [JsonConverter(typeof(FlexStringCollectionDeserializer))]
       public IList<string> EnabledCriteria { get; set; }
    }
 }

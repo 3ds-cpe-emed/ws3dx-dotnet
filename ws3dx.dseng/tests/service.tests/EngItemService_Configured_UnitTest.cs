@@ -55,6 +55,40 @@ namespace NUnitTestProject
          }
       }
 
+      [TestCase("994C313A24002A006745B16F0000491D")]
+      public async Task GetConfiguration_IConfiguredDetail_from_ID(string _engItemId)
+      {
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
+
+         try
+         {
+            IEnumerable<IConfiguredDetail> ret = await engItemService.GetConfiguration<IConfiguredDetail>(_engItemId);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException ex)
+         {
+            Assert.Fail(await ex.GetErrorMessage());
+         }
+      }
+
+      [TestCase("994C313A24002A006745B16F0000491D")]
+      public async Task GetConfiguration_IConfiguredBasics_from_ID(string _engItemId)
+      {
+         EngItemService engItemService = await GetAuthenticatedEngineeringServiceAsync();
+
+         try
+         {
+            IEnumerable<IConfiguredBasics> ret = await engItemService.GetConfiguration<IConfiguredBasics>(_engItemId);
+
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException ex)
+         {
+            Assert.Fail(await ex.GetErrorMessage());
+         }
+      }
+
       [TestCase("AAA27 Engineering Configuration Item", "A.1")]
       public async Task GetConfiguration_IConfiguredBasics(string _title, string _rev)
       {
