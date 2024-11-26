@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-     <Version>426.4.0</Version>
+     <Version>427.0.0</Version>
      <Title>3DEXPERIENCE Engineering Web Services .NET Client</Title>
      <Description>3DEXPERIENCE Engineering Web Services .NET Client</Description>
      <PackageProjectUrl></PackageProjectUrl>
