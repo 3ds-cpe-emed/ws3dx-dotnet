@@ -9,6 +9,7 @@
      <PackageProjectUrl></PackageProjectUrl>
      <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
      <PackageTags>3DEXPERIENCE</PackageTags>
+     <PackageReleaseNotes>Upgrade to 2025X GA</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
