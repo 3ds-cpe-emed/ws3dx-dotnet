@@ -23,6 +23,7 @@ using ws3dx.core.exception;
 using ws3dx.dseng.core.service;
 using ws3dx.dseng.data;
 using ws3dx.dseng.data.impl;
+using ws3dx.shared.data;
 using ws3dx.shared.data.impl;
 using ws3dx.utils.search;
 
@@ -674,6 +675,46 @@ namespace NUnitTestProject
                Assert.IsNotNull(ret);
             }
          }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+
+      [TestCase("prd-R1132100982379-00828277","A.1")]
+      public async Task Locate(string _name, string _rev)
+      {
+         IPassportAuthentication passport = await Authenticate();
+
+         EngItemService engItemService = ServiceFactoryCreate(passport);
+
+         try
+         {
+            SearchByNameRevision searchCriteria = new SearchByNameRevision(_name, _rev);
+
+            IEnumerable<IEngItemDefaultMask> engItemSearchResult = await engItemService.Search<IEngItemDefaultMask>(searchCriteria);
+
+            foreach (IEngItemDefaultMask engItem in engItemSearchResult)
+            {
+               ILocateEngInstances locateEngInstances = new LocateEngInstances();
+
+               locateEngInstances.ReferencedObjects = new List<ITypedUriIdentifier>() { new EngItemUriIdentitier(engItem.Id, engItemService.EnoviaServiceURL) };
+
+               IList<ILocatedEngInstances> locateResponse = await engItemService.Locate(locateEngInstances);
+
+               if (locateResponse.Count > 0) //
+               {
+                  ILocatedEngInstances locatedEngInstances = locateResponse[0];
+
+                  if (locatedEngInstances.Id == engItem.Id)
+                  {
+                     IList<ILocatedEngInstance> instances = locateResponse[0].EngInstances;
+                  }
+               }
+            }
+         }
+
          catch (HttpResponseException _ex)
          {
             string errorMessage = await _ex.GetErrorMessage();

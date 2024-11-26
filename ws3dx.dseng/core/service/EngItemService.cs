@@ -811,11 +811,11 @@ namespace ws3dx.dseng.core.service
       /// <param name="request">
       /// </param>
       ///---------------------------------------------------------------------------------------------
-      public async Task<IAddEmpty> Locate(ILocateEngInstances request)
+      public async Task<IList<ILocatedEngInstances>> Locate(ILocateEngInstances request)
       {
          string resourceURI = $"{GetBaseResource()}dseng:EngItem/locate";
 
-         return await PostIndividual<IAddEmpty, ILocateEngInstances>(resourceURI, request);
+         return await PostCollectionFromResponseMemberProperty<ILocatedEngInstances, ILocateEngInstances>(resourceURI, request);
       }
 
       ///---------------------------------------------------------------------------------------------
