@@ -35,7 +35,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets multiple Substitute Item Links which are Indexed.
@@ -49,11 +48,11 @@ namespace ws3dx.dsmfg.service
         /// <param name="request">
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<ISubstituteMask>> BulkFetch(string[] request)
+        public async Task<(IList<ISubstituteMask>, IList<string>)> BulkFetch(string[] request)
         {
             string resourceURI = $"{GetBaseResource()}dsmfg:Substitute/bulkfetch";
 
-            return await PostCollectionFromResponseMemberProperty<ISubstituteMask, string[]>(resourceURI, request);
+            return await PostBulkCollection<ISubstituteMask, string[]>(resourceURI, request);
         }
     }
 }

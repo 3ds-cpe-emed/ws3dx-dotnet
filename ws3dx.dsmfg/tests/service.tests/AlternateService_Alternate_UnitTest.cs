@@ -22,27 +22,27 @@ using ws3dx.dsmfg.service;
 
 namespace NUnitTestProject
 {
-    public class AlternateService_Alternate_UnitTests : AlternateServiceTestsSetup
-    {
-        //TODO
-        [TestCase()]
-        public async Task Bulkfetch()
-        {
-            AlternateService alternateService = ServiceFactoryCreate(await Authenticate());
+   public class AlternateService_Alternate_UnitTests : AlternateServiceTestsSetup
+   {
+      //TODO
+      [TestCase()]
+      public async Task Bulkfetch()
+      {
+         AlternateService alternateService = ServiceFactoryCreate(await Authenticate());
 
-            string[] request = new string[] { };
+         string[] request = new string[] { };
 
-            try
-            {
-                IEnumerable<IAlternateMask> ret = await alternateService.BulkFetch(request);
+         try
+         {
+            (IList<IAlternateMask>, IList<string>) ret = await alternateService.BulkFetch(request);
 
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-    }
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+   }
 }

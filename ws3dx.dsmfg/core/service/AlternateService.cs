@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsmfg.data;
+using ws3dx.shared.utils;
 
 namespace ws3dx.dsmfg.service
 {
@@ -35,7 +36,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets multiple Alternate Item Links which are Indexed.
@@ -49,11 +49,11 @@ namespace ws3dx.dsmfg.service
         /// <param name="request">
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IAlternateMask>> BulkFetch(string[] request)
+        public async Task<(IList<IAlternateMask>, IList<string>)> BulkFetch(string[] request)
         {
             string resourceURI = $"{GetBaseResource()}dsmfg:Alternate/bulkfetch";
 
-            return await PostCollectionFromResponseMemberProperty<IAlternateMask, string[]>(resourceURI, request);
+            return await PostBulkCollection<IAlternateMask, string[]>(resourceURI, request);
         }
     }
 }

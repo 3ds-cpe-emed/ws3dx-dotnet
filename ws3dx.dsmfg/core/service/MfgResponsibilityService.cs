@@ -35,7 +35,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets multiple MfgResponsibility Item Links which are Indexed.
@@ -49,11 +48,11 @@ namespace ws3dx.dsmfg.service
         /// <param name="request">
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IMfgResponsibilityMask>> BulkFetch(string[] request)
+        public async Task<(IList<IMfgResponsibilityMask>, IList<string>)> BulkFetch(string[] request)
         {
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgResponsibility/bulkfetch";
 
-            return await PostCollectionFromResponseMemberProperty<IMfgResponsibilityMask, string[]>(resourceURI, request);
+            return await PostBulkCollection<IMfgResponsibilityMask, string[]>(resourceURI, request);
         }
     }
 }

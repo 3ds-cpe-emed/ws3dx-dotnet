@@ -35,7 +35,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets multiple Origin Item Links which are Indexed.
@@ -49,11 +48,11 @@ namespace ws3dx.dsmfg.service
         /// <param name="request">
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<IOriginMask>> BulkFetch(string[] request)
+        public async Task<(IList<IOriginMask>, IList<string>)> BulkFetch(string[] request)
         {
             string resourceURI = $"{GetBaseResource()}dsmfg:Origin/bulkfetch";
 
-            return await PostCollectionFromResponseMemberProperty<IOriginMask, string[]>(resourceURI, request);
+            return await PostBulkCollection<IOriginMask, string[]>(resourceURI, request);
         }
     }
 }

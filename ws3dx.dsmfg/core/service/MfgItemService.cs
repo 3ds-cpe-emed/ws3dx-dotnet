@@ -167,6 +167,8 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Locate or find set of Manufacturing Items dsmfg:MfgItem based on the matched search criteria and
+        /// other filter criteria.
         /// Provides the capability to locate or find set of Manufacturing Items dsmfg:MfgItem and navigate
         /// to target types based on the matched search criteria and other filter criteria.
         ///  Following are the capabilities provided:-
@@ -198,17 +200,19 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/locate";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await PostCollectionFromResponseMemberProperty<ILocateMfgItemsResponse, ILocateMfgItemsRequest>(resourceURI, request, queryParams: queryParams);
         }
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Locate or find set of Manufacturing Items dsmfg:MfgItem based on the matched search criteria and
+        /// other filter criteria.
         /// Provides the capability to locate or find set of Manufacturing Items dsmfg:MfgItem and navigate
         /// to target types based on the matched search criteria and other filter criteria.
         ///  Following are the capabilities provided:-
@@ -240,17 +244,19 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/locate";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await PostCollectionFromResponseMemberProperty<ILocateMfgItemsResponse, ILocateMfgItems>(resourceURI, request, queryParams: queryParams);
         }
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Expand specified Manufacturing Item dsmfg:MfgItem to retrive all its references, instances and
+        /// other content types which are Public types only.
         /// Expand specified Manufacturing Item dsmfg:MfgItem to retrive all its references and instances
         /// which are Public types only.
         ///  API Works only for Indexed Data only.
@@ -444,6 +450,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets all the Resulting Engineering Items
         /// Gets all the resulting Engineering Item from the Manufacturing reference dsmfg:MfgItem.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -581,6 +588,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Scoped Engineering Item of an dsmfg:MfgItem
         /// Gets the scoped Engineering Item from the Manufacturing reference dsmfg:MfgItem
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -827,7 +835,7 @@ namespace ws3dx.dsmfg.service
 
             return await PostIndividual<IGenericResponse, IItemOccurrence>(resourceURI, request);
         }
-    
+
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Service to detach implemented Engineering Item Occurrence from an single Manufacturing Item instance.
@@ -855,6 +863,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Partial Scoped Engineering Item of an dsmfg:MfgItem
         /// Gets the Partial scoped Engineering Item from the Manufacturing reference dsmfg:MfgItem
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1117,11 +1126,11 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Origin";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await GetCollectionFromResponseMemberProperty<IOriginMask>(resourceURI, queryParams: queryParams);
         }
@@ -1173,11 +1182,11 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Substitute";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await GetCollectionFromResponseMemberProperty<ISubstituteMask>(resourceURI, queryParams: queryParams);
         }
@@ -1229,11 +1238,11 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:MfgResponsibility";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await GetCollectionFromResponseMemberProperty<IMfgResponsibilityMask>(resourceURI, queryParams: queryParams);
         }
@@ -1285,11 +1294,11 @@ namespace ws3dx.dsmfg.service
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItem/{mfgItemId}/dsmfg:Alternate";
 
             IDictionary<string, string> queryParams = new Dictionary<string, string>
-            {
+         {
                 { "$top", top.ToString() },
 
-                { "$skip", skip.ToString() }
-            };
+            { "$skip", skip.ToString() }
+         };
 
             return await GetCollectionFromResponseMemberProperty<IAlternateMask>(resourceURI, queryParams: queryParams);
         }
@@ -1498,6 +1507,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Object Configuration information
         /// This extension gets the Enabled Criteria and Configuration Contexts of Configured object
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1520,6 +1530,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Modifies Configuration Information of configured object
         /// Enables the criteria of single reference
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1588,6 +1599,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Instance effectivity information.
         /// This extension gets the effectivity of an Object instance/relationship
         /// </summary>
         ///---------------------------------------------------------------------------------------------

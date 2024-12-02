@@ -33,7 +33,7 @@ namespace NUnitTestProject
 
             try
             {
-                IEnumerable<ISubstituteMask> ret = await substituteService.BulkFetch(request);
+                (IList<ISubstituteMask>, IList<string>) ret = await substituteService.BulkFetch(request);
 
                 Assert.IsNotNull(ret);
             }

@@ -34,7 +34,7 @@ namespace NUnitTestProject
 
             try
             {
-                IEnumerable<IOriginMask> ret = await originService.BulkFetch(request);
+                (IList<IOriginMask>,IList<string>) ret = await originService.BulkFetch(request);
 
                 Assert.IsNotNull(ret);
             }

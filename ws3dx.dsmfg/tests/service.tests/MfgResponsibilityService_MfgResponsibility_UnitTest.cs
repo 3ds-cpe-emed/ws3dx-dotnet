@@ -34,7 +34,7 @@ namespace NUnitTestProject
 
             try
             {
-                IEnumerable<IMfgResponsibilityMask> ret = await mfgResponsibilityService.BulkFetch(request);
+                (IList<IMfgResponsibilityMask>, IList<string>) ret = await mfgResponsibilityService.BulkFetch(request);
 
                 Assert.IsNotNull(ret);
             }

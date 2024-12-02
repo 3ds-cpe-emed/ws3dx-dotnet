@@ -37,7 +37,6 @@ namespace ws3dx.dsmfg.service
             return BASE_RESOURCE;
         }
 
-
         ///---------------------------------------------------------------------------------------------
         /// <summary>
         /// Get Multiple Manufacturing Item Instances which are Indexed.
@@ -51,13 +50,13 @@ namespace ws3dx.dsmfg.service
         /// <param name="request">
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IEnumerable<T>> BulkFetch<T>(string[] request)
+        public async Task<(IList<T>, IList<string>)> BulkFetch<T>(string[] request)
         {
             GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IMfgItemInstanceMask), typeof(IMfgItemInstanceDetailMask) });
 
             string resourceURI = $"{GetBaseResource()}dsmfg:MfgItemInstance/bulkFetch";
 
-            return await PostCollectionFromResponseMemberProperty<T, string[]>(resourceURI, request);
+            return await PostBulkCollection<T, string[]>(resourceURI, request);
         }
     }
 }

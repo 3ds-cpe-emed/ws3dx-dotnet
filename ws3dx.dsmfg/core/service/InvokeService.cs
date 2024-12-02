@@ -38,6 +38,7 @@ namespace ws3dx.dsmfg.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Get scoped, partial scoped and resulting manufacturing item references from Engineering Item
         /// Get scoped and resulting manufacturing item references from Engineering Item
         /// </summary>
         ///---------------------------------------------------------------------------------------------

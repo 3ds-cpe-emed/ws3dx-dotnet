@@ -22,46 +22,46 @@ using ws3dx.dsmfg.service;
 
 namespace NUnitTestProject
 {
-    public class MfgItemInstanceService_MfgItemInstance_UnitTests : MfgItemInstanceServiceTestsSetup
-    {
-        [TestCase()]
-        public async Task BulkFetch_IMfgItemInstanceMask()
-        {
-            MfgItemInstanceService mfgItemInstanceService = ServiceFactoryCreate(await Authenticate());
+   public class MfgItemInstanceService_MfgItemInstance_UnitTests : MfgItemInstanceServiceTestsSetup
+   {
+      [TestCase()]
+      public async Task BulkFetch_IMfgItemInstanceMask()
+      {
+         MfgItemInstanceService mfgItemInstanceService = ServiceFactoryCreate(await Authenticate());
 
-            string[] request = new string[] { };
+         string[] request = new string[] { };
 
-            try
-            {
-                IEnumerable<IMfgItemInstanceMask> ret = await mfgItemInstanceService.BulkFetch<IMfgItemInstanceMask>(request);
+         try
+         {
+            (IList<IMfgItemInstanceMask>, IList<string>) ret = await mfgItemInstanceService.BulkFetch<IMfgItemInstanceMask>(request);
 
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
 
-        [TestCase()]
-        public async Task BulkFetch_IMfgItemInstanceDetailMask()
-        {
-            MfgItemInstanceService mfgItemInstanceService = ServiceFactoryCreate(await Authenticate());
+      [TestCase()]
+      public async Task BulkFetch_IMfgItemInstanceDetailMask()
+      {
+         MfgItemInstanceService mfgItemInstanceService = ServiceFactoryCreate(await Authenticate());
 
-            string[] request = new string[] { };
+         string[] request = new string[] { };
 
-            try
-            {
-                IEnumerable<IMfgItemInstanceDetailMask> ret = await mfgItemInstanceService.BulkFetch<IMfgItemInstanceDetailMask>(request);
+         try
+         {
+            (IList<IMfgItemInstanceDetailMask>, IList<string>) ret = await mfgItemInstanceService.BulkFetch<IMfgItemInstanceDetailMask>(request);
 
-                Assert.IsNotNull(ret);
-            }
-            catch (HttpResponseException _ex)
-            {
-                string errorMessage = await _ex.GetErrorMessage();
-                Assert.Fail(errorMessage);
-            }
-        }
-    }
+            Assert.IsNotNull(ret);
+         }
+         catch (HttpResponseException _ex)
+         {
+            string errorMessage = await _ex.GetErrorMessage();
+            Assert.Fail(errorMessage);
+         }
+      }
+   }
 }
