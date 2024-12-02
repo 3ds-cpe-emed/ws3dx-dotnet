@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-     <Version>426.4.3</Version>
+     <Version>427.0.4</Version>
      <Title>3DEXPERIENCE Manufacturing Item Web Services .NET Client</Title>
      <Company />
      <Description>3DEXPERIENCE Manufacturing Item Web Services .NET Client</Description>
      <RepositoryUrl>https://github.com/3ds-cpe-emed/ws3dx-dotnet</RepositoryUrl>
      <PackageTags>3DEXPERIENCE DELMIA</PackageTags>
-     <PackageReleaseNotes>Support for process continuous material and provide subtypes</PackageReleaseNotes>
+     <PackageReleaseNotes>2025x ga compatibility verified, BulkFetch signature updates on different services</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
