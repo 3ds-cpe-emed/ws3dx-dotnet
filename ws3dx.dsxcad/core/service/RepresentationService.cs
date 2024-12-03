@@ -302,6 +302,7 @@ namespace ws3dx.dsxcad.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Locate a CAD Specific Data from an Engineering Item
         /// Locate the CAD Specific Data from an Engineering Item by navigating the dependency link
         /// </summary>
         ///---------------------------------------------------------------------------------------------

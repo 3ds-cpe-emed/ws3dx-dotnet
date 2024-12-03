@@ -86,6 +86,7 @@ namespace ws3dx.dsxcad.service
         /// <param name="templateId">
         /// dsxcad:Template object ID
         /// </param>
+        ///---------------------------------------------------------------------------------------------
         public async Task<IXCADTemplateMask> Get(string templateId)
         {
             string resourceURI = $"{GetBaseResource()}dsxcad:Template/{templateId}";

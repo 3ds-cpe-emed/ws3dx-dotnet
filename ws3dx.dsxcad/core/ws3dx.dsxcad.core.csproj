@@ -3,12 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>425.4.1</Version>
+    <Version>427.0.1</Version>
+    <PackageReleaseNotes>Reviewed compatibility with 2025X GA (no changes)</PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.7" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\ws3dx.core\ws3dx.core.csproj" />
