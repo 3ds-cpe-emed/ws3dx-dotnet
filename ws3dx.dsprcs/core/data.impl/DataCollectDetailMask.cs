@@ -112,13 +112,21 @@ namespace ws3dx.dsprcs.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string PossibleValues { get; set; }
 
-        [JsonPropertyName("minIncluded")]
+        [JsonPropertyName("minLimit")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? MinIncluded { get; set; }
+        public string MinLimit { get; set; }
 
-        [JsonPropertyName("maxIncluded")]
+        [JsonPropertyName("maxLimit")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? MaxIncluded { get; set; }
+        public string MaxLimit { get; set; }
+
+        [JsonPropertyName("controlMinLimit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string ControlMinLimit { get; set; }
+
+        [JsonPropertyName("controlMaxLimit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string ControlMaxLimit { get; set; }
 
         [JsonPropertyName("dsprcs:WorkInstructionEnterpriseAttributes")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

@@ -124,7 +124,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Creates Manufacturing Operation. Only 1 item could be created per call 'on cloud'. Only 50 items 
+        /// Creates Manufacturing Operation. Only 1 item could be created per call 'on cloud'. Only 50 items
         /// could be created per call 'on premise'.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -146,9 +146,9 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Gets multiple Manufacturing Operations which are Indexed. 
-        ///  API Works only for Indexed Data only. 
-        ///  The customer attributes or enterprise extension attributes are returned only with default sixw 
+        /// Gets multiple Manufacturing Operations which are Indexed.
+        ///  API Works only for Indexed Data only.
+        ///  The customer attributes or enterprise extension attributes are returned only with default sixw
         /// mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Create Manufacturing Operation Instance under an Manufacturing Operation. Only 1 item could be 
+        /// Create Manufacturing Operation Instance under an Manufacturing Operation. Only 1 item could be
         /// created per call 'on cloud'. Only 50 items could be created per call 'on premise'.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -268,6 +268,29 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Deletes a Manufacturing Operation Time Constraint under MfgOperation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsprcs:MfgOperation/{ID}/dsprcs:TimeConstraint/{PID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="timeConstraintId">
+        /// dsprcs:TimeConstraint object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> RemoveTimeConstraint(string mfgOperationId, string timeConstraintId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:TimeConstraint/{timeConstraintId}";
+
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Gets all Manufacturing Operation Time Constraint
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -296,6 +319,28 @@ namespace ws3dx.dsprcs.service
             };
 
             return await GetCollectionFromResponseMemberProperty<ITimeConstraintMask>(resourceURI, queryParams: queryParams);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates Manufacturing Process Time Constraint Under MfgOperation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgOperation/{ID}/dsprcs:TimeConstraint
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<ITimeConstraintMask>> AddTimeConstraint(string mfgOperationId, ICreateTimeConstraintRequest request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:TimeConstraint";
+
+            return await PostCollectionFromResponseMemberProperty<ITimeConstraintMask, ICreateTimeConstraintRequest>(resourceURI, request);
         }
 
         ///---------------------------------------------------------------------------------------------
@@ -346,6 +391,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Modifies a Manufacturing Operation Primary Capable Resource attributes
         /// Modifies a Manufacturing Operation Primary Capable Resource
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -528,6 +574,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Create Secondary Capable Resource to an Manufacturing Operation.
         /// Create Primary Capable Resource to an Manufacturing Operation.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -652,6 +699,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Object Configuration information
         /// This extension gets the Enabled Criteria and Configuration Contexts of Configured object
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -674,6 +722,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Modifies Configuration Information of configured object
         /// Enables the criteria of single reference
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -875,6 +924,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Instance effectivity information.
         /// This extension gets the effectivity of an Object instance/relationship
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -898,7 +948,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution 
+        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution
         /// and Variant Expression are under users responsibility.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -947,13 +997,13 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under 
-        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING: 
-        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service 
-        /// will return the http 200 status code for success, partially failure and all manageable failure. 
-        /// errorCode and errorMessage attributes will be present in the response payload if the set variant 
-        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates 
-        /// the reason for set variant effectivity failure. If the exception occurs then the web service will 
+        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under
+        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING:
+        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service
+        /// will return the http 200 status code for success, partially failure and all manageable failure.
+        /// errorCode and errorMessage attributes will be present in the response payload if the set variant
+        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates
+        /// the reason for set variant effectivity failure. If the exception occurs then the web service will
         /// completely failed with 400 http status code.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -985,7 +1035,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to unset the variant effectivities. If unsetVariant service is executed under Work Under 
+        /// Service to unset the variant effectivities. If unsetVariant service is executed under Work Under
         /// (Change Action) then it may lead to a new evolution of existing relationship.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1314,6 +1364,56 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Delete an DataCollectPlan Instance
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsprcs:MfgOperation/{PID}/dsprcs:DataCollectPlanInstance/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="instanceId">
+        /// dsprcs:DataCollectInstance object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> RemoveDataCollectPlanInstance(string mfgOperationId, string instanceId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance/{instanceId}";
+
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Modify an DataCollectPlan Instance
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PATCH) dsprcs:MfgOperation/{PID}/dsprcs:DataCollectPlanInstance/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="instanceId">
+        /// dsprcs:DataCollectInstance object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> UpdateDataCollectPlanInstance<T>(string mfgOperationId, string instanceId, IDataCollectPlanInstancePatch request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectPlanInstanceMask), typeof(IDataCollectPlanInstanceDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance/{instanceId}";
+
+            return await PatchCollectionFromResponseMemberProperty<T, IDataCollectPlanInstancePatch>(resourceURI, request);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Gets all the DataCollectPlan Instance
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1332,6 +1432,31 @@ namespace ws3dx.dsprcs.service
             string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance";
 
             return await GetCollectionFromResponseMemberProperty<T>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates DataCollectPlan or CheckList Instances under the specified Operation Only 1 item could be
+        /// created per call 'on cloud'. Only 10 items could be created per call 'on premise'.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgOperation/{PID}/dsprcs:DataCollectPlanInstance
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> AddDataCollectPlanInstance<T>(string mfgOperationId, ICreateDataCollectPlanInstancesRefObject request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectPlanInstanceMask), typeof(IDataCollectPlanInstanceDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:DataCollectPlanInstance";
+
+            return await PostCollectionFromResponseMemberProperty<T, ICreateDataCollectPlanInstancesRefObject>(resourceURI, request);
         }
 
         ///---------------------------------------------------------------------------------------------
@@ -1368,6 +1493,31 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Creates Resource Parameter Plan Instances under the specified Operation Only 1 item could be
+        /// created per call 'on cloud'. Only 10 items could be created per call 'on premise'.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgOperation/{ID}/dsprcs:ResourceParameterPlanInstance
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> AddResourceParameterPlanInstance<T>(string mfgOperationId, ICreateResourceParameterPlanInstancesRefObject request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceParamPlanInstanceMask), typeof(IResourceParamPlanInstanceDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ResourceParameterPlanInstance";
+
+            return await PostCollectionFromResponseMemberProperty<T, ICreateResourceParameterPlanInstancesRefObject>(resourceURI, request);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Get a Resource Parameter Plan Instances available on specified Operation
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1382,11 +1532,63 @@ namespace ws3dx.dsprcs.service
         /// dsprcs:ResourceParameterPlanInstance object ID
         /// </param>
         ///---------------------------------------------------------------------------------------------
-        public async Task<IResourceParamPlanInstanceMask> GetResourceParameterPlanInstance(string mfgOperationId, string resourceParameterPlanInstanceId)
+        public async Task<T> GetResourceParameterPlanInstance<T>(string mfgOperationId, string resourceParameterPlanInstanceId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceParamPlanInstanceMask), typeof(IResourceParamPlanInstanceDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ResourceParameterPlanInstance/{resourceParameterPlanInstanceId}";
+
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Delete a Resource Parameter Plan Instances available on specified Operation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsprcs:MfgOperation/{ID}/dsprcs:ResourceParameterPlanInstance/{PID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="resourceParameterPlanInstanceId">
+        /// dsprcs:ResourceParameterPlanInstance object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> RemoveResourceParameterPlanInstance(string mfgOperationId, string resourceParameterPlanInstanceId)
         {
             string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ResourceParameterPlanInstance/{resourceParameterPlanInstanceId}";
 
-            return await GetIndividualFromResponseMemberProperty<IResourceParamPlanInstanceMask>(resourceURI);
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Modify a Resource Parameter Plan Instances available on specified Operation
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PATCH) dsprcs:MfgOperation/{ID}/dsprcs:ResourceParameterPlanInstance/{PID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgOperationId">
+        /// dsprcs:MfgOperation object ID
+        /// </param>
+        /// <param name="resourceParameterPlanInstanceId">
+        /// dsprcs:ResourceParameterPlanInstance object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> UpdateResourceParameterPlanInstance<T>(string mfgOperationId, string resourceParameterPlanInstanceId, IResourceParameterPlanInstancePatch request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IResourceParamPlanInstanceMask), typeof(IResourceParamPlanInstanceDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgOperation/{mfgOperationId}/dsprcs:ResourceParameterPlanInstance/{resourceParameterPlanInstanceId}";
+
+            return await PatchCollectionFromResponseMemberProperty<T, IResourceParameterPlanInstancePatch>(resourceURI, request);
         }
     }
 }

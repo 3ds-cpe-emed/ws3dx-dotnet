@@ -16,8 +16,11 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ws3dx.core.exception;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -41,6 +44,45 @@ namespace NUnitTestProject
             IEnumerable<ITimeConstraintMask> ret = await mfgProcessService.GetTimeConstraints(mfgProcessId, top, skip);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task AddTimeConstraint(string mfgProcessId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateTimeConstraintRequest request = new CreateTimeConstraintRequest();
+
+            try
+            {
+                IEnumerable<ITimeConstraintMask> ret = await mfgProcessService.AddTimeConstraint(mfgProcessId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemoveTimeConstraint(string mfgProcessId, string timeConstraintId)
+        {
+            MfgProcessService mfgProcessService = ServiceFactoryCreate(await Authenticate());
+
+
+            try
+            {
+                IGenericResponse ret = await mfgProcessService.RemoveTimeConstraint(mfgProcessId, timeConstraintId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }

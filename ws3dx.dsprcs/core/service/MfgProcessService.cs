@@ -146,7 +146,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Creates Manufacturing Process. Only 1 item could be created per call 'on cloud'. Only 50 items 
+        /// Creates Manufacturing Process. Only 1 item could be created per call 'on cloud'. Only 50 items
         /// could be created per call 'on premise'.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -168,16 +168,18 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Provides the capability to locate or find set of Manufacturing Processes dsprcs:MfgProcess and 
-        /// navigate to target types based on the matched search criteria and other filter criteria. 
+        /// Locate or find set of Manufacturing Process dsprcs:MfgProcess based on the matched search criteria
+        /// and other filter criteria.
+        /// Provides the capability to locate or find set of Manufacturing Processes dsprcs:MfgProcess and
+        /// navigate to target types based on the matched search criteria and other filter criteria.
         ///  Following are the capabilities provided:-
         ///  1. Locate Mfg Process matching the search criteria 'searchCriteria' alone.
-        ///  2. Locate Mfg Process matching the search criteria 'searchCriteria' and filter using query param 
+        ///  2. Locate Mfg Process matching the search criteria 'searchCriteria' and filter using query param
         /// $top and $skip.
-        ///  3. Locate Mfg Process matching both the search criteria 'searchCriteria' and list of Mfg Process 
+        ///  3. Locate Mfg Process matching both the search criteria 'searchCriteria' and list of Mfg Process
         /// Object references 'ObjectReferences' passed in the request payload.
-        ///  Additionally once the Manufacturing process is located based on matching criteria then response 
-        /// contains list of valid Manufacturing process references and also return its associated objects 
+        ///  Additionally once the Manufacturing process is located based on matching criteria then response
+        /// contains list of valid Manufacturing process references and also return its associated objects
         /// if defined in 'navigateTo' and 'navigateFrom'.
         ///  The supported types in 'navigateTo' is 'dsprcs:MfgProcessInstance' and 'dsrsc:ScopeLink'.
         ///  And the supported types in 'navigateFrom' are dsprcs:PrimaryCapableResource, and dsprcs:ItemSpecification
@@ -212,17 +214,18 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Expand specified Manufacturing Process dsprcs:MfgProcess to retrieve all its references and 
+        /// Expand specified Manufacturing Process dsprcs:MfgProcess to retrive all its references and instances.
+        /// Expand specified Manufacturing Process dsprcs:MfgProcess to retrieve all its references and
         /// instances which are Public types only.
         /// API works only for Indexed Data only.
         /// Number of Paths or Occurrences in response is restricted to 10000 only.
-        /// Returns other content types 'dsprcs:MfgProcess', 'dsprcs:MfgProcessInstance', 'dsprcs:MfgOperationInstance', 
-        /// 'dsprcs:MfgOperation', 'dsprcs:ItemSpecification', 'dsprcs:TimeConstraint', 'dsprcs:TransientTimeCnxFilter', 
-        /// 'dsprcs:PrimaryCapableResource', 'dsprcs:SecondaryCapableResource', 'dsprcs:PreAssignedWorkCenter', 
-        /// 'dsprcs:AlertInstance', 'dsprcs:Alert', 'dsprcs:InstructionInstance', 'dsprcs:Instruction', 
-        /// 'dsprcs:SignOffInstance', 'dsprcs:SignOff', 'dsprcs:DataCollectInstance', 'dsprcs:DataCollect', 
-        /// 'dsprcs:DataCollectPlanInstance', 'dsprcs:DataCollectPlan', 'dsprcs:CheckList', 'dsprcs:DataCollectRow', 
-        /// 'dsprcs:ResourceParameterPlanInstance', 'dsprcs:ResourceParameterPlan', 'dsprcs:ResourceParameterRow' 
+        /// Returns other content types 'dsprcs:MfgProcess', 'dsprcs:MfgProcessInstance', 'dsprcs:MfgOperationInstance',
+        /// 'dsprcs:MfgOperation', 'dsprcs:ItemSpecification', 'dsprcs:TimeConstraint', 'dsprcs:TransientTimeCnxFilter',
+        /// 'dsprcs:PrimaryCapableResource', 'dsprcs:SecondaryCapableResource', 'dsprcs:PreAssignedWorkCenter',
+        /// 'dsprcs:AlertInstance', 'dsprcs:Alert', 'dsprcs:InstructionInstance', 'dsprcs:Instruction',
+        /// 'dsprcs:SignOffInstance', 'dsprcs:SignOff', 'dsprcs:DataCollectInstance', 'dsprcs:DataCollect',
+        /// 'dsprcs:DataCollectPlanInstance', 'dsprcs:DataCollectPlan', 'dsprcs:CheckList', 'dsprcs:DataCollectRow',
+        /// 'dsprcs:ResourceParameterPlanInstance', 'dsprcs:ResourceParameterPlan', 'dsprcs:ResourceParameterRow'
         /// using detail mask.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -247,9 +250,9 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Gets multiple Manufacturing Processes which are Indexed. 
-        ///  API Works only for Indexed Data only. 
-        ///  The customer attributes or enterprise extension attributes are returned only with default sixw 
+        /// Gets multiple Manufacturing Processes which are Indexed.
+        ///  API Works only for Indexed Data only.
+        ///  The customer attributes or enterprise extension attributes are returned only with default sixw
         /// mapping ds6wg:TypeName.AttributeName and it is not supported if the sixw predicate is changed.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -271,7 +274,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Create Manufacturing Process Instance to an Manufacturing Process. Only 1 item could be created 
+        /// Create Manufacturing Process Instance to an Manufacturing Process. Only 1 item could be created
         /// per call 'on cloud'. Only 50 items could be created per call 'on premise'.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -375,7 +378,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Create Manufacturing Operation Instance under an Manufacturing Process. Only 1 item could be 
+        /// Create Manufacturing Operation Instance under an Manufacturing Process. Only 1 item could be
         /// created per call 'on cloud'. Only 50 items could be created per call 'on premise'.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -473,6 +476,29 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Delete a Manufacturing Process Time Constraint Under MfgProcess
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsprcs:MfgProcess/{ID}/dsprcs:TimeConstraint/{PID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgProcessId">
+        /// dsprcs:MfgProcess object ID
+        /// </param>
+        /// <param name="timeConstraintId">
+        /// dsprcs:TimeConstraint object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> RemoveTimeConstraint(string mfgProcessId, string timeConstraintId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dsprcs:TimeConstraint/{timeConstraintId}";
+
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Gets all Manufacturing Process Time Constraint.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -501,6 +527,28 @@ namespace ws3dx.dsprcs.service
             };
 
             return await GetCollectionFromResponseMemberProperty<ITimeConstraintMask>(resourceURI, queryParams: queryParams);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates Manufacturing Process Time Constraint Under MfgProcess.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:MfgProcess/{ID}/dsprcs:TimeConstraint
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="mfgProcessId">
+        /// dsprcs:MfgProcess object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<ITimeConstraintMask>> AddTimeConstraint(string mfgProcessId, ICreateTimeConstraintRequest request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:MfgProcess/{mfgProcessId}/dsprcs:TimeConstraint";
+
+            return await PostCollectionFromResponseMemberProperty<ITimeConstraintMask, ICreateTimeConstraintRequest>(resourceURI, request);
         }
 
         ///---------------------------------------------------------------------------------------------
@@ -551,6 +599,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Modifies a Manufacturing Process Primary Capable Resource attributes
         /// Modifies a Manufacturing Process Primary Capable Resource
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -873,6 +922,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Service to attach a dsprcs:AssetContext to a single reference.
         /// Service to attach a dsprcs:AssetContextto a single reference.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -917,6 +967,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Object Configuration information
         /// This extension gets the Enabled Criteria and Configuration Contexts of Configured object
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -939,6 +990,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Modifies Configuration Information of configured object
         /// Enables the criteria of single reference
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1140,6 +1192,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Change Control of an Manufacturing Operation Instance Under MfgProcess
         /// Gets a Change Control of an Manufacturing Process Instance Under MfgProcess
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1211,6 +1264,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Instance effectivity information.
         /// This extension gets the effectivity of an Object instance/relationship
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1234,7 +1288,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution 
+        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution
         /// and Variant Expression are under users responsibility.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1283,13 +1337,13 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under 
-        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING: 
-        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service 
-        /// will return the http 200 status code for success, partially failure and all manageable failure. 
-        /// errorCode and errorMessage attributes will be present in the response payload if the set variant 
-        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates 
-        /// the reason for set variant effectivity failure. If the exception occurs then the web service will 
+        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under
+        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING:
+        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service
+        /// will return the http 200 status code for success, partially failure and all manageable failure.
+        /// errorCode and errorMessage attributes will be present in the response payload if the set variant
+        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates
+        /// the reason for set variant effectivity failure. If the exception occurs then the web service will
         /// completely failed with 400 http status code.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1321,6 +1375,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Gets a Instance effectivity information.
         /// This extension gets the effectivity of an Object instance/relationship
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1344,7 +1399,7 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution 
+        /// Service to set the effectivities evolution expression (XML). WARNING: Coherency between Evolution
         /// and Variant Expression are under users responsibility.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -1393,13 +1448,13 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
-        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under 
-        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING: 
-        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service 
-        /// will return the http 200 status code for success, partially failure and all manageable failure. 
-        /// errorCode and errorMessage attributes will be present in the response payload if the set variant 
-        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates 
-        /// the reason for set variant effectivity failure. If the exception occurs then the web service will 
+        /// Service to set the effectivities variant expression (XML). If setVariant service is executed under
+        /// Work Under (Change Action) then it may lead to a new evolution of existing relationship. WARNING:
+        /// Coherency between Evolution and Variant Expression are under users responsibility. The web service
+        /// will return the http 200 status code for success, partially failure and all manageable failure.
+        /// errorCode and errorMessage attributes will be present in the response payload if the set variant
+        /// effectivity failed for that relationship. errorMessage attribute in the response payload indicates
+        /// the reason for set variant effectivity failure. If the exception occurs then the web service will
         /// completely failed with 400 http status code.
         /// </summary>
         ///---------------------------------------------------------------------------------------------

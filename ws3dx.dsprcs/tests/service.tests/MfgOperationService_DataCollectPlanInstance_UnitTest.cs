@@ -16,8 +16,11 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ws3dx.core.exception;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
@@ -48,7 +51,7 @@ namespace NUnitTestProject
         {
             MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IDataCollectPlanInstanceMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, instanceId);
+            IDataCollectPlanInstanceMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, instanceId);
 
             Assert.IsNotNull(ret);
         }
@@ -58,9 +61,67 @@ namespace NUnitTestProject
         {
             MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-         IDataCollectPlanInstanceDetailMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, instanceId);
+            IDataCollectPlanInstanceDetailMask ret = await mfgOperationService.GetDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, instanceId);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task AddDataCollectPlanInstance_IDataCollectPlanInstanceMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateDataCollectPlanInstancesRefObject request = new CreateDataCollectPlanInstancesRefObject();
+
+            try
+            {
+                IEnumerable<IDataCollectPlanInstanceMask> ret = await mfgOperationService.AddDataCollectPlanInstance<IDataCollectPlanInstanceMask>(mfgOperationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task AddDataCollectPlanInstance_IDataCollectPlanInstanceDetailMask(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateDataCollectPlanInstancesRefObject request = new CreateDataCollectPlanInstancesRefObject();
+
+            try
+            {
+                IEnumerable<IDataCollectPlanInstanceDetailMask> ret = await mfgOperationService.AddDataCollectPlanInstance<IDataCollectPlanInstanceDetailMask>(mfgOperationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemoveDataCollectPlanInstance(string mfgOperationId, string instanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await mfgOperationService.RemoveDataCollectPlanInstance(mfgOperationId, instanceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }

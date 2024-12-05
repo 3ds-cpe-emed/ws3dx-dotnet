@@ -24,7 +24,7 @@ namespace ws3dx.dsprcs.data
     {
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Reference object title value Example: My title
         ///
         /// </summary>
@@ -33,7 +33,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Reference description value Example: My description
         ///
         /// </summary>
@@ -42,7 +42,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Entity physical id Example: Object Physical ID
         ///
         /// </summary>
@@ -51,7 +51,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Basic type value Example: DELResourcePrmPlanGET or DELResourcePrmPlanSET
         ///
         /// </summary>
@@ -60,8 +60,8 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
-        /// Basic modified value Example: 2023-12-08 06:08:33 UTC
+        ///
+        /// Basic modified value Example: 2024-07-01T09:48:10.000Z
         ///
         /// </summary>
         ///----------------------------------------------------------------
@@ -69,8 +69,8 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
-        /// Object created value Example: 2023-12-08 06:08:33 UTC
+        ///
+        /// Object created value Example: 2024-07-01T09:48:10.000Z
         ///
         /// </summary>
         ///----------------------------------------------------------------
@@ -78,7 +78,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object current state value Example: DEFAULT
         ///
         /// </summary>
@@ -87,7 +87,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object owner value Example: John Doe
         ///
         /// </summary>
@@ -96,7 +96,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object organization value Example: MyCompany
         ///
         /// </summary>
@@ -105,7 +105,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object collabspace value Example: Default
         ///
         /// </summary>
@@ -114,7 +114,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object cestamp value Example: Object cestamp value
         ///
         /// </summary>
@@ -123,7 +123,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object text value Example: Any text
         ///
         /// </summary>
@@ -132,14 +132,12 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
-        /// Basic type value Example: Interger/Text/Real/Boolean…
+        ///
+        /// object displayUnit value Example: KILOGRAM
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public string ParamType { get; set; }
-
-        public IMagnitudeValuewithDisplayUnit ParamValue { get; set; }
+        public string DisplayUnit { get; set; }
 
         public IMagnitudeValuewithDisplayUnit MinValue { get; set; }
 
@@ -153,7 +151,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
@@ -162,7 +160,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
@@ -171,7 +169,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
@@ -180,7 +178,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
@@ -189,7 +187,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object possibleValues value Example: ["P1","P2"]
         ///
         /// </summary>
@@ -198,7 +196,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object symbolicResourceParamID value Example: UUID1
         ///
         /// </summary>
@@ -207,7 +205,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object symbolicCapableResourceD value Example: UUID2
         ///
         /// </summary>

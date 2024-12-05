@@ -16,7 +16,9 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ws3dx.core.exception;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.service;
 
 namespace NUnitTestProject
@@ -25,7 +27,7 @@ namespace NUnitTestProject
     {
 
         [TestCase("", 0, 0)]
-        public async Task GetResourceParameterRow(string id, int top, int skip)
+        public async Task GetResourceParameterRows(string id, int top, int skip)
         {
             ResourceParameterPlanService resourceParameterPlanService = ServiceFactoryCreate(await Authenticate());
 
@@ -42,6 +44,26 @@ namespace NUnitTestProject
             IResourceParameterRowMask ret = await resourceParameterPlanService.GetResourceParameterRow(id, pId);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task CreateResourceParameterRow(string iD)
+        {
+            ResourceParameterPlanService resourceParameterPlanService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateResourceParameterRow request = new CreateResourceParameterRow();
+
+            try
+            {
+                IEnumerable<IResourceParameterRowMask> ret = await resourceParameterPlanService.CreateResourceParameterRow(iD, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }

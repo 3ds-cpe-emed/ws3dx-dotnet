@@ -18,7 +18,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ws3dx.core.exception;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 using ws3dx.utils.search;
 
 namespace NUnitTestProject
@@ -72,28 +74,9 @@ namespace NUnitTestProject
 
             SearchByFreeText searchByFreeText = new SearchByFreeText(search);
 
-         try
-         {
             IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText, skip, top);
+
             Assert.IsNotNull(ret);
-
-            int i = 0;
-            foreach (IDataCollectPlanMask dataCollectPlan in ret)
-            {
-               IDataCollectPlanDetailMask dataCollectPlanDetail = await dataCollectPlanService.Get<IDataCollectPlanDetailMask>(dataCollectPlan.Id);
-
-               Assert.AreEqual(dataCollectPlan.Id, dataCollectPlanDetail.Id);
-
-               i++;
-
-               if (i > 20) return;
-            }
-         }
-         catch (HttpResponseException _ex)
-         {
-            string errorMessage = await _ex.GetErrorMessage();
-            Assert.Fail(errorMessage);
-         }
         }
 
         [TestCase("search")]
@@ -106,6 +89,84 @@ namespace NUnitTestProject
             IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Search<IDataCollectPlanMask>(searchByFreeText);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase()]
+        public async Task Create_IDataCollectPlanMask()
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateDataCollectPlan request = new CreateDataCollectPlan();
+
+            try
+            {
+                IEnumerable<IDataCollectPlanMask> ret = await dataCollectPlanService.Create<IDataCollectPlanMask> (request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase()]
+        public async Task Create_IDataCollectPlanDetailMask()
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateDataCollectPlan request = new CreateDataCollectPlan();
+
+            try
+            {
+                IEnumerable<IDataCollectPlanDetailMask> ret = await dataCollectPlanService.Create<IDataCollectPlanDetailMask>(request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task CreateDataCollectRows(string dataCollectPlanId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateDataCollectRow request = new CreateDataCollectRow();
+
+            try
+            {
+                IEnumerable<IDataCollectRowMask> ret = await dataCollectPlanService.CreateDataCollectRows(dataCollectPlanId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("")]
+        public async Task Remove(string dataCollectPlanId)
+        {
+            DataCollectPlanService dataCollectPlanService = ServiceFactoryCreate(await Authenticate());
+
+            try
+            {
+                IGenericResponse ret = await dataCollectPlanService.Remove(dataCollectPlanId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }

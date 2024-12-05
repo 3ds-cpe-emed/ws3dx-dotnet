@@ -23,7 +23,7 @@ namespace ws3dx.dsprcs.data
     {
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Entity physical id Example: EE562168015FFCF14F940A513C63AA77
         ///
         /// </summary>
@@ -32,7 +32,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Basic type value Example: DELWkiDataCollectPlanInstance
         ///
         /// </summary>
@@ -44,6 +44,8 @@ namespace ws3dx.dsprcs.data
         ///		
         /// Basic modified value Example: Dec 15, 2017 11:17 PM
         ///
+        /// Basic modified value Example: 2024-07-01T09:48:10.000Z
+        ///
         /// </summary>
         ///----------------------------------------------------------------
         public string Modified { get; set; }
@@ -53,13 +55,15 @@ namespace ws3dx.dsprcs.data
         ///		
         /// Object created value Example: Dec 11, 2017 12:53 PM
         ///
+        /// Object created value Example: 2024-07-01T09:48:10.000Z
+        ///
         /// </summary>
         ///----------------------------------------------------------------
         public string Created { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Instance name Example: My name
         ///
         /// </summary>
@@ -68,7 +72,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Instance description vlaue Example: My description
         ///
         /// </summary>
@@ -77,7 +81,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object owner value Example: John Doe
         ///
         /// </summary>
@@ -86,7 +90,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object organization value Example: MyCompany
         ///
         /// </summary>
@@ -95,7 +99,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object collabspace value Example: Default
         ///
         /// </summary>
@@ -104,7 +108,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Reference Physical ID of Instance Example: String
         ///
         /// </summary>
@@ -113,7 +117,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object cestamp value Example: 2D70169432D84866A200F907881AC9B1
         ///
         /// </summary>

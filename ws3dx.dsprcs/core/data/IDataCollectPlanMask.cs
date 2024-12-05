@@ -71,6 +71,8 @@ namespace ws3dx.dsprcs.data
         ///		
         /// Basic modified value Example: Dec 15, 2017 11:17 PM
         ///
+        /// Basic modified value Example: 2024-07-01T09:48:10.000Z
+        ///
         /// </summary>
         ///----------------------------------------------------------------
         public string Modified { get; set; }
@@ -78,7 +80,7 @@ namespace ws3dx.dsprcs.data
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Object created value Example: Dec 11, 2017 12:53 PM
+        /// Object created value Example: 2024-07-01T09:48:10.000Z
         ///
         /// </summary>
         ///----------------------------------------------------------------

@@ -45,11 +45,13 @@ namespace ws3dx.dsprcs.service
         /// </remarks>
         ///---------------------------------------------------------------------------------------------
         /// <param name="request">
-      public async Task<IRealizedChangeDetailMask> GetRealizedChanges(IRealizedChangeRequest request)
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IRealizedChangeDetailMask> GetRealizedChanges(IRealizedChangeRequest request)
         {
             string resourceURI = $"{GetBaseResource()}invoke/dsprcs:getRealizedChanges";
 
-         return await PostIndividual<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
+            return await PostIndividual<IRealizedChangeDetailMask, IRealizedChangeRequest>(resourceURI, request);
         }
     }
 }

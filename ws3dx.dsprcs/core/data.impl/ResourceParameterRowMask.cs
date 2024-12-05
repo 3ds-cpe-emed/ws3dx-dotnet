@@ -68,13 +68,9 @@ namespace ws3dx.dsprcs.data.impl
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Text { get; set; }
 
-        [JsonPropertyName("paramType")]
+        [JsonPropertyName("displayUnit")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string ParamType { get; set; }
-
-        [JsonPropertyName("paramValue")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public IMagnitudeValuewithDisplayUnit ParamValue { get; set; }
+        public string DisplayUnit { get; set; }
 
         [JsonPropertyName("minValue")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsprcs.data;
+using ws3dx.shared.data;
 using ws3dx.shared.utils;
 using ws3dx.utils.search;
 
@@ -99,6 +100,72 @@ namespace ws3dx.dsprcs.service
 
         ///---------------------------------------------------------------------------------------------
         /// <summary>
+        /// Deletes a Work instruction DataCollectPlan reference.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsprcs:DataCollectPlan/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="dataCollectPlanId">
+        /// dsprcs:DataCollectPlan object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> Remove(string dataCollectPlanId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:DataCollectPlan/{dataCollectPlanId}";
+
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Modifys a Work instruction DataCollectPlan reference.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (PATCH) dsprcs:DataCollectPlan/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="dataCollectPlanId">
+        /// dsprcs:DataCollectPlan object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Update<T>(string dataCollectPlanId, IDataCollectPlanUpdate request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectPlanMask), typeof(IDataCollectPlanDetailMask) });
+
+            string resourceURI = $"{GetBaseResource()}dsprcs:DataCollectPlan/{dataCollectPlanId}";
+
+            return await PatchCollectionFromResponseMemberProperty<T, IDataCollectPlanUpdate>(resourceURI, request);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates Work instruction DataCollectPlan reference. Only 1 item could be created per call 'on
+        /// cloud'. Only 10 items could be created per call 'on premise'.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:DataCollectPlan
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Create<T>(ICreateDataCollectPlan request)
+		{
+			GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDataCollectPlanMask), typeof(IDataCollectPlanDetailMask)});
+
+			string resourceURI = $"{GetBaseResource()}dsprcs:DataCollectPlan";
+
+			return await PostCollectionFromResponseMemberProperty<T, ICreateDataCollectPlan>(resourceURI, request);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
         /// Gets all Work instruction DataCollectRow assigned to a DataCollectPlan.
         /// </summary>
         ///---------------------------------------------------------------------------------------------
@@ -115,6 +182,29 @@ namespace ws3dx.dsprcs.service
             string resourceURI = $"{GetBaseResource()}dsprcs:DataCollectPlan/{dataCollectPlanId}/dsprcs:DataCollectRow";
 
             return await GetCollectionFromResponseMemberProperty<IDataCollectRowMask>(resourceURI);
+        }
+
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates Work instruction DataCollectRows under DataCollectPlan. Only 1 item could be created per
+        /// call 'on cloud'. Only 10 items could be created per call 'on premise'.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsprcs:DataCollectPlan/{ID}/dsprcs:DataCollectRow
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="dataCollectPlanId">
+        /// dsprcs:DataCollectPlan object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<IDataCollectRowMask>> CreateDataCollectRows(string dataCollectPlanId, ICreateDataCollectRow request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsprcs:DataCollectPlan/{dataCollectPlanId}/dsprcs:DataCollectRow";
+
+            return await PostCollectionFromResponseMemberProperty<IDataCollectRowMask, ICreateDataCollectRow>(resourceURI, request);
         }
 
         ///---------------------------------------------------------------------------------------------
@@ -139,5 +229,5 @@ namespace ws3dx.dsprcs.service
 
             return await GetIndividualFromResponseMemberProperty<IDataCollectRowMask>(resourceURI);
         }
-    }
+	}
 }

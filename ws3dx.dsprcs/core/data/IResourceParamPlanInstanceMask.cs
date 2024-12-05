@@ -22,7 +22,7 @@ namespace ws3dx.dsprcs.data
     {
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Reference name Example: My name
         ///
         /// </summary>
@@ -31,7 +31,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Reference description value Example: My description
         ///
         /// </summary>
@@ -40,7 +40,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Entity physical id Example: Object Physical ID
         ///
         /// </summary>
@@ -49,7 +49,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Basic type value Example: DELResourceParameterPlanInstance
         ///
         /// </summary>
@@ -58,8 +58,8 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
-        /// Basic modified value Example: 2023-12-08 06:08:29 UTC
+        ///
+        /// Basic modified value Example: 2024-07-01T09:48:10.000Z
         ///
         /// </summary>
         ///----------------------------------------------------------------
@@ -67,8 +67,8 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
-        /// Object created value Example: 2023-12-08 06:08:29 UTC
+        ///
+        /// Object created value Example: 2024-07-01T09:48:10.000Z
         ///
         /// </summary>
         ///----------------------------------------------------------------
@@ -76,7 +76,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object owner value Example: John Doe
         ///
         /// </summary>
@@ -85,7 +85,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object organization value Example: MyCompany
         ///
         /// </summary>
@@ -94,7 +94,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object collabspace value Example: Default
         ///
         /// </summary>
@@ -103,7 +103,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object cestamp value Example: Object cestamp value
         ///
         /// </summary>
@@ -112,7 +112,7 @@ namespace ws3dx.dsprcs.data
 
         ///----------------------------------------------------------------
         /// <summary>
-        ///		
+        ///
         /// Object parameter plan reference physicalid Example: Object reference value
         ///
         /// </summary>

@@ -232,20 +232,38 @@ namespace ws3dx.dsprcs.data
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Object minIncluded value Example: true
+        /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public bool? MinIncluded { get; set; }
+        public string MinLimit { get; set; }
 
         ///----------------------------------------------------------------
         /// <summary>
         ///		
-        /// Object maxIncluded value
+        /// Object minLimit value Example: Unset/Include/Excluded
         ///
         /// </summary>
         ///----------------------------------------------------------------
-        public bool? MaxIncluded { get; set; }
+        public string MaxLimit { get; set; }
+
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object minLimit value Example: Unset/Include/Excluded
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ControlMinLimit { get; set; }
+
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Object minLimit value Example: Unset/Include/Excluded
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string ControlMaxLimit { get; set; }
 
         public IWorkInstructionEnterpriseAttributes WorkInstructionEnterpriseAttributes { get; set; }
 

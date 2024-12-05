@@ -16,15 +16,18 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ws3dx.core.exception;
 using ws3dx.dsprcs.data;
+using ws3dx.dsprcs.data.impl;
 using ws3dx.dsprcs.service;
+using ws3dx.shared.data;
 
 namespace NUnitTestProject
 {
     public class MfgOperationService_ResourceParameterPlanInstance_UnitTests : MfgOperationServiceTestsSetup
     {
         [TestCase("", 0, 0)]
-        public async Task GetResourceParameterPlanInstance(string mfgOperationId, int top, int skip)
+        public async Task GetResourceParameterPlanInstances(string mfgOperationId, int top, int skip)
         {
             MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
@@ -34,13 +37,52 @@ namespace NUnitTestProject
         }
 
         [TestCase("", "")]
-        public async Task GetResourceParameterPlanInstance(string mfgOperationId, string id)
+        public async Task GetResourceParameterPlanInstance(string mfgOperationId, string resourceParameterPlanInstanceId)
         {
             MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
 
-            IResourceParamPlanInstanceMask ret = await mfgOperationService.GetResourceParameterPlanInstance(mfgOperationId, id);
+            IResourceParamPlanInstanceMask ret = await mfgOperationService.GetResourceParameterPlanInstance(mfgOperationId, resourceParameterPlanInstanceId);
 
             Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task AddResourceParameterPlanInstance(string mfgOperationId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+            ICreateResourceParameterPlanInstancesRefObject request = new CreateResourceParameterPlanInstancesRefObject();
+
+            try
+            {
+                IEnumerable<IResourceParamPlanInstanceMask> ret = await mfgOperationService.AddResourceParameterPlanInstance(mfgOperationId, request);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
+        }
+
+        [TestCase("", "")]
+        public async Task RemoveResourceParameterPlanInstance(string mfgOperationId, string resourceParameterPlanInstanceId)
+        {
+            MfgOperationService mfgOperationService = ServiceFactoryCreate(await Authenticate());
+
+
+            try
+            {
+                IGenericResponse ret = await mfgOperationService.RemoveResourceParameterPlanInstance(mfgOperationId, resourceParameterPlanInstanceId);
+
+                Assert.IsNotNull(ret);
+            }
+            catch (HttpResponseException _ex)
+            {
+                string errorMessage = await _ex.GetErrorMessage();
+                Assert.Fail(errorMessage);
+            }
         }
     }
 }
