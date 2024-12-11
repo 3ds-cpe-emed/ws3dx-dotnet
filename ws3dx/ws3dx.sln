@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.core.ui.win", "..\ws3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.core.ui.win.tests", "..\ws3dx.core.ui.win\tests\ws3dx.core.ui.win.tests.csproj", "{D2363832-687C-4880-B2E9-46E18B09E7AF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsdo", "..\ws3dx.dsdo\core\ws3dx.dsdo.csproj", "{7C5FC31C-2E05-4C8B-9303-B123183C8048}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{D2363832-687C-4880-B2E9-46E18B09E7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2363832-687C-4880-B2E9-46E18B09E7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2363832-687C-4880-B2E9-46E18B09E7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5FC31C-2E05-4C8B-9303-B123183C8048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5FC31C-2E05-4C8B-9303-B123183C8048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5FC31C-2E05-4C8B-9303-B123183C8048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5FC31C-2E05-4C8B-9303-B123183C8048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
