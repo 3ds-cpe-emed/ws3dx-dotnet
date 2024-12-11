@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.core", "..\ws3dx.core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.shared", "..\ws3dx.shared\ws3dx.shared.csproj", "{862953B5-9315-492D-A65A-3A973A33F4CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsxcad.core", "core\ws3dx.dsxcad.core.csproj", "{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsxcad", "core\ws3dx.dsxcad.csproj", "{001A9DDA-5BEB-42E3-9CC1-CF2897984D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
