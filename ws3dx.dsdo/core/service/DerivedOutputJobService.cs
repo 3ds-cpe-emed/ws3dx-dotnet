@@ -19,38 +19,39 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.service
+namespace ws3dx.dsdo.service
 {
-   // SDK Service
-   public class DerivedOutputJobService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
+    // SDK Service
+    public class DerivedOutputJobService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
 
-      public DerivedOutputJobService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public DerivedOutputJobService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsdo:DerivedOutputJobs
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Create new derived output job using rule ID. Summary: Create new derived output job 
-      // using rule ID.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IList<ICreateDerivedOutputJobsResponse>> Create(ICreateDerivedOutputJobs request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputJobs";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create new derived output job using rule ID.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsdo:DerivedOutputJobs
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IList<ICreateDerivedOutputJobsResponse>> Create(ICreateDerivedOutputJobs request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputJobs";
 
-         return await PostCollectionNoMaskFromResponseMemberProperty<ICreateDerivedOutputJobsResponse, ICreateDerivedOutputJobs>(resourceURI, request);
-
-      }
-   }
+            return await PostCollectionNoMaskFromResponseMemberProperty<ICreateDerivedOutputJobsResponse, ICreateDerivedOutputJobs>(resourceURI, request);
+        }
+    }
 }

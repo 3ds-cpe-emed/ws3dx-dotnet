@@ -14,26 +14,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class GetCheckInTicketRequest : IGetCheckInTicketRequest
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 1
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("fileCount")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string FileCount { get; set; }
+    public class GetCheckInTicketRequest : IGetCheckInTicketRequest
+    {
+        //------------------------------------------------------------------------------------------------
+        //<summary>
+        //
+        // Example: 1
+        //
+        //<summary>
+        //------------------------------------------------------------------------------------------------
+        [JsonPropertyName("fileCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string FileCount { get; set; }
 
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
-   }
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriId ReferencedObject { get; set; }
+    }
 }

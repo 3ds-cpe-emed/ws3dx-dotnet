@@ -14,17 +14,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class GetCheckInTicket : IGetCheckInTicket
-   {
-      [JsonPropertyName("ticketURL")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string TicketURL { get; set; }
-      [JsonPropertyName("ticket")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Ticket { get; set; }
-   }
+    public class GetCheckInTicket : IGetCheckInTicket
+    {
+        [JsonPropertyName("ticketURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string TicketURL { get; set; }
+        [JsonPropertyName("ticket")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Ticket { get; set; }
+    }
 }

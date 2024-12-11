@@ -13,38 +13,22 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsdo.data.impl;
-using ws3dx.serialization.attribute;
-namespace ws3dx.dsdo.data
+
+using ws3dx.authentication.data;
+using ws3dx.dsdo.service;
+using ws3dx.dsdo.tests.service.tests;
+
+namespace NUnitTestProject
 {
-    [ConcreteInterfaceImpConverter(typeof(DerivedOutputFileAttributes))]
-    public interface IDerivedOutputFileAttributes
+    public class DerivedOutputJobServiceTestsSetup : PassportAuthenticationTestSetup
     {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: visible
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: true
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public bool? Val { get; set; }
-
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: Optional keep
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Kind { get; set; }
+        public DerivedOutputJobService ServiceFactoryCreate(IPassportAuthentication _passport)
+        {
+            return new DerivedOutputJobService(GetServiceUrl(), _passport)
+            {
+                Tenant = GetTenant(),
+                SecurityContext = GetDefaultSecurityContext()
+            };
+        }
     }
 }

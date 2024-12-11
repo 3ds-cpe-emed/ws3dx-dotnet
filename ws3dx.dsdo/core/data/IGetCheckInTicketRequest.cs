@@ -17,17 +17,17 @@ using ws3dx.shared.data;
 
 namespace ws3dx.dsdo.data
 {
-   public interface IGetCheckInTicketRequest
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string FileCount { get; set; }
+    public interface IGetCheckInTicketRequest
+    {
+        //----------------------------------------------------------------
+        // <summary>
+        //		
+        // Example: 1
+        //
+        // </summary>
+        //----------------------------------------------------------------
+        public string FileCount { get; set; }
 
-      public ITypedUriId ReferencedObject { get; set; }
-   }
+        public ITypedUriId ReferencedObject { get; set; }
+    }
 }

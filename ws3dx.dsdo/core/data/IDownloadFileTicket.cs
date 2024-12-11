@@ -13,36 +13,38 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsdo.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsdo.data
 {
-   public interface IDownloadFileTicket
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The URL that should be used to download the file Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string TicketURL { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(DownloadFileTicket))]
+    public interface IDownloadFileTicket
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The URL that should be used to download the file Example: xxx
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string TicketURL { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The ticket to use for download Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Ticket { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The ticket to use for download Example: xxx
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Ticket { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Description: The file name of the file to download Example: xxx
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Filename { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// The file name of the file to download Example: xxx
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Filename { get; set; }
+    }
 }

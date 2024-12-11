@@ -15,10 +15,10 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 namespace ws3dx.dsdo.data
 {
-   public interface IGetCheckInTicketResponse
-   {
-      public string Success { get; set; }
-      public string StatusCode { get; set; }
-      public IGetCheckInTicketResponseData Data { get; set; }
-   }
+    public interface IGetCheckInTicketResponse
+    {
+        public string Success { get; set; }
+        public string StatusCode { get; set; }
+        public IGetCheckInTicketResponseData Data { get; set; }
+    }
 }

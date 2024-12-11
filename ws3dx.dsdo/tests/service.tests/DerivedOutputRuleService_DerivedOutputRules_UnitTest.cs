@@ -13,38 +13,35 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-using ws3dx.dsdo.data.impl;
-using ws3dx.serialization.attribute;
-namespace ws3dx.dsdo.data
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ws3dx.dsdo.data;
+using ws3dx.dsdo.service;
+
+namespace NUnitTestProject
 {
-    [ConcreteInterfaceImpConverter(typeof(DerivedOutputFileAttributes))]
-    public interface IDerivedOutputFileAttributes
+    public class DerivedOutputRuleService_DerivedOutputRules_UnitTests : DerivedOutputRuleServiceTestsSetup
     {
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: visible
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Name { get; set; }
 
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: true
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public bool? Val { get; set; }
+        [TestCase("", "ondemand")] //onXCADSave, ondemand
+        public async Task GetAll(string category, string ruleType)
+        {
+            DerivedOutputRuleService derivedOutputRuleService = ServiceFactoryCreate(await Authenticate());
 
-        ///----------------------------------------------------------------
-        /// <summary>
-        ///		
-        /// Example: Optional keep
-        ///
-        /// </summary>
-        ///----------------------------------------------------------------
-        public string Kind { get; set; }
+            IEnumerable<IDerivedOutputRuleDetailMask> ret = await derivedOutputRuleService.GetAll(category, ruleType);
+
+            Assert.IsNotNull(ret);
+        }
+
+        [TestCase("")]
+        public async Task Get(string iD)
+        {
+            DerivedOutputRuleService derivedOutputRuleService = ServiceFactoryCreate(await Authenticate());
+
+            IDerivedOutputRuleDetailMask ret = await derivedOutputRuleService.Get(iD);
+
+            Assert.IsNotNull(ret);
+        }
     }
 }

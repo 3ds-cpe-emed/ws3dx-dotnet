@@ -15,9 +15,9 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 namespace ws3dx.dsdo.data
 {
-   public interface IGetCheckInTicketResponseData
-   {
-      public string Id { get; set; }
-      public IGetCheckInTicket DataElements { get; set; }
-   }
+    public interface IGetCheckInTicketResponseData
+    {
+        public string Id { get; set; }
+        public IGetCheckInTicket DataElements { get; set; }
+    }
 }

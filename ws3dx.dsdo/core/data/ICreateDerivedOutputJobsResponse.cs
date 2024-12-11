@@ -13,66 +13,68 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
+using ws3dx.dsdo.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsdo.data
 {
-   public interface ICreateDerivedOutputJobsResponse
-   {
-      public ITypedUriId ReferencedObject { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(CreateDerivedOutputJobsResponse))]
+    public interface ICreateDerivedOutputJobsResponse
+    {
+        public ITypedUriId ReferencedObject { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: DOJob_C0828256DBC8320062D66F0000072D99_A.1_2027540094524400
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Name { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: DOJob_C0828256DBC8320062D66F0000072D99_A.1_2027540094524400
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Name { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: C0828256DBC8320062D66F2C001CE380
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: C0828256DBC8320062D66F2C001CE380
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 4e9b3458f2e57787a144c1763544eeb88850e5affbdfdb9ce90d4bf154d1d85b
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string RuleId { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 4e9b3458f2e57787a144c1763544eeb88850e5affbdfdb9ce90d4bf154d1d85b
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string RuleId { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: prd_oMhNiOU+++++3++-uz+9g_prd_oMhNiOU+++++3++-uz+9g_A.1
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Title { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: prd_oMhNiOU+++++3++-uz+9g_prd_oMhNiOU+++++3++-uz+9g_A.1
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Title { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: STEP
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Target { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: STEP
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Target { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: Created
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Status { get; set; }
-   }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: Created
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Status { get; set; }
+    }
 }

@@ -14,23 +14,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using ws3dx.dsdo.data.impl;
+using ws3dx.serialization.attribute;
 using ws3dx.shared.data;
-
 namespace ws3dx.dsdo.data
 {
-   public interface IDerivedOutput
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: F6AF82561E5700005EB271EE0003C500
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public string Id { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(DerivedOutput))]
+    public interface IDerivedOutput
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: F6AF82561E5700005EB271EE0003C500
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public string Id { get; set; }
 
-      public ITypedUriId ReferencedObject { get; set; }
+        public ITypedUriId ReferencedObject { get; set; }
 
-      public IList<IDerivedOutputFileDetail> DerivedOutputFiles { get; set; }
-   }
+        public IList<IDerivedOutputFileDetail> DerivedOutputFiles { get; set; }
+    }
 }

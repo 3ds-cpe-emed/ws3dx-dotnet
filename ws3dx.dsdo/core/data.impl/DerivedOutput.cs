@@ -15,30 +15,22 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class DerivedOutput : IDerivedOutput
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: F6AF82561E5700005EB271EE0003C500
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
+    public class DerivedOutput : IDerivedOutput
+    {
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Id { get; set; }
 
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriId ReferencedObject { get; set; }
 
-      [JsonPropertyName("derivedoutputfiles")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IDerivedOutputFileDetail> DerivedOutputFiles { get; set; }
-   }
+        [JsonPropertyName("derivedoutputfiles")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IDerivedOutputFileDetail> DerivedOutputFiles { get; set; }
+    }
 }

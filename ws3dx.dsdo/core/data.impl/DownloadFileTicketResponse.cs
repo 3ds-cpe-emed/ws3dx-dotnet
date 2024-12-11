@@ -14,36 +14,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class DownloadFileTicketResponse : IDownloadFileTicketResponse
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: true
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("success")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public bool? Success { get; set; }
+    public class DownloadFileTicketResponse : IDownloadFileTicketResponse
+    {
+        [JsonPropertyName("success")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? Success { get; set; }
 
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 200
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("statusCode")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public int? StatusCode { get; set; }
+        [JsonPropertyName("statusCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? StatusCode { get; set; }
 
-      [JsonPropertyName("data")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IDownloadFileTicketData Data { get; set; }
-   }
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IDownloadFileTicketData Data { get; set; }
+    }
 }

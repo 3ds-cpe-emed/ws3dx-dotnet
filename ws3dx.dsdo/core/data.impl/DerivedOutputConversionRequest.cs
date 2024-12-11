@@ -14,26 +14,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class DerivedOutputConversionRequest : IDerivedOutputConversionRequest
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 4e9b3458f2e57787a144c1763544eeb88850e5affbdfdb9ce90d4bf154d1d85b
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("ruleID")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string RuleID { get; set; }
+    public class DerivedOutputConversionRequest : IDerivedOutputConversionRequest
+    {
+        [JsonPropertyName("ruleID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string RuleID { get; set; }
 
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
-   }
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriId ReferencedObject { get; set; }
+    }
 }

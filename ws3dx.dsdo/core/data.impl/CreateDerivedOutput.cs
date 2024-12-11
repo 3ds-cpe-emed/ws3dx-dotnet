@@ -15,19 +15,18 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class CreateDerivedOutput : ICreateDerivedOutput
-   {
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public ITypedUriId ReferencedObject { get; set; }
+    public class CreateDerivedOutput : ICreateDerivedOutput
+    {
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ITypedUriId ReferencedObject { get; set; }
 
-      [JsonPropertyName("derivedoutputfiles")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ICreateDerivedOutputFile> DerivedOutputFiles { get; set; }
-   }
+        [JsonPropertyName("derivedoutputfiles")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ICreateDerivedOutputFile> DerivedOutputFiles { get; set; }
+    }
 }

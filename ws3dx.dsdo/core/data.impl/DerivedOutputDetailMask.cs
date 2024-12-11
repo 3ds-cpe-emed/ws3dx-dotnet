@@ -14,14 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class DerivedOutputDetailMask : IDerivedOutputDetailMask
-   {
-      [JsonPropertyName("derivedOutputs")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IDerivedOutput DerivedOutputs { get; set; }
-   }
+    public class DerivedOutputDetailMask : IDerivedOutputDetailMask
+    {
+        [JsonPropertyName("derivedOutputs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IDerivedOutputs DerivedOutputs { get; set; }
+    }
 }

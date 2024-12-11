@@ -14,25 +14,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class DownloadFileTicketData : IDownloadFileTicketData
-   {
-      //------------------------------------------------------------------------------------------------
-      //<summary>
-      //
-      // Example: 6F849256BAA2000062FBB5300002F2C5
-      //
-      //<summary>
-      //------------------------------------------------------------------------------------------------
-      [JsonPropertyName("doid")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Doid { get; set; }
+    public class DownloadFileTicketData : IDownloadFileTicketData
+    {
+        [JsonPropertyName("doid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Doid { get; set; }
 
-      [JsonPropertyName("dataelements")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IDownloadFileTicket Data { get; set; }
-   }
+        [JsonPropertyName("dataelements")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IDownloadFileTicket Data { get; set; }
+    }
 }

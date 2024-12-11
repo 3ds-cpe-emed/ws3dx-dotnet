@@ -17,13 +17,13 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dsdo.data
 {
-   public class GetCheckInTicketResponseData : IGetCheckInTicketResponseData
-   {
-      [JsonPropertyName("id")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Id { get; set; }
-      [JsonPropertyName("dataelements")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IGetCheckInTicket DataElements { get; set; }
-   }
+    public class GetCheckInTicketResponseData : IGetCheckInTicketResponseData
+    {
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Id { get; set; }
+        [JsonPropertyName("dataelements")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IGetCheckInTicket DataElements { get; set; }
+    }
 }

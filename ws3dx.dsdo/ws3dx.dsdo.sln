@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.shared", "..\ws3dx.sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsdo", "core\ws3dx.dsdo.csproj", "{778BF64E-D87E-425C-987C-2924A3AD5D86}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dseng", "..\ws3dx.dseng\core\ws3dx.dseng.csproj", "{BC5FD911-8E61-4D54-8A5F-A66F61DDCDC3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ws3dx.dsxcad", "..\ws3dx.dsxcad\core\ws3dx.dsxcad.csproj", "{699D3982-EE0B-401A-A03F-D4A1FCB74F6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{778BF64E-D87E-425C-987C-2924A3AD5D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{778BF64E-D87E-425C-987C-2924A3AD5D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{778BF64E-D87E-425C-987C-2924A3AD5D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC5FD911-8E61-4D54-8A5F-A66F61DDCDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC5FD911-8E61-4D54-8A5F-A66F61DDCDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC5FD911-8E61-4D54-8A5F-A66F61DDCDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC5FD911-8E61-4D54-8A5F-A66F61DDCDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699D3982-EE0B-401A-A03F-D4A1FCB74F6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699D3982-EE0B-401A-A03F-D4A1FCB74F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699D3982-EE0B-401A-A03F-D4A1FCB74F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699D3982-EE0B-401A-A03F-D4A1FCB74F6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

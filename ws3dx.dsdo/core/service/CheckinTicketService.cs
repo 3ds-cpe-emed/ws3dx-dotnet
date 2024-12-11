@@ -18,37 +18,40 @@ using ws3dx.authentication.data;
 using ws3dx.core.service;
 using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.service
+namespace ws3dx.dsdo.service
 {
-   // SDK Service
-   public class CheckinTicketService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
+    // SDK Service
+    public class CheckinTicketService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
 
-      public CheckinTicketService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public CheckinTicketService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) CheckinTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Get an checkin ticket to upload files to FCS in order to add or modify a Derived 
-      // Output Entity Summary: Get checkin ticket for FCS upload.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGetCheckInTicketResponse> Get(IGetCheckInTicketRequest request)
-      {
-         string resourceURI = $"{GetBaseResource()}CheckinTicket";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get checkin ticket for FCS upload. 
+        /// Get an checkin ticket to upload files to FCS in order to add or modify a Derived Output Entity
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) CheckinTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGetCheckInTicketResponse> Get(IGetCheckInTicketRequest request)
+        {
+            string resourceURI = $"{GetBaseResource()}CheckinTicket";
 
-         return await PostIndividualNoMask<IGetCheckInTicketResponse, IGetCheckInTicketRequest>(resourceURI, request);
-      }
-   }
+            return await PostIndividualNoMask<IGetCheckInTicketResponse, IGetCheckInTicketRequest>(resourceURI, request);
+        }
+    }
 }

@@ -13,29 +13,31 @@
 // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
-
+using ws3dx.dsdo.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsdo.data
 {
-   public interface IDownloadFileTicketResponse
-   {
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: true
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public bool? Success { get; set; }
+    [ConcreteInterfaceImpConverter(typeof(DownloadFileTicketResponse))]
+    public interface IDownloadFileTicketResponse
+    {
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: true
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public bool? Success { get; set; }
 
-      //----------------------------------------------------------------
-      // <summary>
-      //		
-      // Example: 200
-      //
-      // </summary>
-      //----------------------------------------------------------------
-      public int? StatusCode { get; set; }
+        ///----------------------------------------------------------------
+        /// <summary>
+        ///		
+        /// Example: 200
+        ///
+        /// </summary>
+        ///----------------------------------------------------------------
+        public int? StatusCode { get; set; }
 
-      public IDownloadFileTicketData Data { get; set; }
-   }
+        public IDownloadFileTicketData Data { get; set; }
+    }
 }

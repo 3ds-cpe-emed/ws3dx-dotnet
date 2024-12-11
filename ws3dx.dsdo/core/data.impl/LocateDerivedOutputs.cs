@@ -15,15 +15,14 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class LocateDerivedOutputs : ILocateDerivedOutputs
-   {
-      [JsonPropertyName("referencedObject")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<ITypedUriId> ReferencedObject { get; set; }
-   }
+    public class LocateDerivedOutputs : ILocateDerivedOutputs
+    {
+        [JsonPropertyName("referencedObject")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<ITypedUriId> ReferencedObject { get; set; }
+    }
 }

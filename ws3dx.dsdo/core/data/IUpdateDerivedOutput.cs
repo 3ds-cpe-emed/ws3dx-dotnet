@@ -14,11 +14,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-
+using ws3dx.dsdo.data.impl;
+using ws3dx.serialization.attribute;
 namespace ws3dx.dsdo.data
 {
-   public interface IUpdateDerivedOutput
-   {
-      public IList<IUpdateDerivedOutputFile> DerivedOutputFiles { get; set; }
-   }
+    [ConcreteInterfaceImpConverter(typeof(UpdateDerivedOutput))]
+    public interface IUpdateDerivedOutput
+    {
+        public IList<IUpdateDerivedOutputFile> DerivedOutputFiles { get; set; }
+    }
 }

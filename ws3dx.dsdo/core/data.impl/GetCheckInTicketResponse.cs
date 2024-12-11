@@ -17,16 +17,16 @@ using System.Text.Json.Serialization;
 
 namespace ws3dx.dsdo.data
 {
-   public class GetCheckInTicketResponse : IGetCheckInTicketResponse
-   {
-      [JsonPropertyName("success")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string Success { get; set; }
-      [JsonPropertyName("statusCode")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public string StatusCode { get; set; }
-      [JsonPropertyName("data")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IGetCheckInTicketResponseData Data { get; set; }
-   }
+    public class GetCheckInTicketResponse : IGetCheckInTicketResponse
+    {
+        [JsonPropertyName("success")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Success { get; set; }
+        [JsonPropertyName("statusCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string StatusCode { get; set; }
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IGetCheckInTicketResponseData Data { get; set; }
+    }
 }

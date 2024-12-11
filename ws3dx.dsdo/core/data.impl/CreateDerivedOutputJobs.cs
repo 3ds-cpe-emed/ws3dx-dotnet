@@ -15,14 +15,13 @@
 //------------------------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using ws3dx.dsdo.data;
 
-namespace ws3dx.dsdo.core.data.impl
+namespace ws3dx.dsdo.data.impl
 {
-   public class CreateDerivedOutputJobs : ICreateDerivedOutputJobs
-   {
-      [JsonPropertyName("conversionRequests")]
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      public IList<IDerivedOutputConversionRequest> ConversionRequests { get; set; }
-   }
+    public class CreateDerivedOutputJobs : ICreateDerivedOutputJobs
+    {
+        [JsonPropertyName("conversionRequests")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public IList<IDerivedOutputConversionRequest> ConversionRequests { get; set; }
+    }
 }

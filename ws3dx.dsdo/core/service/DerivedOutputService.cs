@@ -22,147 +22,160 @@ using ws3dx.dsdo.data;
 using ws3dx.shared.data;
 using ws3dx.shared.utils;
 
-namespace ws3dx.dsdo.core.service
+namespace ws3dx.dsdo.service
 {
-   // SDK Service
-   public class DerivedOutputService : EnoviaBaseService
-   {
-      private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
+    // SDK Service
+    public class DerivedOutputService : EnoviaBaseService
+    {
+        private const string BASE_RESOURCE = "/resources/v1/modeler/dsdo/";
 
-      public DerivedOutputService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
-      {
-      }
+        public DerivedOutputService(string enoviaService, IPassportAuthentication passport) : base(enoviaService, passport)
+        {
+        }
 
-      protected string GetBaseResource()
-      {
-         return BASE_RESOURCE;
-      }
+        protected string GetBaseResource()
+        {
+            return BASE_RESOURCE;
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (GET) dsdo:DerivedOutputs/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Gets a Derived Output Summary: Gets a Derived Output
-      // <param name="doId">
-      // Description: dsdo:DerivedOutputs object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------		
-      public async Task<T> Get<T>(string doId)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Add new derived output.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsdo:DerivedOutputs
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Create<T>(ICreateDerivedOutput request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}";
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs";
 
-         return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
-      }
+            return await PostIndividualFromResponseMemberProperty<T, ICreateDerivedOutput>(resourceURI, request);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsdo:DerivedOutputs
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Add new derived output. Summary: Add new derived output.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<T> Create<T>(ICreateDerivedOutput request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a Derived Output
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (GET) dsdo:DerivedOutputs/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="doId">
+        /// dsdo:DerivedOutputs object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<T> Get<T>(string doId)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs";
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}";
 
-         return await PostIndividualFromResponseMemberProperty<T, ICreateDerivedOutput>(resourceURI, request);
-      }
+            return await GetIndividualFromResponseMemberProperty<T>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}/DownloadTicket
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Download derived output files. Summary: Download derived output files.
-      // <param name="doId">
-      // Description: dsdo:DerivedOutputs object ID
-      // </param>
-      // <param name="doFileId">
-      // Description: dsdo:DerivedOutputFiles object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IDownloadFileTicketResponse> GetDownloadTicket(string doId, string doFileId, IEmpty request)
-      {
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/DownloadTicket";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get information of all derived outputs.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsdo:DerivedOutputs/Locate
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Locate<T>(ILocateDerivedOutputs request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
-         return await PostIndividual<IDownloadFileTicketResponse, IEmpty>(resourceURI, request);
-      }
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/Locate";
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsdo:DerivedOutputs/Locate
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Get information of all derived outputs. Summary: Get information of all derived 
-      // outputs.
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Locate<T>(ILocateDerivedOutputs request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
+            return await PostCollectionFromResponseMemberProperty<T, ILocateDerivedOutputs>(resourceURI, request);
+        }
 
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/Locate";
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Delete a Derived Output File
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (DELETE) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="doId">
+        /// dsdo:DerivedOutputs object ID
+        /// </param>
+        /// <param name="doFileId">
+        /// dsdo:DerivedOutputFiles object ID
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IGenericResponse> RemoveFile(string doId, string doFileId)
+        {
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}";
 
-         return await PostCollectionFromResponseMemberProperty<T, ILocateDerivedOutputs>(resourceURI, request);
-      }
+            return await DeleteIndividual<IGenericResponse>(resourceURI);
+        }
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (POST) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}/Sync
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Update an existing derived output entity on given Representation. Summary: Update 
-      // derived output entity.
-      // <param name="doId">
-      // Description: dsdo:DerivedOutputs object ID
-      // </param>
-      // <param name="doFileId">
-      // Description: dsdo:DerivedOutputFiles object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IEnumerable<T>> Update<T>(string doId, string doFileId, IUpdateDerivedOutput request)
-      {
-         GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Download derived output files.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}/DownloadTicket
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="doId">
+        /// dsdo:DerivedOutputs object ID
+        /// </param>
+        /// <param name="doFileId">
+        /// dsdo:DerivedOutputFiles object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IDownloadFileTicketResponse> GetDownloadTicket(string doId, string doFileId, IEmpty request)
+        {
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/DownloadTicket";
 
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/Sync";
+            return await PostIndividual<IDownloadFileTicketResponse, IEmpty>(resourceURI, request);
+        }
 
-         return await PostCollectionFromResponseMemberProperty<T, IUpdateDerivedOutput>(resourceURI, request);
-      }
+        ///---------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Update derived output entity. 
+        /// Update an existing derived output entity on given Representation.
+        /// </summary>
+        ///---------------------------------------------------------------------------------------------
+        /// <remarks>
+        /// (POST) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}/Sync
+        /// </remarks>
+        ///---------------------------------------------------------------------------------------------
+        /// <param name="doId">
+        /// dsdo:DerivedOutputs object ID
+        /// </param>
+        /// <param name="doFileId">
+        /// dsdo:DerivedOutputFiles object ID
+        /// </param>
+        /// <param name="request">
+        /// </param>
+        ///---------------------------------------------------------------------------------------------
+        public async Task<IEnumerable<T>> Update<T>(string doId, string doFileId, IUpdateDerivedOutput request)
+        {
+            GenericParameterConstraintUtils.CheckConstraints(typeof(T), new Type[] { typeof(IDerivedOutputDetailMask), typeof(IDerivedOutputCompleteMask) });
 
-      //---------------------------------------------------------------------------------------------
-      // <remarks>
-      // (DELETE) dsdo:DerivedOutputs/{PID}/dsdo:DerivedOutputFiles/{ID}
-      // </remarks>
-      //---------------------------------------------------------------------------------------------
-      // <summary>
-      // Description: Delete a Derived Output File Summary: Delete a Derived Output File
-      // <param name="doId">
-      // Description: dsdo:DerivedOutputs object ID
-      // </param>
-      // <param name="doFileId">
-      // Description: dsdo:DerivedOutputFiles object ID
-      // </param>
-      // </summary>
-      //---------------------------------------------------------------------------------------------
-      public async Task<IGenericResponse> RemoveFile(string doId, string doFileId)
-      {
-         string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}";
+            string resourceURI = $"{GetBaseResource()}dsdo:DerivedOutputs/{doId}/dsdo:DerivedOutputFiles/{doFileId}/Sync";
 
-         return await DeleteIndividual<IGenericResponse>(resourceURI);
-      }
-   }
+            return await PostCollectionFromResponseMemberProperty<T, IUpdateDerivedOutput>(resourceURI, request);
+        }
+    }
 }
