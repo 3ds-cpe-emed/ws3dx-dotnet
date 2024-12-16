@@ -30,6 +30,7 @@ The priority is to support the 3DEXPERIENCE Cloud Web Services. Support for spec
 |[CAD Collaboration Web Services](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAXCADWS/dsxcad_v1.htm)|[ws3dx.dsxcad](./ws3dx.dsxcad)| 2024x FD03 (1.5.0), 2025x GA (1.5.0) |
 |[Manufacturing Process Web Services](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAManufProcessWS/dsprcs_v1.htm)|[ws3dx.dsprcs](./ws3dx.dsprcs)| 2024x FD03 (1.14.0), 2025x GA (1.15.0) |
 |[Derived Outputs Web Services](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAADerivedOutputsWS/dsdo_v1.htm)|[ws3dx.dsdo](./ws3dx.dsdo)| 2025x GA (1.2.1) |
+|[Issue Web Services](https://media.3ds.com/support/documentation/developer/Cloud/en/DSDoc.htm?show=CAAChangeWS/dslc_change_issue_v1.htm)|[ws3dx.dsiss](./ws3dx.dsiss)| 2025x GA (1.1.1) |
 Note access to the 3DEXPERIENCE web service public documentation requires a 3DEXPERIENCE ID.
 
 ## Getting Started
